@@ -64,6 +64,8 @@ public class MaxConcurrentEventsTest {
         intervalList.add(new MaxConcurrentEvents.Interval(4,10));
         intervalList.add(new MaxConcurrentEvents.Interval(15,20));
         assertEquals(MaxConcurrentEvents.maxConcurrentIntervals(intervalList), 3);
+
+        assertEquals(MaxConcurrentEvents.maxConcurrentIntervals2(intervalList), 3);
     }
 
     @Test
@@ -74,6 +76,8 @@ public class MaxConcurrentEventsTest {
         intervalList.add(new MaxConcurrentEvents.Interval(4,10));
         intervalList.add(new MaxConcurrentEvents.Interval(15,20));
         assertEquals(MaxConcurrentEvents.maxConcurrentIntervals(intervalList), 3);
+
+        assertEquals(MaxConcurrentEvents.maxConcurrentIntervals2(intervalList), 3);
     }
 
 

@@ -2,6 +2,7 @@ package my.epi.sorting;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -108,9 +109,18 @@ public class MaxConcurrentEvents {
         List<Interval> startEndList = new ArrayList<Interval>(input.size()*2);
         for (Interval i : input) {
             startEndList.add(new Interval(i.start, i.end, true));
-            startEndList.add(new Interval(i.start, i.end, false));
+            startEndList.add(new Interval(i.end, i.end, false));
         }
-        Collections.sort(startEndList);
+        Collections.sort(startEndList, new Comparator<Interval>() {
+            public int compare(Interval o1, Interval o2) {
+                int result = o1.start - o2.start;
+                if(result == 0) {
+                    result = o2.end - o1.end;
+                }
+                return result;
+
+            }}
+        );
 
         System.out.println("maxConcurrentIntervals2: " + startEndList);
 
