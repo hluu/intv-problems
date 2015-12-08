@@ -99,13 +99,49 @@ public class MaxConcurrentEvents {
         return maxConcurrIntervalCounter;
     }
 
+    /**
+     * This approach breaks each interval into two points - starting and ending
+     * @param input
+     * @return
+     */
+    public static int maxConcurrentIntervals2(List<Interval> input) {
+        List<Interval> startEndList = new ArrayList<Interval>(input.size()*2);
+        for (Interval i : input) {
+            startEndList.add(new Interval(i.start, i.end, true));
+            startEndList.add(new Interval(i.start, i.end, false));
+        }
+        Collections.sort(startEndList);
+
+        System.out.println("maxConcurrentIntervals2: " + startEndList);
+
+        int maxConcurrentIntvCounter = 0;
+        int counter = 0;
+        for (Interval ie : startEndList) {
+            if (ie.isStart) {
+                counter++;
+                maxConcurrentIntvCounter = (counter > maxConcurrentIntvCounter) ? counter : maxConcurrentIntvCounter;
+            } else {
+                counter--;
+            }
+        }
+
+        return maxConcurrentIntvCounter;
+    }
+
     public static class Interval implements Comparable<Interval> {
         public int start;
         public int end;
+        public boolean isStart;
 
         public Interval(int start, int end) {
             this.start = start;
             this.end = end;
+        }
+
+        public Interval(int start, int end, boolean isStart) {
+            this.start = start;
+            this.end = end;
+            this.isStart = isStart;
         }
 
         public int compareTo(Interval o) {

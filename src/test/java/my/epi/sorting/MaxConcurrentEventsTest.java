@@ -19,6 +19,8 @@ public class MaxConcurrentEventsTest {
         intervalList.add(new MaxConcurrentEvents.Interval(1,5));
         intervalList.add(new MaxConcurrentEvents.Interval(6,10));
         assertEquals(MaxConcurrentEvents.maxConcurrentIntervals(intervalList), 1);
+
+        assertEquals(MaxConcurrentEvents.maxConcurrentIntervals2(intervalList), 1);
     }
 
     @Test
@@ -28,6 +30,8 @@ public class MaxConcurrentEventsTest {
         intervalList.add(new MaxConcurrentEvents.Interval(2,7));
         intervalList.add(new MaxConcurrentEvents.Interval(8,10));
         assertEquals(MaxConcurrentEvents.maxConcurrentIntervals(intervalList), 2);
+
+        assertEquals(MaxConcurrentEvents.maxConcurrentIntervals2(intervalList), 2);
     }
 
     @Test
@@ -37,6 +41,8 @@ public class MaxConcurrentEventsTest {
         intervalList.add(new MaxConcurrentEvents.Interval(5,7));
         intervalList.add(new MaxConcurrentEvents.Interval(8,10));
         assertEquals(MaxConcurrentEvents.maxConcurrentIntervals(intervalList), 2);
+
+        assertEquals(MaxConcurrentEvents.maxConcurrentIntervals2(intervalList), 2);
     }
 
     @Test
@@ -46,6 +52,8 @@ public class MaxConcurrentEventsTest {
         intervalList.add(new MaxConcurrentEvents.Interval(1,7));
         intervalList.add(new MaxConcurrentEvents.Interval(8,10));
         assertEquals(MaxConcurrentEvents.maxConcurrentIntervals(intervalList), 2);
+
+        assertEquals(MaxConcurrentEvents.maxConcurrentIntervals2(intervalList), 2);
     }
 
     @Test
@@ -67,4 +75,7 @@ public class MaxConcurrentEventsTest {
         intervalList.add(new MaxConcurrentEvents.Interval(15,20));
         assertEquals(MaxConcurrentEvents.maxConcurrentIntervals(intervalList), 3);
     }
+
+
+
 }
