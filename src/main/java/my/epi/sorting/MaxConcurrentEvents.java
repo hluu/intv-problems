@@ -101,7 +101,20 @@ public class MaxConcurrentEvents {
     }
 
     /**
-     * This approach breaks each interval into two points - starting and ending
+     * This approach breaks each interval into two points - starting and ending.
+     * 0) Notice how the interval is created in the constructor - where the start value
+     *    for ending interval is the end value.
+     * 1) Sort the list of points by starting value. If they are the same, then order by
+     *    end value
+     * 2) Iterator through the list increment counter when seeing a starting point as well
+     *    as updating the max counter
+     * 3) When the ending point is encountered, decrement the counter
+     *
+     * Observation: The counter value will be doing up and down, the max counter
+     *  will only be updated once there is a value greater than it.
+     *
+     * At the end we just return the max counter
+     *
      * @param input
      * @return
      */
