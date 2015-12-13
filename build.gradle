@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 version = '1.0'
 
 repositories {
@@ -14,4 +14,28 @@ dependencies {
 
 test {
     useTestNG()
+}
+
+allprojects {
+    sourceCompatibility = 1.8
+    version = '1.0'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile group:'org.testng', name:'testng', version:'6.9.9'
+    }
+
+    test {
+        useTestNG()
+    }
+
+
 }

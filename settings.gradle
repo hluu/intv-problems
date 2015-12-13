@@ -1,2 +1,5 @@
-rootProject.name = 'epi-java'
+rootProject.name = 'intv-problems'
+
+include 'epi-java'
+include 'cci-java'
 
