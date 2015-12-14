@@ -5,6 +5,8 @@ import java.util.BitSet;
 /**
  * Created by hluu on 12/13/15.
  *
+ * Problem statement:
+ *
  * Determine if a given string has all unique characters.
  * What if you can't use addition data structure
  */
