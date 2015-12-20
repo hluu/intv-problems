@@ -30,7 +30,8 @@ import java.util.List;
  *  Base case:
  *     sum == 0 or set is empty
  *
- *
+ * Runtime Analysis:
+ *   O(n^2) - exponential
  *
  */
 public class SubSetSum {
@@ -67,8 +68,11 @@ public class SubSetSum {
     /**
      * This approach will perform the inclusion and exclusion for each
      * value in the array.  In addition, the sum will be decrement by the chosen value.
-     * The base case is when sum is equal to 0, which we will print out the list of values.
-     * Another base case is when the sum is less than 0, then we return.
+     *
+     * The base case is when sum remainder is equal to 0, which we will print out
+     * the list of values.
+     *
+     * Another base case is when the sum is less than 0, then the recursion stops.
      * Another base case is when the index reaches the end of the array.
      *
      * @param input
@@ -112,6 +116,12 @@ public class SubSetSum {
     /**
      * This approach uses a bit array to mark each value in the array is selected.
      *
+     * Perform the addition at each level of recursion.
+     *
+     * Base cases:
+     *  1) When sumSoFar is equal to sum
+     *  2) When index passes the end of the array
+     *  3) When sumSoFar is greater than sum (pruning),
      *
      *
      * @param input
@@ -124,6 +134,7 @@ public class SubSetSum {
                                                  int sum, int sumSoFar,
                                                  int index, List<String> collector)  {
 
+        // base case
         if (sumSoFar == sum) {
 
             StringBuilder buf = new StringBuilder();
@@ -138,17 +149,18 @@ public class SubSetSum {
             }
             collector.add(buf.toString());
             System.out.println(buf.toString() + "    sum: " + sum);
-        } else if (index >= input.length) {
             return;
-        } else if (sumSoFar > sum) {
+        } else if (index == input.length || sumSoFar > sum) {
             return;
-        } else {
-            bitArr[index] = 1;
-            allSubsetSumUsingBitArray(input, bitArr, sum, sumSoFar + input[index], index + 1,
-                    collector);
-            bitArr[index] = 0;
-            allSubsetSumUsingBitArray(input, bitArr, sum, sumSoFar, index + 1, collector);
         }
+
+        // main recursion loop
+        bitArr[index] = 1;
+        allSubsetSumUsingBitArray(input, bitArr, sum, sumSoFar + input[index], index + 1,
+                collector);
+        bitArr[index] = 0;
+        allSubsetSumUsingBitArray(input, bitArr, sum, sumSoFar, index + 1, collector);
+
 
     }
 }

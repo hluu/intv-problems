@@ -1,8 +1,6 @@
 package org.learning.dp;
 
 
-import org.learning.common.SystemInfo;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,11 +43,10 @@ public class Subsequence {
         String input = "abcd";
         //String input = "ACGATGTAC";
 
-        List<String> collector = new ArrayList<String>();
-        //printSubSeq(input, 0, 1, collector);
+        usingBinaryApproach(input);
+    }
 
-        System.out.println("collector size: " + collector.size());
-
+    private static void usingBinaryApproach(String input) {
         int[] intArray = new int[4];
         for (int i = 0; i < 16; i++) {
             binaryAddOne(intArray);
@@ -64,35 +61,7 @@ public class Subsequence {
         System.out.println(collector2);
     }
 
-    public static void printSubSeq(String input, int startIndex, int numChar,
-                                   List<String> collector) {
 
-        if (numChar == input.length()) {
-            collector.add(input);
-            System.out.println(input);
-            return;
-        }
-        printSubSeq(input, 0, numChar+1, collector);
-        if (numChar == 1) {
-            for (int i = 0; i < input.length(); i++) {
-                collector.add(input.substring(i, i+1));
-                System.out.println(input.substring(i, i+1));
-            }
-        } else {
-            // outer loop goes up to length - (numChar - 1)
-            int upTo = input.length() - (numChar - 1);
-            for (int i = startIndex; i < upTo; i++) {
-                // substring with last index as exclusive
-                // prefix => number of characters up to numChar - 1
-                String prefix = input.substring(i, i + numChar-1);
-                // prepending the last character
-                for (int j = i + numChar-1; j < input.length(); j++) {
-                    collector.add(prefix + input.substring(j, j + 1));
-                    System.out.println(prefix + input.substring(j, j + 1));
-                }
-            }
-        }
-    }
 
     public static void printSubSeqUsingBinary(String input, List<String> collector) {
         if ((input == null) || (input.length() == 0)) {
