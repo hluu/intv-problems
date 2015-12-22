@@ -8,18 +8,18 @@ public class CoinChangeTest {
 	@Test()
 	public void basicTest() {
 		int[] denominations = {1,3,5};
-		Assert.assertEquals(3, CoinChange.coinChange(9, denominations));
+		Assert.assertEquals(CoinChange.coinChange(9, denominations), 3);
 	}
 	
 	@Test()
 	public void largeAmountTest() {
 		int[] denominations = {1,3,5};
-		Assert.assertEquals(10, CoinChange.coinChange(50, denominations));
+		Assert.assertEquals(CoinChange.coinChange(50, denominations), 10);
 	}
 	
 	@Test()
-	public void zeroAmounTest() {
+	public void zeroAmountTest() {
 		int[] denominations = {1,3,5};
-		Assert.assertEquals(0, CoinChange.coinChange(0, denominations));
+		Assert.assertEquals(CoinChange.coinChange(0, denominations), 0);
 	}
 }

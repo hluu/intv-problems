@@ -115,7 +115,7 @@ public class LongestCommonSubsequence {
         for (int i = 1; i <= x.length(); i++) {
             for (int j = 1; j <= y.length(); j++) {
                 if (x.charAt(i-1) == y.charAt(j-1)) {
-                    table[i][j] = table[i-1][j-1] + 1;
+                    table[i][j] = 1 + table[i-1][j-1];
                 } else {
                     table[i][j] = Math.max(table[i-1][j], table[i][j-1]);
                 }
