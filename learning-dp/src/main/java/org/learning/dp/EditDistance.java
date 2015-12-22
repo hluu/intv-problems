@@ -1,5 +1,7 @@
 package org.learning.dp;
 
+import org.learning.common.Tuple;
+
 /**
  * Created by hluu on 12/20/15.
  *
@@ -32,7 +34,7 @@ package org.learning.dp;
  *     * Copy (0)
  *
  *   One dead simple approach to transform X into Y, is by deleting all characters in X and then
- *   inserting each character from Y into Z. But that wouldn't be optimal.
+ *   inserting each character from Y into Z. But that wouldn't be optimal run time would O(n+m)
  *
  *
  *   Let cost[i,j] be the minimum cost of an optimal solution to the Xi -> Yj
@@ -83,10 +85,14 @@ public class EditDistance {
 
         String x = "distance";
         String y = "dostsncr";
-        minDistance(x,y);
+        Tuple<Integer, int[][]> result = minDistance(x,y);
+
+        System.out.println("length: " + result.first);
+        LongestCommonSubsequence.printTable(result.second,x,y);
+
     }
 
-    public static int minDistance(String x, String y) {
+    public static Tuple<Integer, int[][]>  minDistance(String x, String y) {
         int xLen = x.length();
         int yLen = y.length();
         int[][] costTable = new int[xLen+1][yLen+1];
@@ -101,7 +107,7 @@ public class EditDistance {
             costTable[i][0] = i;
         }
 
-        LongestCommonSubsequence.printTable(costTable,x,y);
+        //LongestCommonSubsequence.printTable(costTable,x,y);
 
         for (int i = 1; i < costTable.length; i++) {
             for (int j = 1; j < costTable[0].length; j++) {
@@ -116,7 +122,7 @@ public class EditDistance {
                }
             }
         }
-        LongestCommonSubsequence.printTable(costTable,x,y);
-        return costTable[xLen][yLen];
+        //LongestCommonSubsequence.printTable(costTable,x,y);
+        return Tuple.createTuple(costTable[xLen][yLen], costTable);
     }
 }
