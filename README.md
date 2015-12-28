@@ -5,12 +5,12 @@ books and other problems from other sources
 
 ## Common stuffs that one should know about
 
-### There are n! permutations of an n-element set
-### There are 2^n subsets of an n-element set
-### There are n(n-1)/2 contiguous substrings in a string of length n (n^2)
-### There are n(n-1)/2 possible subtrees in a binary search tree (n^2)
+### String permutations, subsets and substrings
+* There are n! permutations of an n-element set
+* There are 2^n subsets of an n-element set
+* There are n(n-1)/2 contiguous substrings in a string of length n (n^2)
+* There are n(n-1)/2 possible subtrees in a binary search tree (n^2)
 
-## Common stuffs that one should know about
 
 ### Common steps for solving a technical questions
 * ask questions to clarify ambiguity
