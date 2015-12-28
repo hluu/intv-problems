@@ -22,9 +22,9 @@ public class ReverseString {
 
         System.out.println(ReverseString.class.getName());
 
-        String input = "This is awesome";
+        //String input =  "This is awesome";
 
-        //sString input = "xy";
+        String input = "abc";
 
         System.out.println("input: " + input);
         System.out.println("output: " + reverseString(input));
@@ -74,11 +74,11 @@ public class ReverseString {
      */
     public static void reverseChars(char[] input, int start, int end) {
 
-        int noSwap = ((end - start) + 1)/2;
+        int numSwap = ((end - start) + 1)/2;
 
-        System.out.println(String.format("start: %d, end: %d, noSwap: %d", start, end, noSwap));
+        System.out.println(String.format("start: %d, end: %d, noSwap: %d", start, end, numSwap));
 
-        for (int i = 0; i < noSwap; i++) {
+        for (int i = 0; i < numSwap; i++) {
             char tmp = input[start];
             input[start] = input[end];
             input[end] = tmp;

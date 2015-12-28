@@ -2,6 +2,11 @@ package my.cci.array_string;
 
 /**
  * Created by hluu on 12/13/15.
+ *
+ * A permutation of a set of objects is a particular ordering of those objects.
+ *
+ * All permutations of a set, means all possible ways of ordering those objects
+ *
  */
 public class Permutation {
 
@@ -55,7 +60,8 @@ public class Permutation {
         // pay attention to characters that appear more than once
         for (int i = 0; i < s2CharArr.length; i++) {
             int index = s2CharArr[i];
-            // expecting the value to be 1 or more
+            // expecting the value to be 1 or more.
+            // if see 0, means that there was a mismatch
             int value = charCounterArr[index];
             if (value == 0) {
                 return false;
