@@ -65,16 +65,19 @@ public class LongestCommonSubsequence {
         //String x = "acbaed";
         //String y = "abcadf";
 
-        String x = "ACBDEA";
-        String y = "ABCDA";
+        //String x = "ACBDEA";
+        //String y = "ABCDA";
+
+        String x = "hieroglyphology";
+        String y = "michaelangelo";
 
         Tuple<Integer, int[]> t = Tuple.createTuple(1, new int[5]);
         System.out.println("first: " + t.first);
         System.out.println("second: " + t.second.length);
 
         System.out.println("x: " + x + " y: " + y);
-        Tuple<String, int[][]> lcsResult =  lcs(x, y);
-        System.out.println("lcs = " + lcsResult.first.length() + " lcs: " + lcsResult.first);
+        Tuple<String, int[][]> lcsResult =  lcsUsingPrefix(x, y);
+        System.out.println("lcsUsingPrefix = " + lcsResult.first.length() + " lcsUsingPrefix: " + lcsResult.first);
 
         printTable(lcsResult.second, x, y);
     }
@@ -104,9 +107,9 @@ public class LongestCommonSubsequence {
      *
      * @param x
      * @param y
-     * @return Tuple<String, int[][]> - first element is lcs string, second is the table
+     * @return Tuple<String, int[][]> - first element is lcsUsingPrefix string, second is the table
      */
-    public static Tuple<String, int[][]> lcs(String x, String y) {
+    public static Tuple<String, int[][]> lcsUsingPrefix(String x, String y) {
         int n = x.length();
         int m = y.length();
 

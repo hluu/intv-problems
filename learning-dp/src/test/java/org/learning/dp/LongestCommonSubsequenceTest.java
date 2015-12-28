@@ -14,7 +14,7 @@ public class LongestCommonSubsequenceTest {
     public void oneEmptyString() {
         String x = "aaaaa", y = "";
 
-        Tuple<String, int[][]> result = LongestCommonSubsequence.lcs(x,y);
+        Tuple<String, int[][]> result = LongestCommonSubsequence.lcsUsingPrefix(x, y);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(result.first, "");
@@ -22,7 +22,7 @@ public class LongestCommonSubsequenceTest {
         y = "aaaaa";
         x = "";
 
-        Tuple<String, int[][]> result2 = LongestCommonSubsequence.lcs(x,y);
+        Tuple<String, int[][]> result2 = LongestCommonSubsequence.lcsUsingPrefix(x, y);
         Assert.assertEquals(result2.first, "");
     }
 
@@ -30,7 +30,7 @@ public class LongestCommonSubsequenceTest {
     public void noLCS() {
         String x = "aaaaa", y = "bbbbbbbbb";
 
-        Tuple<String, int[][]> result =LongestCommonSubsequence.lcs(x,y);
+        Tuple<String, int[][]> result =LongestCommonSubsequence.lcsUsingPrefix(x, y);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(result.first, "");
@@ -43,7 +43,7 @@ public class LongestCommonSubsequenceTest {
     public void oneLetterString() {
         String x = "a", y = "a";
 
-        Tuple<String, int[][]> result =LongestCommonSubsequence.lcs(x,y);
+        Tuple<String, int[][]> result =LongestCommonSubsequence.lcsUsingPrefix(x, y);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(result.first, "a");
@@ -53,7 +53,7 @@ public class LongestCommonSubsequenceTest {
     public void oneLetterCommonString() {
         String x = "abcdef", y = "c";
 
-        Tuple<String, int[][]> result =LongestCommonSubsequence.lcs(x,y);
+        Tuple<String, int[][]> result =LongestCommonSubsequence.lcsUsingPrefix(x, y);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(result.first, "c");
@@ -63,7 +63,7 @@ public class LongestCommonSubsequenceTest {
     public void oneLetterCommonString2() {
         String y = "abcdef", x = "c";
 
-        Tuple<String, int[][]> result =LongestCommonSubsequence.lcs(x,y);
+        Tuple<String, int[][]> result =LongestCommonSubsequence.lcsUsingPrefix(x, y);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(result.first, "c");
@@ -73,9 +73,21 @@ public class LongestCommonSubsequenceTest {
     public void everyOtherCharOfFirstString() {
         String y = "123456789", x = "7254861";
 
-        Tuple<String, int[][]> result =  LongestCommonSubsequence.lcs(x,y);
+        Tuple<String, int[][]> result =  LongestCommonSubsequence.lcsUsingPrefix(x, y);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(result.first, "246");
+    }
+
+    @Test
+    public void longString() {
+        String y = "hieroglyphology", x = "michaelangelo";
+
+
+        Tuple<String, int[][]> result =  LongestCommonSubsequence.lcsUsingPrefix(x, y);
+
+        Assert.assertNotNull(result);
+
+        //Assert.assertEquals(result.first, "246");
     }
 }

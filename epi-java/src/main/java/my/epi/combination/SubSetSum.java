@@ -161,6 +161,5 @@ public class SubSetSum {
         bitArr[index] = 0;
         allSubsetSumUsingBitArray(input, bitArr, sum, sumSoFar, index + 1, collector);
 
-
     }
 }
