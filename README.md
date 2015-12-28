@@ -5,7 +5,7 @@ books and other problems from other sources
 
 ## Common stuffs that one should know about
 
-### String permutations, subsets and substrings
+### Permutations, subsets and substrings
 * There are n! permutations of an n-element set
 * There are 2^n subsets of an n-element set
 * There are n(n-1)/2 contiguous substrings in a string of length n (n^2)
@@ -31,3 +31,21 @@ books and other problems from other sources
 | 30      | 1,073,741,824       |  1GB    |
 | 32      | 4,294,967,296       |  4GB    |
 | 40      | 1,099, 511,627,776  |  1TB    |
+
+
+### Common utility to know
+```java
+public static String toBase(int n, int base) {
+   if (base < 2 || base > 10) {
+       return "-1";
+   }
+
+   String result = "";
+
+   while (n > 0) {
+       result = (n % base) + result;
+       n = n / base;
+   }
+   return result;
+}
+```
