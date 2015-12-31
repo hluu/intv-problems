@@ -1,7 +1,7 @@
 package org.learning.dp;
 
 
-import org.learning.common.Tuple;
+import org.common.Tuple;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

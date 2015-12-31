@@ -1,6 +1,6 @@
 package org.learning.dp;
 
-import org.learning.common.Tuple;
+import org.common.Tuple;
 
 /**
  * Created by hluu on 12/20/15.

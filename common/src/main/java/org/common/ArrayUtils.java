@@ -1,4 +1,4 @@
-package org.learning.common;
+package org.common;
 
 public class ArrayUtils {
 	public static void printMatrix(int[][] matrix) {

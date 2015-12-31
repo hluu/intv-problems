@@ -1,6 +1,6 @@
 package org.learning.dp;
 
-import static org.learning.common.ArrayUtils.*;
+import static org.common.ArrayUtils.*;
 
 /**
  * Given n items where each item has an associated weight (w) and value (v) and

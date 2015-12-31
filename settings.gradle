@@ -1,5 +1,6 @@
 rootProject.name = 'intv-problems'
 
+include 'common'
 include 'epi-java'
 include 'cci-java'
 include 'learning-dp'

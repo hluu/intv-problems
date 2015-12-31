@@ -2,7 +2,7 @@ package org.learning.dp;
 
 import java.util.Arrays;
 
-import org.learning.common.Tuple;
+import org.common.Tuple;
 
 /**
  * Given an array of integers, find the interval indices a and b such that the sum is maximized.

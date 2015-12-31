@@ -1,6 +1,6 @@
 package org.learning.dp;
 
-import static org.learning.common.ArrayUtils.*;
+import static org.common.ArrayUtils.*;
 
 /**
  * Compute the largest # of coins a robot can collect on an n x m board

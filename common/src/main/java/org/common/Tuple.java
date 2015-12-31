@@ -1,4 +1,4 @@
-package org.learning.common;
+package org.common;
 
 public class Tuple<T,V> {
 	public T first;
