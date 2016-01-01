@@ -12,7 +12,7 @@ package my.cci.array_string;
  *      s1 = "erbottlewat", s2="waterbottle"
  *      s1 = "bottlewater", s2="waterbottle"
  *
- * Approach:
+ * Approach #1:
  *  The constraint is a hint to solve this problem. A string rotation causes
  *  some letters to move to the front but some remain the same.
  *
@@ -25,6 +25,11 @@ package my.cci.array_string;
  *  0-1, 0-2, 0-3, 0-m. For each of these substrings, we can use method isSubString to see
  *  whether each one is a substring of S1.  At some point (called it t), it isn't, what is the rotation
  *  point, and characters from t-m should be a substring of S2.
+ *
+ *  Approach #2:
+ *   When s1 is rotated as such 'erbottlewat', there is a rotation point which divides the string
+ *   into x and y parts: x = 'er' and y = 'bottlewat'.  So s1 = xy. then s2 = yx.
+ *   yx is always a substring of xyxy
  *
  *
  *
