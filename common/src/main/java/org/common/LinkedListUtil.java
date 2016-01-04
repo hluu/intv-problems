@@ -37,4 +37,20 @@ public class LinkedListUtil {
         }
         return len;
     }
+
+    public static int lessThan(SLNode<Integer> head, int lessThanValue) {
+
+        SLNode<Integer> tmp = head;
+
+        int count = 0;
+        while (tmp != null) {
+           if (tmp.value < lessThanValue) {
+               count++;
+               tmp = tmp.next;
+           } else {
+               break;
+           }
+        }
+        return count;
+    }
 }
