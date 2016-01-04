@@ -49,3 +49,8 @@ public static String toBase(int n, int base) {
    return result;
 }
 ```
+
+### Working with string
+* Permutation - rearrangement of letters in specific order.
+* Anagram - rearranging the letters of a word to produce a new word. i.e listen and silent
+* Palindrome - a word which read the same backward or forward. i.e civic
