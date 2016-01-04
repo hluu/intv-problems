@@ -24,11 +24,13 @@ import sun.awt.image.ImageWatched;
  *      What do need to do to put us into a situation that we can use pointer manipulation
  *      to remove a node.
  *
- *      We can't simply move node c to the end because that requires pointer to node b
+ *      Let say we would like to remove node c and given pointer to c node,
+ *      We can't simply move node c to the end because that requires pointer to node b.
  *
-
- *      Move the moves after c up by one node and move value c to the end, where e is.
- *      Since we know how to get to pointer d and we can remove c by pd->next = null.
+ *      In general, in order remove a node, we need pointer to its previous node.
+ *
+ *      We could swap the value of node b and c and now we can remove node with value c
+ *
  *      This approach assumes it is feasible to update the value of each node
  */
 public class DeleteNodeInMiddle {
@@ -70,21 +72,13 @@ public class DeleteNodeInMiddle {
         SLNode<T> p1 = node;
         SLNode<T> p2 = node.next;
 
-        while (p2.next != null) {
-            // swap value
-            T tmpValue = p1.value;
-            p1.value = p2.value;
-            p2.value = tmpValue;
 
-            p1 = p2;
-            p2 = p2.next;
-        }
-        // last swap
+        // swap the value
         T tmpValue = p1.value;
         p1.value = p2.value;
         p2.value = tmpValue;
 
-        // remove last element
-        p1.next = null;
+        // remove the element
+        p1.next = p2.next;
     }
 }
