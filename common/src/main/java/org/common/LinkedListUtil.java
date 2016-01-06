@@ -53,4 +53,20 @@ public class LinkedListUtil {
         }
         return count;
     }
+
+    public static int[] toArray(SLNode<Integer> head) {
+        if (head == null) {
+            return new int[0];
+        }
+        int[] result = new int[length(head)];
+
+        SLNode<Integer> tmp = head;
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = tmp.value;
+            tmp = tmp.next;
+        }
+
+        return result;
+    }
 }
