@@ -5,6 +5,28 @@ package org.common;
  */
 public class LinkedListUtil {
 
+    public static SLNode<Character> stringToLinkedList(String str) {
+
+        SLNode<Character> head = null, runner = null;
+
+        if (str == null) {
+            return null;
+        }
+
+        char[] chars = str.toCharArray();
+
+        for (int i = 0; i < chars.length; i++) {
+            if (head == null) {
+                head = SLNode.createNode(chars[i]);
+                runner = head;
+            } else {
+                runner.next = SLNode.createNode(chars[i]);
+                runner = runner.next;
+            }
+        }
+        return head;
+    }
+
     public static <T> boolean lookFor(SLNode<T> head, T value) {
         SLNode<T> tmp = head;
         boolean result = false;
