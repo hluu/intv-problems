@@ -3,14 +3,17 @@ package org.learning.dp;
 import static org.common.ArrayUtils.*;
 
 /**
- * Given n items where each item has an associated weight (w) and value (v) and
- * a knapsack, of capacity W. Find the most valuable subset of the items that
- * fit into the knapsack.
+ * Problem Statement:
+ *
+ *  Given n items where each item has an associated weight (w) and value (v) and
+ *  a knapsack, of capacity W. Find the most valuable subset of the items that
+ *  fit into the knapsack.
  * 
- * All weights and knapsack capacity are positive integers. Item values do not
- * have to be integers.
+ *  All weights and knapsack capacity are positive integers. Item values do not
+ *  have to be integers.
  * 
- * @author hluu
+ * Approach:
+ *
  *
  */
 public class Knapsack {
