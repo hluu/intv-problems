@@ -13,7 +13,8 @@ public class PalindromeTest {
     public void oneLetterString() {
         SLNode<Character> l = LinkedListUtil.stringToLinkedList("a");
 
-        Assert.assertFalse(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome2(l));
     }
 
     @Test
@@ -21,6 +22,7 @@ public class PalindromeTest {
         SLNode<Character> l = LinkedListUtil.stringToLinkedList("aa");
 
         Assert.assertTrue(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome2(l));
     }
 
     @Test
@@ -28,6 +30,7 @@ public class PalindromeTest {
         SLNode<Character> l = LinkedListUtil.stringToLinkedList("ab");
 
         Assert.assertFalse(Palindrome.isPalindrome(l));
+        Assert.assertFalse(Palindrome.isPalindrome2(l));
     }
 
     @Test
@@ -35,10 +38,12 @@ public class PalindromeTest {
         SLNode<Character> l = LinkedListUtil.stringToLinkedList("aaa");
 
         Assert.assertTrue(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome2(l));
 
         l = LinkedListUtil.stringToLinkedList("aba");
 
         Assert.assertTrue(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome2(l));
     }
 
     @Test
@@ -46,6 +51,7 @@ public class PalindromeTest {
         SLNode<Character> l = LinkedListUtil.stringToLinkedList("abc");
 
         Assert.assertFalse(Palindrome.isPalindrome(l));
+        Assert.assertFalse(Palindrome.isPalindrome2(l));
     }
 
     @Test
@@ -53,10 +59,12 @@ public class PalindromeTest {
         SLNode<Character> l = LinkedListUtil.stringToLinkedList("aaaa");
 
         Assert.assertTrue(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome2(l));
 
         l = LinkedListUtil.stringToLinkedList("abba");
 
         Assert.assertTrue(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome2(l));
     }
 
     @Test
@@ -64,5 +72,14 @@ public class PalindromeTest {
         SLNode<Character> l = LinkedListUtil.stringToLinkedList("abca");
 
         Assert.assertFalse(Palindrome.isPalindrome(l));
+        Assert.assertFalse(Palindrome.isPalindrome2(l));
+    }
+
+    @Test
+    public void longestPalindrome() {
+        SLNode<Character> l = LinkedListUtil.stringToLinkedList("rotavator");
+
+        Assert.assertTrue(Palindrome.isPalindrome(l));
+        Assert.assertTrue(Palindrome.isPalindrome2(l));
     }
 }

@@ -5,6 +5,37 @@ package org.common;
  */
 public class LinkedListUtil {
 
+    /**
+     * Reverse a linked list
+     * @param head
+     * @param <T>
+     * @return head of the reversed linked list
+     */
+    public static <T> SLNode<T> reverse(SLNode<T> head) {
+        if (head == null) {
+            return null;
+        }
+
+        // one node list
+        if (head.next == null) {
+            return head;
+        }
+
+        SLNode<T> prev = null;
+        SLNode<T> current = head;
+        SLNode<T> next = head.next;
+
+        while (next != null) {
+            current.next = prev;
+            prev = current;
+            current = next;
+            next = next.next;
+        }
+
+        current.next = prev;
+        return current;
+    }
+
     public static SLNode<Character> stringToLinkedList(String str) {
 
         SLNode<Character> head = null, runner = null;
