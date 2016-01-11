@@ -80,6 +80,24 @@ public class LinkedListUtil {
         System.out.println();
     }
 
+    public static <T> void printLinkedList(DLNode<T> head) {
+        DLNode<T> tmp = head;
+        while (tmp != null) {
+            System.out.print(tmp.value + ", ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
+
+    public static <T> void printLinkedListBackward(DLNode<T> tail) {
+        DLNode<T> tmp = tail;
+        while (tmp != null) {
+            System.out.print(tmp.value + ", ");
+            tmp = tmp.prev;
+        }
+        System.out.println();
+    }
+
     public static <T> int length(SLNode<T> head) {
         int len = 0;
 
@@ -87,6 +105,17 @@ public class LinkedListUtil {
         while (tmp != null) {
             len++;
             tmp = tmp.next;
+        }
+        return len;
+    }
+
+    public static <T> int lengthBackward(DLNode<T> tail) {
+        int len = 0;
+
+        DLNode<T> tmp = tail;
+        while (tmp != null) {
+            len++;
+            tmp = tmp.prev;
         }
         return len;
     }

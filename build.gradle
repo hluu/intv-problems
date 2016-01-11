@@ -30,6 +30,7 @@ subprojects {
     }
 
     dependencies {
+        compile group:'com.google.collections', name:'google-collections', version:'1.0'
         testCompile group:'org.testng', name:'testng', version:'6.9.9'
     }
 

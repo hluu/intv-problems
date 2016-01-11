@@ -64,7 +64,7 @@ public class LargestConsecutiveProduct {
             } else {
                 // negative
                 maxPos = Math.max(maxNeg * v, curMax);
-                maxNeg = Math.min(maxNeg * v, 1);
+                maxNeg = Math.min(maxNeg * v, v* curMax);
                 curMax = maxPos;
             }
         }
