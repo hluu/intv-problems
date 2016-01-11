@@ -5,6 +5,37 @@ package org.common;
  */
 public class LinkedListUtil {
 
+    /**
+     * Reverse a linked list
+     * @param head
+     * @param <T>
+     * @return head of the reversed linked list
+     */
+    public static <T> SLNode<T> reverse(SLNode<T> head) {
+        if (head == null) {
+            return null;
+        }
+
+        // one node list
+        if (head.next == null) {
+            return head;
+        }
+
+        SLNode<T> prev = null;
+        SLNode<T> current = head;
+        SLNode<T> next = head.next;
+
+        while (next != null) {
+            current.next = prev;
+            prev = current;
+            current = next;
+            next = next.next;
+        }
+
+        current.next = prev;
+        return current;
+    }
+
     public static SLNode<Character> stringToLinkedList(String str) {
 
         SLNode<Character> head = null, runner = null;
@@ -49,6 +80,24 @@ public class LinkedListUtil {
         System.out.println();
     }
 
+    public static <T> void printLinkedList(DLNode<T> head) {
+        DLNode<T> tmp = head;
+        while (tmp != null) {
+            System.out.print(tmp.value + ", ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
+
+    public static <T> void printLinkedListBackward(DLNode<T> tail) {
+        DLNode<T> tmp = tail;
+        while (tmp != null) {
+            System.out.print(tmp.value + ", ");
+            tmp = tmp.prev;
+        }
+        System.out.println();
+    }
+
     public static <T> int length(SLNode<T> head) {
         int len = 0;
 
@@ -56,6 +105,17 @@ public class LinkedListUtil {
         while (tmp != null) {
             len++;
             tmp = tmp.next;
+        }
+        return len;
+    }
+
+    public static <T> int lengthBackward(DLNode<T> tail) {
+        int len = 0;
+
+        DLNode<T> tmp = tail;
+        while (tmp != null) {
+            len++;
+            tmp = tmp.prev;
         }
         return len;
     }

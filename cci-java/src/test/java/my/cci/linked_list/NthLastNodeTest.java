@@ -1,8 +1,9 @@
 package my.cci.linked_list;
 
-import junit.framework.Assert;
+
 import org.common.LinkedListUtil;
 import org.common.SLNode;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -32,12 +33,12 @@ public class NthLastNodeTest {
 
 
         // start from len-1 to 1
-        for (int k = LinkedListUtil.length(head)-1; k > 0; k--) {
+        for (int k = LinkedListUtil.length(head) - 1; k > 0; k--) {
             SLNode<Integer> resultFromRunnerPointer = NthLastNode.useRunnerPointer(head, k);
-            Assert.assertEquals(resultFromRunnerPointer.value, new Integer(len-k));
+            Assert.assertEquals(resultFromRunnerPointer.value, new Integer(len - k));
 
             SLNode<Integer> resultFromRecursion = NthLastNode.useRecursion(head, k);
-            Assert.assertEquals(resultFromRecursion.value, new Integer(len-k));
+            Assert.assertEquals(resultFromRecursion.value, new Integer(len - k));
         }
     }
 }

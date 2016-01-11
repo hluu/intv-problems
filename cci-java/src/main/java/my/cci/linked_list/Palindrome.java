@@ -50,13 +50,60 @@ public class Palindrome {
         SLNode<Character> head = LinkedListUtil.stringToLinkedList(word1);
         LinkedListUtil.printLinkedList(head);
         System.out.println("palindrome: " + isPalindrome(head));
+
+        String word2 = "rotavator";
+        SLNode<Character> head2 = LinkedListUtil.stringToLinkedList(word2);
+        LinkedListUtil.printLinkedList(head2);
+        System.out.println("reverse of " + word2);
+        LinkedListUtil.printLinkedList(LinkedListUtil.reverse(head2));
     }
 
 
-    public static boolean isPalindrome(SLNode<Character> head) {
-        if (head == null || head.next == null) {
+    public static boolean isPalindrome2(SLNode<Character> head) {
+        // this version first clone the linked list and then
+        // reverse it and finally compare the first half of characters of both lists
+
+        if (head == null) {
             // null or one node, then false
             return false;
+        }
+
+        if (head.next == null) {
+            return  true;
+        }
+
+        int len = LinkedListUtil.length(head);
+
+        int numChar = len / 2;
+
+        String firstHalf = "";
+
+        SLNode<Character> runner = head;
+        for (int i = 0; i < numChar; i++) {
+            firstHalf = firstHalf + runner.value;
+            runner = runner.next;
+        }
+
+        SLNode<Character> reversedList = LinkedListUtil.reverse(head);
+
+        String firstHalf2 = "";
+        runner = reversedList;
+        for (int i = 0; i < numChar; i++) {
+            firstHalf2 = firstHalf2 + runner.value;
+            runner = runner.next;
+        }
+
+        return firstHalf.equals(firstHalf2);
+
+    }
+    public static boolean isPalindrome(SLNode<Character> head) {
+        if (head == null) {
+            // null or one node, then false
+            return false;
+        }
+
+        if (head.next == null) {
+            return  true;
         }
 
         int len = LinkedListUtil.length(head);

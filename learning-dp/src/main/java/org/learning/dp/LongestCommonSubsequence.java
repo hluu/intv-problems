@@ -84,7 +84,7 @@ public class LongestCommonSubsequence {
 
     /**
      * This implementation will use a 2-dimensional array (n,m) to store
-     * the LCS of (i,j).
+     * the LCS of (i,j), which is the length, not the actual letters
      *
      * n being the length of String X
      * m being the length of String Y
@@ -133,6 +133,16 @@ public class LongestCommonSubsequence {
 
     }
 
+    /**
+     * This method actually returns the LCS string
+     *
+     * @param table
+     * @param x
+     * @param y
+     * @param i
+     * @param j
+     * @return
+     */
     private static String retrieveLCS(int[][] table, String x, String y, int i, int j) {
 
         if(i == 0 || j ==0) {

@@ -1,5 +1,8 @@
 package org.learning.numbers;
 
+import java.lang.Comparable;
+import java.util.TreeSet;
+
 /**
  * Created by hluu on 1/8/16.
  *
@@ -25,6 +28,71 @@ package org.learning.numbers;
  */
 public class IntervalCoverage {
     public static void main(String[] args) {
+
         System.out.println("IntervalCoverage.main");
+
+        IntervalCoverage ic = new IntervalCoverage();
+        ic.add(3,6);
+        ic.add(8,9);
+        ic.add(1,5);
+        ic.add(2,7);
+
+        ic.add(10,15);
+        ic.add(11,14);
+
+        System.out.println(ic.getTotalLength());
     }
+
+    private TreeSet<Point> points = new TreeSet<Point>();
+
+    public void add(int from, int to) {
+        points.add(new Point(from, true));
+        points.add(new Point(to, false));
+    }
+
+    public int getTotalLength() {
+        int totalLen = 0;
+
+        int from = -1;
+        int startCount = 0;
+        for (Point point : points) {
+            System.out.println(point);
+
+            if (from < 0 && point.start) {
+                from = point.coordinate;
+            }
+            startCount += (point.start) ? 1 : -1;
+
+            if (startCount == 0) {
+                // end of a segment
+                totalLen += point.coordinate - from;
+                from = -1;
+            }
+        }
+
+        return totalLen;
+    }
+
+    private static class Point implements Comparable<Point> {
+        public final int coordinate;
+        public final boolean start;
+
+        public Point(int from, boolean start) {
+            this.coordinate = from;
+            this.start = start;
+        }
+
+        public int compareTo(Point other) {
+            if (other == null) {
+                return -1;
+            }
+
+            return coordinate - other.coordinate;
+        }
+
+        public String toString() {
+            return coordinate + ":" + start;
+        }
+    }
+
 }
