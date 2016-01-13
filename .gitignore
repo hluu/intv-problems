@@ -6,3 +6,8 @@ gradle/
 *.iws
 *.iml
 out/
+common/common.iml
+epi-java/epi-java.iml
+cci-java/cci-java.iml
+learning-dp/cci-java.iml
+other-problems/cci-java.iml
