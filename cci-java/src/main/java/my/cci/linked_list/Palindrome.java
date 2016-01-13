@@ -28,6 +28,12 @@ import java.util.Stack;
  *  What can do is to push the characters from the second half onto the stack which will allow us to pop
  *  them in the order that we can compare with letter from the first half.
  *
+ *  Another approach is to reverse the linked list and compare the first half.
+ *    original list: 1->2->3->2->1
+ *    reversed list: 1->2->3->2->1
+ *
+ *  So we just compare the first half.
+ *
  * Runtime analysis:
  *  O(n/2) - for populating the stack
  *  O(n/2) - comparing
