@@ -1,5 +1,7 @@
 package org.common;
 
+import com.google.common.base.Preconditions;
+
 /**
  * Created by hluu on 1/1/16.
  *
@@ -15,6 +17,11 @@ public class SLNode<T> extends Node<T> {
     public SLNode(T v, SLNode<T> next) {
         super(v);
         this.next = next;
+    }
+
+    public SLNode<T> attach(SLNode<T> next) {
+        this.next = next;
+        return this;
     }
 
     public static <T> SLNode<T> createNode(T v) {

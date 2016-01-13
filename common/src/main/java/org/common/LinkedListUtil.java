@@ -80,6 +80,22 @@ public class LinkedListUtil {
         System.out.println();
     }
 
+    public static <T> void printLinkedList(SLNode<T> head, int howMany) {
+        SLNode<T> tmp = head;
+        int counter = 0;
+        while (tmp != null) {
+            System.out.print(tmp.value + ", ");
+            tmp = tmp.next;
+
+            counter++;
+
+            if (counter == howMany) {
+                break;
+            }
+        }
+        System.out.println();
+    }
+
     public static <T> void printLinkedList(DLNode<T> head) {
         DLNode<T> tmp = head;
         while (tmp != null) {

@@ -89,7 +89,7 @@ public class MaxConcurrentEvents {
                 if (counter > maxConcurrIntervalCounter) {
                     maxConcurrIntervalCounter = counter;
                 }
-                // maintain the internval the largest end point
+                // maintain the interval the largest end point
                 prevInterval = (intv.end > prevInterval.end) ? intv : prevInterval;
             } else {
                 // new interval starts after the end of prevInternval
