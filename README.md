@@ -32,6 +32,17 @@ books and other problems from other sources
 | 32      | 4,294,967,296       |  4GB    |
 | 40      | 1,099, 511,627,776  |  1TB    |
 
+### Bits & Bytes
+| Bytes                  |  Name   | 
+| :-----:                | :------:|
+| 1,000                  | 1KB     |
+| 1,000,000              | 1MB     |
+| 1,000,000,000          | 1GB     |
+| 1,000,000,000,000      | 1TB     |
+| 1,000,000,000,000,000  | 1PB     |
+
+
+
 
 ### Common utility to know
 ```java
@@ -54,3 +65,4 @@ public static String toBase(int n, int base) {
 * Permutation - rearrangement of letters in specific order.
 * Anagram - rearranging the letters of a word to produce a new word. i.e listen and silent
 * Palindrome - a word which read the same backward or forward. i.e civic
+
