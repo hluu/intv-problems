@@ -1,5 +1,8 @@
 package org.learning.index;
 
+import java.util.TreeSet;
+import java.util.UUID;
+
 /**
  * Created by hluu on 1/16/16.
  *
@@ -41,4 +44,47 @@ package org.learning.index;
  *
  */
 public class FastAccessWithIndex {
+    public static void main(String[] args) {
+        UUID uuid = UUID.randomUUID();
+        System.out.println("uuid version: " + uuid.version() + " variant: " +
+            uuid.variant());
+        System.out.println("uuid: " + uuid.toString());
+
+        TreeSet<UUID> set = new TreeSet<>(new UUIDComparator());
+        for (int i = 0; i < 20; i++) {
+            uuid = UUID.randomUUID();
+            System.out.println(uuid);
+            set.add(uuid);
+        }
+
+        System.out.println("after sorting");
+        for (UUID uuid1 : set) {
+            System.out.println(uuid1);
+        }
+
+        byte[] msb = longToByteArray(uuid.getMostSignificantBits());
+        byte[] lsb = longToByteArray(uuid.getLeastSignificantBits());
+
+        byte[] uuidBytes = new byte[msb.length + lsb.length];
+
+        for (int i = 0; i < uuidBytes.length; i++) {
+            if (i < 8) {
+                uuidBytes[i] = msb[i];
+            } else {
+                uuidBytes[i] = lsb[i-8];
+            }
+        }
+
+    }
+
+    private static byte[] longToByteArray(long l) {
+        byte[] result = new byte[8];
+
+        for (int i = result.length-1; i >= 0; i--) {
+            result[i] = (byte)(l & 0xff);
+            l = l >> 8;
+        }
+
+        return result;
+    }
 }
