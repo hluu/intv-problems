@@ -66,3 +66,10 @@ public static String toBase(int n, int base) {
 * Anagram - rearranging the letters of a word to produce a new word. i.e listen and silent
 * Palindrome - a word which read the same backward or forward. i.e civic
 
+### Subsets
+* The number of subsets of size k of a set of size n is n!/k!*(n-k)!
+* This is also known as combinations
+
+### Permutations
+* The number of permutation of a set of size n is n!
+
