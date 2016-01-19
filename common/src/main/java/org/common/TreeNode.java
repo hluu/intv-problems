@@ -68,6 +68,20 @@ public class TreeNode<T> extends Node<T> {
         return new TreeNode<T>(t, left, right);
     }
 
+    public static TreeNode<Integer> createTreeNode(Integer n, Integer left, Integer right ) {
+        if (n == null) {
+            throw new NullPointerException("value can't be null");
+        }
+        TreeNode<Integer> result = new TreeNode<Integer>(n);
+        if (left != null) {
+            result.left = createTreeNode(left);
+        }
+
+        if (right != null) {
+            result.right = createTreeNode(right);
+        }
+        return result;
+    }
 
     public static <T> void resetState(TreeNode<T> root) {
         if (root == null) {
