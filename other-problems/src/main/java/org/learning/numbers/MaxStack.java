@@ -24,7 +24,7 @@ import java.util.Stack;
  *      popMax() -> 5; peek -> 4, peekMax() -> 4
  *
  * Approach:
- *      Need couple of data structures:
+ *      Need a couple of data structures:
  *          one for regular stack to store elements
  *          another one for maintain the max elements up that to point
  *      Need to synchronize between these two stacks

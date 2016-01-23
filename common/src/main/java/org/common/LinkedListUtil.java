@@ -73,8 +73,13 @@ public class LinkedListUtil {
 
     public static <T> void printLinkedList(SLNode<T> head) {
         SLNode<T> tmp = head;
+        boolean afterFirstNode = false;
         while (tmp != null) {
-            System.out.print(tmp.value + ", ");
+            if (afterFirstNode) {
+                System.out.print(", ");
+            }
+            System.out.print(tmp.value);
+            afterFirstNode = true;
             tmp = tmp.next;
         }
         System.out.println();
