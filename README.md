@@ -11,6 +11,13 @@ books and other problems from other sources
 * There are n(n-1)/2 contiguous substrings in a string of length n (n^2)
 * There are n(n-1)/2 possible subtrees in a binary search tree (n^2)
 
+### Subsets
+* The number of subsets of size k of a set of size n is n!/k!*(n-k)!
+* This is also known as combinations
+
+### Permutations
+* The number of permutation of a set of size n is n!
+
 
 ### Common steps for solving a technical questions
 * ask questions to clarify ambiguity
@@ -66,10 +73,10 @@ public static String toBase(int n, int base) {
 * Anagram - rearranging the letters of a word to produce a new word. i.e listen and silent
 * Palindrome - a word which read the same backward or forward. i.e civic
 
-### Subsets
-* The number of subsets of size k of a set of size n is n!/k!*(n-k)!
-* This is also known as combinations
+### Working with numbers
+* Every number can be decomposed into a product of primes
+* All non-prime numbers are divisible by a primer number
 
-### Permutations
-* The number of permutation of a set of size n is n!
+### Tree Data Structures
+* Heap is a binary tree where every node holds a value that is at least as large as the values in all children.
 

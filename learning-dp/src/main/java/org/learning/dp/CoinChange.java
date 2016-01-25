@@ -38,24 +38,33 @@ public class CoinChange {
 		
 	}
 	
-	public static int coinChange(int amount, int[] denominations) {
+	public static int coinChange(int amount, int[] coins) {
+		if (amount < coins[0]) {
+			return -1;
+		}
+
 		int minCoin[] = new int[amount+1];
 		
 		for (int amt = 1; amt <= amount; amt++) {
 			int minSoFar = Integer.MAX_VALUE;
-			for (int j = 0; j < denominations.length; j++) {
-				// make sure the denomination is less than or equal to amount
-				int denomination = denominations[j]; 
-				if (amt >= denomination) {
-				//if (denomination <= amt) {					
-					minSoFar = Math.min(minCoin[amt - denominations[j]], minSoFar);
+			for (int j = 0; j < coins.length; j++) {
+				// make sure the coinDenomination is less than or equal to amount
+				int coinDenomination = coins[j];
+				if (amt >= coinDenomination) {
+				//if (coinDenomination <= amt) {
+					minSoFar = Math.min(minCoin[amt - coinDenomination], minSoFar);
 				}
 			}
-			minCoin[amt] = minSoFar + 1;
-			System.out.println("amount: " + amt + " minCoin: " + Arrays.toString(minCoin));
+			if (minSoFar == Integer.MAX_VALUE) {
+				// this is for the case where amount is less than any denomination
+				minCoin[amt] = 0;
+			} else {
+				minCoin[amt] = minSoFar + 1;
+			}
+			//System.out.println("amount: " + amt + " minCoin: " + Arrays.toString(minCoin));
 		}
 		
-		return minCoin[amount];
+		return (minCoin[amount] > 0) ? minCoin[amount] : -1;
 	}
 
 }
