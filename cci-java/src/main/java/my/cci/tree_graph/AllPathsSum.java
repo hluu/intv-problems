@@ -35,7 +35,11 @@ import java.util.ListIterator;
  *    * At any point in time of traversing, then there is a single unique path
  *    * We can represent that path with an array storing the elements in that path
  *    * Since a path can start or end at any node, we need to check for the sum as
- *      we iterate from largest level back to lowest level
+ *      we iterate from deepest level back to lowest level.  Why does this work?
+ *    * Take for example the path of 20, 10, 5, 3 and their respective levels
+ *    * We have the following paths: [20], [20,10], [20,10,5], [10,5], [20,10,5,3],
+ *      [10,5,3], [3,5]
+ *
  *
  *  Runtime analysis:
  *    * This is a variation of DFS meaning we traverse every single node
@@ -75,6 +79,8 @@ public class AllPathsSum {
         ListIterator<Integer> iterator = ll.listIterator(level);
         int sumSoFar = 0;
         StringBuilder buf = new StringBuilder();
+
+        // walking from bottom up to root
         while (iterator.hasPrevious()) {
             int value = iterator.previous();
             sumSoFar += value;
@@ -92,6 +98,5 @@ public class AllPathsSum {
         printAllPaths(root.right, sum, ll, level+1, collector);
 
         ll.removeLast();
-
     }
 }

@@ -50,6 +50,13 @@ public class IsTreeBalanced {
         System.out.println("result = " + result);
     }
 
+    /**
+     * Using negative return value to indicate there was an imbalanced.
+     *
+     * @param root
+     * @param <T>
+     * @return
+     */
     public static <T> int checkBalanced(TreeNode<T> root) {
         if (root == null) {
             return 0;

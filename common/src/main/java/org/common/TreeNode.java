@@ -27,6 +27,16 @@ public class TreeNode<T> extends Node<T> {
         this.right = right;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if ((o == null) || !(o instanceof TreeNode)) {
+            return false;
+        }
+
+        TreeNode<T> other = (TreeNode<T>)o;
+        return this.value.equals(((TreeNode<T>) o).value);
+    }
+
     public boolean isNotVisited() {
         return (this.state == VisitState.NOT_VISITED);
     }
