@@ -1,7 +1,8 @@
 package org.learning.numbers;
 
 import org.common.LinkedListUtil;
-import org.junit.Assert;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**

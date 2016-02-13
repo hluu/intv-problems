@@ -12,7 +12,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *  add cookies to the jar.
  *
  *  Develop a CookieJar to hold cookies such that cookies consumers have the ability to
- *  take cookies to enjoy without waiting on each other
+ *  take cookies to enjoy without waiting on each other.
+ *
+ *  This example is about how to use read and write locks.
+ *      Read lock protects writers and readers, but allow concurrent readers
+ *      Write lock protects readers and from multiple writers
  */
 public class CookieJar {
     private ReadWriteLock rwLock = new ReentrantReadWriteLock();
@@ -50,6 +54,7 @@ public class CookieJar {
     }
 
     public static void main(String[] args) {
+
         System.out.println("CookieJar.main");
     }
 

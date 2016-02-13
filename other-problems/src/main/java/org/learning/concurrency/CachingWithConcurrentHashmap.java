@@ -24,7 +24,8 @@ public class CachingWithConcurrentHashmap<K,V> {
     public static void main(String[] args) {
         System.out.println("CachingWithConcurrentHashmap.main");
 
-        CachingWithConcurrentHashmap<String,Integer> cache = new CachingWithConcurrentHashmap<String,Integer>();
+        CachingWithConcurrentHashmap<String,Integer> cache =
+                new CachingWithConcurrentHashmap<String,Integer>();
 
         Integer prevValue = cache.put("One", 1);
         prevValue = cache.put("Two", 2);
