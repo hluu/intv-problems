@@ -64,6 +64,11 @@ public class FindSmallestPositiveNumber {
        for (int i = 0; i < arr.length; i++) {
            int v = arr[i];
 
+           // make sure we don't get in inifite loop here
+           // keep loop when:
+           //   v is between 0 and maxValue
+           //   v is not same at position i+1
+           //   v is not same value as the value at position v-1 in the array
            while (v > 0 && v < maxValue && (v != i+1) && (v != arr[v-1])) {
                int newV = arr[v - 1];
                arr[v - 1] = v;
