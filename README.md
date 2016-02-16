@@ -73,9 +73,10 @@ public static String toBase(int n, int base) {
 * Anagram - rearranging the letters of a word to produce a new word. i.e listen and silent
 * Palindrome - a word which read the same backward or forward. i.e civic
 
-### Working with numbers
+### Working with prime numbers
 * Every number can be decomposed into a product of primes
 * All non-prime numbers are divisible by a primer number
+* All prime numbers are odd
 
 ### Tree Data Structures
 * Heap is a binary tree where every node holds a value that is at least as large as the values in all children.
