@@ -10,6 +10,8 @@ package org.learning.dp;
  *  A subsequence is not necessary contiguous
  *
  *  For example:
+ *      {3,4-1,5,8,2,3,12,7,9,10} => {-1,2,3,7,9,10}  with size of 6
+ *
  *      {3,4,-1,0,6,2,3} => {-1,0,2,3} with size of 4
  *
  *      {3,2,6,4,5,1} => {2,4,5}  with size of 3
@@ -26,7 +28,7 @@ package org.learning.dp;
  *  Let LIS[i] be the longest increasing subsequence at 0 to i
  *
  *  What are subproblems?
- *      * Can we solve for LIS[0 to i-1] and extend to LIS[i]?
+ *    * Can we solve for LIS[0 to i-1] and extend to LIS[i]?
  *
  *  Have an array with same length as the input array to store the max subsequence at each index
  *
