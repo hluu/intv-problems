@@ -81,3 +81,15 @@ public static String toBase(int n, int base) {
 ### Tree Data Structures
 * Heap is a binary tree where every node holds a value that is at least as large as the values in all children.
 
+### General pattern for solving tree related problems:
+* Identify base case and return appropriate value
+* compute the left side
+** Take appropriate action based on result: either stop recursion or continue
+* compute the right side
+** Take appropriate action based on result: either stop recursion or continue
+* Now take action based on the result of both left and right side
+
+### Dynamic Programming - three steps involved in solving a DP problem
+* Formulate the answer as a recurrence relation or recursive algorithm
+* Ensure the number of different parameter values taken on by recurrence is bounded
+* Specify the order of evaluation for the recurrence so partial results are available when needed

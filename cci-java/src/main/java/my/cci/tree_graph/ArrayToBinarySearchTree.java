@@ -22,9 +22,9 @@ import org.common.TreeUtility;
  * <p>
  * <p>
  * Approach:
- * * How to ensure half the array is on the left hand side and the other half on the other side
- * * By picking a middle number
- * * Once the array is divided half, we can use the same approach to build the subtree on each side
+ *  How to ensure half the array is on the left hand side and the other half on the other side
+ *  By picking a middle number
+ *  Once the array is divided half, we can use the same approach to build the subtree on each side
  */
 public class ArrayToBinarySearchTree {
     public static void main(String[] args) {

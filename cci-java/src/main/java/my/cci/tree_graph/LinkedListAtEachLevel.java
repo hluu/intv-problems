@@ -29,7 +29,7 @@ import java.util.*;
  *  BFS - build a linked list at each level.  The challenge is to know the end of each level.
  *        use two counters, one for current level and next level
  *  DFS - increment the level at traversing down the tree, use the tree level to look up the
- *        linked list and add the value to that list
+ *        linked list in a map and add the value to that list
  */
 public class LinkedListAtEachLevel {
     public static void main(String[] args) {

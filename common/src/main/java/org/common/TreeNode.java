@@ -74,9 +74,22 @@ public class TreeNode<T> extends Node<T> {
         return new TreeNode<T>(t, left);
     }
 
+    public static <T> TreeNode<T> createTreeNode(T t, T left) {
+        return new TreeNode<T>(t, new TreeNode(left));
+    }
+
     public static <T> TreeNode<T> createTreeNode(T t, TreeNode left, TreeNode<T> right ) {
         return new TreeNode<T>(t, left, right);
     }
+
+    /*
+    public static <T> TreeNode<T> createTreeNode(T t, Integer left, TreeNode<T> right ) {
+        return new TreeNode<T>(t, new TreeNode(left), right);
+    }
+
+    public static <T> TreeNode<T> createTreeNode(T t, TreeNode<T> left, Integer right ) {
+        return new TreeNode<T>(t, left, new TreeNode(right) );
+    } */
 
     public static TreeNode<Integer> createTreeNode(Integer n, Integer left, Integer right ) {
         if (n == null) {

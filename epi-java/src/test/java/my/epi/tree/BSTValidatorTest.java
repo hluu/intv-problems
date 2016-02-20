@@ -1,7 +1,8 @@
 package my.epi.tree;
 
-import junit.framework.Assert;
-import my.epi.sorting.MaxConcurrentEvents;
+
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
