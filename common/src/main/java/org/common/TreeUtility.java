@@ -57,4 +57,14 @@ public class TreeUtility {
         printRootToLeafPath(root.left, path);
         printRootToLeafPath(root.right, path);
     }
+
+    public static <T> void inOrderTraversal(TreeNode<T> root) {
+        if (root == null) {
+            return;
+        }
+
+        inOrderTraversal(root.left);
+        System.out.println(root.value);
+        inOrderTraversal(root.right);
+    }
 }

@@ -37,6 +37,8 @@ public class HasPathSum {
 
         TreeNode<Integer> root = TreeNode.createTreeNode(314,left, right);
 
+        TreeUtility.inOrderTraversal(root);
+
         TreeUtility.printRootToLeafPath(root);
 
         //int targetSum = 591;
