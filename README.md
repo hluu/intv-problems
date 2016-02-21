@@ -89,7 +89,7 @@ public static String toBase(int n, int base) {
 | Height          | log(N+1) - 1     |
 | # leaf nodes    | 2^H              |
 
-## In a perfect binary tree, almost exactly half of the nodes are leaves and almost exactly half are internal nodes.
+#### In a perfect binary tree, almost exactly half of the nodes are leaves and almost exactly half are internal nodes.
 
 ### Tree Traversal
 #### Preorder Traversal
@@ -98,11 +98,9 @@ public static void preOrder(Node node) {
    if (node == null) return
 
    System.out.println(node.value);
-   if (node.left != null)
-     preOrder(node.left);
+   if (node.left != null) preOrder(node.left);
 
-   if (node.right != null)
-     preOrder(node.right);
+   if (node.right != null) preOrder(node.right);
 }
 ```
 
@@ -111,13 +109,11 @@ public static void preOrder(Node node) {
 public static void inorder(Node node) {
    if (node == null) return
 
-   if (node.left != null)
-     preOrder(node.left);
+   if (node.left != null) preOrder(node.left);
 
    System.out.println(node.value);
 
-   if (node.right != null)
-     preOrder(node.right);
+   if (node.right != null) preOrder(node.right);
 }
 ```
 
@@ -126,11 +122,9 @@ public static void inorder(Node node) {
 public static void postOrder(Node node) {
    if (node == null) return
 
-   if (node.left != null)
-     preOrder(node.left);
+   if (node.left != null) preOrder(node.left);
 
-   if (node.right != null)
-     preOrder(node.right);
+   if (node.right != null) preOrder(node.right);
 
    System.out.println(node.value);
 }
