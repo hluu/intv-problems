@@ -28,7 +28,7 @@ books and other problems from other sources
 
 
 ### Binary values
-| # bits  |  Value              | Bytes   |   
+| # bits  |  Value              | Bytes   |
 | :-----: | :-----------------: | :------:|
 | 7       | 128                 |         |
 | 8       | 256                 |         |
@@ -40,7 +40,7 @@ books and other problems from other sources
 | 40      | 1,099,511,627,776   |  1TB    |
 
 ### Bits & Bytes
-| Bytes                  |  Name   |  Name       | 
+| Bytes                  |  Name   |  Name       |
 | :-----:                | :------:| :------:    |
 | 1,000                  | 1KB     | Thousand    |
 | 1,000,000              | 1MB     | Million     |
@@ -80,6 +80,62 @@ public static String toBase(int n, int base) {
 
 ### Tree Data Structures
 * Heap is a binary tree where every node holds a value that is at least as large as the values in all children.
+
+### Binary Tree Properties
+| Property        |  Value           |
+| :-----:         | :--------------: |
+| Branches        | N -1             |
+| # of nodes      | N = 2^(H+1) -1   |
+| Height          | log(N+1) - 1     |
+| # leaf nodes    | 2^H              |
+
+## In a perfect binary tree, almost exactly half of the nodes are leaves and almost exactly half are internal nodes.
+
+### Tree Traversal
+#### Preorder Traversal
+```java
+public static void preOrder(Node node) {
+   if (node == null) return
+
+   System.out.println(node.value);
+   if (node.left != null)
+     preOrder(node.left);
+
+   if (node.right != null)
+     preOrder(node.right);
+}
+```
+
+#### Inorder Traversal
+```java
+public static void inorder(Node node) {
+   if (node == null) return
+
+   if (node.left != null)
+     preOrder(node.left);
+
+   System.out.println(node.value);
+
+   if (node.right != null)
+     preOrder(node.right);
+}
+```
+
+#### Postorder Traversal
+```java
+public static void postOrder(Node node) {
+   if (node == null) return
+
+   if (node.left != null)
+     preOrder(node.left);
+
+   if (node.right != null)
+     preOrder(node.right);
+
+   System.out.println(node.value);
+}
+```
+
 
 ### General pattern for solving tree related problems:
 * Identify base case and return appropriate value
