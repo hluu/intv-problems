@@ -8,6 +8,7 @@ package org.common;
 public class TreeNode<T> extends Node<T> {
     public enum VisitState { NOT_VISITED, VISITING, VISITED };
 
+    public TreeNode<T> parent;
     public TreeNode<T> left;
     public TreeNode<T> right;
     public VisitState state = VisitState.NOT_VISITED;
@@ -19,12 +20,21 @@ public class TreeNode<T> extends Node<T> {
     public TreeNode(T t, TreeNode left) {
         this(t);
         this.left = left;
+        if (left != null) {
+            left.parent = this;
+        }
     }
 
     public TreeNode(T t, TreeNode<T> left, TreeNode<T> right) {
         this(t);
         this.left = left;
+        if (left != null) {
+            left.parent = this;
+        }
         this.right = right;
+        if (right != null) {
+            right.parent = this;
+        }
     }
 
     @Override
@@ -71,10 +81,12 @@ public class TreeNode<T> extends Node<T> {
     }
 
     public static <T> TreeNode<T> createTreeNode(T t, TreeNode left) {
+
         return new TreeNode<T>(t, left);
     }
 
     public static <T> TreeNode<T> createTreeNode(T t, T left) {
+
         return new TreeNode<T>(t, new TreeNode(left));
     }
 
@@ -98,10 +110,12 @@ public class TreeNode<T> extends Node<T> {
         TreeNode<Integer> result = new TreeNode<Integer>(n);
         if (left != null) {
             result.left = createTreeNode(left);
+            result.left.parent = result;
         }
 
         if (right != null) {
             result.right = createTreeNode(right);
+            result.right.parent = result;
         }
         return result;
     }
