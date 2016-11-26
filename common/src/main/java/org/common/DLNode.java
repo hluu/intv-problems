@@ -32,6 +32,12 @@ public class DLNode<T> extends Node<T> {
         return other;
     }
 
+    public void moveUp() {
+        DLNode<T> tmp = this.prev;
+        this.prev = this;
+        this.prev.next = this;
+    }
+
     public DLNode<T> delete() {
 
         DLNode<T> prev = this.prev;

@@ -57,7 +57,7 @@ public class Knapsack {
 					optimalValue = Math.max(candidateOptimalValue,
 							table[i - 1][j]);
 				} else {
-					// item weight is bigger the current capacity
+					// item weight is bigger then current capacity
 					optimalValue = table[i - 1][j];
 				}
 				table[i][j] = optimalValue;

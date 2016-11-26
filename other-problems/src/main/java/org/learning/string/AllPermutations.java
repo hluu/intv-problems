@@ -12,9 +12,11 @@ import java.util.List;
  *  For example:
  *      dog -> dog, dgo, odg, ogd, god, gdo
  *
- *      Run time is n!, n is the length of characters in the string
+ *      Run time is n!, n is the length of characters in the string.  Why?
  *
  *  Approach:
+ *      Using recursion
+ *
  *      General approach is to pick a character at position 0 and permute on the
  *      remaining characters.
  *
@@ -40,9 +42,17 @@ public class AllPermutations {
         System.out.println(output.size());
         System.out.println("output2: " + output);
 
-
     }
 
+    /**
+     * From index of 0 to the # of characters in the string.
+     *
+     * @TODO - need more understand of the algorithm
+     *
+     * @param letters
+     * @param output
+     * @param pos
+     */
     public static void permuteUsingSwapping(char[] letters, List<String> output, int pos) {
         if (pos == letters.length) {
             output.add(new String(letters));

@@ -39,13 +39,23 @@ public class CountingSmallValues {
         int n = nums.length;
         int[] ans = new int[n];
         Tuple[] arr = new Tuple[n];
-        for (int i = 0; i < n; ++i) arr[i] = new Tuple(nums[i], i);
+        for (int i = 0; i < n; ++i) {
+            arr[i] = new Tuple(nums[i], i);
+        }
         sort(ans, arr, n);
         List<Integer> list = new ArrayList<>(n);
         for (int x : ans) list.add(x);
         return list;
     }
 
+    /**
+     * While doing simulated sorting, instead of merge, we figure
+     * the number of elements each element is bigger
+     * @param ans
+     * @param a
+     * @param n
+     * @return
+     */
     private static Tuple[] sort(int[] ans, Tuple[] a, int n) {
         if (n > 1) {
             int i = n / 2, j = n - i;
@@ -55,14 +65,18 @@ public class CountingSmallValues {
                 if (j == 0 || (i > 0 && left[i - 1].val > right[j - 1].val)) {
                     ans[left[i - 1].idx] += j;
                     a[k] = left[--i];
-                } else
+                } else {
                     a[k] = right[--j];
+                }
         }
         return a;
     }
 }
 
 
+/**
+ * Tuple to store the actual element value and the position it is in the array
+ */
 class Tuple {
     public int val;
     public int idx;

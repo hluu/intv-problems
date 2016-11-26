@@ -36,9 +36,9 @@ public class LargestConsecutiveProduct {
 
         //int[] arr = {-1, -3, -10, 0, 60};
 
-        //int[] arr = {-2, -3, 0, -2, -40};
+        int[] arr = {-2, -3, 0, -2, -40};
 
-        int[] arr = {1, 2, -4, 1, 3, -2, 3, -1};
+        //int[] arr = {1, 2, -4, 1, 3, -2, 3, -1};
 
         System.out.println("max prod: " + maxContiguousProduct(arr));
     }
@@ -64,7 +64,8 @@ public class LargestConsecutiveProduct {
             } else {
                 // negative
                 maxPos = Math.max(maxNeg * v, curMax);
-                maxNeg = Math.min(maxNeg * v, v* curMax);
+                maxNeg = Math.min(maxNeg * v, v * curMax);
+
                 curMax = maxPos;
             }
         }

@@ -14,17 +14,19 @@ import java.util.Arrays;
  *      1   2   3   4   5
  *      =================
  * R 	2	2	6	4	2
- * G	  	0	5	7	1	1
- * B		1	1	2	0	4
+ * G	0	5	7	1	1
+ * B	1	1	2	0	4
  * 
  * Approach:
- *  Base and build
+ *  Base and build technique
+ *
  *  What if there is only 1 house 
- *    {  2
- *       0
- *       1
- *        }
- *    Then the solution is just the min of the cost
+ *    {
+ *      2
+ *      0
+ *      1
+ *    }
+ *  Then the solution is just the min of the cost
  *    
  *  What if there are only 2 houses - 
  *     2  2  => 2+1  (R+B) = 3

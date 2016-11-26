@@ -25,6 +25,7 @@ public class CookieJar {
 
     private volatile  int count;
     public CookieJar(int initialNumCookies) {
+
         this.count = initialNumCookies;
     }
 
@@ -56,6 +57,14 @@ public class CookieJar {
     public static void main(String[] args) {
 
         System.out.println("CookieJar.main");
+
+        CookieJar cookieJar = new CookieJar(5);
+
+        cookieJar.takeCookie();
+        cookieJar.takeCookie();
+        cookieJar.takeCookie();
+
+        cookieJar.addCookie(new Cookie());
     }
 
 }

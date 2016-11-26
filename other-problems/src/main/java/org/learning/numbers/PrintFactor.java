@@ -5,6 +5,7 @@ package org.learning.numbers;
  */
 public class PrintFactor {
     public static void main(String[] args) {
+
         System.out.println("PrintFactor.main");
     }
 }

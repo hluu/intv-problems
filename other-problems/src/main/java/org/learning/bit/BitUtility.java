@@ -26,6 +26,7 @@ public class BitUtility {
      * @return
      */
     public static int sign(int n) {
-        return (n >> 31) & 0x1;
+
+        return flip((n >> 31) & 0x1);
     }
 }
