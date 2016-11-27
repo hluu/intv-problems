@@ -69,9 +69,9 @@ books and other problems from other sources
 
 Notes
 -----
-1 ns = 10^-9 seconds
-1 us = 10^-6 seconds = 1,000 ns
-1 ms = 10^-3 seconds = 1,000 us = 1,000,000 ns
+* 1 ns = 10^-9 seconds
+* 1 us = 10^-6 seconds = 1,000 ns
+* 1 ms = 10^-3 seconds = 1,000 us = 1,000,000 ns
 
 ##### Credit: https://gist.github.com/jboner/2841832
 
