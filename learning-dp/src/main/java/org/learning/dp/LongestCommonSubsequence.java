@@ -37,9 +37,11 @@ import org.common.Tuple;
  *  Z => z1,z2,z3... zk  => each letter in Z must exist in X and Y
  *
  *  Let's examine the last character of both X and Y: xn and ym.
- *  If they are equal, then that character is a part Z, so Z(k-1) must be LCS of X(n-1) and Y(m-1)
+ *  If they are equal, then that character is a part Z, so Z(k-1)
+ *    must be LCS of X(n-1) and Y(m-1)
  *
- *  If they are not equal, zk may be the same as xn or ym. zk might not the same as xn and ym.
+ *  If they are not equal, zk may be the same as xn or ym. zk might
+ *   not the same as xn and ym.
  *  If zk is not the same as xn, then Z is the LCS of X(n-1) and Y.
  *  If zk is not the same as ym, then Z is the LCS of X and Y(-1)
  *

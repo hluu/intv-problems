@@ -1,6 +1,8 @@
 package org.learning.string;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,6 +15,12 @@ import java.util.List;
  *      dog -> dog, dgo, odg, ogd, god, gdo
  *
  *      Run time is n!, n is the length of characters in the string.  Why?
+ *
+ *      Let's the length of string is 4:
+ *      4 possibilities for the first position
+ *      3 possibilities for the second position
+ *      2 possibilities for the third position
+ *      1 possibilities for the third position
  *
  *  Approach:
  *      Using recursion
@@ -27,21 +35,46 @@ public class AllPermutations {
 
         System.out.println("AllPermutations.main");
 
+        String tmp = "a";
+        System.out.printf("output: \"%s\"\n", tmp.substring(0,0));
+
+
         //String str = "dog";
-        String str = "abcd";
+        String str = "abc";
 
         List<String> output = new ArrayList<>();
 
         permuteUsingSwapping(str.toCharArray(), output,0);
         System.out.println(output.size());
+        Collections.sort(output);
         System.out.println("output1: " + output);
         output.clear();
 
-        permuteUsingBooleanFlags(str.toCharArray(), new boolean[str.length()], 0, output,
-                new StringBuilder(str.length()));
-        System.out.println(output.size());
-        System.out.println("output2: " + output);
 
+        permutationWithBooleanFlagsTest(str);
+
+        permutationWithSubString(str);
+    }
+
+
+
+    private static void permutationWithSubString(String str) {
+        System.out.printf("***** permutationWithSubString\n");
+        List<String> output2 = new ArrayList<>();
+        permUsingSubstring("", str, output2);
+        System.out.println(output2.size());
+        Collections.sort(output2);
+        System.out.println("output2: " + output2);
+    }
+
+    private static void permutationWithBooleanFlagsTest(String str) {
+        List<String> output2 = new ArrayList<>();
+        permuteUsingBooleanFlags(str.toCharArray(), new boolean[str.length()], 0,
+                output2,
+                new StringBuilder(str.length()));
+        System.out.println(output2.size());
+        Collections.sort(output2);
+        System.out.println("output2: " + output2);
     }
 
     /**
@@ -54,7 +87,7 @@ public class AllPermutations {
      * @param pos
      */
     public static void permuteUsingSwapping(char[] letters, List<String> output, int pos) {
-        if (pos == letters.length) {
+        if (pos == (letters.length - 1)) {
             output.add(new String(letters));
             return;
         }
@@ -67,6 +100,26 @@ public class AllPermutations {
             // swap back
             swap(letters, pos, i);
         }
+    }
+
+    private static void permUsingSubstring(String prefix, String s, List<String> output) {
+
+        System.out.printf("prefix: \"%s\", s: \"%s\"\n", prefix, s);
+        int n = s.length();
+        if (n == 0) {
+            output.add(prefix);
+        } else {
+            for (int i = 0; i < n; i++) {
+                String prefixTmp = prefix + s.charAt(i);
+                // pluck out the characters before i and characters after i
+                String tmp = s.substring(0, i) + s.substring(i + 1, n);
+                //System.out.printf("prefix: \"%s\", s: \"%s\"\n", prefix, tmp);
+                permUsingSubstring(prefixTmp,
+                        tmp,
+                        output);
+            }
+        }
+
     }
 
     private static void swap(char[] letter, int i, int j) {

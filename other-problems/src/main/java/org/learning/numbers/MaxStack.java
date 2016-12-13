@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import org.common.DLNode;
 import org.common.LinkedListUtil;
 
-import java.util.Comparator;
+
 import java.util.Stack;
 
 /**
@@ -28,10 +28,12 @@ import java.util.Stack;
  *          one for regular stack to store elements
  *          another one for maintain the max elements up that to point
  *      Need to synchronize between these two stacks
- *        * when a node is removed from regular stack, remove it from max stack if they are the same value
+ *        * when a node is removed from regular stack, remove
+ *          it from max stack if they are the same value
  *        * when a node is removed from max stack, remove it from regular stack
- *        * seems like the link is only needed from max stack to regular stack, not the other way around
- *      popMax will remove elements in regular stack in non-stack like fashion
+ *        * seems like the link is only needed from max stack to regular stack,
+ *          not the other way around
+ *        * popMax will remove elements in regular stack in non-stack like fashion
  *        * need to handle that
  *        * seems like double linked list would be most efficient
  *
@@ -43,6 +45,7 @@ public class MaxStack<T extends Comparable<T>> {
     private Stack<DLNode<T>> maxStack = new Stack<>();
 
     public int length() {
+
         return LinkedListUtil.lengthBackward(regularStackTail);
     }
     // The standard three Stack methods - push adds an element to the stack
@@ -63,6 +66,7 @@ public class MaxStack<T extends Comparable<T>> {
     }
     // Peek returns the top value on the stack
     public T peek() {
+
         return (regularStackTail != null) ? regularStackTail.value : null;
     }
 

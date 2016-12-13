@@ -67,7 +67,8 @@ public class AllPathsSum {
         System.out.println("output:" + collector);
     }
 
-    public static void printAllPaths(TreeNode<Integer> root, int sum, LinkedList<Integer> ll,
+    public static void printAllPaths(TreeNode<Integer> root, int sum,
+                                     LinkedList<Integer> ll,
                                      int level, List<String> collector) {
 
         if (root == null) {

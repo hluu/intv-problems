@@ -1,5 +1,7 @@
 package org.learning.dp;
 
+import org.testng.Assert;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,21 +42,78 @@ import java.util.List;
 public class CoinChange {
 
 	public static void main(String[] args) {
-		//int[] denominations = {1,3,4};
-		int[] denominations = {1,5,12,25};
-		int amount = 22;
-		
-		System.out.println("denominations: " + Arrays.toString(denominations));
-		System.out.printf("min coins for amount %d is %d\n", amount, 
-				coinChange(amount, denominations));
-		// i = 5
-		// j = 0 
-		// minSoFar = 2
-		//   0 1 2 3 4 5
-		// d[0,1,2,1,2,m]
-		
+
+		testCoinChange(7, new int[] {1,3,4}, 2);
+		testCoinChange(22, new int[] {1,5,12,25}, 3);
+		testCoinChange(15, new int[] {1,3,9,10}, 3);
+
+		testCoinChangeUsingRecursion(7, new int[] {1,3,4}, 2);
+		testCoinChangeUsingRecursion(22, new int[] {1,5,12,25}, 3);
+		testCoinChangeUsingRecursion(15, new int[] {1,3,9,10}, 3);
 	}
-	
+
+	private static int testCoinChangeUsingRecursion(int amount, int[] coins, int expectedNumCoins) {
+		System.out.println("\n*** testCoinChangeUsingRecursion: " + Arrays.toString(coins));
+		int numCoins = coinChangeRecursion(amount, coins);
+		System.out.printf("min coins for amount %d is %d\n", amount,
+				numCoins);
+
+		Assert.assertEquals(numCoins, expectedNumCoins);
+		return numCoins;
+	}
+
+	private static int testCoinChange(int amount, int[] coins, int expectedNumCoins) {
+		System.out.println("denominations: " + Arrays.toString(coins));
+		int numCoins = coinChange(amount, coins);
+		System.out.printf("min coins for amount %d is %d\n", amount,
+				numCoins);
+
+		Assert.assertEquals(numCoins, expectedNumCoins);
+		return numCoins;
+	}
+
+
+	/**
+	 * Determine # of min coin changes using recursion
+	 *
+	 * Runtime Analysis of this is:
+	 * 	* Each level is branched out to maximum of # of coins
+	 * 	* Sounds like exponential
+	 *
+	 * @param amount
+	 * @param coins
+     * @return
+     */
+	public static int coinChangeRecursion(int amount, int[] coins) {
+
+		if (amount == 0) {
+			return 1;
+		}
+
+		if (amount < 1) {
+			return 0;
+		}
+		int minCount = Integer.MAX_VALUE;
+		for (int i = 0; i < coins.length; i++) {
+			int denomination = coins[i];
+			if (amount >= denomination) {
+				int numCoin = coinChangeRecursion(amount- denomination, coins);
+				if (numCoin < minCount) {
+					minCount = numCoin;
+				}
+			}
+		}
+
+		return minCount;
+	}
+
+	/**
+	 * Using DP with memoization.
+	 *
+	 * @param amount
+	 * @param coins
+     * @return
+     */
 	public static int coinChange(int amount, int[] coins) {
 		if (amount < coins[0]) {
 			return -1;

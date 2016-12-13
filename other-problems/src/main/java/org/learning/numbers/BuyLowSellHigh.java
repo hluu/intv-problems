@@ -1,5 +1,9 @@
 package org.learning.numbers;
 
+import org.testng.Assert;
+
+import java.util.Arrays;
+
 /**
  * Created by hluu on 8/22/16.
  *
@@ -22,11 +26,22 @@ public class BuyLowSellHigh {
     public static void main(String[] args ) {
         System.out.println("BuyLowSellHigh");
 
-        int[] prices = {10,7,5,11,9};
-        //int[] prices = {10,7,5,11,9,17,4,18};
+        int[] prices1 = {10,7,5,11,9};
+        int[] prices2 = {10,7,5,11,9,17,4,18};
 
-        System.out.println("Max profit: " + buyLowSellHigh(prices));
+        //System.out.println("Max profit: " + buyLowSellHigh(prices));
 
+        test(prices1, 6);
+        test(prices2, 14);
+    }
+
+    private static void test(int[] prices, int expectedMaxProfit) {
+        System.out.printf("*** %s\n", Arrays.toString(prices));
+        int actualValue = buyLowSellHigh(prices);
+        System.out.printf("expected value: %d, actual value: %d\n",
+                expectedMaxProfit, actualValue);
+
+        Assert.assertEquals(actualValue, expectedMaxProfit);
     }
 
 
@@ -60,6 +75,7 @@ public class BuyLowSellHigh {
                 minPrice = v;
             }
         }
+        System.out.printf("minPrice: %d\n", minPrice);
         return maxProfit;
     }
 }

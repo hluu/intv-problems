@@ -34,6 +34,7 @@ public class TreeUtility {
     }
 
     public static <T> void printRootToLeafPath(TreeNode<T> root) {
+
         printRootToLeafPath(root, "");
     }
 
@@ -67,4 +68,31 @@ public class TreeUtility {
         System.out.println(root.value);
         inOrderTraversal(root.right);
     }
+
+    public static <T> void printRootToLeafPath(BNode<T> root) {
+
+        printRootToLeafPath(root, "");
+    }
+
+    private static <T> void printRootToLeafPath(BNode<T> root, String path) {
+        if (root == null) {
+            return;
+        }
+
+        if (path.length() > 0) {
+            path += ",";
+        }
+        path += root.value.toString();
+
+
+        if (root.left == null && root.right == null) {
+            // leaf
+            System.out.println(path);
+            return;
+        }
+
+        printRootToLeafPath(root.left, path);
+        printRootToLeafPath(root.right, path);
+    }
+
 }

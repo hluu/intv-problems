@@ -17,13 +17,26 @@ import java.util.TreeSet;
  *
  * getTotalCoveredLength() -> 6
  * I.e. [1,5) and [3,6) intersect and give a total covered interval [1,6).
- * [1,6) and [8,9) don't intersect, so the total covered length is a sum of both intervals, that is 5+1=6.
+ * [1,6) and [8,9) don't intersect, so the total covered length is a sum of
+ * both intervals, that is 5+1=6.
  *
  *          |__|__|__|                  (3,6)
  *                         |__|         (8,9)
  *    |__|__|__|__|                     (1,5)
  *
  * 0  1  2  3  4  5  6  7  8  9  10
+ *
+ * Approach:
+ *  Each interval is represented by a pair of point, one for start and the other for end.
+ *  If all these points are sorted.  The above example looks something like below:
+ *      1s,3s,5e,6e,8s,9e
+ *      (1,s),(3,s),(5,e),(6,e),(8,s),(9,e)
+ *
+ *  So we can just match up the start and end to calculate the interval of overlapping
+ *  intervals.
+ *
+ *  How to deal with start and end on same value
+ *    (1,s),(5,e),(5,s),7(e)
  *
  */
 public class IntervalCoverage {
