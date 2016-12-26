@@ -10,15 +10,24 @@ public class ShortenURL {
     public static void main(String[] args) throws Exception {
         System.out.printf("%s\n", ShortenURL.class.getName());
 
-        String url = "http://www.google.com";
+
 
         fillBase62Array();
 
+        System.out.printf("base62array: %s\n", new String(base62));
         System.out.printf("%c %c %c %c %c %c\n", base62[0], base62[25],
                 base62[26], base62[51], base62[52], base62[61]);
 
+        String hexString = "1F";
+        System.out.printf("hexString: %s to decimal: %s\n", hexString,
+                hexStringToBigInteger(hexString));
+
+        String url = "http://www.google.com";
         System.out.printf("shortURL: %s\n", shortenURL(url));
-       // System.out.printf("shortURL: %s\n", shortenURL("http://www.linkedin.com"));
+
+
+        System.out.printf("240: %s\n", tobase62(BigInteger.valueOf(30)));
+
     }
 
     /**
@@ -36,38 +45,65 @@ public class ShortenURL {
         md.update(url.getBytes());
 
         byte[] digest = md.digest();
-        System.out.printf("length: %d\n", md.getDigestLength());
+
+        String hexString = toHexString(digest);
+        System.out.printf("length: %d, value: %s\n", md.getDigestLength(),
+                hexString);
+
+        BigInteger bigInteger = hexStringToBigInteger(hexString);
+        System.out.printf("decimal: %s\n", bigInteger.toString());
 
 
-        BigInteger bigIntDigest = new BigInteger( digest);
-        String result = tobase62(bigIntDigest);
+        String base62String = tobase62(bigInteger);
 
 
+        return base62String;
+    }
+
+    private static String toHexString(byte[] digest) {
+        StringBuilder buf = new StringBuilder();
+        for (byte b : digest) {
+            int value = b & 0xff;
+            if (value < 0x10) {
+                buf.append("0");
+            }
+            buf.append(Integer.toHexString(value).toUpperCase());
+        }
+
+        return buf.toString();
+    }
+
+
+
+    private static final String HEX_DIGITS = "0123456789ABCDEF";
+    private static final BigInteger SIXTEEN = BigInteger.valueOf(16);
+    private static final BigInteger SIX_TWO = BigInteger.valueOf(62);
+
+    private static BigInteger hexStringToBigInteger(String hexStr) {
+        BigInteger result = BigInteger.valueOf(0);
+
+        for (int i = 0; i < hexStr.length(); i++) {
+            int value = HEX_DIGITS.indexOf(hexStr.charAt(i));
+            result = result.multiply(SIXTEEN).add(BigInteger.valueOf(value));
+            //System.out.printf("char: %s, value: %d, bigInteger: %s\n", hexStr.charAt(i),
+              //      value, result);
+        }
         return result;
+
+
     }
 
     private static String tobase62(BigInteger val) {
-        BigInteger base = BigInteger.valueOf((long)62);
 
-        System.out.printf("base: %d\n", base.intValue());
-
-
-        val = val.abs();
-
-        //int remainder = val.mod(base).intValue();
-        //System.out.printf("remainder: %d, %c\n", remainder, base62[remainder]);
-
-        System.out.printf("value: %s\n", val.toString());
-        //StringBuffer buf = new StringBuffer();
         String result = "";
+
         while (!val.equals(BigInteger.ZERO)) {
-            int remainder2 = val.mod(base).intValue();
+            int remainder2 = val.mod(SIX_TWO).intValue();
             result = base62[remainder2] + result;
-            val = val.divide(base);
+            val = val.divide(SIX_TWO);
         }
 
         return result;
-
     }
 
     private static char[] base62 = new char[62];
