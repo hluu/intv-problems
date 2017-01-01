@@ -7,7 +7,7 @@ books and other problems from other sources
 
 ### Big-O Table
 | # Name  |  f(n)              | Examples   |
-| :-----:     | :-----------------  | :------:|
+| -----:     | :-----------------  | :------:|
 | Constant    | f(n) = 1          | max(n, 100)   |
 | Logarithm   | f(n) = log n      | Binary search  |
 | Linear      | f(n) = n          | Smallest item  |
