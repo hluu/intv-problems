@@ -70,4 +70,18 @@ public class ArrayUtils {
 
 		return true;
 	}
+
+	public static void swap(int[] a, int i, int j) {
+		if (a == null) {
+			throw new RuntimeException("array is null");
+		}
+
+		if (i >= a.length || j >= a.length) {
+			throw new ArrayIndexOutOfBoundsException("either i or j is larger then array length");
+		}
+
+		int tmp = a[i];
+		a[i] = a[j];
+		a[j] = tmp;
+	}
 }

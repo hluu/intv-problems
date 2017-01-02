@@ -102,6 +102,12 @@ public class AllPermutations {
         }
     }
 
+    /**
+     *
+     * @param prefix
+     * @param s
+     * @param output
+     */
     private static void permUsingSubstring(String prefix, String s, List<String> output) {
 
         System.out.printf("prefix: \"%s\", s: \"%s\"\n", prefix, s);
@@ -129,7 +135,8 @@ public class AllPermutations {
     }
 
     public static void permuteUsingBooleanFlags(char[] letters, boolean[] flags,
-                                                int pos, List<String> output, StringBuilder buf) {
+                                                int pos, List<String> output,
+                                                StringBuilder buf) {
 
         // base case
         if (pos == letters.length) {
