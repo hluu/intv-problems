@@ -32,6 +32,9 @@ import java.util.List;
  */
 public class PermuteByInsertIntoEachPostion {
     public static void main(String[] args) {
+
+        System.out.printf("PermuteByInsertIntoEachPosition\n");
+
         test("");
         test("b");
         test("ba");

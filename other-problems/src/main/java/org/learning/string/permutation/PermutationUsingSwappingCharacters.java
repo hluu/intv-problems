@@ -60,14 +60,14 @@ public class PermutationUsingSwappingCharacters {
 
     }
 
-    static int swapCount = 0;
     private static void swap(char[] arr, int i, int j) {
         if (i == j) {
             return;
         }
-        swapCount++;
         char tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
     }
+
+    static int swapCount = 0;
 }
