@@ -36,7 +36,7 @@ public class PriorityQueueSample {
             System.out.printf("%d\n", pq.poll());
         }
 
-        playWithSortedSet();
+       // playWithSortedSet();
     }
 
     private static void playWithSortedSet() {
