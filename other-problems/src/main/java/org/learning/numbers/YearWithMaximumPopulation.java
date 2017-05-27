@@ -51,7 +51,7 @@ import java.util.Arrays;
  *
  *      There may be multiple years with same maximum population.
  *
- *      So we can just walk through the people data set.  Use the born and death yaer
+ *      So we can just walk through the people data set.  Use the born and death year
  *      as index into an array.
  *
  *

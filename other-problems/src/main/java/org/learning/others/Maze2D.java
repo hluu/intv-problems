@@ -52,6 +52,7 @@ import java.util.Arrays;
 public class Maze2D {
     private static final int GATE = -2;
     private static final int WALL = -1;
+
     public static void main(String[] args) {
         System.out.printf("%s\n", Maze2D.class.getName());
 
@@ -136,14 +137,14 @@ public class Maze2D {
         }
 
 
-            System.out.printf("(%d,%d): top: %d, bottom: %d, left: %d, right: %d, " +
-                    "finalValue: %d\n",
-                    r,c,
-                    getCellValue(r - 1, c, maze),
-                    getCellValue(r + 1, c, maze),
-                    getCellValue(r, c - 1, maze),
-                    getCellValue(r, c + 1, maze),
-                    maze[r][c]);
+        System.out.printf("(%d,%d): top: %d, bottom: %d, left: %d, right: %d, " +
+                "finalValue: %d\n",
+                r,c,
+                getCellValue(r - 1, c, maze),
+                getCellValue(r + 1, c, maze),
+                getCellValue(r, c - 1, maze),
+                getCellValue(r, c + 1, maze),
+                maze[r][c]);
 
 
         // keep going if value is greater than current value

@@ -4,7 +4,7 @@ package org.learning.string;
  * Created by hluu on 1/1/17.
  *
  * Structure:
- *  1) Ask clarifing questions to narrow down to specific problem to solve
+ *  1) Ask clarifying questions to narrow down to specific problem to solve
  *  2) Work through an example to solidify the understanding of the problem
  *  3) Talk through your thought process while coding i.e ask to see if it is OK
  *     to use certain APIs.

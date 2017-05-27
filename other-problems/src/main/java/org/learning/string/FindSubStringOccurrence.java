@@ -29,6 +29,7 @@ public class FindSubStringOccurrence {
         }
 
 
+        // no need to go to the end of the long string
         for (int i = 0; i <= str.length() - pattern.length(); i++) {
             boolean foundIt = true;
             for (int j = 0; j < pattern.length(); j++) {

@@ -18,11 +18,11 @@ public class PermutationUsingPrefix {
         int fact = 10;
         System.out.printf("fact of %d is %d\n", fact,  NumberUtility.factorial(10));
 
-        //test("");
-        test("b");
+       // test("");
+       // test("b");
         test("ba");
-        test("bar");
-        test("abcdefghij");
+       // test("bar");
+       // test("abcdefghij");
     }
 
     private static void test(String str) {
@@ -31,7 +31,8 @@ public class PermutationUsingPrefix {
         //Collections.sort(result);
         //System.out.printf("%s: %s\n", str, result);
 
-        Assert.assertEquals(result.size(), NumberUtility.factorial(str.length()));
+        long expectedFactorialValue = NumberUtility.factorial(str.length());
+        Assert.assertEquals(result.size(), expectedFactorialValue);
     }
 
     protected static void permute(String prefix, String remaining, List<String> collector) {
@@ -40,7 +41,9 @@ public class PermutationUsingPrefix {
         }
 
         if (remaining.length() == 0) {
-            collector.add(prefix);
+            if (prefix.length() > 0) {
+                collector.add(prefix);
+            }
             return;
         } else {
             for (int i = 0; i < remaining.length(); i++) {

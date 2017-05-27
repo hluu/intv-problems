@@ -25,7 +25,7 @@ import java.util.*;
  *    elements that are close to each other, it doesn't take advantage of the
  *    sorted nature of elements, SO NOT A GOOD USE OF SORTING
  *  * HashMap - iterate through array and build up the array, as we discover
- *              a number already exists in the array then that is a duplcate
+ *              a number already exists in the array then that is a duplicate
  *              O(n) runtime, O(n) space
  *
  *  * Optimize - O(n) no extra space
@@ -119,14 +119,15 @@ public class FindDuplicates {
     }
 
 
-    private static List<Integer> toIntList(int[] input) {
+    /*private static List<Integer> toIntList(int[] input) {
         List<Integer> result = new ArrayList<>(input.length);
         for (int v : input) {
             result.add(v);
         }
 
         return result;
-    }
+    }*/
+
     private static int[] toIntArray(List<Integer> list ) {
         int result[] = new int[list.size()];
         for (int i = 0; i < result.length; i++) {

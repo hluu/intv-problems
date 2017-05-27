@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 /**
  * Created by hluu on 10/1/16.
+ *
+ * Palindrome is a word, phrase, or sequence that reads the same backward as forward,
+ * For example: madam or nurses run
+ *
  */
 public class IsPalindrome {
     private static final int smallestChar = Character.getNumericValue('a');
@@ -24,6 +28,7 @@ public class IsPalindrome {
     }
 
     private static void isPalindromeTest(String s) {
+
         System.out.printf("%s is palindrome %b\n", s, isPalindrome(s));
     }
 

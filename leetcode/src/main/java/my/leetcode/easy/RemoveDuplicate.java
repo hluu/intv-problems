@@ -14,13 +14,24 @@ import java.util.Arrays;
 public class RemoveDuplicate {
     public static void main(String[] args) {
         System.out.println("RemoveDuplicate.main");
-        int[] arr = {1,2,3};
-        //int[] arr = {1,1,1,2};
+        //int[] arr = {1,2,3};
+        int[] arr = {1,1,1,2};
 
         System.out.printf("result of %s is %d \n",
                 Arrays.toString(arr), removeDuplicates(arr));
+
+        System.out.printf("after removing duplicates %s\n", Arrays.toString(arr));
     }
 
+    /**
+     * Using two indexes with one of them ahead of the other (first, second)
+     * There are two cases:
+     * 1) Values at both indexes are the same: then increment the second index value
+     * 2) Values at both indexes are different: then increment both indexes
+     *    * One trick to use is to copy value at second index to first index
+     * @param nums
+     * @return
+     */
     private static int removeDuplicates(int[] nums) {
 
         System.out.printf("Input: %s\n", Arrays.toString(nums));

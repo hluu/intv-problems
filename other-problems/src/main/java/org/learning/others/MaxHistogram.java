@@ -26,18 +26,18 @@ import java.util.Stack;
  * Approach:
  *  * Observation:
  *      * Bigger histograms cover the previous smaller one
- *      * Smaller histograms ends the streak of previous bigger historgrams
+ *      * Smaller histograms ends the streak of previous bigger histograms
  *      * Need to maintain the pos of previous history until smaller one is encounter
- *      * As bigger history gram is seen, keep previous smaller historgrams around as well
+ *      * As bigger history gram is seen, keep previous smaller histograms around as well
  *        as the new bigger one
  *      * Need some kind of a list, but need to access element in the order of seen
  *      * LIFO -> Stack
- *  * Maintain a stack of elements in the order of seen of increasing histrogram size
+ *  * Maintain a stack of elements in the order of seen of increasing histogram size
  *  * When encounter a smaller histogram, pop the bigger ones out until no more or
  *    smaller one
  *
  * Algorithm:
- *  * If next histogram with top historgram in stack
+ *  * If next histogram with top histogram in stack
  *      1) If equal, do nothing
  *      2) If >, then add to stack
  *      3) If < calculate the height of previous bigger histogram and update max

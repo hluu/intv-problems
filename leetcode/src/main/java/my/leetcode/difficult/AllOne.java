@@ -10,10 +10,16 @@ import java.util.Map;
  *
  * Problem:
  *  Implement a data structure supporting the following operations:
- *  Inc(Key) - Inserts a new key with value 1. Or increments an existing key by 1. Key is guaranteed to be a non-empty string.
- *  Dec(Key) - If Key's value is 1, remove it from the data structure. Otherwise decrements an existing key by 1. If the key does not exist, this function does nothing. Key is guaranteed to be a non-empty string.
- *  GetMaxKey() - Returns one of the keys with maximal value. If no element exists, return an empty string "".
- *  GetMinKey() - Returns one of the keys with minimal value. If no element exists, return an empty string "".
+ *  Inc(Key) - Inserts a new key with value 1. Or increments an existing key by 1.
+ *             Key is guaranteed to be a non-empty string.
+ *  Dec(Key) - If Key's value is 1, remove it from the data structure.
+ *             Otherwise decrements an existing key by 1.
+ *             If the key does not exist, this function does nothing.
+ *             Key is guaranteed to be a non-empty string.
+ *  GetMaxKey() - Returns one of the keys with maximal value.
+ *                If no element exists, return an empty string "".
+ *  GetMinKey() - Returns one of the keys with minimal value.
+ *                If no element exists, return an empty string "".
  *
  * Challenge: Perform all these in O(1) time complexity.
  *
@@ -60,22 +66,32 @@ public class AllOne {
         }
     }
 
-    /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
+    /** @TODO
+     * Decrements an existing key by 1. If Key's value is 1, remove it from the data structure.
+     *
+     */
     public void dec(String key) {
 
     }
 
-    /** Returns one of the keys with maximal value. */
+    /** @TODO
+     *  Returns one of the keys with maximal value.
+     *
+     */
     public String getMaxKey() {
         return  null;
     }
 
-    /** Returns one of the keys with Minimal value. */
+    /** @TODO
+     * Returns one of the keys with Minimal value.
+     *
+     */
     public String getMinKey() {
         return  null;
     }
 
     public static void main(String[] args) {
+
         System.out.printf("AllOne\n");
     }
 }

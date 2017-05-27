@@ -6,6 +6,19 @@ import java.util.TreeSet;
 
 /**
  * Created by hluu on 11/30/16.
+ *
+ * Usages of priority queue:
+ *  1) Merging 3 or more lists of sorted numbers
+ *  2) Maintaining Top N
+ *  3) Median of an incoming stream of numbers
+ *
+ *
+ * Common APIs in PriorityQueue:
+ *  1) offer - to add an element to queue
+ *  2) isEmpty -
+ *  3) poll - removing an element from a queue
+ *
+ *
  */
 public class PriorityQueueSample {
     public static void main(String[] args) {

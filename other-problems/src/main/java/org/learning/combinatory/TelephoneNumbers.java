@@ -1,4 +1,4 @@
-package org.learning.others;
+package org.learning.combinatory;
 
 /**
  * Created by hluu on 12/11/16.
@@ -31,18 +31,20 @@ public class TelephoneNumbers {
         printWords(letters, 0, new StringBuilder());
     }
 
-    private static void printWords(char[][] letters, int idx, StringBuilder soFar) {
-        if (idx == letters.length-1) {
-            for (int i = 0; i < letters[idx].length; i++) {
-                soFar.append(letters[idx][i]);
+    private static void printWords(char[][] letters, int rowIndex, StringBuilder soFar) {
+        if (rowIndex == letters.length-1) {
+            // for each letter in the last row
+            for (int i = 0; i < letters[rowIndex].length; i++) {
+                soFar.append(letters[rowIndex][i]);
                 System.out.printf("%s\n", soFar.toString());
+                // remove to make sure for the next letter in the last row
                 soFar.deleteCharAt(soFar.length()-1);
             }
             return;
         }
 
-        for (int i = 0; i < letters[idx].length; i++) {
-            printWords(letters, idx+1, soFar.append(letters[idx][i]));
+        for (int i = 0; i < letters[rowIndex].length; i++) {
+            printWords(letters, rowIndex+1, soFar.append(letters[rowIndex][i]));
             soFar.deleteCharAt(soFar.length()-1);
         }
     }

@@ -55,6 +55,7 @@ public class SubString {
         int strLen = str.length();
         int patternLen = pattern.length();
 
+        // no need to search if lenth of pattern is greater than string length
         if (patternLen > strLen) {
             return indexList;
         }
@@ -79,7 +80,8 @@ public class SubString {
     }
 
     /**
-     * This one uses the different way of detecting pattern matching
+     * This one uses the different way of detecting pattern matching. Using
+     * two for loops
      *
      * @param str
      * @param pattern

@@ -1,4 +1,4 @@
-package org.learning.numbers;
+package org.learning.backtracking;
 
 import java.util.Arrays;
 
