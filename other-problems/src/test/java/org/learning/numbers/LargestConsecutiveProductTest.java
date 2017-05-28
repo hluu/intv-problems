@@ -10,7 +10,7 @@ public class LargestConsecutiveProductTest {
     @Test
     public void allPositiveNumbers() {
         int arr[] = {3,2,6,4,5,1};
-        Assert.assertEquals(LargestConsecutiveProduct.maxContiguousProduct(arr), 24);
+        Assert.assertEquals(LargestConsecutiveProduct.maxContiguousProduct(arr), 720);
     }
 
     @Test

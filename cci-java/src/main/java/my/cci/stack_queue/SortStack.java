@@ -83,6 +83,7 @@ public class SortStack {
 
             output.push(tmp);
 
+            System.out.printf("output stack: %s, input stack %s\n", output, input);
         }
         return output;
     }
