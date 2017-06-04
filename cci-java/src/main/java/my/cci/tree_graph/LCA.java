@@ -31,7 +31,7 @@ import java.util.List;
  *
  *
  * Approach #1:
- *  * Since this is not a binary search tree, we can't rely on the value to figure
+ *  * Since this is not a BST, we can't rely on the value to figure
  *    to go left or right
  *  * So instead we need to search for it relative to give node.
  *    1) If both nodes reside on left hand side, move left

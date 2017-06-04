@@ -14,7 +14,7 @@ import java.util.Random;
  * The central part of quick sort is the partitioning scheme, where it selects
  * a pivot point and move all elements smaller pivot to the left of the pivot and
  * move all elements larger pivot to the right of the pivot.  Then return the index of
- * the pivot
+ * the pivot.
  *
  */
 public class QuickSort {
@@ -24,8 +24,9 @@ public class QuickSort {
 
         //int[] arr = {7,1,2,5,4,9,3,6};
         //int[] arr = {9, 7, 5, 200,11, 12, 2, 14, 3, 10, 6};
+        int[] arr = {2,3,6,5, 9, 200};
         //int[] arr = {7,1};
-        int[] arr = {1,7};
+        //int[] arr = {1,7};
         //int[] arr = {7,3,9,1,4};
         //int[] arr = {8};
         //int[] arr = new int[0];
@@ -75,11 +76,13 @@ public class QuickSort {
      *
      * Approach:
      *  Pick an element as pivot value (could be the last element)
-     *  Establish the wall which start at start - 1 to make it easier
+     *  Establish the wall which start at (start - 1) to make it easier
      *  Move from left to right
      *      * If (value at i > pivot value), moving on
      *      * If (value at i < pivot value), increment the wall, swap element at i with
      *        element at the wall
+     *
+     * Every elememt to the left of the wall are smaller than the pivot value
      *
      * One improvement we could have is the selection of of the pivot value
      *   * Could be random using a random generator
@@ -97,6 +100,7 @@ public class QuickSort {
         int pv = arr[end];
 
         // start with left side because we will increment it first before using it
+        // wallIndex indicates the point where values are greater than the pivot value
         int wallIndex = start - 1;
 
         for (int i = start; i < end; i++) {
@@ -128,8 +132,7 @@ public class QuickSort {
     private static int partition(int[] arr, int start, int end) {
 
         Random rand = new Random(System.currentTimeMillis());
-        int pivotIndex = start + rand.nextInt(end-start +1);
-        pivotIndex = end;
+        int pivotIndex = end;
         System.out.printf("pivotIndex: %d\n", pivotIndex);
 
         int pivotValue = arr[pivotIndex];
@@ -153,13 +156,17 @@ public class QuickSort {
                 right--;
             }
 
+            // if the are crossed, then we are done
             if (left >= right) {
                 break;
             }
 
+            // else swap these two elements
             swap(arr, left, right);
         }
 
+        // move the pivot value into place
+        // left
         if (left < right || right == start) {
             swap(arr, end, left);
         }
