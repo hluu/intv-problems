@@ -10,9 +10,9 @@ package org.learning.dp;
  *
  * Ex: Given [4,1,2,3,4,5,6,5,4,3,4,4,4,4,4,4,4] should return 10 (all 4's)
  */
-public class MaximumLenPalindromeSubsequence {
+public class LongestPalindromeSubsequence {
     public static void main(String[] args) {
 
-        System.out.println("MaximumLenPalindromeSubsequence.main");
+        System.out.println("LongestPalindromeSubsequence.main");
     }
 }

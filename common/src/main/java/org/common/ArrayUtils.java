@@ -6,6 +6,33 @@ import java.util.Random;
 public class ArrayUtils {
 	private static Random rand = new Random(System.currentTimeMillis());
 
+	public static void printBooleanMatrix(boolean[][] matrix) {
+		int rows = matrix.length;
+		int cols = matrix[0].length;
+
+		for (int j = 0; j < cols; j++) {
+			System.out.print("=====");
+		}
+		System.out.println("");
+
+		for (int i = 0; i < rows; i++) {
+			System.out.print("|");
+			for (int j = 0; j < cols; j++) {
+				if (j > 0) {
+					System.out.print(" | ");
+				}
+				System.out.print(" " + (matrix[i][j] ? "T" : "F"));
+			}
+			System.out.println(" |");
+		}
+
+		for (int j = 0; j < cols; j++) {
+			System.out.print("=====");
+		}
+		System.out.println("");
+
+	}
+
 	public static void printMatrix(int[][] matrix) {
 		int rows = matrix.length;
 		int cols = matrix[0].length;

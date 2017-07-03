@@ -20,7 +20,6 @@ public class WorkBreakWithMemoization {
         System.out.printf("contains: %b\n", testMap.containsKey(new String("abc")));
     }
 
-
     private static String testWordBreak(String[] dict, String str) {
         Set<String> dictSet = new HashSet<>();
         dictSet.addAll(Arrays.asList(dict));
@@ -29,7 +28,6 @@ public class WorkBreakWithMemoization {
         return testWordBreak(dictSet, str);
 
     }
-
 
     private static String testWordBreak(Set<String> dict, String str) {
         WorkBreakWithMemoization a = new WorkBreakWithMemoization();

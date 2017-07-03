@@ -19,7 +19,7 @@ import java.util.*;
  *      string: amIdofree       => false
  *
  *  Brute force:
- *      Iterate the string from left tonight and build a word
+ *      Iterate the string from left to right and build a word
  *          * If such word exist in dictionary then recursive on the
  *              substring following that word
  *          * To handle the case with free and freedom, then we must keep iterating

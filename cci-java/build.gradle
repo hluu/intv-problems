@@ -1,3 +1,7 @@
 dependencies {
     compile project(':common')
+
+    compile group:'org.testng', name:'testng', version:'6.9.9'
+    testCompile group:'org.testng', name:'testng', version:'6.9.9'
+
 }

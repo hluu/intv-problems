@@ -51,8 +51,8 @@ public class MaximumSumSubArray {
 				min_sum = sum;
 				min_idx = i;
 			}
-			System.out.println("sum: " + sum + " min_sum: " + min_sum 
-					           + " max_sum: " + max_sum);
+			//System.out.println("sum: " + sum + " min_sum: " + min_sum
+			//		           + " max_sum: " + max_sum);
 			if (sum - min_sum > max_sum) {
 				max_sum = sum - min_sum;
 				result.first = min_idx + 1;

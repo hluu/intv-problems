@@ -26,7 +26,7 @@ public class SubSet {
   public static void main(String[] args) {
     System.out.printf("%s\n", SubSet.class.getName());
 
-    int array[] = {3, 1, 6, 5, 10}; int k = 12;
+    int array[] = {3, 1, 6, 5, 10, 2}; int k = 12;
 
     //int array[] = {15, 22, 14, 26, 32, 9, 16, 8}; int k = 53;
 
@@ -65,4 +65,6 @@ public class SubSet {
 
     return false;
   }
+
 }
+

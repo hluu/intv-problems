@@ -45,8 +45,8 @@ public class EqualPartitions {
     //int[] array = {5, 4, 3, 2, 2};  int k = 2;
     //int[] array = {4, 3, 2, 3, 5, 2, 1}; int k = 4;
 
-    //int[] array = {3, 5, 1, 3};  int k = 2;
-    int[] array = {1,3,6,9,10};  int k = 3;
+    int[] array = {3, 5, 1, 3};  int k = 2;
+    //int[] array = {1,3,6,9,10};  int k = 3;
 
     isSumDivisibleByK(array, k);
 
@@ -55,6 +55,7 @@ public class EqualPartitions {
 
   private static boolean isSumDivisibleByK(int[] array, int k) {
     int total = Arrays.stream(array).sum();
+    // see if total sum is divisible by k
     boolean isPossible = (total % k) == 0;
 
     System.out.printf("input array: %s and k: %d\n", Arrays.toString(array), k);
@@ -62,6 +63,7 @@ public class EqualPartitions {
 
     boolean result = false;
     if (isPossible) {
+      // here is the key, the target sum is the sum divided by k
       int targetSum = total / k;
       int bucketSum[] = new int[k];
       result = foundEqualPartitions(array, bucketSum, 0, targetSum);

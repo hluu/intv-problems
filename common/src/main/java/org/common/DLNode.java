@@ -1,6 +1,6 @@
 package org.common;
 
-import com.google.common.base.Preconditions;
+
 
 /**
  * Created by hluu on 1/10/16.
@@ -16,7 +16,6 @@ public class DLNode<T> extends Node<T> {
     }
 
     public DLNode<T> add(T v) {
-        Preconditions.checkNotNull(v);
         DLNode<T>  newNode = new DLNode<T>(v) ;
         add(newNode);
 
@@ -25,7 +24,6 @@ public class DLNode<T> extends Node<T> {
 
 
     public DLNode<T> add(DLNode<T> other) {
-        Preconditions.checkNotNull(other);
 
         this.next = other;
         other.prev = this;

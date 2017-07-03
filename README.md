@@ -122,6 +122,12 @@ public static String toBase(int n, int base) {
 ### Tree Data Structures
 * Heap is a binary tree where every node holds a value that is at least as large as the values in all children.
 
+### Binary Tree Terminologies
+* Level - Defined as 1+ the number connections between a node and the root. Root starts at level 1, meaning the level starts at value of 1 and it goes down from top to bottom.  Level = depth + 1
+* Height - number of edges from a node to the deepest leaf. Height of furthest eaf node is 0.  Goes from bottom (0) to top (n).  Height of a tree is the height of the root.
+* Depth - number of edges from root to node.  Goes from top to bottom and starts at 0.
+* Height and depth should move inversely.
+
 ### Binary Tree Properties
 | Property        |  Value           |
 | :-----:         | :--------------: |
