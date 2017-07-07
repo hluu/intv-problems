@@ -45,7 +45,7 @@ import org.common.TreeUtility;
  *          c   a
  *
  * Approach:
- *  * Looks like the left most child will be come the root note
+ *  * Looks like the left most child will be come the root node
  *  * This requires DFS and then build the tree as it bubbles up the stack
  *  * So it is more a bottom up approach
  *  * As it bubbles up the stack
@@ -63,6 +63,8 @@ public class SidewayTree {
 
         TreeUtility.printRootToLeafPath(tree2);
 
+        TreeUtility.printLevelByLevel(tree2);
+
         TreeNode<Character> tree2NewRoot = getNewRoot(tree2);
         System.out.printf("\n*** New root of tree2 is %s\n", tree2NewRoot.value);
 
@@ -73,11 +75,14 @@ public class SidewayTree {
         System.out.println("**** tree1 ****");
         TreeNode<Character> tree1 = createTree1();
         TreeUtility.printRootToLeafPath(tree1);
+        TreeUtility.printLevelByLevel(tree1);
+
         TreeNode<Character> tree1NewRoot = getNewRoot(tree1);
         System.out.printf("\n*** New root of tree1 is %s\n", tree1NewRoot.value);
         sideWayTransformation(tree1);
 
         TreeUtility.printRootToLeafPath(tree1NewRoot);
+        TreeUtility.printLevelByLevel(tree1NewRoot);
 
         testOneMethodSolution();
     }
@@ -88,6 +93,9 @@ public class SidewayTree {
             return root;
         }
 
+        // keep going left until leaf node
+        // child node is being returned from the lower level
+        // and it becomes the parent node
         TreeNode<T>  newParent = sideWayTransformation(root.left);
 
         newParent.right = root;
@@ -155,6 +163,12 @@ public class SidewayTree {
         TreeUtility.printRootToLeafPath(sidewayTree(root1));
     }
 
+    /**
+     * Another approach that has a neat way of returning the root node
+     * @param node
+     * @param <T>
+     * @return
+     */
     private static <T> TreeNode<T> sidewayTree(TreeNode<T> node) {
         if (node == null) {
             return null;
@@ -166,8 +180,12 @@ public class SidewayTree {
         }
         // keep going left until a leaf node
         TreeNode n = sidewayTree(node.left);
+
+        // now rewiring the nodes in the way based on the constraints of the
+        // problem
         node.left.left = node.right;
         node.left.right = node;
+        // make sure to reset the pointers of current node
         node.left = null;
         node.right = null;
 

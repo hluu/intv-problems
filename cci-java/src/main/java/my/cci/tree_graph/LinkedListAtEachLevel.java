@@ -95,6 +95,13 @@ public class LinkedListAtEachLevel {
      * Using BFS to traverse level by level.  The key is to know when each level ends.
      * This is done using two counters - one for current level and one for next level.
      *
+     * As we pop an element out of the queue, we decrement the current level counter.
+     * As we explore child nodes at current level, we increment the next level counter.
+     *
+     * When current level counter is 0, we are done at this level, then switch counter
+     *   current level counter = next level counter
+     *   next level counter = 0
+     *
      *
      * @param root
      * @return

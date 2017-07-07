@@ -23,8 +23,8 @@ books and other problems from other sources
 ### Permutations, subsets and substrings
 * There are n! permutations of an n-element set
 * There are 2^n subsets of an n-element set
-* There are n(n-1)/2 contiguous substrings in a string of length n (n^2)
-* There are n(n-1)/2 possible subtrees in a binary search tree (n^2)
+* There are n(n+1)/2 contiguous substrings in a string of length n
+* There are n(n-1)/2 possible subtrees in a binary search tree
 
 ### Subsets
 * The number of subsets of size k of a set of size n is n!/k!*(n-k)!
@@ -113,6 +113,57 @@ public static String toBase(int n, int base) {
 * Permutation - rearrangement of letters in specific order.
 * Anagram - rearranging the letters of a word to produce a new word. i.e listen and silent
 * Palindrome - a word which read the same backward or forward. i.e civic
+
+#### Generate substrings
+```java
+public static List<String> generateSubStrings(String str) {
+    List<String> result = new ArrayList<>();
+
+    if (str == null) {
+        return result;
+    }
+
+    // two for loops to build all the possible substrings
+    for (int i = 0; i < str.length(); i++) {
+        for (int j = i; j < str.length(); j++) {
+            // now print out the substring from i to j
+            String subStr = "";
+            for (int k = i; k <= j; k++) {
+                subStr += str.charAt(k);
+            }
+            result.add(subStr);
+        }
+    }
+    return result;
+}
+```
+#### Generate sub-sequences
+```java
+public static List<String> generateSubsequences(String str) {
+    List<String> result = new ArrayList<>();
+    if (str == null || str.length() == 0) {
+        return result;
+    }
+
+    double numSequences = Math.pow(2, str.length());
+
+    for (int i = 0; i < numSequences; i++) {
+        String subSeqStr = "";
+        int index = 0;
+        int temp = i;
+
+        while (temp > 0) {
+            if ((temp & 1) == 1) {
+                subSeqStr += str.charAt(index);
+            }
+            index++;
+            temp = temp >> 1;
+        }
+        result.add(subSeqStr);
+    }
+    return  result;
+}
+```
 
 ### Working with prime numbers
 * Every number can be decomposed into a product of primes

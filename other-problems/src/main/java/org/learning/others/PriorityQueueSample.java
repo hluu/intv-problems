@@ -30,6 +30,7 @@ public class PriorityQueueSample {
         pq.offer(5);
         pq.offer(10);
 
+
         System.out.printf("%s\n", pq);
 
         while (!pq.isEmpty()) {

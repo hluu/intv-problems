@@ -3,9 +3,7 @@ package org.learning.tree_graph;
 import org.common.BNode;
 import org.common.TreeUtility;
 
-import java.util.HashMap;
-import java.util.IdentityHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by hluu on 12/11/16.
@@ -43,6 +41,8 @@ public class CloneObjectGraph {
 
         BNode<String> root2 =  BNode.create(root1.value);
 
+        System.out.println("root1: " + root1.hashCode() + " root2: " + root2.hashCode());
+
         Map<BNode, BNode> cache = new IdentityHashMap<>();
         createObjectGraphHelper(cache, root1, root2);
 
@@ -50,6 +50,11 @@ public class CloneObjectGraph {
         TreeUtility.printRootToLeafPath(root2);
 
         printOutCache(cache);
+
+        System.out.printf("****** clone tree using BFS ****\n");
+        BNode<String> newObjectGraph = cloneGraphUsingBFS(root1);
+
+        TreeUtility.printRootToLeafPath(newObjectGraph);
     }
 
     private static void printOutCache(Map<BNode, BNode> cache) {
@@ -59,6 +64,15 @@ public class CloneObjectGraph {
         }
     }
 
+    /**
+     * Build the object graph was we traverse down.
+     *
+     * This is a top down approach
+     *
+     * @param cache
+     * @param node1
+     * @param node2
+     */
     private static void createObjectGraphHelper(Map<BNode, BNode> cache,
                                                 BNode<String> node1,
                                                 BNode<String> node2) {
@@ -68,28 +82,29 @@ public class CloneObjectGraph {
         }
 
         if (node1.left != null) {
-            BNode<String> tmp = cache.get(node1.left);
-            if (tmp == null) {
-                tmp = new BNode<>((String)node1.left.value);
-                cache.put(node1.left, tmp);
-            }else {
-                System.out.printf("((( found: %s in cache on left branch\n", tmp);
-            }
+            BNode<String> tmp = getNewNode(node1.left, cache);
             node2.left = tmp;
             createObjectGraphHelper(cache, node1.left, node2.left);
         }
 
         if (node1.right != null) {
-            BNode<String> tmp = cache.get(node1.right);
-            if (tmp == null) {
-                tmp = new BNode<>((String)node1.right.value);
-                cache.put(node1.right, tmp);
-            } else {
-                System.out.printf("((( found: %s in cache on right branch\n", tmp);
-            }
+            BNode<String> tmp = getNewNode(node1.right, cache);
+
             node2.right = tmp;
             createObjectGraphHelper(cache, node1.right, node2.right);
         }
+    }
+
+    private static <T> BNode<T> getNewNode(BNode<T> node, Map<BNode, BNode> cache) {
+        BNode<T> newNode = cache.get(node);
+        if (newNode == null) {
+            newNode = new BNode<T>(node.value);
+            cache.put(node, newNode);
+        } else {
+            System.out.printf("((( found: %s in cache\n", newNode);
+        }
+
+        return newNode;
     }
 
     private static BNode<String> createObjectGraph() {
@@ -120,7 +135,29 @@ public class CloneObjectGraph {
 
     }
 
+    private static <T> BNode<T> cloneGraphUsingBFS(BNode<T> root) {
+        Map<BNode, BNode> cache = new IdentityHashMap<>();
+        cache.put(root, new BNode(root.value));
 
+        Queue<BNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            BNode<T> node = queue.poll();
+            BNode<T> newNode = cache.get(node);
+
+            if (node.left != null) {
+                newNode.left = getNewNode(node.left, cache);
+                queue.add(node.left);
+            }
+
+            if (node.right != null) {
+                newNode.right = getNewNode(node.right, cache);
+                queue.add(node.right);
+            }
+        }
+        return cache.get(root);
+    }
 
 
 }

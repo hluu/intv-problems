@@ -21,6 +21,7 @@ import java.util.function.IntBinaryOperator;
  *      {3,4,-1,0,6,2,3} => {-1,0,2,3} with size of 4
  *
  *      {3,2,6,4,5,1} => {2,4,5}  with size of 3
+ *
  *      What are all the increasing subsequences?
  *        {3,6},{2,6},{2,4,5},{4,5},{1}
  *
@@ -52,10 +53,11 @@ import java.util.function.IntBinaryOperator;
  *  Recurrence:
  *      LIS[j] = 1 + max(LIS[i] : i < j and si < sj}
  *
- *
+ *  What is the runtime? O(N^2)
  *
  */
 public class LongestIncreasingSubsequence {
+
     public static void main(String[] args) {
         System.out.println("LongestIncreasingSubsequence.main");
 
@@ -65,9 +67,19 @@ public class LongestIncreasingSubsequence {
         //int arr[] = { 10, 22, 9, 33, 21, 50, 41, 60, 80 };
         //int arr[] = {9,5,2,8,7,3,1,6,4};
 
-        System.out.println("LIS of: " + Arrays.toString(arr) + " is " + lis(arr));
+        int arr10[] = {5,2,8,6,3,6,9,7};
 
-        System.out.println("LIS of: " + Arrays.toString(arr) + " is " + lis2(arr));
+        ///System.out.println("LIS of: " + Arrays.toString(arr) + " is " + lis(arr));
+
+        //System.out.println("LIS of: " + Arrays.toString(arr) + " is " + lis2(arr));
+
+        test(arr);
+        test(arr10);
+    }
+
+    private static void test(int[] arr) {
+        System.out.printf("==== test - arr: %s\n ====", Arrays.toString(arr));
+        System.out.println("LIS is " + lis(arr));
     }
 
 

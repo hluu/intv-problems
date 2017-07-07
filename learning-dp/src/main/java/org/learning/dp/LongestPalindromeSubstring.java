@@ -1,7 +1,8 @@
 package org.learning.dp;
 
 
-import org.common.ArrayUtils;
+
+import org.common.StringUtility;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -167,6 +168,7 @@ public class LongestPalindromeSubstring {
      * This will require only O(N^2)
      *
      * https://leetcode.com/articles/longest-palindromic-substring/
+     * http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/
      *
      *
      * @param str
@@ -243,7 +245,7 @@ public class LongestPalindromeSubstring {
      */
     private static String bruteForce(String str) {
         // generate the list of candidates
-        List<String> subStrList = subStrings(str);
+        List<String> subStrList = StringUtility.generateSubStrings(str);
 
         String longestPalindromeSub = "";
 
@@ -311,31 +313,12 @@ public class LongestPalindromeSubstring {
 
     private static void testSubString(String str) {
         System.out.println("===== testSubString");
-        List<String> subStrList = subStrings(str);
+        List<String> subStrList = StringUtility.generateSubStrings(str);
         for (String s : subStrList) {
             System.out.println(s);
         }
     }
 
 
-    private static List<String> subStrings(String str) {
-        List<String> result = new ArrayList<>();
 
-        if (str == null) {
-            return result;
-        }
-
-        // two for loops to build all the possible substrings
-        for (int i = 0; i < str.length(); i++) {
-            for (int j = i; j < str.length(); j++) {
-                // now print out the substring from i to j
-                String subStr = "";
-                for (int k = i; k <= j; k++) {
-                    subStr += str.charAt(k);
-                }
-                result.add(subStr);
-            }
-        }
-        return result;
-    }
 }

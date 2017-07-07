@@ -44,11 +44,13 @@ public class Subsequence {
         //String input = "ACGATGTAC";
 
         usingBinaryApproach(input);
+
+        usingBinaryApproach(input + "e");
     }
 
     private static void usingBinaryApproach(String input) {
-        int[] intArray = new int[4];
-        for (int i = 0; i < 16; i++) {
+        int[] intArray = new int[input.length()];
+        for (int i = 0; i < Math.pow(2, input.length()); i++) {
             binaryAddOne(intArray);
             System.out.println(Arrays.toString(intArray));
         }
@@ -77,7 +79,7 @@ public class Subsequence {
         for (int i = 0; i < numIterations; i++) {
             String subSet = "";
             for (int j = 0; j < binaryArr.length; j++) {
-                if (binaryArr[j] == 0) {
+                if (binaryArr[j] == 1) {
                     subSet = subSet +  charArr[j];
                 }
             }

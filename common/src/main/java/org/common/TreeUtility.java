@@ -1,5 +1,9 @@
 package org.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  * Created by hluu on 1/18/16.
  */
@@ -82,7 +86,7 @@ public class TreeUtility {
         if (path.length() > 0) {
             path += ",";
         }
-        path += root.value.toString();
+        path += root.value.toString() + "(" + root.hashCode() + ")";
 
 
         if (root.left == null && root.right == null) {
@@ -94,5 +98,115 @@ public class TreeUtility {
         printRootToLeafPath(root.left, path);
         printRootToLeafPath(root.right, path);
     }
+
+    /**
+     * Using two lists - current and next level
+     * @param root
+     * @param <T>
+     */
+    public static <T> void printLevelByLevel(BNode<T> root) {
+        System.out.println("======== printLevelByLevel =======");
+        if (root == null) {
+            return ;
+        }
+        List<BNode<T>> currentLevelList = new ArrayList<>();
+        List<BNode<T>> nextLevelList = new ArrayList<>();
+
+        currentLevelList.add(root);
+
+        while(!currentLevelList.isEmpty()) {
+            for (BNode<T> node : currentLevelList) {
+                System.out.printf("%d ", node.value);
+                if (node.left != null) {
+                    nextLevelList.add(node.left);
+                }
+                if (node.right != null) {
+                    nextLevelList.add(node.right);
+                }
+            }
+            // swap list
+            currentLevelList.clear();;
+            if (!nextLevelList.isEmpty()) {
+                currentLevelList.addAll(nextLevelList);
+                nextLevelList.clear();;
+            }
+
+            System.out.println();
+        }
+    }
+
+
+    public static <T> void printLevelByLevel(TreeNode<T> root) {
+        System.out.println("======== printLevelByLevel =======");
+        if (root == null) {
+            return ;
+        }
+        List<TreeNode<T>> currentLevelList = new ArrayList<>();
+        List<TreeNode<T>> nextLevelList = new ArrayList<>();
+
+        currentLevelList.add(root);
+
+        while(!currentLevelList.isEmpty()) {
+            for (TreeNode<T> node : currentLevelList) {
+                System.out.print(node.value + " ");
+                if (node.left != null) {
+                    nextLevelList.add(node.left);
+                }
+                if (node.right != null) {
+                    nextLevelList.add(node.right);
+                }
+            }
+            // swap list
+            currentLevelList.clear();;
+            if (!nextLevelList.isEmpty()) {
+                currentLevelList.addAll(nextLevelList);
+                nextLevelList.clear();;
+            }
+
+            System.out.println();
+        }
+    }
+
+    /**
+     * Return a list of list, where each list is for each level.
+     *
+     * If a tree has 5 levels, the returned lists will have 5 lists in there
+     *
+     * The approach is to perform DFS and use level to look up the list
+     * in the master list.
+     *
+     * @param root
+     * @param <T>
+     * @return
+     */
+    public static <T> List<List<T>> getListOfLevels(BNode<T> root) {
+        List<List<T>> result = new ArrayList<>();
+
+        if (root == null) {
+            return result;
+        }
+
+        buildLevelByLevel(root, result, 1);
+
+        return result;
+    }
+
+    private static <T> void buildLevelByLevel(BNode<T> root, List<List<T>> collector,
+                                              int level) {
+        if (root == null) {
+            return;
+        }
+
+        if (collector.size() < level) {
+            collector.add(new ArrayList<T>());
+        }
+
+        collector.get(level-1).add(root.value);
+
+        buildLevelByLevel(root.left, collector, level+1);
+        buildLevelByLevel(root.right, collector, level+1);
+    }
+
+
 
 }

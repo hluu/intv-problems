@@ -37,6 +37,20 @@ public class TreeNode<T> extends Node<T> {
         }
     }
 
+    public TreeNode<T> setLeft(TreeNode<T> child) {
+        this.left = child;
+        child.parent = this;
+
+        return this;
+    }
+
+    public TreeNode<T> setRight(TreeNode<T> child) {
+        this.right = child;
+        child.parent = this;
+
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if ((o == null) || !(o instanceof TreeNode)) {
