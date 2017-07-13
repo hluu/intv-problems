@@ -22,18 +22,23 @@ import java.util.Map;
  *      * Bottleneck - S! - how can we avoid this? (by not doing it)
  *
  *  Optimize:
- *      * All permutations of a string have # of characters
+ *      * All permutations of a string have same # of characters
  *      * aabc, abca, acba -> same # of a, same # of b, same # of c
  *      * What can we do to leverage this?
  *      * Build a map to store characters and their occurrence as source of truth
+ *        * This is the key here, we don't care about order, just as long as
+ *        * any four characters that make up the right # of characters and their occurrence
  *      * Build a working map to store working characters
+ *        * This working map contains only the characters and their occurrence in short string
  *      * First build up this second map with first len(s) of characters
  *      * Check is to see if it contains same # of characters and occurrence in
  *        source of truth
- *      * Iterate through each letter in b
+ *      * Iterate through remaining characters each letter in b
  *          * decrement the count of the previous char from the working map if exists
  *          * increment the count of the current character in the working map
  *          * check if working map same as source of truth map
+ *          * basically moving a window length of short string characters
+ *            one character at a time forward.  Remove the tail, add the head, and compare
  *
  *
  */
@@ -42,7 +47,9 @@ public class AllPermutationsInLongString {
         System.out.printf("%s\b", AllPermutationsInLongString.class.getName());
 
         String s = "aabc";
-        String b = "cbabadcbbabbcbabaabcbabc";
+        //String b = "cbabadcbbabbcbabaabcbabc";
+        //String b = "abacaaaabcbaa";
+        String b = "abacacbaa";
 
         List<String> result = findAllPermutations(s,b);
         System.out.printf("%s\n", result);
@@ -71,9 +78,9 @@ public class AllPermutationsInLongString {
         }
 
 
-        // populate the first n chars from s
+        // populate the first n chars from long string
         for (int i = 0; i < shortStr.length(); i++) {
-            incrementCharCount(workingMap, shortStr.charAt(i));
+            incrementCharCount(workingMap, longStr.charAt(i));
         }
 
         boolean foundPermutation = isSameMap(sourceOfTruth,workingMap);
@@ -83,15 +90,14 @@ public class AllPermutationsInLongString {
 
         int shortStrLen = shortStr.length();
         int prefixCharIndex = 0;
-        for (int i = 1; i < longStr.length() - shortStrLen; i++) {
+        for (int i = shortStrLen; i < longStr.length(); i++) {
             removeCount(workingMap, longStr.charAt(prefixCharIndex++));
             incrementCharCount(workingMap, longStr.charAt(i));
             if (isSameMap(sourceOfTruth, workingMap)) {
-                result.add(longStr.substring(i,i+shortStrLen));
+                result.add(longStr.substring(prefixCharIndex,prefixCharIndex+shortStrLen));
             }
 
         }
-
         System.out.printf("%s\n", sourceOfTruth);
         return result;
 

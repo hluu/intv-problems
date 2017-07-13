@@ -89,6 +89,12 @@ public class LongestPalindromeSubsequence {
         }
     }
 
+    /**
+     * DP approach of using a table to store the intermediate result
+     *
+     * @param str
+     * @return
+     */
     private static int dp(String str) {
         if (str == null) {
             return -1;

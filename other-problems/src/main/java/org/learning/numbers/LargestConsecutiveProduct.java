@@ -69,8 +69,6 @@ public class LargestConsecutiveProduct {
                 curMax = maxPos;
             }
         }
-
         return maxPos;
-
     }
 }

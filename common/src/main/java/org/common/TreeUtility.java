@@ -207,6 +207,25 @@ public class TreeUtility {
         buildLevelByLevel(root.right, collector, level+1);
     }
 
+    public static TreeNode<Integer> findNodeInTree(TreeNode<Integer> root, int v) {
+        if (root == null) {
+            return  null;
+        }
+
+        if (root.value.intValue() == v) {
+            return root;
+        }
+
+        TreeNode<Integer> node = findNodeInTree(root.left, v);
+        if (node != null) {
+            // if found it, return it
+            return node;
+        } else {
+            // else look for the right side of the tree
+            return findNodeInTree(root.right, v);
+        }
+    }
+
 
 
 }
