@@ -43,6 +43,13 @@ public class ParityDetection {
         Assert.assertEquals(optimizedParity(value), expectedParity);
     }
 
+    /**
+     * Checking the last bit to see if it is one and right shifting 1 bit a time
+     * util value become 0
+     *
+     * @param value
+     * @return
+     */
     public static int bruteForceParity(long value) {
         short result = 0;  // doesn't have to be int
 
