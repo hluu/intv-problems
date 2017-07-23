@@ -47,8 +47,10 @@ public class BuyLowSellHigh {
         minArr[0] = arr[0];
         // maintaining a running min
         for (int i = 1; i < arr.length; i++) {
+            // default update
             minArr[i] = minArr[i-1];
-           if (arr[i] < minArr[i-1]) {
+            // update if less than
+           if (arr[i] < minArr[i]) {
                minArr[i] = arr[i];
            }
         }

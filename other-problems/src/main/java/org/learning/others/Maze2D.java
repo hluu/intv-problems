@@ -52,6 +52,7 @@ import java.util.Arrays;
 public class Maze2D {
     private static final int GATE = -2;
     private static final int WALL = -1;
+    public static final int OPEN_STATE = 0;
 
     public static void main(String[] args) {
         System.out.printf("%s\n", Maze2D.class.getName());
@@ -93,10 +94,10 @@ public class Maze2D {
         // keep going until no more open spots
         int counter = 0;
         while (cellCoord != null) {
-            System.out.printf("Open spot (r,c): %s\n", Arrays.toString(cellCoord));
-            int r = cellCoord[0];
-            int c = cellCoord[1];
-            populateMaze(r, c, maze);
+            System.out.printf("Open spot (row,column): %s\n", Arrays.toString(cellCoord));
+            int row = cellCoord[0];
+            int column = cellCoord[1];
+            populateMaze(row, column, maze);
             cellCoord = findOpenSpotNextToGate(maze);
 
             counter++;
@@ -113,60 +114,70 @@ public class Maze2D {
 
     }
 
-    private static void populateMaze(int r, int c, int[][] maze) {
-        System.out.printf("(%d,%d)\n", r,c);
-        if (r < 0 || r >= maze.length || c < 0 || c >= maze[0].length ||
-                maze[r][c] < 0) {
+    /**
+     * Recursion to do update the cell value
+     * @param row
+     * @param column
+     * @param maze
+     */
+    private static void populateMaze(int row, int column, int[][] maze) {
+        System.out.printf("(%d,%d)\n", row,column);
+        if (row < 0 || row >= maze.length || column < 0 || column >= maze[0].length ||
+                maze[row][column] < 0) {
             return;
         }
 
         // 1 is the smallest, no need to improve it
-        if (maze[r][c] == 1) {
+        if (maze[row][column] == 1) {
             return;
         }
 
         // if not wall or gate
-        int cellValue = Math.min(getCellValue(r - 1, c, maze),
-                getCellValue(r + 1, c, maze));
-        cellValue = Math.min(cellValue, getCellValue(r, c - 1, maze));
-        cellValue = Math.min(cellValue, getCellValue(r, c + 1, maze));
+        int cellValue = Math.min(getCellValue(row - 1, column, maze),
+                getCellValue(row + 1, column, maze));
+        cellValue = Math.min(cellValue, getCellValue(row, column - 1, maze));
+        cellValue = Math.min(cellValue, getCellValue(row, column + 1, maze));
 
 
         if (cellValue < Integer.MAX_VALUE) {
-            maze[r][c] = cellValue + 1;
+            maze[row][column] = cellValue + 1;
         }
 
 
         System.out.printf("(%d,%d): top: %d, bottom: %d, left: %d, right: %d, " +
                 "finalValue: %d\n",
-                r,c,
-                getCellValue(r - 1, c, maze),
-                getCellValue(r + 1, c, maze),
-                getCellValue(r, c - 1, maze),
-                getCellValue(r, c + 1, maze),
-                maze[r][c]);
+                row,column,
+                getCellValue(row - 1, column, maze),
+                getCellValue(row + 1, column, maze),
+                getCellValue(row, column - 1, maze),
+                getCellValue(row, column + 1, maze),
+                maze[row][column]);
 
 
         // keep going if value is greater than current value
-        if (getCellValue(r - 1, c, maze) > maze[r][c]) {
-            populateMaze(r - 1, c, maze);
+        if (getCellValue(row - 1, column, maze) > maze[row][column]) {
+            populateMaze(row - 1, column, maze);
         }
 
-        if (getCellValue(r + 1, c, maze) > maze[r][c]) {
-            populateMaze(r + 1, c, maze);
+        if (getCellValue(row + 1, column, maze) > maze[row][column]) {
+            populateMaze(row + 1, column, maze);
         }
 
-        if (getCellValue(r, c-1, maze) > maze[r][c]) {
-            populateMaze(r, c - 1, maze);
+        if (getCellValue(row, column-1, maze) > maze[row][column]) {
+            populateMaze(row, column - 1, maze);
         }
 
-        if (getCellValue(r, c+1, maze) > maze[r][c]) {
-            populateMaze(r, c + 1, maze);
+        if (getCellValue(row, column+1, maze) > maze[row][column]) {
+            populateMaze(row, column + 1, maze);
         }
     }
 
+    /**
+     * Returning the coordinate of the cell {row, column}
+     * @param maze
+     * @return
+     */
     private static int[] findOpenSpotNextToGate(int[][] maze) {
-
 
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[0].length; j++) {
@@ -190,29 +201,29 @@ public class Maze2D {
         return null;
     }
 
-    private static boolean isOpenCell(int r, int c, int [][] maze) {
-        if (r < 0 || r >= maze.length ||
-                c < 0 || c >= maze[0].length) {
+    private static boolean isOpenCell(int row, int column, int [][] maze) {
+        if (row < 0 || row >= maze.length ||
+                column < 0 || column >= maze[0].length) {
             return false;
         }
-        return (maze[r][c] == 0);
+        return (maze[row][column] == OPEN_STATE);
     }
 
-    private static int getCellValue(int r, int c, int[][] maze) {
-        if (r < 0 || r >= maze.length ||
-                c < 0 || c >= maze[0].length ||
-                maze[r][c] == WALL) {
+    private static int getCellValue(int row, int column, int[][] maze) {
+        if (row < 0 || row >= maze.length ||
+                column < 0 || column >= maze[0].length ||
+                maze[row][column] == WALL) {
             return Integer.MAX_VALUE;
         }
 
-        if (maze[r][c] == GATE) {
+        if (maze[row][column] == GATE) {
             return 0;
         }
 
-        if (maze[r][c] == 0) {
+        if (maze[row][column] == OPEN_STATE) {
             return Integer.MAX_VALUE;
         }
 
-        return maze[r][c];
+        return maze[row][column];
     }
 }

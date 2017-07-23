@@ -79,21 +79,22 @@ public class MaxConcurrentEvents {
         int counter = 0;
 
         Interval prevInterval = null;
-        for (Interval intv : input) {
+        for (Interval currInterval : input) {
             if (prevInterval == null) {
-                prevInterval = intv;
+                // special case
+                prevInterval = currInterval;
                 counter++;
                 maxConcurrIntervalCounter = counter;
-            } else if (intv.start <= prevInterval.end) {
+            } else if (currInterval.start <= prevInterval.end) {
                 counter++;
                 if (counter > maxConcurrIntervalCounter) {
                     maxConcurrIntervalCounter = counter;
                 }
                 // maintain the interval the largest end point
-                prevInterval = (intv.end > prevInterval.end) ? intv : prevInterval;
+                prevInterval = (currInterval.end > prevInterval.end) ? currInterval : prevInterval;
             } else {
                 // new interval starts after the end of prevInternval
-                prevInterval = intv;
+                prevInterval = currInterval;
                 counter = 1;
             }
         }
@@ -106,7 +107,7 @@ public class MaxConcurrentEvents {
      *    for ending interval is the end value.
      * 1) Sort the list of points by starting value. If they are the same, then order by
      *    end value
-     * 2) Iterator through the list increment counter when seeing a starting point as well
+     * 2) Iterator through the list, increment counter when seeing a starting point as well
      *    as updating the max counter
      * 3) When the ending point is encountered, decrement the counter
      *

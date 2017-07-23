@@ -19,7 +19,8 @@ import java.util.*;
  *                 b    c
  *                / \  / \
  *              d    e    f
- *      Node e is being reference by both b and c
+ *
+ *      Node e is being referenced by both b and c
  *
  * Approach:
  *   * Traverse the tree using DFS - left and then right
@@ -28,7 +29,7 @@ import java.util.*;
  *   * Two options
  *      * Pre-processing - traverse the graph and update a counter.
  *          * Need the ability to update the tree
- *      * Use Hash map to look it up - O(n) space
+ *      * Use Hash map to look it up as traversing - O(n) space
  */
 public class CloneObjectGraph {
     public static void main(String[] args) {
@@ -158,6 +159,5 @@ public class CloneObjectGraph {
         }
         return cache.get(root);
     }
-
 
 }

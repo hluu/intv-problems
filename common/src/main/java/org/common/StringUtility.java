@@ -26,7 +26,7 @@ public class StringUtility {
         System.out.println("***** substrings and subsequences of str: " + str);
 
         int strLen = str.length();
-        System.out.println("**** substrings ****");
+        System.out.println("**** substrings  ****");
         List<String> subStringList = generateSubStrings(str);
         System.out.println(subStringList);
 
@@ -59,11 +59,13 @@ public class StringUtility {
         for (int i = 0; i < str.length(); i++) {
             for (int j = i; j < str.length(); j++) {
                 // now print out the substring from i to j
-                String subStr = "";
+               /* String subStr = "";
                 for (int k = i; k <= j; k++) {
                     subStr += str.charAt(k);
                 }
-                result.add(subStr);
+                result.add(subStr);*/
+
+                result.add(str.substring(i, j+1));
             }
         }
         return result;

@@ -76,14 +76,14 @@ public class LongestPalindromeSubstring {
 
     /**
      * This approach uses DP because of the following recurrence
-     *   pl(i,j) = pl(i+1, j-1) && a[i] && [j]
+     *   pl(i,j) = pl(i+1, j-1) && a[i] == [j]
      *
      * So if we store the palindrome state of pl(i+1, j-1), then we can use if for
      * pl(i,j)
      *
      * We will need a table of dimension table[str.len][str.len]
      *
-     * Run time will be O(N^2)
+     * Run time will be O(N^2) and also require addition space of O(N^2)
      *
      * For each of string length from 1 to n
      *   For each substring from 0 to n
@@ -188,8 +188,14 @@ public class LongestPalindromeSubstring {
         int left = 0; int right = 0;
         String longestPalindrome = "";
 
+        // iterate through string starting at 1 and end at length-1
+        // a palindrome can't start at either end of the string
+        // treat each character as the center
+        // two possible scenarios:
+        //  * odd palindrome
+        //  * even palindrome
         for (int i = 1; i < str.length() - 1; i++) {
-            left = i -1; right = i + 1;
+            left = i - 1; right = i + 1;
             String palStr = isPalindromeFromCenter(left, right, str);
             // try even len palindrome
             if ((palStr == null) && (str.charAt(i) == str.charAt(i+1))) {
