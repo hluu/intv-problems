@@ -110,7 +110,9 @@ public static String toBase(int n, int base) {
 ```
 ### Working with bits
 * x & ~(x - 1) isolates the lowest bit (0100100 ==> 0000100)
+  * Right propagate right most bit
 * x & (x - 1) changes the rightmost 1 bit to 0 (0100100 ==> 0100000)
+  * Use to count # of bits, detect if n is power of 2
 * Integer.parseInt("01100110",2); // to parse an binary string into an integer
 * XOR has the property of being associative (grouping) and commutative (ordering)
 
