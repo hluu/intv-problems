@@ -49,6 +49,15 @@ public class NumSubsetSum {
 
     private static int counter = 1;
 
+    /**
+     * Using recursion
+     *
+     * @param array
+     * @param target
+     * @param idx
+     * @param soFar
+     * @return
+     */
     private static String numSubsets(int[] array, int target, int idx, String soFar) {
 
 
@@ -84,7 +93,7 @@ public class NumSubsetSum {
      *
      *
      * @param array
-     * @param target
+     * @param sum
      * @return
      */
     private static boolean numSubsetsDP(int[] array, int sum) {
