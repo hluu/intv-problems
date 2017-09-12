@@ -29,8 +29,8 @@ public class ContiguousSequenceSum {
 
     System.out.println("array: " + Arrays.toString(array) + " k: " + k);
 
-    System.out.println("result: " + numSubSumBruteForce(array, k));
-    System.out.println("result (optimized): " + numSubSumOptimized(array, k));
+    System.out.println("result (brute force):\t " + numSubSumBruteForce(array, k));
+    System.out.println("result (optimized):\t " + numSubSumOptimized(array, k));
 
   }
 
@@ -59,7 +59,8 @@ public class ContiguousSequenceSum {
   }
 
   /**
-   * Brute force version with using two for loops.
+   * Brute force version with using two for loops.  Trying out every possible
+   * subsequence.
    *
    * @param a
    * @param target
@@ -76,7 +77,7 @@ public class ContiguousSequenceSum {
           count++;
         }
       }
-      System.out.printf("i: %d, count: %d\n", i, count);
+      //System.out.printf("i: %d, count: %d\n", i, count);
     }
     return count;
   }

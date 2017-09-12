@@ -25,7 +25,7 @@ import java.util.List;
  * Approach:
  *  Let F(n) be the minimum path from top to bottom.
  *
- *  * What if we choose the minimum value at each level and add them up.
+ *  What if we choose the minimum value at each level and add them up?
  */
 public class MinimumTotal {
     public static void main(String[] args) {

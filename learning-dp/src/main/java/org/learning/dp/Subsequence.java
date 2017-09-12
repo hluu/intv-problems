@@ -1,10 +1,7 @@
 package org.learning.dp;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by hluu on 12/16/15.
@@ -45,8 +42,80 @@ public class Subsequence {
 
         usingBinaryApproach(input);
 
-        usingBinaryApproach(input + "e");
+        //usingBinaryApproach(input + "e");
+
+        System.out.println("*** topDownApproach");
+        List<String> topDownResult = new ArrayList<>();
+        topDownApproach(input.toCharArray(), 0, "", topDownResult);
+        System.out.println(topDownResult);
+
+        System.out.println("*** bottomUpApproach");
+        System.out.println(bottomUpApproach(input));
     }
+
+    /**
+     * For each level, branch into two sub levels
+     *
+     * @param charArr
+     * @param index
+     * @param subSequence
+     * @param collector
+     */
+    private static void topDownApproach(char[] charArr, int index, String subSequence,
+                                        List<String> collector) {
+        if (index >= charArr.length) {
+            /// base case when index is at the end
+            //System.out.println(subSequence);
+            collector.add(subSequence);
+            return;
+        }
+
+        // without character at index position
+        topDownApproach(charArr, index+1, subSequence, collector);
+        // with character at index position
+        topDownApproach(charArr, index+1, subSequence + charArr[index],
+                collector);
+    }
+
+    /**
+     * Give a string, generate all the sub sequences:
+     *
+     * String = "abc"  => "a" * bottomUpApproach("bc")
+     *                          b * bottomUpApproach("c")
+     *                              c * bottomUpApproach("")
+     *
+     *  Once it is bubble up from the bottom, the prefix add itself
+     *  to the list - one with prefix, one without
+     *      "c", ""
+     *      "c", ,"", "bc", "b"
+     *      "c", "", "bc", "b", "ac", "a", "abc", "ab"
+     *
+     * @param str
+     * @return
+     */
+    private static List<String> bottomUpApproach(String str) {
+        if (str.length() == 0) {
+            return Collections.emptyList();
+        }
+
+        String prefix = str.substring(0,1);
+        String suffix = str.substring(1);
+        List<String> bubbleUpResult = bottomUpApproach(suffix);
+
+        List<String> result = new ArrayList<>();
+        result.add(prefix);
+
+        if (!bubbleUpResult.isEmpty()) {
+            for (String s : bubbleUpResult) {
+                result.add(s);
+                result.add(prefix + s);
+            }
+        }
+
+        return result;
+
+    }
+
 
     private static void usingBinaryApproach(String input) {
         int[] intArray = new int[input.length()];
