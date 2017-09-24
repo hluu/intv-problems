@@ -22,7 +22,7 @@ books and other problems from other sources
 
 ### Permutations, subsets and substrings
 * There are n! permutations of an n-element set
-* There are 2^n subsets of an n-element set
+* There are 2^n subsets of an n-element set (because each element will be in or not in the set)
 * There are n(n+1)/2 contiguous substrings in a string of length n
 * There are n(n-1)/2 possible subtrees in a binary search tree
 
@@ -30,15 +30,15 @@ books and other problems from other sources
 * The number of subsets of size k of a set of size n is n!/k!*(n-k)!
 * This is also known as combinations
 
-### Permutations
-* The number of permutation of a set of size n is n!
-
 
 ### Common steps for solving a technical questions
 * ask questions to clarify ambiguity
+* try out a small example(s) to explore possible algorithms
+* identify needed data structures
 * design an algorithm
 * write pseudo code first (let interview know)
 * write code at moderate pace
+* stub out secondary concerns (swapping two numbers)
 * test code and carefully fix mistakes
 
 
@@ -63,6 +63,13 @@ books and other problems from other sources
 | 1,000,000,000,000      | 1TB     | Trillion    |
 | 1,000,000,000,000,000  | 1PB     | Quadrillion |
 
+### Characters
+| Letters              |  Integer Value   |
+| :-----               | :------:         |
+| A-Z                  |  65-90   |
+| a-z                  |  07-122   |
+
+
 
 ### Latency Numbers Every Software Engineers Should Know
 | Category                           | Time (ns)        | Time (us)   | Time (ms) | Relative                     |
@@ -80,7 +87,8 @@ books and other problems from other sources
 | Read 1 MB sequentially from SSD*   |   1,000,000   ns |    1,000 us |   1 ms    |  ~1GB/sec SSD, 4X memory     |
 | Disk seek                          |  10,000,000   ns |   10,000 us |  10 ms    |  20x datacenter roundtrip    |
 | Read 1 MB sequentially from disk   |  20,000,000   ns |   20,000 us |  20 ms    |  80x memory, 20X SSD         |
-| Send packet CA->Netherlands->CA    | 150,000,000   ns |  150,000 us | 150 ms    |                              |
+| Internet CA<->NY    | 40,000,000   ns |  40,000 us | 40 ms    |
+| Internet CA<->Netherlands    | 150,000,000   ns |  150,000 us | 150 ms    |                              |
 
 Notes
 -----
