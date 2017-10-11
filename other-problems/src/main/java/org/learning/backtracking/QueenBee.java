@@ -1,7 +1,5 @@
 package org.learning.backtracking;
 
-import org.learning.others.Maze2D;
-
 
 /**
  * Created by hluu on 5/20/17.

@@ -67,7 +67,7 @@ books and other problems from other sources
 | Letters              |  Integer Value   |
 | :-----               | :------:         |
 | A-Z                  |  65-90   |
-| a-z                  |  07-122   |
+| a-z                  |  97-122   |
 
 
 

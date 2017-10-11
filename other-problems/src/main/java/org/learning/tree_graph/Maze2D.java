@@ -1,4 +1,4 @@
-package org.learning.others;
+package org.learning.tree_graph;
 
 import org.common.ArrayUtils;
 
@@ -9,7 +9,7 @@ import java.util.Arrays;
  *
  * Problem:
  *  Given a 2-D maze where there are walls and gates.
- *  Determine the minimum distance to a gate.
+ *  Determine the minimum distance from each location to a gate.
  *
  *  Input:
  *  ---------------
@@ -21,7 +21,7 @@ import java.util.Arrays;
  *
  *  Output:
  *  ---------------
- *  |  3  W  G  ` |
+ *  |  3  W  G  1 |
  *  |  2  2  1  W |
  *  |  1  2  1  2 |
  *  |  G  1  G  W |

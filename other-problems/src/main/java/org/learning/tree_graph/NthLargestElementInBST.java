@@ -97,6 +97,7 @@ public class NthLargestElementInBST {
             return 0;
         }
 
+        // go all the ways down to the right hand side first
         int result = findNthLargestElement(root.right, nth, orderSoFar);
 
         if (orderSoFar[0] == nth) {
@@ -109,6 +110,7 @@ public class NthLargestElementInBST {
             return root.value;
         }
 
+        // then only go on the left hand side
         return findNthLargestElement(root.left, nth, orderSoFar);
     }
 

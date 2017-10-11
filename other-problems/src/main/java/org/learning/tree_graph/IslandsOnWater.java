@@ -1,12 +1,13 @@
 package org.learning.tree_graph;
 
+import org.common.ArrayUtils;
 import org.testng.Assert;
 
 /**
  * Created by hluu on 7/12/17.
  *
  * Problem:
- *  Give an array that represents a map where cell with value of 1 signifys land
+ *  Give an array that represents a map where cell with value of 1s signify land
  *  and 0s signify water.
  *
  *  Determine the number of islands - represented by a continuous block of 1s
@@ -59,6 +60,8 @@ public class IslandsOnWater {
 
     private static void test(int[][] map, int expectedNumIslands) {
         int numIslands = numIslands(map);
+        System.out.printf("\n========= test =========\n");
+        ArrayUtils.printMatrix(map);
         System.out.printf("There are %d islands in map\n", numIslands);
 
         Assert.assertEquals(numIslands, expectedNumIslands);

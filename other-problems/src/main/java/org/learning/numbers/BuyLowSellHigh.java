@@ -47,7 +47,7 @@ public class BuyLowSellHigh {
 
     /**
      * As we iterating through the number, maintain two things:
-     *  1) Mininum value seen so far
+     *  1) Minimum value seen so far
      *  2) Maximum profit seen so far
      *
      *  The reason this works is because the order matters due to increasing time

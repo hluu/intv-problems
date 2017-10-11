@@ -74,7 +74,10 @@ public class Knapsack {
 	}
 
 	/**
-	 * Brute force approach by going computing the maximum for each combination
+	 * Brute force approach by going computing the maximum for each combination.
+	 * The combination is generated two choices for each item:
+	 *   1) To include it
+	 *   2) To not include it
 	 *
 	 * @return Maximum value
 	 */
@@ -92,10 +95,12 @@ public class Knapsack {
 		// only if weight of current item can fit in remaining capacity
 		if (weights[item] <= remainingCapacity) {
 
+			// include the item
 			int valueForIncluding = bruteForceKnapsack(weights, values,
 					item + 1, remainingCapacity - weights[item],
 					valueSoFar + values[item]);
 
+			// not including the item
 			int valueForNoIncluding = bruteForceKnapsack(weights, values,
 					item + 1, remainingCapacity,  valueSoFar);
 

@@ -19,7 +19,7 @@ import java.util.Map;
  * In other words, a valid street consists of segments where the segments are contiguous where
  * the end point of previous segment is the same as the start point of the next segment.
  *
- * For example, below is a valid street reprensted by 3 segments:
+ * For example, below is a valid street represented by 3 segments:
  *
  * Segment 1: (1,2):(5,3)
  * Segment 2: (5,3):(6,6)
