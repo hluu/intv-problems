@@ -212,9 +212,8 @@ public static void preOrder(Node node) {
    if (node == null) return
 
    System.out.println(node.value);
-   if (node.left != null) preOrder(node.left);
-
-   if (node.right != null) preOrder(node.right);
+   preOrder(node.left);
+   preOrder(node.right);
 }
 ```
 
@@ -223,11 +222,11 @@ public static void preOrder(Node node) {
 public static void inorder(Node node) {
    if (node == null) return
 
-   if (node.left != null) preOrder(node.left);
+   inorder(node.left);
 
    System.out.println(node.value);
 
-   if (node.right != null) preOrder(node.right);
+   inorder(node.right);
 }
 ```
 
@@ -236,9 +235,9 @@ public static void inorder(Node node) {
 public static void postOrder(Node node) {
    if (node == null) return
 
-   if (node.left != null) preOrder(node.left);
+   postOrder(node.left);
 
-   if (node.right != null) preOrder(node.right);
+   postOrder(node.right);
 
    System.out.println(node.value);
 }
