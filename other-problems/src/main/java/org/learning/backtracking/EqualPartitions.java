@@ -45,8 +45,10 @@ public class EqualPartitions {
     //int[] array = {5, 4, 3, 2, 2};  int k = 2;
     //int[] array = {4, 3, 2, 3, 5, 2, 1}; int k = 4;
 
-    int[] array = {3, 5, 1, 3};  int k = 2;
+    //int[] array = {3, 5, 1, 3};  int k = 2;
     //int[] array = {1,3,6,9,10};  int k = 3;
+
+    int[] array = {3, 5, 1, 3};  int k = 3;
 
     isSumDivisibleByK(array, k);
 
@@ -54,49 +56,53 @@ public class EqualPartitions {
   }
 
   private static boolean isSumDivisibleByK(int[] array, int k) {
+    // calculate the sum
     int total = Arrays.stream(array).sum();
     // see if total sum is divisible by k
     boolean isPossible = (total % k) == 0;
+
+    if (!isPossible) {
+      System.out.printf("not possible to partition array: %s into  %d partitions",
+              Arrays.toString(array), k);
+      return false;
+    }
 
     System.out.printf("input array: %s and k: %d\n", Arrays.toString(array), k);
     System.out.printf("isPossible: %b: target: %f\n", isPossible, (total * 1.0/ k));
 
     boolean result = false;
-    if (isPossible) {
-      // here is the key, the target sum is the sum divided by k
-      int targetSum = total / k;
-      int bucketSum[] = new int[k];
-      result = foundEqualPartitions(array, bucketSum, 0, targetSum);
-      System.out.printf("foundEqualPartitions: %b\n", result);
 
-    } else {
-      System.out.printf("not possible to partition array: %s into  %d partitions",
-          Arrays.toString(array), k);
-    }
+    // here is the key, the target sum is the sum divided by k
+    int targetSum = total / k;
+    int bucketSum[] = new int[k];
+    result = foundEqualPartitions(array, bucketSum, 0, targetSum);
+    System.out.printf("foundEqualPartitions: %b\n", result);
 
     return result;
-
   }
 
 
+  /**
+   * This the recursion with backtracking approach
+   * @param array
+   * @param buckets
+   * @param index
+   * @param target
+   * @return
+   */
   private static boolean foundEqualPartitions(int[] array, int[] buckets, int index, int target) {
-    // the base case
+    // the base case when index reaches end of the array
     if (index == array.length) {
       // determine if the value in all buckets are equivalent to the target value
       // or another way of stating is if the value in any bucket is not equivalent to target, then false
-      for (int bucketSum : buckets) {
-        if (bucketSum != target) {
-          return  false;
-        }
-      }
-      return true;
+      return areEqualPartitions(buckets, target);
     }
 
     // ======== the main recursion logic  ====
     // pick next candidate
     int nextCandidate = array[index];
 
-    // for all the possible buckets that we want to try out the selected candidate
+    // try next candidate in each bucket
     for (int i = 0; i < buckets.length; i++) {
       runTime++;
 
@@ -106,7 +112,9 @@ public class EqualPartitions {
 
       // test it, if succeeded return return true
       int nextCandidateIndex = index + 1;
-      if (foundEqualPartitions(array, buckets, nextCandidateIndex, target)) return true;
+      if (foundEqualPartitions(array, buckets, nextCandidateIndex, target)) {
+        return true;
+      }
 
       // else undo the attempt, and move on to next bucket
       buckets[i] -= nextCandidate;
@@ -114,6 +122,16 @@ public class EqualPartitions {
 
     // if we got here, that means we didn't succeed
     return false;
+  }
+
+  private static boolean areEqualPartitions(int[] buckets, int target) {
+    for (int bucketSum : buckets) {
+      if (bucketSum != target) {
+        // fail fast when not equal
+        return  false;
+      }
+    }
+    return true;
   }
 
   private static void printBucketSum(int[] buckets) {

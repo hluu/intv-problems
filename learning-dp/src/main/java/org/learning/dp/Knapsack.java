@@ -23,7 +23,7 @@ package org.learning.dp;
  *
  *  This is another DP problem.
  *
- *  What are the inefficiency in the above solution?  O(2^n)? and any duplicate computations
+ *  What are the inefficiencies in the above solution?  O(2^n)? and any duplicate computations
  *  we can save and reuse? can we figure out the max as we go by each item at a time?
  *
  *  Can we have a table to keep track of the best maximum value for each size of the

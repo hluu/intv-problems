@@ -1,6 +1,7 @@
 package org.learning.java8;
 
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -10,7 +11,9 @@ public class Range {
     public static void main(String[] args) {
         System.out.printf("%s\n", Range.class.getName());
 
-        
-        //List<String> result = Sequence.rangeClosed('A','A');
+
+        IntStream intSream = IntStream.range(0, 10);
+
+        System.out.println("average: " + intSream.average().getAsDouble());
     }
 }
