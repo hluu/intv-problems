@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Created by hluu on 10/18/17.
  *
- * Give a decimal number, determin if it is digits are palindrome
+ * Give a decimal number, determine if it is digits are palindrome
  *
  * For example:
  *  * 1234321, 1221.  These numbers are considered palindrome.
