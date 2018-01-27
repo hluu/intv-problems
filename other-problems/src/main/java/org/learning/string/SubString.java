@@ -16,7 +16,7 @@ import java.util.List;
  *
  *  For example:
  *      string: "ababababc"
- *      pattern: "ab:
+ *      pattern: "ab"
  *
  *  Return the indexes of the occurrences of the patterns
  *

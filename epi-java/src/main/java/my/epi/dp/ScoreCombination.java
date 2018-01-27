@@ -20,6 +20,11 @@ import java.util.Arrays;
  *
  *      Total of 4 ways of scoring 12 points
  *
+ * Try to use the FAST technique to solve this problem.
+ *
+ * * Optimal structure
+ * * Overlapping subproblem
+ *
  */
 public class ScoreCombination {
 
@@ -54,7 +59,8 @@ public class ScoreCombination {
      * @return
      */
     public static int bruteForce(int[] playScoreTable, int score) {
-       return bruteForce(playScoreTable, score, 0);
+
+        return bruteForce(playScoreTable, score, 0);
     }
 
     /**

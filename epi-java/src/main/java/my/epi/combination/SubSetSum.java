@@ -1,6 +1,7 @@
 package my.epi.combination;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 /**
  * Created by hluu on 12/14/15.
@@ -39,27 +40,34 @@ public class SubSetSum {
     public static void main(String[] args) {
         System.out.println(SubSetSum.class.getName());
 
-        int[] input = {3,2,7,1};
-        int sum = 11;
+        int[] input1 = {3,2,7,1};
+        int sum1 = 11;
 
-        //int[] input = {3,34,4,12,5,2};
-        //int sum = 9;
+        int[] input2 = {3,34,4,12,5,2};
+        int sum2 = 9;
 
         //int[] input = {2,6,14,8,9,15,-1,1,24,12,4,20,13,7,16};
         //int sum = 15;
 
-        List<String> collector = new ArrayList<String>();
+
+        test(input1, sum1);
+
+        test(input2, sum2);
+
+    }
+
+    private static void test(int[] input, int sum) {
+        System.out.printf("=======> input: %s, sum: %d\n", Arrays.toString(input), sum);
+
+        List<String> collector = new ArrayList<>();
+
         allSubsetSum(input, sum, sum, 0, "", collector);
-        System.out.println("collector: " + collector);
+        System.out.println("Output for allSubsetSum: " + collector.toString());
 
-        System.out.println("input length: " + input.length);
-        System.out.println("counter: " + counter);
-
-
-        System.out.println("=========== allSubsetSumUsingBitArray ======");
         collector.clear();
         allSubsetSumUsingBitArray(input, new int[input.length], sum, 0, 0, collector);
-        System.out.println("allSubsetSumUsingBitArray: " + collector);
+
+        System.out.println("Output for allSubsetSumUsingBitArray: " + collector.toString());
 
     }
 
@@ -90,7 +98,7 @@ public class SubSetSum {
         }
 
         if (remainSum < 0){
-            System.out.println("*********** remainSum < 0 :" + remainSum + " *****");
+           // System.out.println("*********** remainSum < 0 :" + remainSum + " *****");
             return;
         }
 
@@ -100,9 +108,10 @@ public class SubSetSum {
         }
 
         if (input[index] <= sum) {
-            // not include
+            // not include element at index
             allSubsetSum(input, remainSum, sum, index + 1, soFar, collector);
-            // include
+
+            // include element at index, update the remaining, add to soFar string
             allSubsetSum(input, remainSum - input[index], sum, index + 1,
                     (soFar.length() == 0) ? "" + input[index] :
                             soFar + "," + input[index], collector);
@@ -148,7 +157,7 @@ public class SubSetSum {
                 }
             }
             collector.add(buf.toString());
-            System.out.println(buf.toString() + "    sum: " + sum);
+            //System.out.println(buf.toString() + "    sum: " + sum);
             return;
         } else if (index == input.length || sumSoFar > sum) {
             return;

@@ -12,7 +12,7 @@ import java.util.List;
  * Created by hluu on 6/30/17.
  *
  * Problem:
- *  Give a string, return the longest palinndromic substring.
+ *  Give a string, return the longest palindromic substring.
  *
  *  A substring is a contiguous subsequence of characters in a string
  *
@@ -87,7 +87,7 @@ public class LongestPalindromeSubstring {
      *
      * For each of string length from 1 to n
      *   For each substring from 0 to n
-     *     detect if it is a palidrome based on two conditions
+     *     detect if it is a palindrome based on two conditions
      *       pl(i+1,j-1) && a[i] == a[j]
      *
      * @param str
@@ -128,7 +128,7 @@ public class LongestPalindromeSubstring {
 
         // populate the table as we go from length from 1 to n
         for (int currLen = 3; currLen <= strLen; currLen++) {
-            // for each of substring len, compare character at either en and on smaller substring
+            // for each of substring len, compare character at either end and on smaller substring
             for (int i = 0; i < strLen-currLen+1; i++) {
                 // make sure j is the offset of i
                 int j = i+currLen-1;

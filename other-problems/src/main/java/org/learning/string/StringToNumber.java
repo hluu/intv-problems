@@ -38,6 +38,9 @@ public class StringToNumber {
 
         System.out.printf("\n");
         System.out.printf("result: %d\n", convertToNumber(str));
+
+        //int result = String.CASE_INSENSITIVE_ORDER.compare("me", "");
+        //System.out.println("result: " + result);
     }
 
     private static int convertToNumber(String str) {
