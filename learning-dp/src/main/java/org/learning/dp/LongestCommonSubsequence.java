@@ -16,7 +16,7 @@ import org.common.Tuple;
  *  Substring is a subsequence of a string in which the characters must
  *  be drawn from contiguous positions in the string.
  *
- *  For a string with length n characters, it has (n^2) substrings
+ *  For a string with length n characters, it has n(n+1)/2 ==> (n^2) substrings
  *
  *  For a string with length n characters, it has (2^) subsequences
  *

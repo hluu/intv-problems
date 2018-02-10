@@ -1,5 +1,7 @@
 package my.epi.sorting;
 
+import org.testng.Assert;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,6 +46,9 @@ import java.util.List;
  *   interval and decremented when ending an interval.  Additional max concurrent interval
  *   counter is needed and updated when the counter is incremented.
  *
+ *   This is similar to the braces matching problem, but with a twist of add a counter to
+ *   track the highest number of open braces at any point in time.
+ *
  *   This approach requires two steps:
  *     1) Sort the intervals by start O(nlogn)
  *     2) Iterate through the sorted interval O(n)
@@ -60,17 +65,39 @@ public class MaxConcurrentEvents {
     public static void main(String[] args) {
         System.out.println("This is a test");
 
-        List<Interval> intervalList = new ArrayList<Interval>();
-        intervalList.add(new Interval(1,5));
-        intervalList.add(new Interval(5,10));
-        intervalList.add(new Interval(3,7));
-        intervalList.add(new Interval(5,8));
+        List<Interval> intervalList1 = new ArrayList<Interval>();
+        intervalList1.add(new Interval(1,5));
+        intervalList1.add(new Interval(5,10));
+        intervalList1.add(new Interval(3,7));
+        intervalList1.add(new Interval(5,8));
+
+        test(intervalList1, 4);
+
+        List<Interval> intervalList2 = new ArrayList<Interval>();
+        intervalList2.add(new Interval(1,2));
+        intervalList2.add(new Interval(3,5));
+        intervalList2.add(new Interval(5,10));
+        intervalList2.add(new Interval(4,7));
 
 
+        test(intervalList2, 3);
+    }
 
+    private static void test(List<Interval> intervals, int expectedCount) {
+        int actual = maxConcurrentIntervals(intervals);
+        System.out.println("result from maxConcurrentIntervals: " + actual);
+        Assert.assertEquals(actual, expectedCount);
+
+        actual = maxConcurrentIntervals2(intervals);
+        System.out.println("result from maxConcurrentIntervals2: " + maxConcurrentIntervals2(intervals));
+        Assert.assertEquals(actual, expectedCount);
     }
 
     public static int maxConcurrentIntervals(List<Interval> input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
         System.out.println(input);
         Collections.sort(input);
         System.out.println("After sorting: " + input);

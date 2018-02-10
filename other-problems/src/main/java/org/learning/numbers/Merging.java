@@ -1,5 +1,7 @@
 package org.learning.numbers;
 
+import org.testng.Assert;
+
 import java.util.Arrays;
 
 /**
@@ -12,24 +14,26 @@ public class Merging {
         int[] left = {1,3,5,7};
         int[] right = {2,4};
 
+        test(left, right);
+        test(right, left);
+
+        test(new int[]{2,5}, new int[] {1,6});
+
+    }
+
+    private static void test(int[] left, int[] right) {
         System.out.println("left: " + Arrays.toString(left));
         System.out.println("right: " + Arrays.toString(right));
 
-        System.out.println("result: " + Arrays.toString(leftToRightMerge(left, right)));
-        System.out.println("result: " + Arrays.toString(leftToRightMerge(right, left)));
+        int[] resultLR = leftToRightMerge(left, right);
+        int[] resultRL = rightToLeftMerge(left, right);
 
+        System.out.println("resultLR: " + Arrays.toString(resultLR));
+        System.out.println("resultRL: " + Arrays.toString(resultRL));
 
-        System.out.println("result: " + Arrays.toString(leftToRightMerge(new int[]{2,5},
-                new int[] {1,6})));
+        Assert.assertTrue(Arrays.equals(resultLR, resultRL));
 
-
-
-        System.out.println("=== right left merging ===");
-        System.out.println("result: " + Arrays.toString(rightToLeftMerge(left, right)));
-        System.out.println("result: " + Arrays.toString(rightToLeftMerge(right, left)));
-
-        System.out.println("result: " + Arrays.toString(rightToLeftMerge(new int[]{2, 5},
-                new int[]{1, 6})));
+        System.out.println();
     }
 
     /**
@@ -81,18 +85,57 @@ public class Merging {
     public static int[] rightToLeftMerge(int[] left, int[] right) {
         int result[] = new int[left.length + right.length];
 
-        int j = left.length-1;
-        int k = right.length-1;
-        for (int i = result.length-1; i >= 0; i--) {
+        int leftIndx = left.length-1;
+        int rightIndx = right.length-1;
+
+        int idx = result.length-1;
+        while (leftIndx >= 0 && rightIndx >= 0) {
+            // if left is greater than right, copy left else copy right
+            int leftValue = left[leftIndx];
+            int rightValue = right[rightIndx];
+
+            if (leftValue == rightValue) {
+                result[idx] = leftValue;
+                leftIndx--;
+                rightIndx--;
+            } else if (leftValue > rightValue) {
+                result[idx] = leftValue;
+                leftIndx--;
+            } else {
+                result[idx] = rightValue;
+                rightIndx--;
+            }
+            idx--;
+        }
+
+        // if remaining values in left
+        while (leftIndx >= 0) {
+            result[idx--] = left[leftIndx--];
+        }
+
+        // if remaining value in right
+        while (rightIndx >= 0) {
+            result[idx--] = right[rightIndx--];
+        }
+
+        return result;
+    }
+
+    public static int[] rightToLeftMerge2(int[] left, int[] right) {
+        int result[] = new int[left.length + right.length];
+
+        int leftIndx = left.length-1;
+        int rightIndx = right.length-1;
+        for (int idx = result.length-1; idx >= 0; idx--) {
             // conditions to go into if statement
             // finished with right side
             // or (left side is not node, left side value is greater than right side value
-            if ((k < 0) || ((j >= 0) && (left[j] > right[k]))) {
+            if ((rightIndx < 0) || ((leftIndx >= 0) && (left[leftIndx] > right[rightIndx]))) {
                 // copy elements from left array to result
-                result[i] = left[j--];
+                result[idx] = left[leftIndx--];
             } else {
                 // copy element from right array to result
-                result[i] = right[k--];
+                result[idx] = right[rightIndx--];
             }
         }
 

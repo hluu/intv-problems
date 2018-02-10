@@ -1,7 +1,9 @@
 package org.common;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class ArrayUtils {
 	private static Random rand = new Random(System.currentTimeMillis());
@@ -58,6 +60,22 @@ public class ArrayUtils {
 		}
 		System.out.println("");
 		
+	}
+
+	public static int[] randomArrayWithUnique(int size, int maxValue) {
+		int[] result = new int[size];
+		Set<Integer> set = new HashSet<>();
+
+		for (int i = 0; i < size; i++) {
+			int value = rand.nextInt(maxValue+1);
+			while (set.contains(value)) {
+				value = rand.nextInt(maxValue+1);
+			}
+			set.add(value);
+			result[i] = value;
+		}
+
+		return result;
 	}
 
 	public static int[] randomArray(int size, int maxValue) {

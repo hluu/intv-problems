@@ -151,9 +151,9 @@ public class LongestIncreasingSubsequence {
     }
 
 
-    public static int lis(int[] arr) {
-        int lis[] = new int[arr.length];  // keep the LIS at i
-        int predecessor[] = new int[arr.length];
+    public static int lis(int[] inputArr) {
+        int lis[] = new int[inputArr.length];  // keep the LIS at i
+        int predecessor[] = new int[inputArr.length];
 
         // initialization
         for (int i = 0; i < lis.length; i++) {
@@ -162,13 +162,13 @@ public class LongestIncreasingSubsequence {
 
         }
 
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < inputArr.length; i++) {
             int max = 0;
             // going from i to 0 (backward or previous LIS)
             for (int j = i-1; j >= 0; j--) {
                 // if value at i can extend the sequence
                 // and max LIS for all these smaller values
-                if (arr[i] > arr[j] && lis[j] > max) {
+                if (inputArr[i] > inputArr[j] && lis[j] > max) {
                     max = lis[j];
                     predecessor[i] = j;
                 }
@@ -178,14 +178,14 @@ public class LongestIncreasingSubsequence {
 
         }
 
-        if (arr[1] > arr[0]) {
+        if (inputArr[1] > inputArr[0]) {
             predecessor[0] = 0;
         }
 
         System.out.println("LIS: " + Arrays.toString(lis));
         System.out.println("predecessors: " + Arrays.toString(predecessor));
 
-        List<Integer> lisValues = getElements(arr, predecessor);
+        List<Integer> lisValues = getElements(inputArr, predecessor);
 
 
         System.out.println("(" + lisValues.toString() + ")");

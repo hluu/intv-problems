@@ -78,6 +78,7 @@ public class HouseRGBColoring {
 
 		System.out.println();
 		System.out.println("greedy min cost: " + greedyPaintHouse(costs));
+		System.out.println("brute force: " + paintHousesBruteForce(costs));
 		System.out.println("dp min cost : " + dpPaintHouse(costs));
 
 		System.out.println();
@@ -109,6 +110,7 @@ public class HouseRGBColoring {
 	private static int dpPaintHouse(int[][] costs) {
 		int[][] housePaintingCost = new int[costs.length][costs[0].length];
 
+		// for the first set of houses, the cost is the same as the input
 		for (int color = 0; color < costs[0].length; color++) {
 			housePaintingCost[0][color] = costs[0][color];
 		}
@@ -191,40 +193,31 @@ public class HouseRGBColoring {
 	 * @param costs
 	 * @return
 	 */
-	private static int paintHouses(int[][] costs) {
-		int numColors = costs[0].length;
-		int numHouses = costs.length;
-		
-		int[] minSoFar = new int[numColors];
-		
-		// init with initial costs for first house
-		for (int i = 0; i < numColors; i++) {
-			minSoFar[i] = costs[i][0];
-		}
-		
-		System.out.println("minSoFar: " + Arrays.toString(minSoFar));
-		
-		for (int i = 1; i < numHouses; i++) {
-			
-			for (int j = 0; j < numColors; j++) {
-				int minValue = Integer.MAX_VALUE;
-				for (int k = 0; k < numColors; k++) {
-					if (j != k) {
-						if (minValue > costs[j][i]) {
-							minValue = costs[j][i];
-						}
+	private static int paintHousesBruteForce(int[][] costs) {
+
+		int[][] best = new int[costs.length + 1][costs[0].length];
+		for (int house = 1; house <= costs.length; ++house) {
+			for (int color = 0; color < costs[house - 1].length; ++color) {
+				// Initialize all but the first column cost to MAX, first is already zero
+				best[house][color] = Integer.MAX_VALUE;
+			}
+			for (int prevHouseColor = 0; prevHouseColor < costs[house - 1].length; ++prevHouseColor) {
+				for (int currHouseColor = 0; currHouseColor < costs[house - 1].length; ++currHouseColor) {
+					// Relax the cost only if the colors don't match and the cost is less
+					if (currHouseColor != prevHouseColor && best[house][currHouseColor] > best[house - 1][prevHouseColor] + costs[house - 1][currHouseColor]) {
+						best[house][currHouseColor] = best[house - 1][prevHouseColor] + costs[house - 1][currHouseColor];
 					}
-					minSoFar[k] = minSoFar[k] + minValue;
 				}
 			}
-			 
 		}
-		
-		int min = Integer.MAX_VALUE;
-		for (int i = 0; i <minSoFar.length; i++) {
-			min = (min > minSoFar[i] ? minSoFar[i] : min);
+
+		// Return the lowest of the final values
+		int ret = Integer.MAX_VALUE;
+		for (int i = 0; i < best[best.length - 1].length; ++i) {
+			ret = Math.min(ret, best[best.length - 1][i]);
 		}
-		return min;
+		return ret;
+
 	}
 
 }

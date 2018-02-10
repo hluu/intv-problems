@@ -12,6 +12,9 @@ import java.util.List;
  *  Give a list of calendar events (start time, end time, event name),
  *  find out the ones that are conflict with each other.
  *
+ *  Are the events sorted by start time?
+ *  If end time is the same, does that consider a conflict?
+ *
  *  [1,2, 1]
  *  [3,5, 2]
  *  [4,6, 3]
@@ -96,6 +99,7 @@ public class CalendarConflict {
             return new ArrayList<>();
         }
 
+        // final result
         List<List<String>> result = new ArrayList<>();
         // intermediate result
         List<String> tmp_result = new ArrayList<>();
