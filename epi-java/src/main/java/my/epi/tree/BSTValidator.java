@@ -28,15 +28,6 @@ import java.util.List;
  *                      /  \    /
  *                     4    7  13
  *
- *  int_min < 8 < int_max
- *  int_min < 3 < 8
- *  int_min < 1 < 3
- *
- *  3 < 6 < 8
- *  3 < 4 < 6
- *  6 < 7 < 8
- *
- *
  * Runtime Analysis:
  *  1) We visit each node once, so O(n)
  *
@@ -67,17 +58,17 @@ public class BSTValidator {
         return isValidBSTHelper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    private static  boolean isValidBSTHelper(BNode<Integer> root, int min, int max) {
-        if (root == null) {
+    private static  boolean isValidBSTHelper(BNode<Integer> node, int min, int max) {
+        if (node == null) {
             return true;
         }
 
-        if (!((root.value >= min) && (root.value <= max))) {
+        if (!((node.value >= min) && (node.value <= max))) {
             return false;
         }
 
-        return  isValidBSTHelper(root.left, min, root.value) &&
-                isValidBSTHelper(root.right, root.value, max);
+        return  isValidBSTHelper(node.left, min, node.value) &&
+                isValidBSTHelper(node.right, node.value, max);
     }
 
     public static void main(String[] args) {

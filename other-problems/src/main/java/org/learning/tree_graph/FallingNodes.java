@@ -130,6 +130,7 @@ public class FallingNodes {
 
         maxLevelSoFar = maxLevelSoFar + 1;
 
+        // each level has its own HashSet
         if (maxLevelSoFar >= collector.size()) {
             collector.add(new HashSet<>());
         }

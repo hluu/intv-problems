@@ -39,7 +39,7 @@ import java.util.List;
  * @author hluu
  *
  */
-public class CoinChange {
+public class CoinChangeMinCoins {
 
 	public static void main(String[] args) {
 
