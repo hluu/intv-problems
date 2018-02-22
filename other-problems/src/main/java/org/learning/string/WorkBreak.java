@@ -89,6 +89,9 @@ public class WorkBreak {
         String dictionary4[] = {"the","big","cat"};
         testBreakWord(dictionary4, "thebiggercat");
 
+        String dictionary5[] = {"cat","cats","and", "sand", "dog"};
+        testBreakWords(dictionary5, "catsanddog");
+
     }
 
     private static void testBreakWord(String[] dict, String str) {
@@ -106,6 +109,19 @@ public class WorkBreak {
 
         System.out.printf("input: %s, output: %s\n", str, result);
     }
+
+    private static void testBreakWords(String[] arrStr, String str) {
+        System.out.println("========= testbreakWords =========");
+
+        System.out.printf("str: %s, dict: %s\n", str, Arrays.toString(arrStr));
+
+        Set<String> dict = new HashSet<>(Arrays.asList(arrStr));
+
+        List<String> result = breakWords(dict, str);
+
+        System.out.println(result);
+     }
+
 
     /**
      * One time analysis of this is O(2^n).
@@ -127,6 +143,7 @@ public class WorkBreak {
             // else keep adding characters to prefix
             if (dict.contains(prefix)) {
                 String suffixAsWords = breakWord(dict, str.substring(i));
+
                 if (suffixAsWords != null) {
                     return prefix + " " + suffixAsWords;
                 }
@@ -136,6 +153,49 @@ public class WorkBreak {
         // if we got here, the can't find one of the words in dict
         return null;
 
+    }
+
+    public static List<String> breakWords(Set<String> dict, String str) {
+
+        System.out.println("*** str: " + str);
+        if (str == null || str.length() == 0) {
+            return Collections.emptyList();
+        }
+
+        List<String> result = new ArrayList<>();
+
+
+        // for substring, start index is inclusive, end index is exclusive
+        // therefore idx needs to go up to str.length() + 1
+        for (int idx = 0; idx < str.length() + 1; idx++) {
+
+            String prefix = str.substring(0, idx);
+
+            if (dict.contains(prefix)) {
+                result.add(prefix);
+                // from idx to the end
+                String suffix = str.substring(idx);
+                System.out.println("prefix: "  + prefix + " suffix: " + suffix);
+                List<String> tmpResult = breakWords(dict, str.substring(idx));
+                result.add(mkString(tmpResult));
+            }
+        }
+
+        return result;
+    }
+
+
+    private static String mkString(List<String> input) {
+        StringBuilder buf = new StringBuilder();
+
+        for (String str : input) {
+            if (buf.length() > 0) {
+                buf.append(", ");
+            }
+            buf.append(str);
+        }
+
+        return buf.toString();
     }
 
 

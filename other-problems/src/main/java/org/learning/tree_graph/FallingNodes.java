@@ -189,18 +189,21 @@ public class FallingNodes {
      * @return height of the node
      */
     private static <T> int mapNodeLevel(MultiTreeNode<T> root, Map<MultiTreeNode<T>, Integer> map) {
+        // node has no children would be at level 0
         if (root.getChildNodes().isEmpty()) {
             return 0;
         }
 
+        // to keep track of max level among the child branch
         int maxLevel = 0;
         for (MultiTreeNode<T> node : root.getChildNodes()) {
+            // recursively navigate down to the leaf node
            int nodeLevel =  mapNodeLevel(node, map);
            // for each child node
            map.put(node, nodeLevel);
            maxLevel = Math.max(maxLevel, nodeLevel);
         }
-        // for the current node
+        // for the current node, what ever the max level is, add 1 to it
         map.put(root, maxLevel+1);
 
         return maxLevel+1;
