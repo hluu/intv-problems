@@ -87,7 +87,8 @@ public class StringPathInMatrix {
     }
 
     /**
-     * Using recursion to explore a path
+     * Using backtrack with recursion to explore a path
+     *
      * @param row
      * @param col
      * @param letters

@@ -36,7 +36,7 @@ public class NumSubsetSum {
 
         System.out.println("NumSubsetSum.main");
 
-        int[] arr = {1, 2, 3, 4, 5,6};
+        int[] arr = {1, 2, 3, 4, 5, 6};
         numSubsets(arr, 7, 0, "");
 
 
@@ -89,7 +89,12 @@ public class NumSubsetSum {
     }
 
     /**
-     * This approach is bottom up and using table to record decisions
+     * This approach is bottom up and using table to record decisions.
+     *
+     * What is the run time for this?
+     *
+     * Space   => O(sum*arr.length)
+     * Runtime => O(sum(arr.length)
      *
      *
      * @param array

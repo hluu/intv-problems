@@ -1,5 +1,7 @@
 package org.learning.combinatory;
 
+import org.testng.Assert;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,23 +40,23 @@ public class NumSubset {
 
         int[] a = {1,3,4,5};
         int k = 5;
-        test(a,k);
+        //test(a,k, 2);
 
         int[] a2 = {1,3,-2, 4,5, 2};
         int k2 = 5;
-        test(a2,k2);
+        //test(a2,k2,6);
 
         int[] a3= new int[]{1, 3, 5, 7, 2, -2};
         int k3 = 8;
-        test(a3, k3);
+        test(a3, k3, 6);
 
     }
 
-    private static void test(int[] array, int targetSum) {
+    private static void test(int[] array, int targetSum, int expectedNumSubsequences) {
         System.out.println("\n ******* Running tests **********" );
 
-        System.out.printf("a: %s, k: %d\n",
-                Arrays.toString(array), targetSum);
+        System.out.printf("a: %s, k: %d, expectedNumSubsequences: %d\n",
+                Arrays.toString(array), targetSum, expectedNumSubsequences);
 
         System.out.println("=====> Using running sum");
 
@@ -67,8 +69,24 @@ public class NumSubset {
 
 
         System.out.println("=====> Using findSubSetUsingLoopWithRecur");
-        findSubSetUsingLoopWithRecur(array, targetSum);
+        int count3 = findSubSetUsingLoopWithRecur(array, targetSum);
 
+
+        int[] result4 = new int[1];
+        numPartitions(array, 0, targetSum, result4);
+
+        System.out.printf("count1: %d, count2: %d, count3: %d, count4: %d\n",
+                count1, count2, count3, result4[0]);
+
+        Assert.assertEquals(count1, count2);
+        Assert.assertEquals(count2, count3);
+        Assert.assertEquals(count3, expectedNumSubsequences);
+
+
+        int[] result5 = new int[1];
+        backTrackApproach(array, targetSum, 0, 0, result5);
+        System.out.println("=====> Using backTrackApproach: " + result5[0]);
+        Assert.assertEquals(result5[0], expectedNumSubsequences);
 
     }
 
@@ -140,6 +158,14 @@ public class NumSubset {
         return collector.size();
     }
 
+    /**
+     * Looks like this is a backtracking approach
+     * @param arr
+     * @param index
+     * @param remaining
+     * @param collector
+     * @param listSoFar
+     */
     private static void findSubSetUsingLoopWithRecurHelper(int[] arr,
                                                            int index, int remaining,
                                                            List<List<Integer>> collector,
@@ -167,6 +193,37 @@ public class NumSubset {
                     collector, listSoFar);
             // remove last element, what was added earlier to
             listSoFar.remove(listSoFar.size() - 1);
+        }
+    }
+
+    /**
+     * Trying out the back track approach:
+     *
+     * Input: {1, 3, 4, 5}
+     *
+     * backTrackApproach(arr, target, 0, 0, result)
+     *
+     * @param arr
+     * @param target
+     * @param currentSum
+     * @param idx
+     * @param result
+     */
+    private static void backTrackApproach(int[] arr, int target, int idx, int currentSum, int[] result) {
+
+        if (currentSum == target) {
+            result[0] += 1;
+        }
+
+        for (int i = idx; i < arr.length; i++) {
+            backTrackApproach(arr, target, i+1, currentSum + arr[i], result);
+        }
+    }
+
+    private static void numPartitions(int [] arr, int start, int target, int [] result) {
+        if (target == 0) result[0]++;
+        for(int i = start; i < arr.length; i++) {
+            numPartitions(arr, i + 1, target - arr[i], result);
         }
     }
 

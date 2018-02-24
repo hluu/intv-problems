@@ -1,5 +1,7 @@
 package org.learning.string;
 
+import org.testng.Assert;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,6 +44,24 @@ public class StringPageSize {
             System.out.println(page);
         }
 
+        String sentence = "Foo Bar Man";
+        test(sentence, 3, Arrays.asList("Foo","Bar", "Man"));
+
+        String sentence2 = "Foo Bars Man";
+        test(sentence2, 8, Arrays.asList("Foo Bars", "Man"));
+    }
+
+    private static void test(String sentence, int pageLen, List<String> expectedLines) {
+        System.out.printf("*** sentence: %s, pageLen: %d\n", sentence, pageLen);
+
+        List<String> lines = breakIntoPages(sentence, pageLen);
+
+        System.out.println("lines: " + lines);
+
+        Assert.assertEquals(lines, expectedLines);
+
+
+
 
     }
 
@@ -60,7 +80,7 @@ public class StringPageSize {
         List<String> pageList = new ArrayList<>(str.length() / pageLength);
 
         List<String> wordsPerPage = new ArrayList<>();
-        System.out.println("pageLength: " + pageLength);
+       // System.out.println("pageLength: " + pageLength);
         for (String word : wordList) {
             // take care of space first
             // having it inside the loop would mess up by 1
@@ -76,6 +96,7 @@ public class StringPageSize {
                 // clear the list because starting on a new page
                 wordsPerPage.clear();
 
+                // THIS IS THE KEY HERE - to add the next word
                 wordsPerPage.add(word);
                 runningLength = word.length();
             }
