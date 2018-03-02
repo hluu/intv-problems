@@ -75,7 +75,7 @@ public class LongestNondecreasingSubsequence {
      * provided that (i < j and A[i] < A[j])
      *
      * Runtime is O(n^2) and space is O(n)
-     * 
+     *
      *   {3,2,5,4}
      * @param input
      * @return

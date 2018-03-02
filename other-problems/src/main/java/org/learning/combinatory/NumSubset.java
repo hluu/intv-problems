@@ -40,7 +40,7 @@ public class NumSubset {
 
         int[] a = {1,3,4,5};
         int k = 5;
-        //test(a,k, 2);
+        test(a,k, 2);
 
         int[] a2 = {1,3,-2, 4,5, 2};
         int k2 = 5;
@@ -48,7 +48,7 @@ public class NumSubset {
 
         int[] a3= new int[]{1, 3, 5, 7, 2, -2};
         int k3 = 8;
-        test(a3, k3, 6);
+        //test(a3, k3, 6);
 
     }
 
@@ -68,8 +68,8 @@ public class NumSubset {
         System.out.printf("count: %d\n", count2);
 
 
-        System.out.println("=====> Using findSubSetUsingLoopWithRecur");
-        int count3 = findSubSetUsingLoopWithRecur(array, targetSum);
+        System.out.println("=====> Using findSubSetUsingBackTrack");
+        int count3 = findSubSetUsingBackTrack(array, targetSum);
 
 
         int[] result4 = new int[1];
@@ -145,11 +145,11 @@ public class NumSubset {
 
     }
 
-    private static int findSubSetUsingLoopWithRecur(int[] arr, int target) {
+    private static int findSubSetUsingBackTrack(int[] arr, int target) {
         List<List<Integer>> collector = new ArrayList<>();
 
 
-        findSubSetUsingLoopWithRecurHelper(arr, 0,  target, collector,
+        backTrackHelper(arr, 0,  target, collector,
                 new ArrayList<Integer>());
 
         for (List<Integer> list : collector) {
@@ -166,10 +166,10 @@ public class NumSubset {
      * @param collector
      * @param listSoFar
      */
-    private static void findSubSetUsingLoopWithRecurHelper(int[] arr,
-                                                           int index, int remaining,
-                                                           List<List<Integer>> collector,
-                                                           List<Integer> listSoFar) {
+    private static void backTrackHelper(int[] arr,
+                                        int index, int remaining,
+                                        List<List<Integer>> collector,
+                                        List<Integer> listSoFar) {
 
         // this must go before checking index in order to hand the last element
         if (remaining == 0) {
@@ -188,8 +188,8 @@ public class NumSubset {
         //          5
         for (int i = index; i < arr.length; i++) {
             listSoFar.add(arr[i]);
-
-            findSubSetUsingLoopWithRecurHelper(arr, i+1, remaining-arr[i],
+            System.out.println("index: " + index + " listSoFar: " + listSoFar);
+            backTrackHelper(arr, i+1, remaining-arr[i],
                     collector, listSoFar);
             // remove last element, what was added earlier to
             listSoFar.remove(listSoFar.size() - 1);

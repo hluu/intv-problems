@@ -25,24 +25,39 @@ import java.util.*;
  * When there is no valid suggestion, your function should return the string "NONE".
  * When there is more than one valid suggestion, your function can return any one of them.
  * When there is no spelling mistake in the input (exact match found), your function should return the same word back.
+ *
+ * General approach:
+ * 1) To satisfy the first requirement, we first pre-process the dictionary such that at check time
+ *    we can look a list of words that have the same normalized format.
+ *    i.e yellow => yellow, Yellow => yellow yelloW => yellow
+ *    After pre-processing we would have a map of normalized word to a set of words
+ *
+ * 2) To satisfy the second requirement, we would use a similar approach, by normalizing the vowels,
+ *    meaning any vowels will be translated to a.
+ *
+ *
  */
 public class SimpleSpellChecker {
-    private Map<String, List<String>> dictionary = new HashMap<>();
+    private Map<String, Set<String>> dictionary = new HashMap<>();
     private static Set<Character> VOWELS = new HashSet<>();
 
     public static void main(String[] args) {
         SimpleSpellChecker spellChecker = new SimpleSpellChecker(
-                Arrays.asList("yellow", "Yellow", "redish"));
+                Arrays.asList("yellow", "Yellow", "radish"));
 
         //test(spellChecker, "yelloW", "yellow");
         test(spellChecker,"Yellow", "Yellow");
         test(spellChecker,"yellow", "yellow");
 
+        test(spellChecker,"yollow", "yellow");
+        test(spellChecker,"radisH", "radish");
+        test(spellChecker,"radosH", "radish");
+
         test(spellChecker,"non","NONE");
         test(spellChecker,"","NONE");
         test(spellChecker,null,"NONE");
 
-        System.out.println(spellChecker.normalizeString("hien"));
+        //System.out.println(spellChecker.normalizeString("hien"));
 
     }
 
@@ -69,18 +84,22 @@ public class SimpleSpellChecker {
             return;
         }
 
-        for (String word : dict) {
+        initializedVowelSet();
 
-            List<String> originWords = dictionary.get(word.toLowerCase());
+        for (String word : dict) {
+            String normalizedWord = normalizeString(word);
+            Set<String> originWords = dictionary.get(normalizedWord);
             if (originWords == null) {
-                originWords = new ArrayList<String>();
+                originWords = new LinkedHashSet<>();
             }
             originWords.add(word);
 
-            dictionary.put(word.toLowerCase(), originWords);
+            dictionary.put(normalizedWord, originWords);
         }
 
+    }
 
+    private static void initializedVowelSet() {
         VOWELS.add('a');
         VOWELS.add('e');
         VOWELS.add('i');
@@ -111,17 +130,10 @@ public class SimpleSpellChecker {
         if (word == null) {
             return "NONE";
         }
-        String lowerCaseWord = word.toLowerCase();
-        List<String> originalWords = dictionary.get(lowerCaseWord);
+        String lowerCaseWord = normalizeString(word);
+        Set<String> originalWords = dictionary.get(lowerCaseWord);
         if (originalWords != null) {
-            String result = null;
-            for (String originalWord : originalWords) {
-                result = originalWord;
-                if (originalWord.equals(word)) {
-                    result = word;
-                    break;
-                }
-            }
+            String result = originalWords.contains(word) ? word : originalWords.iterator().next();
             return result;
         } else {
             return "NONE";
