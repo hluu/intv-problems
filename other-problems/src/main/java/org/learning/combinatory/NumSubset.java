@@ -31,7 +31,9 @@ import java.util.List;
  *
  *  For each element, one path to include and another path not to include it.
  *
- *
+ *  Can we use DP for this?
+ *    * There is optimal sub-problems
+ *    * Are there overlapping problem?
  *
  */
 public class NumSubset {

@@ -79,6 +79,8 @@ public class Knapsack {
 	 *   1) To include it
 	 *   2) To not include it
 	 *
+	 * Runtime: O(2^len(items))
+	 *
 	 * @return Maximum value
 	 */
 	private static int bruteForceKnapsack(int[]weights, int[] values,
@@ -115,7 +117,9 @@ public class Knapsack {
 
 	/**
 	 * Go through each of the capacity from 1 to knapsackCapacity
-	 * 
+	 *
+     * Runtime O(items * capacity)
+     *
 	 * @param weights
 	 * @param values
 	 * @param bagCapacity

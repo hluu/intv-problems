@@ -202,6 +202,7 @@ public class HouseRGBColoring {
 				best[house][color] = Integer.MAX_VALUE;
 			}
 			for (int prevHouseColor = 0; prevHouseColor < costs[house - 1].length; ++prevHouseColor) {
+
 				for (int currHouseColor = 0; currHouseColor < costs[house - 1].length; ++currHouseColor) {
 					// Relax the cost only if the colors don't match and the cost is less
 					if (currHouseColor != prevHouseColor && best[house][currHouseColor] > best[house - 1][prevHouseColor] + costs[house - 1][currHouseColor]) {

@@ -1,5 +1,7 @@
 package org.learning.dp;
 
+import org.testng.Assert;
+
 import java.util.Arrays;
 
 /**
@@ -24,24 +26,55 @@ import java.util.Arrays;
  * Approach:
  *   Count # of combinations in which result the score in 0 score, 1 score
  * 
- *   [0,1,2,3,4,5,6,7,8,9,10,11,12]
- *   [0,0,1,
- *   What if score is 2?  
+ *    [0,1,2,3,4,5,6,7,8]
+ *  2 [1,0,1,0,1,0,1,0,1]
+ *  3 [1,0,1,1,1,1,2,1,2]
+ *  7 [0,0,1,1,1,1,2,2,2]
+ *
+ *
+ *   What if score is 2?
  *   What if score is 3?
  *   
  * @author hluu
  *
  */
-public class CountScoreCombination {
+public class CountFootballScoreCombination {
 
 	public static void main(String[] args) {
 		int[] playScores = {2,3,7};
-		int score = 8;
-		
-		System.out.println("play score: " + Arrays.toString(playScores));
-		System.out.println("combo for " + score + " is " + countScoreCombo(playScores, score));
+
+
+		//test(playScores, 2, 1);
+		//test(playScores, 3, 1);
+		//test(playScores, 4, 1);
+		//test(playScores, 5, 1);
+		//test(playScores, 7, 2);
+		test(playScores, 8, 2);
 	}
-	
+
+	private static void test(int[] playScores, int score, int expectedNumCombo) {
+		System.out.printf("play score: %s, score: %d, expected # combo: %d\n",
+				playScores, score, expectedNumCombo);
+
+		int actualNumCombo = countScoreCombo(playScores, score);
+
+		Assert.assertEquals(actualNumCombo, expectedNumCombo);
+		System.out.println();
+	}
+
+	/**
+	 * Using DP to store the number of combinations for each of the smaller score value up to the
+	 * given score value.
+	 *
+	 * This is the bottom up approach of using iterations
+	 *
+	 *
+	 * Runtime is O(score * num(playScore)))
+	 *
+	 * @param playScores
+	 * @param score
+	 * @return
+	 */
 	private static int countScoreCombo(int[] playScores, int score) {
 		int combo[] = new int[score+1];
 		combo[0] = 1;
@@ -50,8 +83,9 @@ public class CountScoreCombination {
 			System.out.println("PlayScore: " + playScore);
 			for (int j = playScore; j <= score; j++) {
 				combo[j] += combo[j-playScore];
-				System.out.println("j: " + j + "\t" + Arrays.toString(combo));
+
 			}
+			System.out.println("i: " + i + "\t" + Arrays.toString(combo));
 		}
 		return combo[score];
 	}
