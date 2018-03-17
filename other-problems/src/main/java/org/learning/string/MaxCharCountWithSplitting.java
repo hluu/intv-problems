@@ -1,5 +1,7 @@
 package org.learning.string;
 
+import org.testng.Assert;
+
 import java.util.Arrays;
 
 /**
@@ -34,22 +36,37 @@ import java.util.Arrays;
 public class MaxCharCountWithSplitting {
     public static void main(String[] args) {
 
-       //test("rbrrwwbbbb", 8);
-
+        // these are two examples where they matter where w is replaced with right char
+        test("wbwrw",5);
+        test("wrwbw",5);
+       test("rrwbwrrr", 6);
         test("rbbbrwbw", 5);
-        //test("brrrbwrw", 5);
+
+
+        test("rbrrwwbbbb", 8);
+
+        test("brrrbwrw", 5);
+
+        test("rrb",3);
+        test("rbwwr",4);
+
+        test("wwrrbr", 5);
+
+
     }
 
     private static void test(String input, int expectedCount) {
 
-        System.out.println("****** test ********");
-        int actualCount = countConsecChars(input);
-
-        System.out.printf("input: %s, expected: %d, actual: %d\n", input, expectedCount, actualCount);
+        System.out.printf("\n****** test: input: %s *\n", input);
 
         int acctualCountFromBF = bruteForce(input);
-
         System.out.printf("bruteforce: expected %d, actual: %d\n", expectedCount, acctualCountFromBF);
+
+        int actualOnePass = onePass(input);
+        System.out.printf("actualOnePass: expected %d, actual: %d\n", expectedCount, actualOnePass);
+
+        Assert.assertEquals(acctualCountFromBF, expectedCount);
+        Assert.assertEquals(actualOnePass, expectedCount);
     }
 
     /**
@@ -68,7 +85,7 @@ public class MaxCharCountWithSplitting {
         }
 
         // 012
-        //"rbb"
+        //"rrb"
         int maxCount = 0;
         for (int i = 1; i <= input.length()-1; i++) {
             int leftCount = countBackward(input, i-1, 0);
@@ -81,6 +98,124 @@ public class MaxCharCountWithSplitting {
         }
 
         return maxCount;
+    }
+
+
+
+    /**
+     * Using one pass by look for left and right in each time in the while loop
+     *
+     *
+     * @param input
+     * @return
+     */
+    private static int onePass(String input) {
+        if (input == null || input.length() ==0) {
+            return 0;
+        }
+
+        if (input.length() < 3) {
+            return input.length();
+        }
+
+        // "rrb"
+
+        char[] inputChar1 = input.toCharArray();
+        preprocessWcharacter(inputChar1);
+
+        for (int i = 0; i < inputChar1.length; i++) {
+            if (inputChar1[i] == 'w') {
+                inputChar1[i] = 'b';
+            }
+        }
+
+        char[] inputChar2 = input.toCharArray();
+        preprocessWcharacter(inputChar2);
+        for (int i = 0; i < inputChar2.length; i++) {
+            if (inputChar2[i] == 'w') {
+                inputChar2[i] = 'r';
+            }
+        }
+
+        return Math.max(countMaxCharOnEitherSide(inputChar1), countMaxCharOnEitherSide(inputChar2));
+
+    }
+
+    /**
+     * Dealing with 'w' at the beginning and at the end
+     *
+     * For beginning, we want 'w' to be replaced with 'non-w' character next to it, not randomly
+     * For end, we want 'w' to be replaced with 'non-w' character next to it, not randomly
+     *
+     * @param inputChar
+     */
+    private static void preprocessWcharacter(char[] inputChar) {
+        int idx = 0;
+        // dealing with w at the beginning
+        while (inputChar[idx] == 'w' && idx < inputChar.length) {
+            idx++;
+        }
+
+        if (idx < inputChar.length) {
+            char charToUse = inputChar[idx];
+            idx--;
+            while (idx >= 0) {
+                inputChar[idx] = charToUse;
+                idx--;
+            }
+        }
+
+        // dealing with w at the end
+        idx = inputChar.length-1;
+        while (inputChar[idx] == 'w' && idx >= 0) {
+            idx--;
+        }
+
+        if (idx >= 0) {
+            char charToUse = inputChar[idx];
+            idx++;
+            while (idx < inputChar.length) {
+                inputChar[idx] = charToUse;
+                idx++;
+            }
+        }
+    }
+
+    /**
+     * Helper method for onepass.
+     *
+     * Expecting inputChar to contain only either 'r' or 'b', not 'w'
+     *
+     * @param inputChar
+     * @return max count consecutive characters on either side of the a split point
+     */
+    private static int countMaxCharOnEitherSide(char[] inputChar) {
+
+        //"rrb"
+
+        int prevCount = 0;
+        int runningSum = 0;
+
+        char currChar = inputChar[0];
+        int currentCnt = 1;
+
+        for (int idx = 1; idx < inputChar.length; idx++) {
+            char nextChar = inputChar[idx];
+            if (currChar == nextChar) {
+                currentCnt++;
+            } else {
+                runningSum = Math.max(runningSum, currentCnt + prevCount);
+                prevCount = currentCnt;
+                currentCnt = 1;
+            }
+            currChar = nextChar;
+        }
+
+        if (prevCount + currentCnt > runningSum) {
+            runningSum = prevCount + currentCnt;
+        }
+
+        return runningSum;
     }
 
     /**
