@@ -30,7 +30,7 @@ import org.testng.Assert;
  *   We can walk through both string from left to right.  If the first letter of both string
  *   is the same then we  can use that as the start of the subsequence.  If they are not,
  *   then it is fairly obvious that it is not possible for them to be a part of a common
- *   subsequence. One or both of them will need to be removed
+ *   subsequence. One or both of them will need to be removed.
  *
  *   Once we are done with the first letter, then solving the remaining letters of both strings
  *   is identical to the original problem, therefore recursion works well.

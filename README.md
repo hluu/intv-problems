@@ -242,7 +242,27 @@ public static void postOrder(Node node) {
    System.out.println(node.value);
 }
 ```
+#### BFS
+```java
+public static void bfs(Node node) {
+    Queue<Node> queue = new LinkedList();
+    queue.add(node);
+    
+    while (!queue.isEmpty()) {
+        Node tmpNode = queue.poll();
+        
+        // perform some processing
+        if (tmpNode.left != null) {
+            queue.add(tmpNode.next);
+        }
+        
+        if (tmpNode.right != null) {
+            queue.add(tmpNode.right);
+        }
+    }
+}
 
+```
 
 ### General pattern for solving tree related problems:
 * Identify base case and return appropriate value

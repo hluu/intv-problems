@@ -44,16 +44,6 @@ public class FndKthLargestValue {
     public static void main(String[] args) {
         int[] arr = ArrayUtils.randomArrayWithUnique(9, 50);
 
-        int[] cloneArr = arr.clone();
-        Arrays.sort(cloneArr);
-
-        System.out.println("sorted arr: "  + Arrays.toString(cloneArr));
-        for (int i = 1; i <= cloneArr.length; i++) {
-            //System.out.printf("%d largest is %d\n", i, getKthLargestValue(cloneArr, i));
-        }
-
-        test(arr, 4, getKthLargestValue(cloneArr, 4));
-
         testPartition();
     }
 
@@ -88,6 +78,19 @@ public class FndKthLargestValue {
     }
 
 
+    /**
+     * Brute force approach using sorting the array first
+     *
+     * @param arr
+     * @param k
+     * @return
+     */
+    private static int bruteForce(int[] arr, int k) {
+        int[] cloneArr = arr.clone();
+        Arrays.sort(cloneArr);
+
+        return cloneArr[cloneArr.length - k];
+    }
     /**
      * This approach uses the min heap to maintain k number of elements.
      *

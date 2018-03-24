@@ -4,7 +4,6 @@ import org.common.ArrayUtils;
 import org.testng.Assert;
 
 /**
- * Created by hluu on 7/12/17.
  *
  * Problem:
  *  Give an array that represents a map where cell with value of 1s signify land

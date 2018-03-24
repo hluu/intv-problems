@@ -4,7 +4,6 @@ import org.common.TreeNode;
 import org.common.TreeUtility;
 
 /**
- * Created by hluu on 7/14/17.
  *
  * Problem:
  *  Given a binary tree, write a program to count the number of Single Valued Subtrees.

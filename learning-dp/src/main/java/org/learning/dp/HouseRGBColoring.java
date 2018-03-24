@@ -87,7 +87,7 @@ public class HouseRGBColoring {
 
 	/**
 	 * DP Approach:
-	 *  0) For each house, we need to evaluate two colors that are not used by adjacent neighbor.
+	 *  0) For each house, we need to evaluate two colors that are not used by adjacent neighbors.
 	 *
 	 *
 	 *  1) Final state F(n) be the minimum cost of painting all the houses
@@ -120,9 +120,10 @@ public class HouseRGBColoring {
 
 		// for each of the houses
 		for (int house = 1; house < numHouses; house++) {
-
+            // for each of the colors
 			for (int color = 0; color < numColors; color++) {
 				int minCostSoFar = Integer.MAX_VALUE;
+				// for each previous houses, find the mind cost
 				for (int colorPrevHouse = 0; colorPrevHouse < numColors; colorPrevHouse++) {
 					if (color != colorPrevHouse) {
 						int cost = costs[house][color];

@@ -136,10 +136,18 @@ public class CloneObjectGraph {
 
     }
 
+    /**
+     * This approach is simpler - create the new tree level by level using BFS
+     *
+     * @param root
+     * @param <T>
+     * @return
+     */
     private static <T> BNode<T> cloneGraphUsingBFS(BNode<T> root) {
         Map<BNode, BNode> cache = new IdentityHashMap<>();
         cache.put(root, new BNode(root.value));
 
+        // use LinkedList as a queue
         Queue<BNode> queue = new LinkedList<>();
         queue.add(root);
 

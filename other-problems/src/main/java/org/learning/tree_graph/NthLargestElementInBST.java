@@ -20,7 +20,7 @@ import org.testng.Assert;
  *
  * Approach:
  *    The elements in BST are arranged in the order such that
- *    key in each node is greater or equals to all the elements in
+ *    key in each node is greater or equal to all the elements in
  *    the left substree and smaller than all the elements in the
  *    right substree
  *
