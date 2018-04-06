@@ -5,9 +5,9 @@ import java.util.*;
 /**
  * Created by hluu on 11/20/16.
  */
-public class WorkBreakWithMemoization {
+public class WordBreakWithMemoization {
     public static void main(String[] args) {
-        System.out.printf("%s\n", WorkBreakWithMemoization.class.getName());
+        System.out.printf("%s\n", WordBreakWithMemoization.class.getName());
 
         String dictWords[] = {"A", "AN", "AND", "DROID", "ANDROID","I", "LOVE", "SRC"};
         String input2 = "ILOVEANDROIDSRC";
@@ -30,7 +30,7 @@ public class WorkBreakWithMemoization {
     }
 
     private static String testWordBreak(Set<String> dict, String str) {
-        WorkBreakWithMemoization a = new WorkBreakWithMemoization();
+        WordBreakWithMemoization a = new WordBreakWithMemoization();
         return a.breakWordWithMemoized(dict, str);
     }
 

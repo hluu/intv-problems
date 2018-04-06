@@ -129,4 +129,15 @@ public class ArrayUtils {
 		a[i] = a[j];
 		a[j] = tmp;
 	}
+
+	public static char[][] deepCopyCharMatrix(char[][] input) {
+		if (input == null)
+			return null;
+		char[][] result = new char[input.length][];
+		for (int r = 0; r < input.length; r++) {
+			result[r] = input[r].clone();
+		}
+		return result;
+	}
+
 }

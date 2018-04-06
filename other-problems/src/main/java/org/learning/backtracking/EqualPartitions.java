@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 
 /**
- * Created by hluu on 5/18/17.
  *
  * Give an array of not sorted number.  Determine whether it is feasible to break the array into
  * K sub arrays (not necessary even size) whose sums are the same value.
@@ -94,8 +93,9 @@ public class EqualPartitions {
     // the base case when index reaches end of the array
     if (index == array.length) {
       // determine if the value in all buckets are equivalent to the target value
-      // or another way of stating is if the value in any bucket is not equivalent to target, then false
-      return areEqualPartitions(buckets, target);
+      // or another way of stating is if the value in any bucket is not equivalent to target,
+      // then false
+      return arePartitionsEqual(buckets, target);
     }
 
     // ======== the main recursion logic  ====
@@ -124,8 +124,9 @@ public class EqualPartitions {
     return false;
   }
 
-  private static boolean areEqualPartitions(int[] buckets, int target) {
+  private static boolean arePartitionsEqual(int[] buckets, int target) {
     for (int bucketSum : buckets) {
+      // one inequality violates the invariant we are looking for
       if (bucketSum != target) {
         // fail fast when not equal
         return  false;

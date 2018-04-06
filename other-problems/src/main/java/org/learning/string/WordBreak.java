@@ -46,9 +46,9 @@ import java.util.*;
  *      http://thenoisychannel.com/2011/08/08/retiring-a-great-interview-problem
  *      http://www.geeksforgeeks.org/dynamic-programming-set-32-word-break-problem/
  */
-public class WorkBreak {
+public class WordBreak {
     public static void main(String[] args) {
-        System.out.printf("%s\n", WorkBreak.class.getName());
+        System.out.printf("%s\n", WordBreak.class.getName());
 
         String dict1[] = {"I","am","a","free", "freedom"};
         testBreakWord(dict1, "Iam");
@@ -105,7 +105,7 @@ public class WorkBreak {
     private static void testBreakWord(Set<String> dict, String str) {
         System.out.printf("=================\n");
         System.out.printf("Dict: %s\n", dict);
-        String result = breakWord(dict, str);
+        String result = breakWordIntoSentence(dict, str);
 
         System.out.printf("input: %s, output: %s\n", str, result);
     }
@@ -130,7 +130,7 @@ public class WorkBreak {
      * @param str
      * @return
      */
-    public static String breakWord(Set<String> dict, String str) {
+    public static String breakWordIntoSentence(Set<String> dict, String str) {
         if (dict.contains(str)) {
             return str;
         }
@@ -142,7 +142,7 @@ public class WorkBreak {
             // only if prefix is a word, the recurse on the suffix
             // else keep adding characters to prefix
             if (dict.contains(prefix)) {
-                String suffixAsWords = breakWord(dict, str.substring(i));
+                String suffixAsWords = breakWordIntoSentence(dict, str.substring(i));
 
                 if (suffixAsWords != null) {
                     return prefix + " " + suffixAsWords;
@@ -155,6 +155,14 @@ public class WorkBreak {
 
     }
 
+    /**
+     * This version returns a list of string, similiar to how suggestions
+     * are made
+     *
+     * @param dict
+     * @param str
+     * @return List<String>
+     */
     public static List<String> breakWords(Set<String> dict, String str) {
 
         System.out.println("*** str: " + str);
@@ -175,8 +183,11 @@ public class WorkBreak {
                 result.add(prefix);
                 // from idx to the end
                 String suffix = str.substring(idx);
+
                 System.out.println("prefix: "  + prefix + " suffix: " + suffix);
+
                 List<String> tmpResult = breakWords(dict, str.substring(idx));
+
                 result.add(mkString(tmpResult));
             }
         }
