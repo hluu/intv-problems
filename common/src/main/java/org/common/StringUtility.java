@@ -120,4 +120,10 @@ public class StringUtility {
                 collector);
 
     }
+
+    public static void printSpace(int n) {
+        for (int i = 0; i < n; i++) {
+            System.out.print(" ");
+        }
+    }
 }

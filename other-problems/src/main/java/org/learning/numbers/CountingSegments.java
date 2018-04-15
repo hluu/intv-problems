@@ -20,11 +20,11 @@ import java.util.Arrays;
  * arr = [1,2,1,3,4,1,2,5,8,9,8,12,8] => 3 (1,2,1,3,4,1,2), (5), (8,9,8,12,8)
  *
  * Approach (Algorithm):
- * * For each value at index i
- * * See if it exists at another location j by looking from the end
- *   * if not, bump up segment count
+ * * For each elm at index i
+ * * See if it exists at another location j where j > i
+ *   * if not, bump up segment count because the segment boundary has reached
  *   * if exists
- *     * see if any of the values between i and j exists beyond j
+ *     * see if any of the values between i and j exists after j
  *       * if exists, update j to new index
  *       * if not exist, check for next element i+1
  *         * stop when i == j

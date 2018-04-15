@@ -84,20 +84,20 @@ public class SubSetSum {
      * Another base case is when the index reaches the end of the array.
      *
      * @param input
-     * @param remainSum
+     * @param remaingSum
      * @param sum
      * @param index
      * @param soFar
      */
-    public static void allSubsetSum(int[] input, int remainSum, int sum,
+    public static void allSubsetSum(int[] input, int remaingSum, int sum,
                                     int index, String soFar, List<String> collector) {
         counter++;
-        if (remainSum == 0) {
+        if (remaingSum == 0) {
             collector.add(soFar);
             return;
         }
 
-        if (remainSum < 0){
+        if (remaingSum < 0){
            // System.out.println("*********** remainSum < 0 :" + remainSum + " *****");
             return;
         }
@@ -109,15 +109,15 @@ public class SubSetSum {
 
         if (input[index] <= sum) {
             // not include element at index
-            allSubsetSum(input, remainSum, sum, index + 1, soFar, collector);
+            allSubsetSum(input, remaingSum, sum, index + 1, soFar, collector);
 
             // include element at index, update the remaining, add to soFar string
-            allSubsetSum(input, remainSum - input[index], sum, index + 1,
+            allSubsetSum(input, remaingSum - input[index], sum, index + 1,
                     (soFar.length() == 0) ? "" + input[index] :
                             soFar + "," + input[index], collector);
         } else {
             // not include
-            allSubsetSum(input, remainSum, sum, index + 1, soFar, collector);
+            allSubsetSum(input, remaingSum, sum, index + 1, soFar, collector);
         }
 
     }

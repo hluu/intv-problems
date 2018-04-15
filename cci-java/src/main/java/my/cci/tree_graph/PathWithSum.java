@@ -3,12 +3,17 @@ package my.cci.tree_graph;
 import org.common.TreeNode;
 import org.common.TreeUtility;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
- * Created by hluu on 6/1/17.
+ *
  *
  * Problem:
- *  Given a binary tree, design an algorithm to count # of paths with a sum equals to a given value.
+ *  Given a binary tree, design an algorithm to count # of paths with a
+ *  sum equals to a given value.
+ *
  *  The path doesn't need to start or end at the root or a leaf.
  */
 public class PathWithSum {
@@ -18,11 +23,29 @@ public class PathWithSum {
 
     TreeNode<Integer> root = createTree1();
 
-    TreeUtility.printRootToLeafPath(root);
+    test(root, 8, 3);
 
-    System.out.println("just sum: " + pathWithSum(root, 8, 0));
+    test(createTree3(), 3, 2);
+  }
 
-    System.out.println("pathSumDriver: " + pathSumDriver(root, 8));
+  private static void test(TreeNode<Integer> tree, int targetSum, int expectedPaths) {
+    System.out.println("***** test with target sum: " + targetSum + " *****");
+
+    System.out.println("====== root to leaf =====");
+    TreeUtility.printRootToLeafPath(tree);
+
+    System.out.println("====== level by level =====");
+    TreeUtility.printLevelByLevel(tree);
+
+
+    int actualPaths1 = pathSumDriver(tree, targetSum);
+    int actualPaths2 = pathSumDriver2(tree, targetSum);
+
+    int actualPaths3 = optimizedPathToSum(tree, targetSum);
+
+    System.out.printf("expected: %d, actual1: %d, actual2: %d, actual3: %d\n",
+            expectedPaths, actualPaths1, actualPaths2, actualPaths3);
+    System.out.println();
   }
 
   private static TreeNode<Integer> createTree1() {
@@ -41,6 +64,22 @@ public class PathWithSum {
     three1.left = three2; three1.right = negTwo;
     two.right = one;
     negThree.right = eleven;
+
+    return root;
+  }
+
+  private static TreeNode<Integer> createTree3() {
+    TreeNode<Integer> root =TreeNode.createTreeNode(1);
+    TreeNode<Integer> two = TreeNode.createTreeNode(2);
+    TreeNode<Integer> three = TreeNode.createTreeNode(3);
+    TreeNode<Integer> four = TreeNode.createTreeNode(4);
+    TreeNode<Integer> five = TreeNode.createTreeNode(5);
+
+    root.right = two;
+    two.right = three;
+    three.right = four;
+    four.right = five;
+
 
     return root;
   }
@@ -80,13 +119,33 @@ public class PathWithSum {
     }
 
     // starting from the node
-    int numPath = pathWithSum(node, target, 0);
+    int numPath = pathWithSumHelper(node, target, 0);
+
+    // its left side - NOTICE IT CALLS THE DRIVER
+    // the reason is we want the running sum to be 0
+    numPath += pathSumDriver(node.left, target);
+
+    // its right side - NOTICE IT CALLS THE DRIVER
+    // the reason is we want the running sum to be 0
+    numPath += pathSumDriver(node.right, target);
+
+
+    return numPath;
+  }
+
+  private static int pathSumDriver2(TreeNode<Integer> node, int target) {
+    if (node == null) {
+      return 0;
+    }
+
+    // starting from the node
+    int numPath = pathSumHelper2(node, target);
 
     // its left side
-    numPath += pathWithSum(node.left, target, 0);
+    numPath += pathSumDriver2(node.left, target);
 
     // its right side
-    numPath += pathWithSum(node.right, target, 0);
+    numPath += pathSumDriver2(node.right, target);
 
     return numPath;
   }
@@ -101,7 +160,8 @@ public class PathWithSum {
    * @param runningSum
    * @return number of paths that have sum same as given target
    */
-  private static int pathWithSum(TreeNode<Integer> node, int target, int runningSum) {
+  private static int pathWithSumHelper(TreeNode<Integer> node, int target,
+                                       int runningSum) {
     if (node == null) {
       return 0;
     }
@@ -113,9 +173,94 @@ public class PathWithSum {
       numPath++;
     }
 
-    numPath += pathWithSum(node.left, target, runningSum);
-    numPath += pathWithSum(node.right, target, runningSum);
+    numPath += pathWithSumHelper(node.left, target, runningSum);
+    numPath += pathWithSumHelper(node.right, target, runningSum);
 
     return numPath;
   }
+
+  private static int pathSumHelper2(TreeNode<Integer> node, int sum) {
+    if (node == null) {
+      return 0;
+    }
+
+    int numPath = (node.value == sum) ? 1 : 0;
+
+    numPath += pathSumHelper2(node.left, sum - node.value);
+    numPath += pathSumHelper2(node.right, sum - node.value);
+
+    return numPath;
+  }
+
+
+  /**
+   * This approach does a DFS only once, as it goes it maintaining
+   * the running sum in a hashmap (which map a running sum to the number
+   * of times we have seen it).
+   *
+   * The basic idea is RS2 - targetSum = RS1.
+   * *) RS2 is the running sum at a later point
+   * *) RS1 is the running sum at an earlier point
+   *
+   * We also check when running sum == target sum
+   *
+   * As the unwinding is happening at each node, we also decrement the number
+   * of times a running sum at that node from the hashmap
+   *
+   * @param tree
+   * @param targetSum
+   * @return
+   */
+  private static int optimizedPathToSum(TreeNode<Integer> tree, int targetSum) {
+    Map<Integer, Integer> runningSumToSeenCount = new HashMap<>();
+
+    return optimizedPathToSumHelper(tree, targetSum, 0, runningSumToSeenCount);
+  }
+
+
+  /**
+   * Doing a DFS
+   * @param tree
+   * @param targetSum
+   * @param runningSum
+   * @param runningSumToSeenCount
+   * @return
+   */
+  private static int optimizedPathToSumHelper(TreeNode<Integer> node, int targetSum,
+                                              int runningSum,
+                                              Map<Integer, Integer> runningSumToSeenCount) {
+
+    if (node == null) {
+      return 0;
+    }
+
+    // running sum at current node
+    runningSum = runningSum + node.value;
+
+    int prevRunningSum = runningSum - targetSum;
+    // retrieve path count of prevRunningCount
+    int pathCount = runningSumToSeenCount.getOrDefault(prevRunningSum, 0);
+
+    pathCount += (runningSum == targetSum) ? 1 : 0;
+
+
+    recordRunningSum(runningSumToSeenCount, runningSum,1);
+
+    // going left
+    pathCount += optimizedPathToSumHelper(node.left, targetSum, runningSum, runningSumToSeenCount);
+    pathCount += optimizedPathToSumHelper(node.right, targetSum, runningSum, runningSumToSeenCount);
+
+    recordRunningSum(runningSumToSeenCount,  runningSum,-1);
+
+    return  pathCount;
+  }
+
+  private static void recordRunningSum(Map<Integer, Integer> runningSumToSeenCount, int runningSum,
+                                       int delta) {
+
+    int newValue = runningSumToSeenCount.getOrDefault(runningSum, 0) + delta;
+
+    runningSumToSeenCount.put(runningSum, newValue);
+  }
+
 }

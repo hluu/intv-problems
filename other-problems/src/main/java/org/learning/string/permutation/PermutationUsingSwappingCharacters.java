@@ -40,23 +40,39 @@ public class PermutationUsingSwappingCharacters {
         Assert.assertEquals(result.size(), NumberUtility.factorial(str.length()));
     }
 
+    /**
+     * This is using backtracking approach.
+     *
+     * Among the characters,
+     *  pick one by putting at front
+     *  permute the remaining ones
+     *  restore back the character to previous position
+     *
+     *
+     * @param arr
+     * @param pos
+     * @param collector
+     */
     protected static void permute(char[] arr, int pos, List<String> collector) {
         // always check for null or empty string
         if (arr == null || arr.length < 1) {
             return;
         }
 
+        // base case when pos is at the end
         if (pos == arr.length-1) {
             collector.add(new String(arr));
             return;
-        } else {
-            for (int i = pos; i < arr.length; i++) {
-                swap(arr, pos, i);
-                permute(arr, pos + 1, collector);
-                //restore
-                swap(arr, pos, i);
-            }
         }
+
+
+        for (int i = pos; i < arr.length; i++) {
+            swap(arr, pos, i);
+            permute(arr, pos + 1, collector);
+            //restore
+            swap(arr, pos, i);
+        }
+
 
     }
 

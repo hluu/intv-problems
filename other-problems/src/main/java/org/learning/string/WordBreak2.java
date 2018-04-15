@@ -82,17 +82,25 @@ public class WordBreak2 {
         return newResult;
     }
 
-    public static List<String> wordBreakHelper(String word, Set<String> dict) {
+    /**
+     * Each time through recursion, the wordRemaining is getting smaller
+     * 
+     * @param wordRemaining
+     * @param dict
+     * @return
+     */
+    public static List<String> wordBreakHelper(String wordRemaining, Set<String> dict) {
         List<String> sentences = new ArrayList<>();
-        if (word == null  || word.isEmpty()  ||  dict == null | dict.isEmpty()) {
+        if (wordRemaining == null  || wordRemaining.isEmpty()  ||  dict == null | dict.isEmpty()) {
             return sentences;
         }
 
 
-        for (int i = 1; i <= word.length(); i++) {
-            String prefix = word.substring(0, i);
+        // start with 1 to make it easier with substring
+        for (int i = 1; i <= wordRemaining.length(); i++) {
+            String prefix = wordRemaining.substring(0, i);
             if (dict.contains(prefix)) {
-                String suffix = word.substring(i);
+                String suffix = wordRemaining.substring(i);
                 List<String> tmpResult = wordBreakHelper(suffix, dict);
 
                 // if tmpResult is empty, make sure handle this case
@@ -110,6 +118,15 @@ public class WordBreak2 {
         return sentences;
     }
 
+    /**
+     * Using additional memory to store previously computed answer for a
+     * particular prefix
+     *
+     * @param word
+     * @param dict
+     * @param cache
+     * @return
+     */
     public static List<String> wordBreakHelperWithMemoiz(String word, Set<String> dict,
                                                          Map<String,List<String>> cache) {
         if (cache.containsKey(word)) {

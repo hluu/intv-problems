@@ -8,7 +8,6 @@ import org.common.LinkedListUtil;
 import java.util.Stack;
 
 /**
- * Created by hluu on 1/8/16.
  *
  *
  * The MaxStack is a stack-like data structure that also allows stack like
@@ -88,6 +87,7 @@ public class MaxStack<T extends Comparable<T>> {
     // Two special methods, so this isn't just 'implement a stack'
     // PeekMax() returns the highest value in the stack (remember that T must implement Comparable)
     public T peekMax() {
+
         return (maxStack.empty()) ? null : maxStack.peek().value;
     }
 

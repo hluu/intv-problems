@@ -34,6 +34,16 @@ public class NumberPalindrome {
         System.out.printf("%d => %s\n", n, Arrays.toString(digits));
     }
 
+    /**
+     * This one using math.
+     * 1) Find out the number digits
+     * 2) Create an array with the size as the number digits
+     * 3) Copy each digit into an array
+     *
+     *
+     * @param n
+     * @return
+     */
     private static int[] convertNumberToDigits(int n) {
         int size = 0;
         int tmp = n;

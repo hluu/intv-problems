@@ -52,6 +52,11 @@ public class EqualPartitions {
     isSumDivisibleByK(array, k);
 
     System.out.printf("====> runtime: %d\n", runTime);
+
+    //int[] array2 = [5, 4, 3, 2, 2], k = 2
+
+    isSumDivisibleByK(new int[] {5, 4, 3, 2, 2}, 2);
+
   }
 
   private static boolean isSumDivisibleByK(int[] array, int k) {
@@ -83,11 +88,18 @@ public class EqualPartitions {
 
   /**
    * This the recursion with backtracking approach
+   *  *) For each bucket
+   *  *)  pick it and add a candidate to that bucket
+   *      check if all the buckets have same value
+   *      if so return true
+   *      if else back out the current value
+   *
+   *
    * @param array
    * @param buckets
    * @param index
    * @param target
-   * @return
+   * @return whether found all partitions have equal value
    */
   private static boolean foundEqualPartitions(int[] array, int[] buckets, int index, int target) {
     // the base case when index reaches end of the array
