@@ -9,17 +9,16 @@ import java.util.Map;
 
 /**
  *
- *
  * Problem:
  *  Given a binary tree, design an algorithm to count # of paths with a
  *  sum equals to a given value.
  *
  *  The path doesn't need to start or end at the root or a leaf.
  */
-public class PathWithSum {
+public class PathWithSumCounting {
 
   public static void main(String[] args) {
-    System.out.println("PathWithSum.main");
+    System.out.println("PathWithSumCounting.main");
 
     TreeNode<Integer> root = createTree1();
 

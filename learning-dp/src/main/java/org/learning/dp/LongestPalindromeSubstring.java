@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hluu on 6/30/17.
+ * https://leetcode.com/articles/longest-palindromic-substring/
  *
  * Problem:
  *  Give a string, return the longest palindromic substring.
@@ -26,34 +26,35 @@ public class LongestPalindromeSubstring {
     public  static  void main(String[] args) {
         System.out.printf("%s\n", LongestPalindromeSubstring.class.getName());
 
-        test("a");
+       test("a", "a");
 
-        test("aa");
+        test("aa", "aa");
 
-        test("abc");
-        test("hieen");
+        test("abc", "a");
 
-        test("civic");
-        test("civica");
-        test("acivic");
+        test("hieen", "ee");
 
-        test("forgeeksskeegfor");
+        test("civic", "civic");
+        test("civica", "civic");
+        test("acivic", "civic");
 
-        test("abaaba");
-        test("abababa");
+       test("forgeeksskeegfor","geeksskeeg");
 
-        test("xdeedz");
-        test("codeedoc");
-        test("codeedoca");
-        test("acodeedoc");
+       test("abaaba", "abaaba");
+        test("abababa", "abababa");
 
-        test("acodeedocd");
+        test("xdeedz", "deed");
+        test("codeedoc", "codeedoc");
+        test("codeedoca", "codeedoc");
+        test("acodeedoc", "codeedoc");
 
-        test("banana");
+        test("acodeedocd", "codeedoc");
+
+        test("banana", "anana");
     }
 
-    private static void test(String str) {
-        System.out.println("====== string: " + str + " =======");
+    private static void test(String str, String expectedString) {
+        System.out.printf("====== string: %s, expected: %s  =======\n",str, expectedString);
 
         // brute force
         String bruteForceStr = bruteForce(str);
@@ -63,14 +64,14 @@ public class LongestPalindromeSubstring {
         String centerStr = palindromeCenter(str);
         System.out.printf("center     : '%s'\n", centerStr);
 
-        Assert.assertEquals(bruteForceStr, centerStr);
+        Assert.assertEquals(expectedString, centerStr);
 
 
         // Dynamic programming
         String dpStr = palindromeDP(str);
         System.out.printf("dp         : '%s'\n", dpStr);
 
-        Assert.assertEquals(centerStr, dpStr);
+        Assert.assertEquals(expectedString, dpStr);
     }
 
 
@@ -143,9 +144,9 @@ public class LongestPalindromeSubstring {
 
         //ArrayUtils.printBooleanMatrix(table);
 
-        if (strLen > 1 && (plLen == 1)) {
+       /* if (strLen > 1 && (plLen == 1)) {
             return null;
-        }
+        }*/
 
         // substring(inclusive, exclusive)
         // watch out for index of by 1
@@ -155,7 +156,7 @@ public class LongestPalindromeSubstring {
 
 
     /**
-     * One unique character of a palindrome is it has a center
+     * One unique property of a palindrome is it has a center
      *  * For an odd length palindrome, the center has only one character
      *  * For an event length palindrome, the center has two one characters
      *
@@ -167,6 +168,7 @@ public class LongestPalindromeSubstring {
      *
      * This will require only O(N^2)
      *
+     * https://www.youtube.com/watch?v=3bd-heXl48U
      * https://leetcode.com/articles/longest-palindromic-substring/
      * http://www.programcreek.com/2013/12/leetcode-solution-of-longest-palindromic-substring-java/
      *
@@ -175,6 +177,48 @@ public class LongestPalindromeSubstring {
      * @return
      */
     private static String palindromeCenter(String str) {
+        if (str == null) {
+            return null;
+        }
+
+        if (str.length() == 1 || (str.length() == 2 && str.charAt(0) == str.charAt(1))) {
+            return str;
+        }
+
+        int maxLen = 1;
+        int start = 0;
+        for (int i = 0; i < str.length(); i++) {
+            int left = i - 1; int right = i + 1;
+            // odd case
+            while (left >= 0 && right < str.length() &&
+                    str.charAt(left) == str.charAt(right)) {
+                int tmpLen = right - left + 1;
+                if (tmpLen > maxLen) {
+                   maxLen = tmpLen;
+                   start = left;
+                }
+                left--;
+                right++;
+            }
+
+            // even case
+            left = i; right = i+1;
+            while (left >= 0 && right < str.length() &&
+                    str.charAt(left) == str.charAt(right)) {
+                int tmpLen = right - left + 1 ;
+                if (tmpLen > maxLen) {
+                    maxLen = tmpLen;
+                    start = left;
+                }
+                left--;
+                right++;
+            }
+        }
+
+        return str.substring(start, start + maxLen);
+    }
+
+    private static String palindromeCenter2(String str) {
 
         if (str == null) {
             return null;
@@ -196,6 +240,7 @@ public class LongestPalindromeSubstring {
         //  * even palindrome
         for (int i = 1; i < str.length() - 1; i++) {
             left = i - 1; right = i + 1;
+            // the odd case
             String palStr = isPalindromeFromCenter(left, right, str);
             // try even len palindrome
             if ((palStr == null) && (str.charAt(i) == str.charAt(i+1))) {
@@ -243,7 +288,8 @@ public class LongestPalindromeSubstring {
      * Brute force solution - O(n^3)
      *
      * 1) Build up a list of substring
-     * 2) For each substring, determine if it is a palindrome and if so, track the length and str
+     * 2) For each substring, determine if it is a palindrome and if so,
+     *    track the length and str
      * 3) Return the max length palindrome.
      *
      * @param str
@@ -262,7 +308,7 @@ public class LongestPalindromeSubstring {
             }
         }
 
-        return (longestPalindromeSub.length() == 1 && str.length() > 1) ? null : longestPalindromeSub;
+        return longestPalindromeSub;
     }
 
     /**
@@ -278,7 +324,7 @@ public class LongestPalindromeSubstring {
         // therefore we can just do a simple compare
         // the moment two characters are not the same, we can bail
 
-        while (left < right) {
+        while (left <= right) {
             if (str.charAt(left++) != str.charAt(right--)) {
                 return false;
             }

@@ -6,6 +6,7 @@ import org.common.StringUtility;
  * Given a number n, print all the binary numbers with n digits
  *
  * For example:
+ *  printBinary(1) => 0, 1
  *  printBinary(2) => 00, 01, 10, 11
  *  printBinary(3) => 000, 001, 010, 011, 100,101,110,111
  *

@@ -15,6 +15,10 @@ import java.util.*;
  *
  * A solution is ["cats and dog", "cat sand dog"].
  *
+ * http://thenoisychannel.com/2011/08/08/retiring-a-great-interview-problem
+ *
+ * Power set - https://en.wikipedia.org/wiki/Power_set
+ *
  *
  * Approach
  *  1) Iterate through the input string from left to right
@@ -42,6 +46,10 @@ public class WordBreak2 {
 
         List<String> wordList4 = Arrays.asList("aaaa", "aa");
         test(wordList4, "aaaaaaa");
+
+        List<String> wordList5 = Arrays.asList("A", "AN", "AND", "DROID", "ANDROID","I", "LOVE", "SRC");
+        test(wordList5, "ILOVEANDROIDSRC");
+
     }
 
     private static void test(List<String> dict, String word) {
@@ -83,15 +91,25 @@ public class WordBreak2 {
     }
 
     /**
-     * Each time through recursion, the wordRemaining is getting smaller
-     * 
+     * Each time through recursion, the wordRemaining is getting smaller.
+     *
+     * Runtime analysis
+     *  * what is the worse case scenario?
+     *    * every prefix exists in dictionary, that is when recursion continues
+     *      to check the suffix
+     *
+     *    T(n) = T(n-1) + T(n-2) + ... + T(1) = 2T(n-1) = O(2^n)
+     *
+     *  * for a string of n characters, there will be n prefixes
+     *  * O(2^n)
+     *
      * @param wordRemaining
      * @param dict
      * @return
      */
     public static List<String> wordBreakHelper(String wordRemaining, Set<String> dict) {
         List<String> sentences = new ArrayList<>();
-        if (wordRemaining == null  || wordRemaining.isEmpty()  ||  dict == null | dict.isEmpty()) {
+        if (wordRemaining == null  || wordRemaining.isEmpty()) {
             return sentences;
         }
 
@@ -104,7 +122,7 @@ public class WordBreak2 {
                 List<String> tmpResult = wordBreakHelper(suffix, dict);
 
                 // if tmpResult is empty, make sure handle this case
-                // when writing it
+                // when add it sentences
                 if (!tmpResult.isEmpty()) {
                     for (String str : tmpResult) {
                         sentences.add(prefix + " " + str);

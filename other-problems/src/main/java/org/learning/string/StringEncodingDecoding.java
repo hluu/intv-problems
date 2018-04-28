@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by hluu on 2/16/18.
+ *
  *
  * Give an array of strings (Unicode), write two functions:
  * 1) String encoding(String[] inputs)

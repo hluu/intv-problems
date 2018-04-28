@@ -1,7 +1,6 @@
 package org.learning.dp;
 
 /**
- * Created by hluu on 1/8/16.
  *
  * Write a function to compute the maximum length palindromic sub-sequence of an array.
  * A palindrome is a sequence which is equal to its reverse.

@@ -5,7 +5,7 @@ import org.testng.Assert;
 import java.util.*;
 
 /**
- * Created by hluu on 8/14/17.
+ *
  *
  * Problem:
  *  Given a 2-d grid of characters and a dictionary.  Find all the possible words in the
@@ -29,7 +29,7 @@ import java.util.*;
  *  * When a word is found, continue to traverse to get to longer words
  *  * To explore all possible paths, we will branch 8 different allowable ways
  *
- *
+ * Runtime: O(8 ^ gridSize)
  */
 public class PossibleWordsInGrid {
     public static void main(String[] args) {

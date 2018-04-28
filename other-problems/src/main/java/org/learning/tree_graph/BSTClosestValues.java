@@ -33,7 +33,8 @@ import java.util.List;
  *
  * Approach:
  *  * Get the first k random closest values in a list of min heap, iterate through numbers in increasing order
- *    (in-order-traversal) and update the list of k closest values.  Can we just use a list of a heap?
+ *    (in-order-traversal) and update the list of k closest values.
+ *    * Can we just use a list of a heap?
  *    * List is for storing values and simpler
  *    * Heap would be storing the differences as well as associated values
  *    * The key point is to take advantage of the order of the values being processed
@@ -41,7 +42,7 @@ import java.util.List;
  *
  */
 public class BSTClosestValues {
-    public static void  main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("==== " + BSTClosestValues.class.getName() + " ====");
 
         TreeNode<Integer> tree1 = createTree1();
@@ -95,15 +96,21 @@ public class BSTClosestValues {
 
         // process node
         if (closestValueList.size() < numElm) {
-            // add value if we don't already have enough in the list
+            // just add value if we don't already have enough in the list
             closestValueList.add(node.value);
         } else {
             int nodeDiff = Math.abs(node.value - target);
             int firstNodeDiff = Math.abs(closestValueList.get(0) - target);
 
             if (nodeDiff < firstNodeDiff) {
+                // remove from the head
                 closestValueList.remove(0);
+                // add to the end
                 closestValueList.add(node.value);
+            } else {
+                // the reason for return is the diff will get bigger
+                // because we are traversing in in-order
+                return;
             }
         }
 

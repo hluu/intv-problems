@@ -1,5 +1,7 @@
 package org.learning.combinatory;
 
+import org.common.ArrayUtils;
+import org.common.StringUtility;
 import org.testng.Assert;
 
 import java.util.ArrayList;
@@ -62,14 +64,14 @@ public class NumSubset {
 
         System.out.println("=====> Using running sum");
 
-        int count1 = numSubsetsUsingSum(array, targetSum, 0, 0, 0);
-        System.out.printf("count: %d\n", count1);
+   //     int count1 = numSubsetsUsingSum(array, targetSum, 0, 0, 0);
+     //   System.out.printf("count: %d\n", count1);
 
         System.out.println("=====> Using sum subtraction");
         int count2 = numSubsetsUsingSubtraction(array, targetSum, 0);
-        System.out.printf("count: %d\n", count2);
+        System.out.printf("actual count: %d\n", count2);
 
-
+/*
         System.out.println("=====> Using findSubSetUsingBackTrack");
         int count3 = findSubSetUsingBackTrack(array, targetSum);
 
@@ -89,7 +91,7 @@ public class NumSubset {
         backTrackApproach(array, targetSum, 0, 0, result5);
         System.out.println("=====> Using backTrackApproach: " + result5[0]);
         Assert.assertEquals(result5[0], expectedNumSubsequences);
-
+*/
     }
 
 
@@ -140,6 +142,11 @@ public class NumSubset {
         if (index >= array.length) {
             return (remainingSum == 0) ? 1 : 0;
         }
+
+        StringUtility.printSpace(index);
+        System.out.printf("index: %d, remaining: %d, value: %d\n",
+                index, remainingSum,  array[index]);
+
 
        return (array[index] == remainingSum) ? 1 : 0 +
                numSubsetsUsingSubtraction(array, remainingSum - array[index],  index+1) +

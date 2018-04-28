@@ -3,7 +3,6 @@ package org.learning.backtracking;
 import org.testng.Assert;
 
 /**
- * Created by hluu on 7/28/17.
  *
  * Problem:
  *  Implement a function to check whether there is a path for a string in a matrix
@@ -25,7 +24,7 @@ import org.testng.Assert;
  * Approach:
  *  What is being asked whether there is a path.
  *
- *  The path can start at any cell, so it is necessary to try out every cell.
+ *  The path can start from any cell, so it is necessary to try out every cell.
  *  The is a notion of a path, so once there is a match of the first character, then
  *  it keeps exploring left, right, up, and down.
  *
@@ -66,15 +65,16 @@ public class StringPathInMatrix {
 
     private static void test(char[][] matrix, String letters, boolean expectedFoundIt) {
         System.out.printf("======= testing for %s =======\n", letters);
-        boolean foundId = isThereApath(matrix, letters.toCharArray());
+        boolean foundId = pathExist(matrix, letters.toCharArray());
 
         System.out.printf("expectedFoundIt: %b, actual: %b\n", expectedFoundIt, foundId);
         Assert.assertEquals(foundId, expectedFoundIt);
     }
 
-    private static boolean isThereApath(char[][] matrix, char[] letters) {
+    private static boolean pathExist(char[][] matrix, char[] letters) {
         boolean[][] visitedMatrix = new boolean[matrix.length][matrix[0].length];
 
+        // trying out every single cell
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[0].length; col++) {
                 if (explorePath(matrix, row, col, letters, 0, visitedMatrix)) {
@@ -105,6 +105,9 @@ public class StringPathInMatrix {
         }
 
         boolean foundIt = false;
+
+        // only explore if coordinates are valid, haven't visited yet
+        // and cell value matches the character at specified index
         if (validCoordinate(matrix, row, col) &&
             !visitedMatrix[row][col]  &&
             matrix[row][col] == letters[index]) {

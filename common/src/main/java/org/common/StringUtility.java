@@ -58,13 +58,6 @@ public class StringUtility {
         // two for loops to build all the possible substrings
         for (int i = 0; i < str.length(); i++) {
             for (int j = i; j < str.length(); j++) {
-                // now print out the substring from i to j
-               /* String subStr = "";
-                for (int k = i; k <= j; k++) {
-                    subStr += str.charAt(k);
-                }
-                result.add(subStr);*/
-
                 result.add(str.substring(i, j+1));
             }
         }
@@ -97,26 +90,38 @@ public class StringUtility {
     }
 
     /**
-     * Generate sub-sequence using recursion with two cases:
-     * 1) One to include
-     * 2) One to not include
+     * Use index to know when to reach the end.
+     * Use string to collect string at each index
+     *
+     * Generate sub-sequence using recursion with two cases
+     *
+     * 1) One to not include character at index
+     * 2) One to include character at index
+     *
+     * Do not modify index a each level, because it is used for both
+     * calls (branches), instead, pass the modified value into the recursion call
+     *
+     * Runtime: O(2^n)
      *
      */
     public static void generateSubseqRecursion(String input, int index,
                                                String stringSoFar,
                                                Set<String> collector) {
 
+        StringUtility.printSpace(index);
+        System.out.printf("level: %d, stringSoFar: '%s'\n", index, stringSoFar);
         if (index >= input.length()) {
+            collector.add(stringSoFar);
             return;
         }
 
         // not to include char at index
-        collector.add(stringSoFar);
+
         generateSubseqRecursion(input, index+1, stringSoFar, collector);
 
         // to include char at index
-        collector.add(stringSoFar + input.charAt(index));
-        generateSubseqRecursion(input, index+1, stringSoFar + input.charAt(index),
+        generateSubseqRecursion(input, index+1,
+                stringSoFar + input.charAt(index),
                 collector);
 
     }

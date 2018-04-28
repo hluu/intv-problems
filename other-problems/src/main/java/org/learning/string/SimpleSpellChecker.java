@@ -5,7 +5,7 @@ import org.testng.Assert;
 import java.util.*;
 
 /**
- * Created by hluu on 2/1/18.
+ *
  *
  * You have a dictionary (set) of words. You need to implement a spellchecker that
  * returns the correct word for an input word.

@@ -3,7 +3,7 @@ package org.learning.backtracking;
 import java.util.Arrays;
 
 /**
- * Created by hluu on 12/10/16.
+ *
  *
  * Problem: Given a set of numbers (in an integer array), this problem is
  * to find subsets whose elements add up to a specific target number.
@@ -14,6 +14,10 @@ import java.util.Arrays;
  * By contrast, there is no subset of {1, 3, 4, 5} whose elements add up to 11.
  *
  * numSubsets(arr, 5) => 2, numSubsets(arr, 11) => 0
+ *
+ * Questions to ask:
+ * 1) Can there be negative value in the input?
+ * 2) Do we care about overflow? should we use long?
  *
  * Approach:
  *  Brute force:
@@ -91,6 +95,9 @@ public class NumSubsetSum {
     /**
      * This approach is bottom up and using table to record decisions.
      *
+     * What is the recurrence for this?
+     *
+     *
      * What is the run time for this?
      *
      * Space   => O(sum*arr.length)
@@ -114,6 +121,7 @@ public class NumSubsetSum {
 
         printTable(state, array, sum);
 
+        // add more comments to this logic here
         for (int sumValue = 1; sumValue <= sum; sumValue++) {
             for (int idx = 1; idx <= array.length; idx++) {
                 state[sumValue][idx] = state[sumValue][idx-1];

@@ -8,7 +8,19 @@ public class Tuple<T,V> {
 		this.first = first;
 		this.second = second;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) {
+			return false;
+		}
+
+		Tuple<String, Integer> other = (Tuple<String, Integer>) o;
+
+		return this.first.equals(other.first) && this.second.equals(other.second);
+	}
+
+	@Override
 	public String toString() {
 		return "(" + first + "," + second + ")";
 	}

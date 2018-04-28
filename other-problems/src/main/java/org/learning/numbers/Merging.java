@@ -5,7 +5,8 @@ import org.testng.Assert;
 import java.util.Arrays;
 
 /**
- * Created by hluu on 2/14/16.
+ * Merging two sorted lists of numbers
+ *
  */
 public class Merging {
     public static void main(String[] args) {

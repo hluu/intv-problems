@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by hluu on 12/29/16.
  *
  * Problem:
  *  Give a string and a pattern, find all the occurrences of that patterns within

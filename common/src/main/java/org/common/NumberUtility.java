@@ -39,4 +39,13 @@ public class NumberUtility {
             }
         }
     }
+
+
+    public static int min(int... numbers) {
+        int result = Integer.MAX_VALUE;
+        for (int each : numbers) {
+            result = Math.min(result, each);
+        }
+        return result;
+    }
 }

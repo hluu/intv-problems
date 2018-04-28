@@ -3,7 +3,7 @@ package org.learning.string;
 import java.util.*;
 
 /**
- * Created by hluu on 11/20/16.
+ *
  */
 public class WordBreakWithMemoization {
     public static void main(String[] args) {
