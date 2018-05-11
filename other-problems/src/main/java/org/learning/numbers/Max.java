@@ -3,7 +3,7 @@ package org.learning.numbers;
 import org.learning.bit.BitUtility;
 
 /**
- * Created by hluu on 8/7/16.
+ *
  *
  *  Find the maximum of two numbers, should not use if-else or any other conditional operator
  */

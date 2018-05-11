@@ -27,6 +27,8 @@ public class BitUtility {
     public static int flip(int bit) {
         return 1^bit;
     }
+
+
     /**
      * Return 1 if positive and 0 if negative
      *
