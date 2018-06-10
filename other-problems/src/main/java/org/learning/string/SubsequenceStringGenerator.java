@@ -38,26 +38,24 @@ public class SubsequenceStringGenerator {
 
         String input = "gat";
 
-        generateSubsequences(input);
+        System.out.println("*** recursionApproach ***");
+        List<String> collector1 = new ArrayList<>();
+        recursionWithIndexApproach(input, 0, "", collector1);
+        System.out.println(collector1);
+
+        System.out.println("*** recursionApproach ***");
+        List<String> collector2 = new ArrayList<>();
+        recursionApproach(input, "", collector2);
+        System.out.println(collector2);
     }
 
-    private static void generateSubsequences(String input) {
-        List<String> collector = new ArrayList<>();
 
-        generateSubsequencesHelper(input, 0, "", collector);
-
-        System.out.println(collector);
-        /*for (String str : collector) {
-            System.out.println(str);
-        }*/
-    }
-
-    private static void generateSubsequencesHelper(String input, int index,
+    private static void recursionWithIndexApproach(String input, int index,
                                                    String subSequence,
                                                    List<String> collector) {
 
-        StringUtility.printSpace(subSequence.length());
-        System.out.printf("idx: %d, subsequence: %s\n", index, subSequence);
+       // StringUtility.printSpace(subSequence.length());
+       // System.out.printf("idx: %d, subsequence: %s\n", index, subSequence);
 
         if (index >= input.length()) {
             /// base case when index is at the end
@@ -67,13 +65,38 @@ public class SubsequenceStringGenerator {
         }
 
         // without character at index position
-        generateSubsequencesHelper(input, index+1, subSequence, collector);
+        recursionWithIndexApproach(input, index+1, subSequence, collector);
 
         // with character at index position
-        generateSubsequencesHelper(input, index+1,
+        recursionWithIndexApproach(input, index+1,
                 subSequence + input.charAt(index),
                 collector);
 
+    }
+
+    /**
+     * Generate all subsequences of a given string
+     *
+     * Using recursion with 2-way branch - one to include the first character,
+     * and the second w/o include the first characters.
+     *
+     * @param remaining
+     * @param soFar
+     * @param collector
+     */
+    private static void recursionApproach(String remaining, String soFar,
+                                          List<String> collector) {
+        if (remaining.isEmpty()) {
+            collector.add(soFar);
+            return;
+        }
+
+        // include first character
+        recursionApproach(remaining.substring(1), soFar + remaining.charAt(0),
+                collector);
+
+        // don't include first character
+        recursionApproach(remaining.substring(1), soFar, collector);
     }
 
 

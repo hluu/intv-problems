@@ -29,7 +29,7 @@ import java.util.Stack;
  *  * Also maintain a running largest rectangle size
  *  * Iterate from left to right, when we see a taller bar, add to stack (height, index)
  *  * When we see a smaller height, compute the rectangle at that point using formula
- *    size = height * (end index - start index).  Swap with running largest rectangle size if
+ *    are = height * (end index - start index).  Swap with running largest rectangle size if
  *    necessary
  *  * Also add the new bar to the stack after computing the rectangle
  *  * If we see a new bar with same height as the one at the top of the stack, then skip it
@@ -41,6 +41,7 @@ public class LargestRectangleInHistogram {
         System.out.println(LargestRectangleInHistogram.class.getName());
 
         test(new int[] {1,3,2,1,2}, 5);
+        test(new int[] {2,1,5,6,2,3}, 10);
     }
 
     private static void test(int[] hist, int expectedRectSize) {
@@ -49,7 +50,11 @@ public class LargestRectangleInHistogram {
         System.out.printf("hist: %s, expected: %d, actual: %d\n",
                 Arrays.toString(hist), expectedRectSize, actualRectSize);
 
-        Assert.assertEquals(actualRectSize, expectedRectSize);
+        int actualRectSize2 = maxRectangleSize2(hist);
+        System.out.printf("hist: %s, expected: %d, actual2: %d\n",
+                Arrays.toString(hist), expectedRectSize, actualRectSize2);
+
+        //Assert.assertEquals(actualRectSize, expectedRectSize);
     }
 
 
@@ -91,5 +96,48 @@ public class LargestRectangleInHistogram {
         }
 
         return maxRectSoFar;
+    }
+
+    private static int maxRectangleSize2(int[] histogram) {
+        int maxArea = 0;
+
+        int currHeight = 0;
+        for (int i = 0; i < histogram.length; i++) {
+
+            currHeight = histogram[i];
+            if (i == 0) {
+                int idx = 1;
+                // check for right side
+                while (idx < histogram.length && currHeight >= histogram[idx]) {
+                    idx++;
+                }
+
+                int area = (idx + 1) * currHeight;
+                maxArea = Math.max(maxArea, area);
+            } else {
+                // left side
+                int left = 0;
+                // right side
+                int idx = i-1;
+                while (idx >= 0 && currHeight <= histogram[idx]) {
+                    idx--;
+                    left++;
+                }
+
+
+                int right = 0;
+                idx = i+1;
+                while (idx < histogram.length && currHeight <= histogram[idx]) {
+                    idx++;
+                    right++;
+                }
+
+                int area = (left + right +1) * currHeight;
+                maxArea = Math.max(maxArea, area);
+            }
+
+
+        }
+        return maxArea;
     }
 }

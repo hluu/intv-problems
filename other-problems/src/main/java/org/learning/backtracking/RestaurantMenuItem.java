@@ -113,6 +113,7 @@ public class RestaurantMenuItem {
                 // select item
                 findItemsHelper2(menuItems, i, menuItems[i].price + amtSoFar,
                         amt, collector, list);
+                // back track
                 list.remove(list.size() - 1);
             }
         }

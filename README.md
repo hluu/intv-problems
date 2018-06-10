@@ -181,6 +181,22 @@ public static List<String> generateSubsequences(String str) {
 }
 ```
 
+```java
+  // using recursion
+  private static void recursionApproach(String remaining, String soFar) {
+      if (remaining.isEmpty()) {
+          collector.add(soFar);
+          return;
+      }
+
+      // include first character
+      recursionApproach(remaining.substring(1), soFar + remaining.charAt(0));
+
+      // don't include first character
+      recursionApproach(remaining.substring(1), soFar);
+      }
+```
+
 ### Working with prime numbers
 * Every number can be decomposed into a product of primes
 * All non-prime numbers are divisible by a primer number
@@ -276,3 +292,29 @@ public static void bfs(Node node) {
 * Formulate the answer as a recurrence relation or recursive algorithm
 * Ensure the number of different parameter values taken on by recurrence is bounded
 * Specify the order of evaluation for the recurrence so partial results are available when needed
+
+### Recursive Backtracking
+
+#### pseudo code
+
+```java
+bool solve(conf) {
+    if (no more choices) {  // base case
+        return; 
+    }
+    
+    for (all available choices) {
+        make a choice;
+        
+        ok = solve(conf with selected choice);
+        if (ok) {
+            return true;
+        }
+        
+        unmake choice
+    }
+    
+    return false;
+}
+
+```

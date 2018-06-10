@@ -53,12 +53,15 @@ public class CountFootballScoreCombination {
 	}
 
 	private static void test(int[] playScores, int score, int expectedNumCombo) {
-		System.out.printf("play score: %s, score: %d, expected # combo: %d\n",
-				playScores, score, expectedNumCombo);
+		System.out.printf("play score: %s, score: %d\n",
+				Arrays.toString(playScores), score);
 
 		int actualNumCombo = countScoreCombo(playScores, score);
 
-		Assert.assertEquals(actualNumCombo, expectedNumCombo);
+        System.out.printf("expected %d, actual: %d\n",
+                expectedNumCombo, actualNumCombo);
+
+        Assert.assertEquals(actualNumCombo, expectedNumCombo);
 		System.out.println();
 	}
 
@@ -72,22 +75,22 @@ public class CountFootballScoreCombination {
 	 * Runtime is O(score * num(playScore)))
 	 *
 	 * @param playScores
-	 * @param score
+	 * @param finalScore
 	 * @return
 	 */
-	private static int countScoreCombo(int[] playScores, int score) {
-		int combo[] = new int[score+1];
-		combo[0] = 1;
-		for (int i = 0; i < playScores.length; i++) {
-			int playScore = playScores[i];
+	private static int countScoreCombo(int[] playScores, int finalScore) {
+		int comboCache[] = new int[finalScore+1];
+		comboCache[0] = 1;
+		for (int playScore : playScores) {
+
 			System.out.println("PlayScore: " + playScore);
-			for (int j = playScore; j <= score; j++) {
-				combo[j] += combo[j-playScore];
+
+			for (int score = playScore; score <= finalScore; score++) {
+				comboCache[score] += comboCache[score-playScore];
 
 			}
-			System.out.println("i: " + i + "\t" + Arrays.toString(combo));
 		}
-		return combo[score];
+		return comboCache[finalScore];
 	}
 
 }

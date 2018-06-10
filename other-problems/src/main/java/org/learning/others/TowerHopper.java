@@ -120,6 +120,9 @@ public class TowerHopper {
     /**
      * The brute force way to explore every possible paths.  Run time would
      * be really bad
+     *
+     * This is the DP approach
+     *
      * @param towers
      * @return
      */
@@ -144,13 +147,16 @@ public class TowerHopper {
             return true;
         }
 
+        // what does this mean?
         if (memoi[towerIndex] != -1) {
             return (memoi[towerIndex] == 1);
         }
 
         System.out.println("dp: " + towerIndex);
 
+        // try all possible avenues - from 1 to tower height
         for (int i = 1; i <= towerHeight; i++) {
+            // each recursive call advances to next tower by towerIndex
             boolean isPossible = dpHelper(towers, towerIndex+i, memoi);
             if (isPossible) {
                 memoi[towerIndex] = 1;

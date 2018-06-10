@@ -49,9 +49,13 @@ public class Subsequence {
         topDownApproach(input.toCharArray(), 0, "", topDownResult);
         System.out.println(topDownResult);
 
-        System.out.println("*** bottomUpApproach");
+        System.out.println("*** bottomUpApproach ***");
         System.out.println(bottomUpApproach(input));
+
+
     }
+
+
 
     /**
      * For each level, branch into two sub levels
@@ -107,8 +111,8 @@ public class Subsequence {
 
         if (!bubbleUpResult.isEmpty()) {
             for (String s : bubbleUpResult) {
-                result.add(s);
-                result.add(prefix + s);
+                result.add(s);  // w/o prefix
+                result.add(prefix + s); // with prefix
             }
         }
 

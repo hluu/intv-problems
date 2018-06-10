@@ -116,7 +116,6 @@ public class StringUtility {
         }
 
         // not to include char at index
-
         generateSubseqRecursion(input, index+1, stringSoFar, collector);
 
         // to include char at index
