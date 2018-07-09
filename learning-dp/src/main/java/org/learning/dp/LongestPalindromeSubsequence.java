@@ -1,12 +1,16 @@
 package org.learning.dp;
 
+import org.common.ArrayUtils;
+import org.testng.Assert;
+
 /**
  *
  * Write a function to compute the maximum length palindromic sub-sequence of an array.
  * A palindrome is a sequence which is equal to its reverse.
  *
  * A sub-sequence of an array is a sequence which can be constructed by removing
- * elements of the array.
+ * elements of the array. A sequence that appears in the same relative order,
+ * but not necessarily contiguous
  *
  * In other words, it doesn't have to be contiguous.
  *
@@ -14,82 +18,97 @@ package org.learning.dp;
  *
  * For example:
  *   str = "ABBDCACB" ==> "BCACB", which is length of 5
+ *   str = "AABCDEBAZ" ==> ABCBA or ABDBA or ABEBA
  *
  *
  * Resource:
  *  * http://www.techiedelight.com/longest-palindromic-subsequence-using-dynamic-programming/
+ *  * https://algorithms.tutorialhorizon.com/longest-palindromic-subsequence/
  */
 public class LongestPalindromeSubsequence {
+
     public static void main(String[] args) {
 
         System.out.println("LongestPalindromeSubsequence.main");
 
-        test("aba");
+        test("aba", 3);
 
-        String str1 = "ABBDCACB";
 
-        test(str1);
+        test("ABBDCACB", 5);
 
-        test("BBABCBCAB");
+        test("BBABCBCAB",7);
 
-        test("bacdecmba");
+        test("bacdecmba", 5);
 
-        test("bacdeb");
+        test("bacdeb", 3);
 
-        test("z");
+        test("z", 1);
     }
 
-    private static void test(String str) {
-        System.out.printf("========= test '%s' =======\n", str);
+    private static void test(String str, int expectedLen) {
+        System.out.printf("========= test '%s', expected: %d =======\n", str, expectedLen);
 
-        System.out.println("bruteforce: " + bruteForce(str, 0, str.length()-1));
+        int actualBF = bruteForce(str, 0, str.length()-1);
+        System.out.printf("bruteforce - actual: %d\n",  actualBF);
 
-        System.out.println("dp: " + dp(str));
+        int actualDP = dp(str);
+        System.out.printf("dp - actual: %d\n", actualDP);
+
+
+        Assert.assertEquals(actualBF, expectedLen);
+        Assert.assertEquals(actualDP, expectedLen);
+        System.out.println();
+
+
     }
 
     /**
      * Given a string, return the longest palindrome subsequence length
      *
-     * Given a string, compare the first and last character represent by (i,j)
+     * Given a string, compare the first and last character represent by (i,right)
      *
      * Approach:
      *   pl(str)
-     *     * if (a[i] == a[j])
+     *     * if (a[i] == a[right])
      *     *  include in palindrome
-     *     * then pl(substr(i+1, j-1)) + 2
+     *     * then pl(substr(i+1, right-1)) + 2
      *     * else
-     *         max { pl(substr(i+1,j), pl(substr(i, j-1)}
+     *         max { pl(substr(i+1,right), pl(substr(i, right-1)}
      *
      * Runtime is O(2^N) - exponential.
      *
-     * There is a lot of redundant computation of string with same (i,j).
+     * There is a lot of redundant computation of string with same (left, right).
      * If we can memoize the result, store, and result them, then that would speed things
      * up.  That is where DP comes in.  Recognizing the redundant computation is the key.
      *
      * @param str
      * @return
      */
-    private static int bruteForce(String str, int i, int j) {
-        if (i > j) {
+    private static int bruteForce(String str, int left, int right) {
+        if (left > right) {
             return 0;
         }
 
-        if (i == j) {
+        if (left == right) {
             return 1;
         }
 
-        //System.out.printf("(%d,%d)\n", i, j);
+        //System.out.printf("(%d,%d)\n", i, right);
 
-        if (str.charAt(i) == str.charAt(j)) {
-            return bruteForce(str, i+1,j-1) + 2;
+        if (str.charAt(left) == str.charAt(right)) {
+            return bruteForce(str, left+1,right-1) + 2;
         } else {
-            return Math.max(bruteForce(str, i+1, j),
-                    bruteForce(str, i, j-1));
+            return Math.max(bruteForce(str, left+1, right),
+                            bruteForce(str, left, right-1));
         }
     }
 
+    private static final int NOT_SEEN = -1;
+
     /**
-     * DP approach of using a table to store the intermediate result
+     * DP approach of using a table to store the intermediate result.
+     *
+     * This is a top down approach
      *
      * @param str
      * @return
@@ -109,10 +128,14 @@ public class LongestPalindromeSubsequence {
             }
         }
 
-        return dpHelper(str, 0, str.length()-1, table);
+        int result = dpHelper(str, 0, str.length()-1, table);
+
+        ArrayUtils.printMatrix(table);
+
+        return  result;
     }
 
-    private static final int NOT_SEEN = -1;
+
     private static int dpHelper(String str, int i, int j, int[][]table) {
 
         if (i > j) {
@@ -129,7 +152,7 @@ public class LongestPalindromeSubsequence {
                 table[i][j] = dpHelper(str, i+1,j-1, table) + 2;
             } else {
                 table[i][j] = Math.max(bruteForce(str, i+1, j),
-                        bruteForce(str, i, j-1));
+                                       bruteForce(str, i, j-1));
             }
         }
 

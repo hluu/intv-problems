@@ -77,6 +77,7 @@ public class WordSearch {
                 {'A','D', 'E', 'E'}
         };
         test(board4, "ABCESEEEFS", true);
+        test(board4, "ABCESEEDASFE", true);
 
     }
 

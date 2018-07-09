@@ -1,7 +1,6 @@
 package org.learning.numbers;
 
 /**
- * Created by hluu on 1/7/16.
  *
  * Problem:
  *  Give an array of integers or floating points, which contains both positive and negative numbers, find the
@@ -55,14 +54,15 @@ public class LargestConsecutiveProduct {
                 // positive
                 curMax *= v;
                 maxNeg *= v;
-                if (curMax > maxPos) {
-                    maxPos = curMax;
-                }
+
+                // update maxPos
+                maxPos = Math.max(maxPos, curMax);
+
             } else if (v == 0) {
                 maxNeg = 1;
                 curMax = 1;
-            } else {
-                // negative
+            } else { // negative
+                // update both maxPos and maxNeg
                 maxPos = Math.max(maxNeg * v, curMax);
                 maxNeg = Math.min(maxNeg * v, v * curMax);
 

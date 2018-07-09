@@ -8,10 +8,9 @@ import java.util.stream.Collectors;
 
 
 /**
- * Created by hluu on 5/27/17.
  *
  * Given a set of strings where a subset of them are anagram of each other, determine the anagram
- * subsets and return themm
+ * subsets and return them
  *
  * For example:
  *  str[] = {"cat","dog","ogd","act","tca","ofg"}
@@ -21,7 +20,8 @@ import java.util.stream.Collectors;
  *    {"dog", "odg}
  *
  * Analysis:
- *  * Anagrams of the a word have same number of characters and look exactly the same when they are sorted
+ *  * Anagrams of the a word have same number of characters and look exactly the
+ *    same when they are sorted
  *  * Need to group by canonical anagram word to find a list
  *
  *

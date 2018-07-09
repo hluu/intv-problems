@@ -5,7 +5,6 @@ package org.learning.string;
 import java.util.*;
 
 /**
- * Created by hluu on 11/20/16.
  *
  * Problem:
  *  Give a dictionary of words and an input string which may or may not contain
@@ -156,7 +155,7 @@ public class WordBreak {
     }
 
     /**
-     * This version returns a list of string, similiar to how suggestions
+     * This version returns a list of string, similar to how suggestions
      * are made
      *
      * @param dict

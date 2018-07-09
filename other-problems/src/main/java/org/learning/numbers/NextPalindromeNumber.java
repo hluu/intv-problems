@@ -19,7 +19,7 @@ import org.testng.Assert;
  * Approach:
  * * Brute force approach is to increment value by 1 and check for palindrome
  * * A more optimized approach using the palindrome property
- * * There is a slight treatment experience based number of digits (odd or even)
+ * * There is a slight different treatment based number of digits (odd or even)
  * * If even (a simpler case)
  *   * split the # of digit into prefix and suffix
  *   * reverse the prefix and make that the suffix

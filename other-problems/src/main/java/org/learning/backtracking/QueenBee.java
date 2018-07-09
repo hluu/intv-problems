@@ -1,8 +1,9 @@
 package org.learning.backtracking;
 
 
+import org.common.ArrayUtils;
+
 /**
- * Created by hluu on 5/20/17.
  *
  * Given a board of size n by n, place a queen in each column such that
  * it doesn't violating the following rule
@@ -50,11 +51,16 @@ public class QueenBee {
     for (int candidateRow = 0; candidateRow < board.length; candidateRow++) {
 
       if (isBoardSafe(board, candidateRow,column)) {
+        // make a decision
         board[candidateRow][column] = QUEEN_VALUE;
+
+        // see if we can solve it
         if (solveQueenBee(board,  column +1)) {
           return true;
         }
-        System.out.printf("*** backtracking from (%d,%d) ***\n", candidateRow, column);
+        //System.out.printf("*** backtracking from (%d,%d) ***\n", candidateRow, column);
+
+        // backtrack
         board[candidateRow][column] = UNASSIGNED_VALUE;
       }
     }
@@ -78,16 +84,16 @@ public class QueenBee {
 
     // check row
     int count = 0;
-    for (int i = 0; i < board[row].length; i++) {
-      if (board[row][i] == QUEEN_VALUE) {
+    for (int col = 0; col < board[row].length; col++) {
+      if (board[row][col] == QUEEN_VALUE) {
         return false;
       }
     }
 
     // check column
     count = 0;
-    for (int i = 0; i < board.length; i++) {
-      if (board[i][column] == QUEEN_VALUE) {
+    for (int rw = 0; rw < board.length; rw++) {
+      if (board[rw][column] == QUEEN_VALUE) {
         return false;
       }
     }
@@ -97,20 +103,23 @@ public class QueenBee {
     // == any queen over there yet
 
     // check upper left diagonal (going left and up)
-    for (int rowCoord = row, columnCoord = column; rowCoord >= 0 && columnCoord >= 0; rowCoord--, columnCoord--) {
+    for (int rowCoord = row, columnCoord = column; rowCoord >= 0 && columnCoord >= 0;
+         rowCoord--, columnCoord--) {
       if (board[rowCoord][columnCoord] == QUEEN_VALUE) {
         return false;
       }
     }
 
     // check lower left diagonal
-    for (int rowCoord = row, columnCoord = column; rowCoord < board.length && columnCoord >= 0; rowCoord++, columnCoord--) {
+    for (int rowCoord = row, columnCoord = column; rowCoord < board.length && columnCoord >= 0;
+         rowCoord++, columnCoord--) {
       if (board[rowCoord][columnCoord] == QUEEN_VALUE) {
         return false;
       }
     }
 
 
+    // if we get here, then there was no conflict
     return true;
   }
 
@@ -186,26 +195,8 @@ public class QueenBee {
 
 
   private static void printBoard(int[][] board) {
-
-    // print header
-    for (int i = 0; i < board[0].length; i++) {
-      System.out.printf("====");
-    }
-    System.out.printf("\n");
-
-    for (int i = 0; i < board.length; i++) {
-      System.out.printf("|");
-      for (int j = 0; j < board[0].length; j ++) {
-        System.out.printf(" %d |", board[i][j]);
-      }
-      System.out.printf("\n");
-    }
-
-    // footer
-    for (int i = 0; i < board[0].length; i++) {
-      System.out.printf("====");
-    }
-    System.out.printf("\n");
+    ArrayUtils.printMatrix(board);
   }
+
 }
 

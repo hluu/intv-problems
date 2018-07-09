@@ -52,25 +52,25 @@ public class SquareSubMatrix {
 
     public static void main(String[] args) {
         int [][] matrixSmall = new int[][] {
-                new int[] {0,1,0,1},
-                new int[] {1,1,1,1},
-                new int[] {0,1,1,0}
+                {0,1,0,1},
+                {1,1,1,1},
+                {0,1,1,0}
         };
 
         int [][] matrixMedium = new int[][] {
-                new int[] {1,1,1,1,1},
-                new int[] {0,1,1,1,0},
-                new int[] {1,1,1,1,0},
-                new int[] {1,1,1,1,0},
-                new int[] {1,0,0,0,0},
+                {1,1,1,1,1},
+                {0,1,1,1,0},
+                {1,1,1,1,0},
+                {1,1,1,1,0},
+                {1,0,0,0,0},
         };
 
         int [][] matrixLarge = new int[][] {
-                new int[] {1,1,1,1,1},
-                new int[] {1,1,1,1,0},
-                new int[] {1,1,1,1,0},
-                new int[] {1,1,1,1,0},
-                new int[] {1,0,0,0,0},
+                {1,1,1,1,1},
+                {1,1,1,1,0},
+                {1,1,1,1,0},
+                {1,1,1,1,0},
+                {1,0,0,0,0},
         };
 
         System.out.println(SquareSubMatrix.class.getName());

@@ -1,7 +1,7 @@
 package org.learning.string;
 
 /**
- * Created by hluu on 1/1/17.
+ *
  *
  * Structure:
  *  1) Ask clarifying questions to narrow down to specific problem to solve

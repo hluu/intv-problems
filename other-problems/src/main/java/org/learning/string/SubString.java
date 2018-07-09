@@ -54,7 +54,7 @@ public class SubString {
         int strLen = str.length();
         int patternLen = pattern.length();
 
-        // no need to search if lenth of pattern is greater than string length
+        // no need to search if length of pattern is greater than string length
         if (patternLen > strLen) {
             return indexList;
         }

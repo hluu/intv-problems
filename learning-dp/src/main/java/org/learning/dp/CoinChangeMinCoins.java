@@ -46,14 +46,16 @@ public class CoinChangeMinCoins {
 	public static void main(String[] args) {
 
 	    TestObject[] testObjects = {
-                TestObject.createTestObj(7, new int[] {1,3,4}, 2),
-                TestObject.createTestObj(22, new int[] {1,5,12,25}, 3),
-                TestObject.createTestObj(15, new int[] {1,3,9,10}, 3)
+               // TestObject.createTestObj(3, new int[] {2}, -1),
+                TestObject.createTestObj(6249, new int[] {186,419,83,408}, 20),
+              //  TestObject.createTestObj(7, new int[] {1,3,4}, 2),
+              //  TestObject.createTestObj(22, new int[] {1,5,12,25}, 3),
+              //  TestObject.createTestObj(15, new int[] {1,3,9,10}, 3)
         };
 
         System.out.println("********* brute force *********");
         for (TestObject to : testObjects) {
-            testBruteForce(to.amount, to.coins, to.expectedNumCoins);
+           // testBruteForce(to.amount, to.coins, to.expectedNumCoins);
         }
 
 
@@ -156,7 +158,11 @@ public class CoinChangeMinCoins {
 			}
 		}
 
-		return minCount+1;
+		if (minCount == Integer.MAX_VALUE || minCount == -1) {
+		    return -1;
+        } else {
+            return minCount + 1;
+        }
 	}
 
     /**
@@ -182,6 +188,7 @@ public class CoinChangeMinCoins {
 	        return cache[amount];
         }
 
+        System.out.println("amount:" + amount);
         int minCoin = Integer.MAX_VALUE;
         for (int coin : coins) {
 	        if (amount >= coin) {
@@ -190,7 +197,14 @@ public class CoinChangeMinCoins {
             }
         }
 
+        /*if (minCoin == Integer.MAX_VALUE || minCoin == -1) {
+            cache[amount] = -1;
+        } else {
+            cache[amount] = minCoin + 1;
+        }*/
+
         cache[amount] = minCoin + 1;
+
         return cache[amount];
     }
 
@@ -205,6 +219,10 @@ public class CoinChangeMinCoins {
      * @return
      */
 	public static int coinChangeBottomUP(int amount, int[] coins) {
+        if (amount == 0) {
+            return 0;
+        }
+
 		if (amount < coins[0]) {
 			return -1;
 		}
@@ -223,9 +241,9 @@ public class CoinChangeMinCoins {
 					minSoFar = Math.min(minCoin[amt - coinDenomination]+1, minSoFar);
 				}
 			}
-			if (minSoFar == Integer.MAX_VALUE) {
+			if (minSoFar == Integer.MAX_VALUE || minSoFar == -1) {
 				// this is for the case where amount is less than any denomination
-				minCoin[amt] = 0;
+				minCoin[amt] = -1;
 			} else {
 				minCoin[amt] = minSoFar;
 			}
@@ -234,10 +252,10 @@ public class CoinChangeMinCoins {
 		System.out.println(Arrays.toString(denominations));
 		int j = denominations.length - 1;
 		List<Integer> denominationList = new ArrayList<>();
-		while (j > 0) {
+		/*while (j > 0) {
 			denominationList.add(denominations[j]);
 			j = j - denominations[j];
-		}
+		}*/
 
 		System.out.println(denominationList.toString());
 		return (minCoin[amount] > 0) ? minCoin[amount] : -1;

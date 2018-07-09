@@ -5,7 +5,6 @@ import org.testng.Assert;
 import java.util.BitSet;
 
 /**
- * Created by hluu on 9/23/17.
  *
  * Remove alternate duplicate characters from a char array.
  * Keeping only the odd occurrences of each character.

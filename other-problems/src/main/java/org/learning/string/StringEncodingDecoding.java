@@ -107,7 +107,7 @@ public class StringEncodingDecoding {
     }
 
     /**
-     * The encoding include string lenght, follows by a comma
+     * The encoding include string length, follows by a comma
      *
      * @param input
      * @return

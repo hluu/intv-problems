@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Given 2 words, determine if they are isomorphic, which is defined as there is a 1 to 1 mapping
- * between the letters in the first word to the second word.  One constraint is no 2 different letters can
- * map to the same letter, in either direction.
+ * Given 2 words, determine if they are isomorphic, which is defined as there is a
+ * 1 to 1 mapping between the letters in the first word to the second word.
+ * One constraint is no 2 different letters can map to the same letter, in either direction.
  *
  * Examples:
  * "foo" => "app"   = true

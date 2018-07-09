@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Created by hluu on 1/14/16.
+ *
  *
  * Problem:
  *  A cookie jar provides cookie consumers to enjoy cookies and cookie bakers to
