@@ -32,12 +32,14 @@ import java.util.List;
  *  What about in the middle?
  *
  * Approach:
- *  * Get the first k random closest values in a list of min heap, iterate through numbers in increasing order
+ *  * Get the first k random closest values in a list of min heap, iterate through
+ *     numbers in increasing order
  *    (in-order-traversal) and update the list of k closest values.
  *    * Can we just use a list of a heap?
  *    * List is for storing values and simpler
  *    * Heap would be storing the differences as well as associated values
  *    * The key point is to take advantage of the order of the values being processed
+ *      because the traversal is in-order
  *
  *
  */

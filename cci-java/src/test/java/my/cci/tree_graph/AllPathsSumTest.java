@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by hluu on 1/20/16.
+ *
  */
 public class AllPathsSumTest {
     @Test

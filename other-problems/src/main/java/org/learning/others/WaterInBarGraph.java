@@ -37,7 +37,7 @@ public class WaterInBarGraph {
     public static void main(String[] args) {
         System.out.printf("%s\n", WaterInBarGraph.class.getName());
 
-        test(new int[]{5,1,3,4}, 4);
+        /*test(new int[]{5,1,3,4}, 4);
         test(new int[]{1,1,1,1,1}, 0);
         test(new int[]{2,1,1,1,1}, 0);
         test(new int[]{1,1,1,1,2}, 0);
@@ -45,8 +45,8 @@ public class WaterInBarGraph {
         test(new int[]{2,1,1,1,100}, 3);
         test(new int[]{5,1,6,1,5}, 8);
 
-
-        test(new int[]{2,1,5,3,7,3,5,1,2}, 6);
+        test(new int[]{2,1,5,3,7,3,5,1,2}, 6);*/
+        test(new int[]{0,0,4,0,0,6,0,0,3,0,5,0,1,0,0,0}, 26);
     }
 
     private static void test(int[] bars, int expectedWaterContentSize) {
@@ -133,9 +133,7 @@ public class WaterInBarGraph {
 
         // going from left to heightBarIndex
         for (int i = 0; i < heightBarIndex; i++) {
-            if (bars[i] > maxHeight) {
-                maxHeight = bars[i];
-            }
+            maxHeight = Math.max(maxHeight, bars[i]);
 
             waterAmount += maxHeight - bars[i];
         }

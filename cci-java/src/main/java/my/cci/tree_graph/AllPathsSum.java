@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Created by hluu on 1/19/16.
+ *
  *
  * Problem statement:
  *  Given a binary tree, design an algorithm to print all paths which sum to a given
- *  value.  Note that a path an start or end at any node.
+ *  value.  Note that a path can start or end at any node.
  *
  *  For example:
  *                    20
@@ -29,7 +29,7 @@ import java.util.ListIterator;
  *    * Notice the longest path can't be longer than the depth of the tree.
  *    * How do we model the path?
  *    * How do traverse each path?
- *    * Notice if we do DFS, then as each node is visited, that becomes path.
+ *    * Notice if we do DFS, then as each node must be visited, that becomes path.
  *    * DFS traverses from top down to bottom, so the path is extending deeper
  *      as traversing downward.
  *    * At any point in time of traversing, then there is a single unique path

@@ -219,7 +219,7 @@ public class PathWithSumCounting {
 
   /**
    * Doing a DFS
-   * @param tree
+   * @param node
    * @param targetSum
    * @param runningSum
    * @param runningSumToSeenCount
@@ -254,7 +254,8 @@ public class PathWithSumCounting {
     return  pathCount;
   }
 
-  private static void recordRunningSum(Map<Integer, Integer> runningSumToSeenCount, int runningSum,
+  private static void recordRunningSum(Map<Integer, Integer> runningSumToSeenCount,
+                                       int runningSum,
                                        int delta) {
 
     int newValue = runningSumToSeenCount.getOrDefault(runningSum, 0) + delta;

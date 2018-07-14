@@ -5,7 +5,6 @@ import org.testng.Assert;
 import java.util.Arrays;
 
 /**
- * Created by hluu on 7/7/17.
  *
  * Problem:
  *  Given an array of sorted integers with n length.  Determine number of
@@ -13,7 +12,7 @@ import java.util.Arrays;
  *
  *  numBST(n) ==> ????
  *
- * Aproach:
+ * Approach:
  *  Try out with simple, small cases, to understand the problem as well as
  *  to establish base cases.  Don't think about a large number like 399.
  *  By trying out the bases, then hopefully a pattern or recurrence appears.
