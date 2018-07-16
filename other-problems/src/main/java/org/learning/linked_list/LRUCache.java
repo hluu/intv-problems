@@ -6,7 +6,6 @@ import org.testng.Assert;
 import java.util.*;
 
 /**
- * Created by hluu on 9/25/17.
  *
  *  https://www.programcreek.com/2013/03/leetcode-lru-cache-java/
  *

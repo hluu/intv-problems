@@ -24,6 +24,7 @@ import java.util.*;
  * Scenarios that we have to deal with:
  * 1) toCurr may not exist
  * 2) may run into circular loop
+ *      * need to maintain a visited map to deal with loop
  * 3) multiple paths to fromCurr to toCurr
  *
  */

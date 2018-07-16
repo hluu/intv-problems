@@ -280,6 +280,12 @@ public static void bfs(Node node) {
 
 ```
 
+### Tracking path with BFS or DFS
+* For BFS, use the parent map of (child -> parent) to maintain the path
+  such that we can build the path at the end.
+* For DFS, use a list to track the path, but make sure to back-track
+  or remove the last one when pop up to parent node
+
 ### General pattern for solving tree related problems:
 * Identify base case and return appropriate value
 * compute the left side

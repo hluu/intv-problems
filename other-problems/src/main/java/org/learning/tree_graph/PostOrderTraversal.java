@@ -28,13 +28,21 @@ public class PostOrderTraversal {
     public static void main(String[] args) {
         System.out.println(PostOrderTraversal.class.getName());
 
-        test();
+        test(createHeavyRightTree());
+        test(createSimpleTree());
+        test(createTree1());
+
+        test(createHeavyLeftTree());
+        test(createSmallTree());
+
+
+
     }
 
-    private static void test() {
-        //TreeNode<Integer> root = createSimpleTree();
-        //TreeNode<Integer> root = createTree1();
-        TreeNode<Integer> root = createHeavyRightTree();
+    private static void test(TreeNode<Integer> root) {
+
+        System.out.println("\n ======= test =======\n");
+        TreeUtility.printLevelByLevel(root);
 
         List<Integer> collector1 = new ArrayList<>();
         postOrderRecursion(root, collector1);
@@ -62,8 +70,6 @@ public class PostOrderTraversal {
      */
     private static void postOrderIterative(TreeNode<Integer> node,
                                            List<Integer> collector) {
-
-        TreeUtility.printLevelByLevel(node);
 
         Stack<TreeNode<Integer>> stack = new Stack<TreeNode<Integer>>();
 
@@ -140,7 +146,7 @@ public class PostOrderTraversal {
     }
 
     /**
-     * Simple 3 node tree
+     * Simple 3 node tree leaning to the right
      *
      * @return
      */
@@ -156,6 +162,27 @@ public class PostOrderTraversal {
         root.left = five; root.right = negThree;
         negThree.right = negTwo;
         negTwo.right = negOne;
+
+        return root;
+    }
+
+    /**
+     * Simple 3 node tree leaning to the left
+     *
+     * @return
+     */
+    private static TreeNode<Integer> createHeavyLeftTree() {
+        TreeNode<Integer> root =TreeNode.createTreeNode(10);
+        TreeNode<Integer> five = TreeNode.createTreeNode(5);
+
+        TreeNode<Integer> negThree = TreeNode.createTreeNode(-3);
+        TreeNode<Integer> negTwo = TreeNode.createTreeNode(-2);
+        TreeNode<Integer> negOne = TreeNode.createTreeNode(-1);
+
+
+        root.left = five; root.right = negThree;
+        five.left = negTwo;
+        negTwo.left = negOne;
 
         return root;
     }
@@ -177,6 +204,19 @@ public class PostOrderTraversal {
         three1.left = three2; three1.right = negTwo;
         two.right = one;
         //negThree.right = eleven;
+
+        return root;
+    }
+
+    private static TreeNode<Integer> createSmallTree() {
+        TreeNode<Integer> root =TreeNode.createTreeNode(10);
+        TreeNode<Integer> negSix = TreeNode.createTreeNode(-6);
+        TreeNode<Integer> fifthteen = TreeNode.createTreeNode(15);
+        TreeNode<Integer> eight = TreeNode.createTreeNode(8);
+
+
+        root.left = negSix; root.right = fifthteen;
+        negSix.right = eight;
 
         return root;
     }
