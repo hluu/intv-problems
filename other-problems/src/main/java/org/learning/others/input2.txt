@@ -1,0 +1,18 @@
+PUT key1 1
+PUT key2 2
+PUT key3 3
+
+PUT key1 2
+
+GET key1 1
+GET key1 2
+GET key1 3
+GET key1 4
+GET key1 5
+GET key1 2000
+
+
+GET key1000
+GET key1000 1000
+
+

@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Created by hluu on 10/14/17.
+ * ReadWrite lock example
  */
 public class ReadWriteLockExample {
     public static void main(String[] args) throws Exception {

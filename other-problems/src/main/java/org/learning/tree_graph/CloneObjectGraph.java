@@ -45,7 +45,7 @@ public class CloneObjectGraph {
         System.out.println("root1: " + root1.hashCode() + " root2: " + root2.hashCode());
 
         Map<BNode, BNode> cache = new IdentityHashMap<>();
-        createObjectGraphHelper(cache, root1, root2);
+        cloneGraphUsingDFS(cache, root1, root2);
 
         System.out.printf("\n******** cloned tree ********\n");
         TreeUtility.printRootToLeafPath(root2);
@@ -74,9 +74,9 @@ public class CloneObjectGraph {
      * @param node1
      * @param node2
      */
-    private static void createObjectGraphHelper(Map<BNode, BNode> cache,
-                                                BNode<String> node1,
-                                                BNode<String> node2) {
+    private static void cloneGraphUsingDFS(Map<BNode, BNode> cache,
+                                           BNode<String> node1,
+                                           BNode<String> node2) {
 
         if (node1 == null) {
             return;
@@ -85,14 +85,14 @@ public class CloneObjectGraph {
         if (node1.left != null) {
             BNode<String> tmp = getNewNode(node1.left, cache);
             node2.left = tmp;
-            createObjectGraphHelper(cache, node1.left, node2.left);
+            cloneGraphUsingDFS(cache, node1.left, node2.left);
         }
 
         if (node1.right != null) {
             BNode<String> tmp = getNewNode(node1.right, cache);
 
             node2.right = tmp;
-            createObjectGraphHelper(cache, node1.right, node2.right);
+            cloneGraphUsingDFS(cache, node1.right, node2.right);
         }
     }
 

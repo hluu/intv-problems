@@ -5,7 +5,7 @@ import org.common.ArrayUtils;
 import java.util.Arrays;
 
 /**
- * Created by hluu on 12/17/16.
+ *
  *
  * Problem:
  *  Given a 2-D maze where there are walls and gates.
@@ -44,9 +44,7 @@ import java.util.Arrays;
  *
  *        // once we determine a value for a cell
  *        // we recursively move top, bottom, left, right
- *
- *
- *
+
  *
  */
 public class Maze2D {

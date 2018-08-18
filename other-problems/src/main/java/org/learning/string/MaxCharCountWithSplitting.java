@@ -18,6 +18,8 @@ import java.util.Arrays;
  *   input "rbrbrwbw", ==> 3
  *   input "rbbbrwbw", ==> 5
  *
+ * What is the significant when w is at the beginning or at the end of the string? if any
+ *
  * Approach:
  *  1) Brute force, to split at each character, count the # of consecutive characters on the left and the right
  *     Maintain the running max and update it if a large one is found. O(n^2)
@@ -71,6 +73,8 @@ public class MaxCharCountWithSplitting {
 
     /**
      * Brute force - for each split point count number of consecutive characters before and after
+     *
+     * Runtime: O(n^2)
      *
      * @param input
      * @return
@@ -242,6 +246,7 @@ public class MaxCharCountWithSplitting {
 
         return count;
     }
+
     private static int countBackward(String input, int from, int to) {
         int count = 0;
         char prevChar = input.charAt(from);

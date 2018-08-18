@@ -4,7 +4,7 @@ import org.common.TreeNode;
 import org.common.TreeUtility;
 
 /**
- * Created by hluu on 6/24/17.
+ *
  *
  * Problem:
  *  Given a binary tree where all the right nodes are either leaf node or empty,

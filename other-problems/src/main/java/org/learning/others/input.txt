@@ -1,0 +1,13 @@
+PUT key1 5
+PUT key2 6
+GET key1
+GET key1 1
+GET key2 2
+PUT key1 7
+GET key1 1
+GET key1 2
+GET key1 3
+GET key4
+GET key1 4
+GET key1 7
+GET key9 5

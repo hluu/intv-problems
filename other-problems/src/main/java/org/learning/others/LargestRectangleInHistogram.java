@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /**
- * Created by hluu on 8/11/17.
  *
  * Problem:
  *  Given a histogram, compute the largest rectangle in it
@@ -21,7 +20,23 @@ import java.util.Stack;
  *  ---------------------
  *   0  1  2  3   4
  *
+ *
+ *               __
+ *            __|  |
+ *         __|  |  |__ __
+ *      __|  |  |  |  |  |__
+ *   __|  |  |  |  |  |  |  |
+ *  |  |  |  |  |  |  |  |  |
+ *  ---------------------------
+ *   1  2   3  4  5  3  3  2
+ *
+ * 1,2,3,4,5,3,3,2
+ *
  * Approach:
+ *  * For each bar, the width continues until another bar with lower height is encountered.
+ *
+ *
+ *
  *  * A new rectangle starts when we reach a new bar with a larger height
  *    and this rectangle ends when we see another bar with lower height
  *  * Maintain two stacks, one for the height and the other for the index of the bar
@@ -42,6 +57,7 @@ public class LargestRectangleInHistogram {
 
         test(new int[] {1,3,2,1,2}, 5);
         test(new int[] {2,1,5,6,2,3}, 10);
+        test(new int[] {2,3,1,3,2}, 5);
     }
 
     private static void test(int[] hist, int expectedRectSize) {

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by hluu on 7/27/16.
+ * Created by hluu on
  *
  * A street is represented by a list of segments where each segment consists of a start and end point.
  * Each point has x and y coordinate on a two dimensional plane.

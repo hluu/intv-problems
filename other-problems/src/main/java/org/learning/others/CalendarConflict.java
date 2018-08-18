@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hluu on 11/25/16.
+ * Created by hluu on
  *
  * Problem:
  *  Give a list of calendar events (start time, end time, event name),
@@ -23,6 +23,15 @@ import java.util.List;
  *  [10,12, 6]
  *  [13,14, 7]
  *  [13,14, 8]
+ *
+ *  Conflict scenarios:
+ *
+ *    |------|       |---------|
+ *       |------|       |-----|
+ *
+ *
+ *    |------||----        |------------------|
+ *       |------|             |-----| |------|
  *
  *  Approach:
  *      * Conflict detection - when start time of event event is less than
