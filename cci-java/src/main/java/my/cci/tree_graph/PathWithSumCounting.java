@@ -2,6 +2,7 @@ package my.cci.tree_graph;
 
 import org.common.TreeNode;
 import org.common.TreeUtility;
+import org.testng.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +46,9 @@ public class PathWithSumCounting {
     System.out.printf("expected: %d, actual1: %d, actual2: %d, actual3: %d\n",
             expectedPaths, actualPaths1, actualPaths2, actualPaths3);
     System.out.println();
+
+    Assert.assertEquals(actualPaths1, actualPaths2);
+    Assert.assertEquals(actualPaths1, actualPaths3);
   }
 
   private static TreeNode<Integer> createTree1() {

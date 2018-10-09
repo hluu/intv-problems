@@ -55,8 +55,9 @@ public class PathSumCount {
      * Note that a path can start or end at any node.
      *
      * 1) Therefore the first part is to traverse node in pre-order fashion
-     *    *) And for each node determin if there is a path with sum that matches the target
+     *    *) And for each node determine if there is a path with sum that matches the target
      *
+     * Runtime: O(2^n)
      *
      * @return
      */

@@ -93,11 +93,11 @@ public class AllPermutations {
         }
 
         for (int i = pos; i < letters.length; i++) {
-            //swap
+            //swapItem
             swap(letters, pos, i);
             // permute
             permuteUsingSwapping(letters, output, pos+1);
-            // swap back
+            // swapItem back
             swap(letters, pos, i);
         }
     }

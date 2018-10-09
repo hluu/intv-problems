@@ -4,7 +4,6 @@ package org.learning.dp;
 import java.util.*;
 
 /**
- * Created by hluu on 12/16/15.
  *
  * Problem statement:
  *  Find all subsequences of a string.

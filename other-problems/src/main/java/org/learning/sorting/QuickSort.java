@@ -79,7 +79,7 @@ public class QuickSort {
      *  Establish the wall which start at (start - 1) to make it easier
      *  Move from left to right
      *      * If (value at i > pivot value), moving on
-     *      * If (value at i < pivot value), increment the wall, swap element at i with
+     *      * If (value at i < pivot value), increment the wall, swapItem element at i with
      *        element at the wall
      *
      * Every elememt to the left of the wall are smaller than the pivot value
@@ -161,7 +161,7 @@ public class QuickSort {
                 break;
             }
 
-            // else swap these two elements
+            // else swapItem these two elements
             swap(arr, left, right);
         }
 

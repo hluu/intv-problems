@@ -47,19 +47,22 @@ public class CoinChangeMinCoins {
 
 	    TestObject[] testObjects = {
                // TestObject.createTestObj(3, new int[] {2}, -1),
-                TestObject.createTestObj(6249, new int[] {186,419,83,408}, 20),
+				// TestObject.createTestObj(6249, new int[] {186,419,83,408}, 20),
               //  TestObject.createTestObj(7, new int[] {1,3,4}, 2),
               //  TestObject.createTestObj(22, new int[] {1,5,12,25}, 3),
               //  TestObject.createTestObj(15, new int[] {1,3,9,10}, 3)
+              //TestObject.createTestObj(12, new int[] {1,6,10}, 2),
+              //TestObject.createTestObj(17, new int[] {1,6,10}, 3),
+              TestObject.createTestObj(3, new int[] {2,6,10}, -1)
         };
 
         System.out.println("********* brute force *********");
         for (TestObject to : testObjects) {
-           // testBruteForce(to.amount, to.coins, to.expectedNumCoins);
+           testBruteForce(to.amount, to.coins, to.expectedNumCoins);
         }
 
 
-
+/*
         System.out.println("\n********* Top down DP *********");
         for (TestObject to : testObjects) {
             testTopDownDP(to.amount, to.coins, to.expectedNumCoins);
@@ -70,7 +73,7 @@ public class CoinChangeMinCoins {
         for (TestObject to : testObjects) {
             testBottomUpDP(to.amount, to.coins, to.expectedNumCoins);
         }
-
+*/
 	}
 
 	private static class TestObject {
@@ -144,7 +147,7 @@ public class CoinChangeMinCoins {
      */
 	public static int coinChangeBruteForce(int amount, int[] coins) {
 
-		if (amount == 0) {
+		if (amount <= 0) {
 		    // since there is a check on to ensure the amount is greater than
             // the denomination, therefore amount will always be 0 or greater
 			return 0;

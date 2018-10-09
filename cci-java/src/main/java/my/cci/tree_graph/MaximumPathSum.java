@@ -5,7 +5,7 @@ import org.common.TreeUtility;
 
 
 /**
- * Created by hluu on 12/4/16.
+ *
  *
  * Resource:
  *  https://projecteuler.net/index.php?section=problems&id=67
@@ -22,7 +22,8 @@ import org.common.TreeUtility;
  *  That is, 3 + 7 + 4 + 9 = 23.
  *
  *  Runtime Analysis:
- *  * How many paths are there?  Each path ends at a leaf node.  The # of leaf nodes is 2^n for binary tree
+ *  * How many paths are there?  Each path ends at a leaf node.  The # of leaf
+ *    nodes is 2^n for binary tree
  *  * So runtime is O(n^2)
  */
 public class MaximumPathSum {
@@ -31,6 +32,8 @@ public class MaximumPathSum {
     System.out.println("MaximumPathSum.main");
 
     TreeNode<Integer> root = createTree1();
+    TreeUtility.printLevelByLevel(root);
+    System.out.println();
     TreeUtility.printRootToLeafPath(root);
 
     System.out.println("Max sum is : " + maxSumPath(root, 0, 0));

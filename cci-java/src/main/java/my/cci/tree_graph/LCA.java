@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by hluu on 1/28/16.
  *
  * Problem statement:
  *  Give a binary tree (not BST) and two nodes, find the lowest common ancestor (if both nodes
@@ -225,6 +224,7 @@ public class LCA {
     }
 
     public static <T> Result<T> createResult(TreeNode<T> node, boolean value) {
+
         return new Result<>(node, value);
     }
 }

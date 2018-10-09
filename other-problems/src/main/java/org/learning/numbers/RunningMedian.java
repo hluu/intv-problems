@@ -83,7 +83,7 @@ public class RunningMedian {
 
       // maintains the invariant - top of max heap must be smaller than top of min heap
       if ((size > 1) && maxHeap.peek() > minHeap.peek()) {
-        // swap
+        // swapItem
         int tmp = maxHeap.poll();
         maxHeap.offer(minHeap.poll());
         minHeap.offer(tmp);

@@ -224,7 +224,7 @@ public class FndKthLargestValue {
      *   2) An slighter straight forward is to user a barrier
      *      * The barrier is point at an element that is greater than the pivot value
      *      * As scanning from left to right, when finding a value smaller than pivot value,
-     *        swap it with the element at the barrier index
+     *        swapItem it with the element at the barrier index
      *      * example [10, 1, 4, 5, 2, 7]
      *        start = 0;
      *        end = 5
@@ -247,7 +247,7 @@ public class FndKthLargestValue {
      *
      *          done
      *
-     *          now swap pivot value with element at barrierIndex
+     *          now swapItem pivot value with element at barrierIndex
      *          [1, 2, 4, 5, 10, 7]
      *
      *

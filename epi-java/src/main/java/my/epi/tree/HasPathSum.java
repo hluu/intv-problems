@@ -4,7 +4,6 @@ import org.common.TreeNode;
 import org.common.TreeUtility;
 
 /**
- * Created by hluu on 2/20/16.
  *
  * Problem:
  *  Give a binary tree with integers, find a root to leaf path with specified sum

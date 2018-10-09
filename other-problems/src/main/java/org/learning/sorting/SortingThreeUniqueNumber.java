@@ -22,7 +22,7 @@ import java.util.Arrays;
  *      * Left would move from left to right, and right would move from right to left
  *      * 1) For left side, we are looking for value > 0, and stop when it gets there
  *      * 2) For right side, we are looking for < 1, and stop when it gets there
- *      * 3) If left < right, then swap
+ *      * 3) If left < right, then swapItem
  *      * Repeat step 1
 
  * What is the runtime for this?
@@ -75,7 +75,7 @@ public class SortingThreeUniqueNumber {
                 rightIdx--;
             }
 
-            // only swap when needed
+            // only swapItem when needed
             if (leftIdx < rightIdx) {
                 ArrayUtils.swap(input, leftIdx, rightIdx);
             }
@@ -97,7 +97,7 @@ public class SortingThreeUniqueNumber {
                 rightIdx--;
             }
 
-            // only swap when needed
+            // only swapItem when needed
             if (leftIdx < rightIdx) {
                 ArrayUtils.swap(input, leftIdx, rightIdx);
             }

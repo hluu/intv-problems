@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.IntBinaryOperator;
 
 /**
- * Created by hluu on 2/5/16.
+ * Created by hluu on
  *
  * Problem statement:
  *  Give an array of unsorted integers, find the longest increasing subsequence in the array.

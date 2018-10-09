@@ -5,7 +5,6 @@ import org.common.MultiTreeNode;
 import java.util.*;
 
 /**
- * Created by hluu on 6/28/17.
  *
  * Given a tree of nodes (not binary tree), return an order list of set of nodes that
  * will fall out according the rule of node falling when it has zero children.
@@ -83,6 +82,7 @@ public class FallingNodes {
         System.out.println("level: " + level);
         System.out.println("nodeLevelMap1: " + nodeLevelMap1);
 
+        // a list of set - index is the level, value is a list of nodes
         List<Set<MultiTreeNode<T>>> result = new ArrayList<>(level+1);
 
         // create empty set for each level

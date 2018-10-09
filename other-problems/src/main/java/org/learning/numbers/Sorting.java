@@ -34,7 +34,7 @@ public class Sorting {
 
     /**
      * Iterating from left to right, for each position find smallest
-     * value at from that position to the end and then swap
+     * value at from that position to the end and then swapItem
      *
      * O(n^2)
      * @param a

@@ -1,6 +1,7 @@
 package my.cci.tree_graph;
 
 import org.common.TreeNode;
+import org.common.TreeUtility;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -62,8 +63,18 @@ public class AllPathsSum {
                         TreeNode.createTreeNode(15, null, 17)),
                 TreeNode.createTreeNode(30));
 
+        test(root2, 30);
+
+    }
+
+    private static void test(TreeNode<Integer> root, int target) {
+        System.out.println("======== test: target: " + 30 + " =======");
+        TreeUtility.printLevelByLevel(root);
+        System.out.println();
+
+        LinkedList<Integer> ll = new LinkedList();
         List<String> collector = new ArrayList();
-        printAllPaths(root2, 30, ll, 1, collector);
+        printAllPaths(root, target, ll, 1, collector);
         System.out.println("output:" + collector);
     }
 

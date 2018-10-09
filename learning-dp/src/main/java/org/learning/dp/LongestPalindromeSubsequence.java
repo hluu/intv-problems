@@ -108,7 +108,7 @@ public class LongestPalindromeSubsequence {
     /**
      * DP approach of using a table to store the intermediate result.
      *
-     * This is a top down approach
+     * This is a top down approach.
      *
      * @param str
      * @return
@@ -136,26 +136,26 @@ public class LongestPalindromeSubsequence {
     }
 
 
-    private static int dpHelper(String str, int i, int j, int[][]table) {
+    private static int dpHelper(String str, int left, int right, int[][]table) {
 
-        if (i > j) {
+        if (left > right) {
             return 0;
         }
 
-        if (i == j) {
+        if (left == right) {
             return 1;
         }
 
         // check table before computing
-        if (table[i][j] == NOT_SEEN) {
-            if (str.charAt(i) == str.charAt(j)) {
-                table[i][j] = dpHelper(str, i+1,j-1, table) + 2;
+        if (table[left][right] == NOT_SEEN) {
+            if (str.charAt(left) == str.charAt(right)) {
+                table[left][right] = dpHelper(str, left+1,right-1, table) + 2;
             } else {
-                table[i][j] = Math.max(bruteForce(str, i+1, j),
-                                       bruteForce(str, i, j-1));
+                table[left][right] = Math.max(bruteForce(str, left+1, right),
+                                       bruteForce(str, left, right-1));
             }
         }
 
-        return table[i][j];
+        return table[left][right];
     }
 }

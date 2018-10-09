@@ -205,6 +205,10 @@ public static List<String> generateSubsequences(String str) {
 ### Tree Data Structures
 * Heap is a binary tree where every node holds a value that is at least as large as the values in all children.
 
+#### Priority queue
+* Top or max n items requires min-priority queue because we want to replace the smallest element with a bigger element
+* Bottom or min n items requires a max priority queue because we want to replace the largest element with a smaller element
+
 ### Binary Tree Terminologies
 * Level - Defined as 1+ the number connections between a node and the root. Root starts at level 1, meaning the level starts at value of 1 and it goes down from top to bottom.  Level = depth + 1
 * Height - number of edges from a node to the deepest leaf. Height of furthest eaf node is 0.  Goes from bottom (0) to top (n).  Height of a tree is the height of the root.
@@ -280,12 +284,38 @@ public static void bfs(Node node) {
 
 ```
 
-### Tracking path with BFS or DFS
+### General pattern for solving graph related problems:
+
+#### Approaches
+* Classify whether graph is directed or undirected
+* Whether each edge has different cost or weight
+* BFS -> for shortest path
+* DFS -> exhaust search
+
+#### Tracking path with BFS or DFS
 * For BFS, use the parent map of (child -> parent) to maintain the path
   such that we can build the path at the end.
 * For DFS, use a list to track the path, but make sure to back-track
   or remove the last one when pop up to parent node
+  
+#### Preventing visiting the node or path
+* Maintain a visited set  
 
+#### Data structure for a graph - adjacency list
+
+```java
+class Graph {
+    private List<Node> vertices;
+    private Map<Node, List<Edge>> adjacenyList;
+}
+
+class Edge {
+    private Node sourceNode;
+    private Node desetNode;
+    private int weight;
+}
+
+```
 ### General pattern for solving tree related problems:
 * Identify base case and return appropriate value
 * compute the left side
@@ -322,5 +352,39 @@ bool solve(conf) {
     
     return false;
 }
+
+```
+
+### Questions to ask when working with numbers
+* negative numbers, sorted, duplicates
+
+### Binary Search
+```java
+
+    public static int binarySearch(int[] input, int val) {
+        int left = 0;
+        int right = input.length - 1;
+
+        while (left <= right) {
+            // there are 2 ways to calculate the mid-index
+            // the first one is more safe because no overflow
+            // the second may run into overflow
+            int mid = left + (right - left) / 2;
+            //int mid = (left + right)/2;
+
+            if (input[mid] == val) {
+                return mid;
+            }
+
+            if (input[mid] < val) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
 
 ```
