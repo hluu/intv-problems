@@ -5,7 +5,6 @@ import java.util.PriorityQueue;
 
 
 /**
- * Created by hluu on 5/27/17.
  *
  * The median of a dataset of integers is the midpoint value of the dataset
  * for which an equal number of integers are less than and greater than the value

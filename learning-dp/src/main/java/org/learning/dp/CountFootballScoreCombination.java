@@ -65,6 +65,11 @@ public class CountFootballScoreCombination {
 		System.out.println();
 	}
 
+	private static int topDownMemoizApproach(int[] playScores, int finalScore) {
+		return -1;
+	}
+
+
 	/**
 	 * Using DP to store the number of combinations for each of the smaller score value up to the
 	 * given score value.

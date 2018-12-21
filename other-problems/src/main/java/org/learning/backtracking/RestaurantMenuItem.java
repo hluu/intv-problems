@@ -4,6 +4,7 @@ import org.common.ArrayUtils;
 import org.common.StringUtility;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class RestaurantMenuItem {
     public static void main(String[] args) {
-/*
+
         MenuItem[] menuItems = new MenuItem[] {
                 new MenuItem("MF", 1.0),
                 new MenuItem("FF", 2.0),
@@ -28,10 +29,10 @@ public class RestaurantMenuItem {
                 new MenuItem("MS", 5.0),
         };
 
-        List<List<MenuItem>> result = findItems(menuItems, 4.0);
-*/
+        test(menuItems, 4.0);
 
-        MenuItem[] menuItems = new MenuItem[] {
+
+        MenuItem[] menuItems2 = new MenuItem[] {
                 new MenuItem("MF", 2.15),
                 new MenuItem("FF", 2.75),
                 new MenuItem("SS", 3.35),
@@ -39,18 +40,39 @@ public class RestaurantMenuItem {
                 new MenuItem("MS", 4.20),
                 new MenuItem("SP", 5.80)
         };
-        List<List<MenuItem>> result = findItems(menuItems, 15.05);
+
+        double amt2 = 15.05;
+
+        test(menuItems2, amt2);
+
+        MenuItem[] menuItems3 = new MenuItem[] {
+                new MenuItem("MF", 1.5),
+                new MenuItem("FF", 2.5),
+                new MenuItem("SS", 3.0),
+        };
+
+        double amt3 = 6.0;
+
+        test(menuItems3, amt3);
+
+    }
+
+    private static void test(MenuItem[] menuItems, double amt) {
+        System.out.println("\n===== finding menu items ======");
+
+        System.out.printf("menu item: %s, amt: %f\n",
+              Arrays.toString(menuItems), amt);
 
 
+        List<List<MenuItem>> result = findItems(menuItems, amt);
 
-        System.out.println("===== result ======");
+        System.out.println();
         for(List<MenuItem> list : result) {
-            System.out.println(list);
+            System.out.println(list.size() + " : " + list);
         }
         System.out.println("======= *** =======");
 
     }
-
 
     private static List<List<MenuItem>> findItems(MenuItem[] menuItems, double amt) {
         List<List<MenuItem>> result = new ArrayList<List<MenuItem>>();
@@ -85,20 +107,22 @@ public class RestaurantMenuItem {
                                            double amt, List<List<MenuItem>> collector,
                                            List<MenuItem> list) {
 
-        StringUtility.printSpace(list.size());
-        System.out.printf("idx: %d, amtSoFar: %f, collect: %s\n", idx, amtSoFar, list);
+        //StringUtility.printSpace(list.size());
+       // System.out.printf("idx: %d, amtSoFar: %f, collect: %s\n", idx, amtSoFar, list);
 
         if (idx >= menuItems.length) {
+            // we went through all the items in the menu, so stop
             return ;
         }
 
         if (amtSoFar > amt) {
+            // not a valid combination when amtSoFar exceeds the given target amount
             return ;
         }
 
-        // base case when these two values are equivalent
+        // base case when amtSoFar exactly matches the given target amount
         if (amtSoFar == amt) {
-            // doing new ArrayList to actually copy the list
+            // return a list of menu items collected up until this point
             collector.add(new ArrayList<>(list));
             return;
         }

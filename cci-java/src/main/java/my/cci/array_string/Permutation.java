@@ -1,7 +1,7 @@
 package my.cci.array_string;
 
 /**
- * Created by hluu on 12/13/15.
+ *
  *
  * All permutations of a set, means all possible ways of ordering those objects
  *

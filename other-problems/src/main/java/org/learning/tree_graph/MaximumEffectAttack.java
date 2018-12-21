@@ -5,7 +5,7 @@ import org.common.ArrayUtils;
 import java.util.*;
 
 /**
- * Created by hluu on 10/5/17.
+ *
  *
  * Problem:
  *  Give a matrix with 0s and 1s, where the 1s represent the enemy territory.
@@ -68,7 +68,9 @@ public class MaximumEffectAttack {
     private static void test(int[][] matrix) {
         System.out.printf("======== test ========\n");
         ArrayUtils.printMatrix(matrix);
+
         List<AttackZone> result = findMaximumAttackZone(matrix);
+
         System.out.println("result: " + result);
         System.out.println("");
     }
@@ -83,8 +85,10 @@ public class MaximumEffectAttack {
             return result;
         }
 
+        // treat each cell as a starting point, so go through each one of them
         for (int r = 0; r < matrix.length; r++) {
             for (int c = 0; c < matrix[0].length; c++) {
+                // however, only explore the ones that haven't been explored yet
                 if (matrix[r][c] == UNEXPLORED_STATE) {
                     AttackZone az = new AttackZone(r,c);
                     exploreTerritory(matrix, az, r, c);
@@ -110,22 +114,43 @@ public class MaximumEffectAttack {
      * @param column
      */
     private static void exploreTerritory(int[][] matrix, AttackZone az, int row, int column) {
-        if (row < 0 || column < 0
+        /*if (row < 0 || column < 0
                 || row >= matrix.length || column >= matrix[0].length
                 || (matrix[row][column] == EXPLORED_STATE)
                 || (matrix[row][column] == 0)) {
+            return;
+        }*/
+
+        if (!isValidCoord(row, column, matrix)) {
             return;
         }
 
         if (matrix[row][column] == UNEXPLORED_STATE) {
             az.incrementSize();
+            // update so, we don't explore it again - **** VERY IMPORTANT ****
             matrix[row][column] = EXPLORED_STATE;
 
+            // Flood fill
             exploreTerritory(matrix, az, row+1, column);
             exploreTerritory(matrix, az, row-1, column);
             exploreTerritory(matrix, az, row, column+1);
             exploreTerritory(matrix, az, row, column-1);
         }
+    }
+
+    private static boolean isValidCoord(int row, int col, int[][] matrix) {
+        if (row < 0
+                || col < 0
+                || row >= matrix.length
+                || col >= matrix[0].length
+                || (matrix[row][col] == EXPLORED_STATE)
+                || (matrix[row][col] == 0)) {
+            return false;
+        } else {
+            return true;
+        }
+
+
     }
 
     private static class AttackZone {

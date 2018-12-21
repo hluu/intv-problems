@@ -5,7 +5,7 @@ import junit.framework.Assert;
 
 
 /**
- * Created by hluu on 1/2/17.
+ *
  */
 public class NumberUtility {
     public static void main(String[] args) {

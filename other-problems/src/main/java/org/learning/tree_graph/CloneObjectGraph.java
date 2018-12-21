@@ -6,7 +6,6 @@ import org.common.TreeUtility;
 import java.util.*;
 
 /**
- * Created by hluu on 12/11/16.
  *
  * Problem:
  *  Give an object graph, clone it.  There are nodes which have multiple parents referring
@@ -66,7 +65,8 @@ public class CloneObjectGraph {
     }
 
     /**
-     * Build the object graph was we traverse down.
+     * Build the object graph was we traverse down. Using the stack
+     * to store the immediate state of the traversal.
      *
      * This is a top down approach
      *

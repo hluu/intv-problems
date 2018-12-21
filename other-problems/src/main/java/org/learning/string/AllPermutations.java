@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by hluu on 1/13/16.
  *
  * Problem statement:
  *  Give an string, print out all the permutations of characters in that string
@@ -42,18 +41,28 @@ public class AllPermutations {
         //String str = "dog";
         String str = "abc";
 
+        test(str);
+    }
+
+    private static void test(String input) {
+        System.out.printf("input: %s\n", input);
+
+        System.out.println("===== permuteUsingSwapping ===");
+
         List<String> output = new ArrayList<>();
+        permuteUsingSwapping(input.toCharArray(), output,0);
 
-        permuteUsingSwapping(str.toCharArray(), output,0);
-        System.out.println(output.size());
         Collections.sort(output);
-        System.out.println("output1: " + output);
-        output.clear();
+        System.out.println("result: " + output);
 
 
-        permutationWithBooleanFlagsTest(str);
+        System.out.println("===== permutationWithBooleanFlagsTest ===");
 
-        permutationWithSubString(str);
+        permutationWithBooleanFlagsTest(input);
+
+        System.out.println("===== permutationWithSubString ===");
+
+        permutationWithSubString(input);
     }
 
 
@@ -110,7 +119,7 @@ public class AllPermutations {
      */
     private static void permUsingSubstring(String prefix, String s, List<String> output) {
 
-        System.out.printf("prefix: \"%s\", s: \"%s\"\n", prefix, s);
+        //System.out.printf("prefix: \"%s\", s: \"%s\"\n", prefix, s);
         int n = s.length();
         if (n == 0) {
             output.add(prefix);

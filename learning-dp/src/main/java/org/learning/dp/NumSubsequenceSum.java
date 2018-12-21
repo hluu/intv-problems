@@ -26,6 +26,6 @@ public class NumSubsequenceSum {
     }
 
     private static int topDownBruteforce(int[] arr, int target) {
-
+        return -1;
     }
 }

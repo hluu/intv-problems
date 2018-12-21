@@ -1,6 +1,8 @@
 package org.learning.backtracking;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -41,18 +43,51 @@ public class NumSubsetSum {
         System.out.println("NumSubsetSum.main");
 
         int[] arr = {1, 2, 3, 4, 5, 6};
-        numSubsets(arr, 7, 0, "");
+        test(arr, 7);
 
 
         int[] arr2 = {3, 34, 4, 12, 5, 2};
         System.out.printf("****** numSubsets: %s\n", Arrays.toString(arr2));
-        numSubsets(arr2, 9, 0, "");
+        test(arr2, 9);
+
 
         numSubsetsDP(arr, 7);
     }
 
     private static int counter = 1;
 
+    private static void test(int[] arr, int target) {
+        System.out.printf("\ninput: %s, target: %d\n", Arrays.toString(arr),
+                target);
+        String result = numSubsets(arr, target, 0, "");
+
+        System.out.println("result: " + result);
+
+        List<Integer> soFar = new ArrayList<>();
+        List<List<Integer>> collector = new ArrayList<>();
+
+        numSubsets(arr, target, 0, soFar, collector);
+        System.out.println("collector: " + collector);
+
+        numSubsetsDP(arr, target);
+    }
+
+    private static void numSubsets(int[] array, int target, int idx,
+                                   List<Integer> soFar,
+                                   List<List<Integer>> collector) {
+        if (target == 0) {
+            collector.add(new ArrayList(soFar));
+        }
+
+        for (int i = idx; i < array.length; i++) {
+
+            soFar.add(array[i]);
+            numSubsets(array,  target - array[i], i + 1, soFar,
+                    collector);
+            soFar.remove(soFar.size()-1);
+        }
+
+    }
     /**
      * Using recursion
      *
@@ -62,7 +97,8 @@ public class NumSubsetSum {
      * @param soFar
      * @return
      */
-    private static String numSubsets(int[] array, int target, int idx, String soFar) {
+    private static String numSubsets(int[] array, int target, int idx,
+                                     String soFar) {
 
 
         System.out.printf("counter: %d, target: %d, idx: %d, soFar: %s\n",
@@ -122,7 +158,9 @@ public class NumSubsetSum {
         printTable(state, array, sum);
 
         // add more comments to this logic here
+        // going from 1 to sum
         for (int sumValue = 1; sumValue <= sum; sumValue++) {
+            // for each sum value, what is the # of
             for (int idx = 1; idx <= array.length; idx++) {
                 state[sumValue][idx] = state[sumValue][idx-1];
 
