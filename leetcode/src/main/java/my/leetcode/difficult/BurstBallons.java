@@ -128,10 +128,14 @@ public class BurstBallons {
         int actualDPTopdown = dpTopdown(nums);
         System.out.printf(" actualDPTopdown: %d ", actualDPTopdown);
 
-        int actualDPBottomup = dpBottomup(nums);
+        Assert.assertEquals(expected, actualDPTopdown);
+
+        int actualDPBottomup = dpBottomup2(nums);
         System.out.printf(" actualDPBottomup: %d\n", actualDPBottomup);
+
+        Assert.assertEquals(expected, actualDPBottomup);
     }
-    
+
     private static int bruteforce(List<Integer> nums) {
         if (nums.size() == 1) {
             // base case, one element is just the value of that element
@@ -229,6 +233,7 @@ public class BurstBallons {
         return dp[0][n - 1];
     }
 
+
     private static int dpBottomup2(int[] nums) {
         // Extend list with head and tail (both are 1), index starts at 1
         int array[] = new int[nums.length + 2];
@@ -241,11 +246,6 @@ public class BurstBallons {
         // Initialize DP arrays, 1 index based
         //cache[i][j] stands for max coins at i step, burst j
         int cache[][] = new int[array.length][array.length];
-        for (int i =0; i < array.length; i++) {
-            for (int j = 0; j < array.length; j++) {
-                cache[i][j] = 0;
-            }
-        }
 
         for (int i=1; i< array.length-1; i++) {
             for (int j=i; j >=1; j--) {
@@ -261,4 +261,5 @@ public class BurstBallons {
 
         return cache[1][array.length-2];
     }
+
 }

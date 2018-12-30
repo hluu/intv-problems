@@ -2,7 +2,6 @@ package my.leetcode.easy;
 
 
 /**
- * Created by hluu on 10/1/16.
  *
  * Palindrome is a word, phrase, or sequence that reads the same backward as forward,
  * For example: madam or nurses run
