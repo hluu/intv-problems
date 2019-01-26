@@ -64,6 +64,12 @@ public class MaximumLenPairChain {
         Assert.assertEquals(expected, actualDP2);
     }
 
+    /**
+     * Runtime O(nlogn) for sorting, space O(n)
+     *
+     * @param pairs
+     * @return
+     */
     private static int findLongestChainBUDP(int[][] pairs) {
 
         // this is pretty cool about sorting an array

@@ -1,6 +1,5 @@
 package org.learning.geometry;
 
-import com.sun.org.apache.regexp.internal.RE;
 
 /**
  * Give two rectangles, determine the overlapping area, which is defined

@@ -5,7 +5,6 @@ import org.testng.Assert;
 import java.util.Arrays;
 
 /**
- * Created by hluu on 10/18/17.
  *
  * Give a decimal number, determine if it is digits are palindrome
  *
@@ -55,12 +54,12 @@ public class NumberPalindrome {
      * 3) Copy each digit into an array
      *
      *
-     * @param n
+     * @param input
      * @return
      */
-    private static int[] convertNumberToDigits(int n) {
+    private static int[] convertNumberToDigits(int input) {
         int size = 0;
-        int tmpNum = n;
+        int tmpNum = input;
 
         // compute the number of digits
         while (tmpNum > 0) {
@@ -71,7 +70,7 @@ public class NumberPalindrome {
         int[] digits = new int[size];
 
         int idx = size - 1;  // zero based index (0.. size-1)
-        tmpNum = n;
+        tmpNum = input;
         // least significant digit at the end of the array
         while (idx >= 0) {
             digits[idx] = tmpNum % 10;
@@ -123,14 +122,17 @@ public class NumberPalindrome {
                 return false;
             }
 
+            // remove LSD
             num = num / 10;
             numDigit--;
+
+            // remove the MSD
             num = shaveOffMSD(msd, num, numDigit);
             numDigit--;
 
-
             numTimes--;
         }
+        // if we get here, then it means input is a palindrome
         return true;
     }
 
@@ -149,6 +151,13 @@ public class NumberPalindrome {
         return num % 10;
     }
 
+    /**
+     * To get the MSD, it needs the # of digits
+     *
+     * @param num
+     * @param numDigit
+     * @return
+     */
     private static int getMSD(int num, int numDigit) {
         // 423 ==> 4
         // 423/100 => 4

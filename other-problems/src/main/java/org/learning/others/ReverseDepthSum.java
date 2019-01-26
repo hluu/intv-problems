@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hluu on 10/11/17.
  *
  *
  * Given a nested list of integers, returns the sum of all integers in the list

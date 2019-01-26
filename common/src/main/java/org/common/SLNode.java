@@ -1,9 +1,8 @@
 package org.common;
 
-import com.google.common.base.Preconditions;
 
 /**
- * Created by hluu on 1/1/16.
+ *
  *
  * Node for single linked list
  */

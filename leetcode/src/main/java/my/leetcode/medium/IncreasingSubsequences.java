@@ -34,12 +34,21 @@ public class IncreasingSubsequences {
         }
     }
 
+    /**
+     * Brute force method. Runtime O(n^3)
+     * @param nums
+     * @return
+     */
     private static List<List<Integer>> findSubsequences(int[] nums) {
         if (nums == null || nums.length == 0) {
             return Collections.emptyList();
         }
         Set<List<Integer>> collector = new HashSet<>();
+
+        // for each elm idx
         for (int i = 0; i < nums.length-1; i++) {
+            // go from i+1 to the end and build an increasing subsequence
+            // from nums[i]
             for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] <= nums[j]) {
                     List<Integer> subSeq = new ArrayList<>();
@@ -54,6 +63,15 @@ public class IncreasingSubsequences {
         return new ArrayList<List<Integer>>(collector);
     }
 
+    /**
+     * Going from idx to the end, see if nums[idx] is greater than the last
+     * element in the numlist.  If so build a new subsequence
+     *
+     * @param nums
+     * @param numList
+     * @param idx
+     * @param collector
+     */
     private static void findSubsequencesHelper(int[] nums, List<Integer> numList,
                                                int idx,
                                                Set<List<Integer>> collector) {
