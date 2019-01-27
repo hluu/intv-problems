@@ -1,8 +1,8 @@
 package my.leetcode.medium;
 
+import org.testng.Assert;
+
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Given an array of non-negative integers, you are initially positioned at the first index of
@@ -26,7 +26,7 @@ public class JumpingGameAdv {
     public static void main(String[] args) {
         System.out.println(JumpingGameAdv.class.getName());
 
-        /*
+
         test(new int[] {1} ,0);
         test(new int[] {2,3,1,1,4} ,2);
 
@@ -56,7 +56,7 @@ public class JumpingGameAdv {
         test(new int[] {5,1,1,5,1,1,1,1,1} ,2);
 
         test(new int[] {2,0,8,0,3,4,7,5,6,1,0,0,5,9,7,5,3,6} ,4);
-        test(new int[] {10,9,8,7,6,5,4,3,2,1,1,0} ,2); */
+        test(new int[] {10,9,8,7,6,5,4,3,2,1,1,0} ,2);
 
         // time exceeding
         test(new int[] {7,8,4,2,0,6,4,1,8,7,1,7,4,1,4,1,2,8,2,7,3,7,8,2,4,4,5,3,5,6,8,5,4,4,7,4,3,4,8,1,1,9,0,8,2} ,7);
@@ -71,6 +71,7 @@ public class JumpingGameAdv {
         System.out.printf("expected count: %d, actual count: %d\n",
                 expectedCount, actualCount);
 
+        Assert.assertEquals(actualCount, expectedCount);
 
         /*int actualCount2 = jumpBF(input);
 
@@ -82,6 +83,7 @@ public class JumpingGameAdv {
         System.out.printf("expected count: %d, actualCount3: %d\n",
                 expectedCount, actualCount3);
 
+        Assert.assertEquals(actualCount3, expectedCount);
     }
 
 
@@ -105,7 +107,9 @@ public class JumpingGameAdv {
             return 0;
         }
 
-        return jumpDPHelper(input, 0, new HashMap<>());
+        int[] cache = new int[input.length];
+        Arrays.fill(cache, -1);
+        return jumpDPHelper(input, 0, cache);
     }
 
 
@@ -118,16 +122,19 @@ public class JumpingGameAdv {
      * @return
      */
     private static int jumpDPHelper(int[] input, int currentIdx,
-                                      Map<Integer, Integer> cache) {
+                                      int[] cache) {
 
-        Integer cacheValue = cache.get(currentIdx);
-        if (cacheValue != null) {
-            return cacheValue;
+        // return from cache if we have it
+        if (cache[currentIdx] != -1) {
+            return cache[currentIdx];
         }
 
+        // if input[currentIdx] == 0, then return MAX_VALUE
         int noJumps = Integer.MAX_VALUE;
 
         if (currentIdx + input[currentIdx] >= (input.length-1)) {
+            // if # of jumps from currentIdx equal or past the end,
+            // then # of jumps is 1;
             noJumps = 1;
         } else if (input[currentIdx] != 0) {
 
@@ -138,13 +145,17 @@ public class JumpingGameAdv {
 
                 int tmpJumps = jumpDPHelper(input, k, cache);
                 if (tmpJumps != Integer.MAX_VALUE) {
+                    // handle the edge case when tmpJumps is MAX_VALUE
                     tmpJumps = 1 + tmpJumps;
                 }
+                // take the min. # of jumps among all the options
                 noJumps = Math.min(noJumps, tmpJumps);
             }
         }
 
-        cache.put(currentIdx, noJumps);
+        // put in the cache
+        cache[currentIdx] = noJumps;
+
         return noJumps;
 
     }
@@ -219,6 +230,7 @@ public class JumpingGameAdv {
         for(int idx=0; idx< input.length-1; idx++) {
 
             max = Math.max(max, idx+input[idx]);
+
             if( idx == prevJumpToLoc ) {
                 jumpCount++;
                 prevJumpToLoc = max;
