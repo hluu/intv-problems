@@ -1,6 +1,8 @@
 package my.leetcode.medium;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Given an array of non-negative integers, you are initially positioned at the first index of
@@ -24,46 +26,64 @@ public class JumpingGameAdv {
     public static void main(String[] args) {
         System.out.println(JumpingGameAdv.class.getName());
 
-        int[] input = {2,3,1,1,4};
-        test(input ,2);
+        /*
+        test(new int[] {1} ,0);
+        test(new int[] {2,3,1,1,4} ,2);
 
+        test(new int[] {2,0,2,4,6,0,0,3} ,3);
+
+        test(new int[] {2,2,0,1} ,2);
 
         test(new int[] {0} ,0);
-       /* test(new int[] {1} ,1);
 
-        test(new int[] {3,1,1,1} ,2);
+        test(new int[] {1,1,1,1} ,3);
+
+        test(new int[] {2,3,0,1,4} ,2);
+
+        test(new int[] {3,1,1,1} ,1);
         test(new int[] {1,2,0,2} ,2);
-
-        test(new int[] {1} ,0);
 
 
         test(new int[] {1,2} ,1);
         test(new int[] {1,1,1,1} ,3);
 
         test(new int[] {2,3,0,1,4} ,2);
-        */
+
         test(new int[] {4,1,1,3,1,1,1} ,2);
 
         test(new int[] {1,3,6,3,2,3,6,8,9,5} ,4);
 
+        test(new int[] {5,1,1,5,1,1,1,1,1} ,2);
 
+        test(new int[] {2,0,8,0,3,4,7,5,6,1,0,0,5,9,7,5,3,6} ,4);
+        test(new int[] {10,9,8,7,6,5,4,3,2,1,1,0} ,2); */
+
+        // time exceeding
+        test(new int[] {7,8,4,2,0,6,4,1,8,7,1,7,4,1,4,1,2,8,2,7,3,7,8,2,4,4,5,3,5,6,8,5,4,4,7,4,3,4,8,1,1,9,0,8,2} ,7);
+        /* */
     }
 
     private static void test(int[] input, int expectedCount) {
         System.out.printf("\ninput: %s\n", Arrays.toString(input));
 
-        int actualCount = minJump(input);
+        int actualCount = jumpOptimized(input);
 
         System.out.printf("expected count: %d, actual count: %d\n",
                 expectedCount, actualCount);
 
 
-        int actualCount2 = jump(input);
+        /*int actualCount2 = jumpBF(input);
 
-        System.out.printf("expected count: %d, actual count 2: %d\n",
-                expectedCount, actualCount2);
+        System.out.printf("expected count: %d, actualCount2: %d\n",
+                expectedCount, actualCount2);*/
+
+        int actualCount3 = jumpDP(input);
+
+        System.out.printf("expected count: %d, actualCount3: %d\n",
+                expectedCount, actualCount3);
 
     }
+
 
     /**
      * minJumps(start, end) = Min ( minJumps(k, end) ) for all k reachable from start
@@ -71,7 +91,7 @@ public class JumpingGameAdv {
      * @param input
      * @return
      */
-    private static int minJump(int[] input) {
+    private static int jumpDP(int[] input) {
 
         if (input == null || input.length == 0) {
             return 0;
@@ -81,66 +101,130 @@ public class JumpingGameAdv {
             return 0;
         }
 
-        int minSoFar = Integer.MAX_VALUE;
-
-        for (int i = 0; i < input.length; i++) {
-            if (input[i] > 0 && (i < minSoFar)) {
-                int jumps = i + countJumps(input, i, 0);
-                minSoFar = Integer.min(minSoFar, jumps);
-            }
-
-
+        if (input[0]== 0) {
+            return 0;
         }
 
-        return minSoFar;
+        return jumpDPHelper(input, 0, new HashMap<>());
+    }
+
+
+
+    /**
+     *
+     * @param input
+     * @param currentIdx
+     * @param cache - index to number of jumps
+     * @return
+     */
+    private static int jumpDPHelper(int[] input, int currentIdx,
+                                      Map<Integer, Integer> cache) {
+
+        Integer cacheValue = cache.get(currentIdx);
+        if (cacheValue != null) {
+            return cacheValue;
+        }
+
+        int noJumps = Integer.MAX_VALUE;
+
+        if (currentIdx + input[currentIdx] >= (input.length-1)) {
+            noJumps = 1;
+        } else if (input[currentIdx] != 0) {
+
+            int start = currentIdx + 1;
+            int end = currentIdx + input[currentIdx];
+
+            for (int k = start; k <= end; k++) {
+
+                int tmpJumps = jumpDPHelper(input, k, cache);
+                if (tmpJumps != Integer.MAX_VALUE) {
+                    tmpJumps = 1 + tmpJumps;
+                }
+                noJumps = Math.min(noJumps, tmpJumps);
+            }
+        }
+
+        cache.put(currentIdx, noJumps);
+        return noJumps;
+
     }
 
     /**
-     * Helper method - count number of jumps at startIdx
+     * minJumps(start, end) = Min ( minJumps(k, end) ) for all k reachable from start
      *
      * @param input
-     * @param startIdx
-     * @param noJumps
      * @return
      */
-    private static int countJumps(int[] input, int startIdx, int noJumps) {
+    private static int jumpBF(int[] input) {
 
-        // using iterative instead of recursion to avoid stack overflow
-        while (startIdx < (input.length - 1)) {
-            // handle the case when value is 0
-            if (input[startIdx] == 0) {
-                return Integer.MAX_VALUE;
-            } else {
-                startIdx = startIdx + input[startIdx];
-                noJumps++;
+        if (input == null || input.length == 0) {
+            return 0;
+        }
+
+        if (input.length == 1) {
+            return 0;
+        }
+
+        if (input[0]== 0) {
+            return 0;
+        }
+
+        return jumpBFHelper(input, 0);
+    }
+
+    /**
+     * Helper method - count number of jumps at currentIdx.
+     * Explore all the different paths from currentIdx and pick the smallest
+     * one.
+     *
+     * This is a from DFS.
+     *
+     * Notic there is a lot of overlapping and repeated computation
+     *
+     * @param input
+     * @param currentIdx
+     * @return minimum jump from the @currentIdx
+     */
+    private static int jumpBFHelper(int[] input, int currentIdx) {
+
+        if (input[currentIdx] == 0) {
+            return Integer.MAX_VALUE;
+        }
+
+        if (currentIdx + input[currentIdx] >= (input.length-1)) {
+            return 1;
+        }
+
+        int start = currentIdx+1;
+        int end = currentIdx + input[currentIdx];
+
+        int noJumps = Integer.MAX_VALUE;
+        for (int k = start; k <= end; k++) {
+
+            int tmpJumps = jumpBFHelper(input, k);
+            if (tmpJumps != Integer.MAX_VALUE) {
+                tmpJumps = 1 + tmpJumps;
             }
+            noJumps = Math.min(noJumps, tmpJumps);
         }
 
         return noJumps;
-
-
-        // lesson learn here - recursion will cause stack overflow if each value is 1
-        // and the input array is very large
-        /*
-        if (input[startIdx] == 0) {
-            return noJumps;
-        } else {
-            return countJumps(input, startIdx + input[startIdx], noJumps + 1);
-        }*/
     }
 
-    public static int jump(int[] A) {
-        int sc = 0;
-        int e = 0;
+    public static int jumpOptimized(int[] input) {
+        int jumpCount = 0;
+        int prevJumpToLoc = 0;
         int max = 0;
-        for(int i=0; i<A.length-1; i++) {
-            max = Math.max(max, i+A[i]);
-            if( i == e ) {
-                sc++;
-                e = max;
+
+        for(int idx=0; idx< input.length-1; idx++) {
+
+            max = Math.max(max, idx+input[idx]);
+            if( idx == prevJumpToLoc ) {
+                jumpCount++;
+                prevJumpToLoc = max;
             }
         }
-        return sc;
+        return jumpCount;
     }
 
 
