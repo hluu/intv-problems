@@ -84,6 +84,13 @@ public class JumpingGameAdv {
                 expectedCount, actualCount3);
 
         Assert.assertEquals(actualCount3, expectedCount);
+
+        int actualCount4 = jumpOptimizedBFS(input);
+        System.out.printf("expected count: %d, actualCount4: %d\n",
+                expectedCount, actualCount4);
+
+        Assert.assertEquals(actualCount4, expectedCount);
+
     }
 
 
@@ -240,4 +247,29 @@ public class JumpingGameAdv {
     }
 
 
+    private static int jumpOptimizedBFS(int input[]) {
+        if(input.length <2) {
+            return 0;
+        }
+
+        int size = input.length;
+
+        int level=0, currentMax=0, idx=0, nextMax=0;
+
+        while(currentMax-idx+1>0){		//nodes count of current level>0
+            level++;
+
+            for(; idx <= currentMax; idx++){	//traverse current level , and update the max reach of next level
+
+                nextMax=Math.max(nextMax,input[idx]+idx);
+
+                if(nextMax >= size-1) {
+                    return level;   // if last element is in level+1,  then the min jump=level
+                }
+            }
+
+            currentMax=nextMax;
+        }
+        return 0;
+    }
 }

@@ -11,6 +11,13 @@ import java.util.Stack;
  *  Given a histogram, compute the largest rectangle in it
  *
  * Example:
+ *
+ *    histogram = {2,1,2}  => largest rectangle is 3
+ *     __    __
+ *    |  |__|  |
+ *    |  |  |  |
+ *    ------------
+ *
  *  histogram = {1,3,2,1,2}  => largest rectangle is 5
  *
  *      __
@@ -35,8 +42,6 @@ import java.util.Stack;
  * Approach:
  *  * For each bar, the width continues until another bar with lower height is encountered.
  *
- *
- *
  *  * A new rectangle starts when we reach a new bar with a larger height
  *    and this rectangle ends when we see another bar with lower height
  *  * Maintain two stacks, one for the height and the other for the index of the bar
@@ -52,108 +57,136 @@ import java.util.Stack;
  *  * now repeat until we hit the end
  */
 public class LargestRectangleInHistogram {
+
     public static void main(String[] args) {
         System.out.println(LargestRectangleInHistogram.class.getName());
 
-        test(new int[] {1,3,2,1,2}, 5);
-        test(new int[] {2,1,5,6,2,3}, 10);
+
+        //test(new int[] {2,1,2}, 3);
+        //test(new int[] {2,1,2}, 3);
         test(new int[] {2,3,1,3,2}, 5);
+
+       // test(new int[] {2,1,5,6,2,3}, 10);
+      // test(new int[] {1,3,2,1,2}, 5);
+        //test(new int[] {1,2,1,3,2,0,1}, 5);
+
+
+       // test(new int[] {2,1,5,6,2,3}, 10);
+        /*
+        test(new int[] {1,10,1}, 10);
+        test(new int[] {1,3,2,1,2}, 5);
+
+        test(new int[] {1,2,3,4,5,3,3,2}, 15);*/
     }
 
     private static void test(int[] hist, int expectedRectSize) {
-        int actualRectSize = maxRectangleSize(hist);
+        System.out.printf("\nhist: %s, \n", Arrays.toString(hist));
 
-        System.out.printf("hist: %s, expected: %d, actual: %d\n",
-                Arrays.toString(hist), expectedRectSize, actualRectSize);
+        int actualRectSizeBF = maxRectangleBF(hist);
 
-        int actualRectSize2 = maxRectangleSize2(hist);
-        System.out.printf("hist: %s, expected: %d, actual2: %d\n",
-                Arrays.toString(hist), expectedRectSize, actualRectSize2);
+        System.out.printf("expected: %d, actualRectSizeBF: %d\n",
+                expectedRectSize, actualRectSizeBF);
 
-        //Assert.assertEquals(actualRectSize, expectedRectSize);
+
+        int actualRectSizeBF2 = s1(hist);
+        System.out.printf("expected: %d, actualRectSizeBF2: %d\n",
+                expectedRectSize, actualRectSizeBF2);
+
+        int actualRectSizeOptimized = maxRectangleSizeOptimized(hist);
+
+        System.out.printf("expected: %d, actualRectSizeOptimized: %d\n",
+                expectedRectSize, actualRectSizeOptimized);
+
+
+        Assert.assertEquals(expectedRectSize, actualRectSizeBF);
+        Assert.assertEquals(expectedRectSize, actualRectSizeOptimized);
     }
 
-
-    private static int maxRectangleSize(int[] hist) {
-        Stack<Integer> heightStack = new Stack();
-        Stack<Integer> indexStack = new Stack();
-
+    /**
+     * This is the brute force approach.
+     *  - iterate from left to right
+     *  - for each index or bar, calculate the width of the left side and right
+     *  - the width is extended when the height of new bar is >= the height of current bar
+     *
+     *  - runtime: O(n^2)
+     *
+     * @param hist
+     * @return
+     */
+    private static int maxRectangleBF(int[] hist) {
         int maxRectSoFar = -1;
 
         for (int i = 0; i < hist.length; i++) {
             int height = hist[i];
-            if (heightStack.isEmpty()) {
-                heightStack.push(height);
-                indexStack.push(i);
-            } else if (height > heightStack.peek()) {
-                // greater than
-                heightStack.push(height);
-                indexStack.push(i);
-            } else if (height < heightStack.peek()) {
-                // new bar is less than top of stack
-                // compute the rectangle
-                int size = height * (i - indexStack.peek());
-                maxRectSoFar = Math.max(maxRectSoFar, size);
 
-                // pop current bar
-                heightStack.pop();
-                indexStack.pop();
+            int left = i-1;
+            while (left >= 0 && hist[left] >= hist[i]) {
+                left--;
+            }
 
-                // push the new bar
-                heightStack.push(height);
-                indexStack.push(i);
-            }  // else equal, then keep going
-        }
+            int right = i+1;
+            while (right < hist.length && hist[right] >= hist[i]) {
+                right++;
+            }
 
-        // make sure to handle the remaining elements in the stack
-        while(!heightStack.isEmpty()) {
-            int size = heightStack.pop() * (hist.length - indexStack.pop());
-            maxRectSoFar = Math.max(maxRectSoFar, size);
+            // make sure to count columns, rather than the gaps between two indexes
+            // that is why we add 1
+            int width = (right-1) - (left+1) + 1;
+            int rectSize = width * hist[i];
+
+            maxRectSoFar = Math.max(maxRectSoFar, rectSize);
         }
 
         return maxRectSoFar;
     }
 
-    private static int maxRectangleSize2(int[] histogram) {
-        int maxArea = 0;
 
-        int currHeight = 0;
-        for (int i = 0; i < histogram.length; i++) {
+    /**
+     * Using additional data structure to do some bookkeeping so we can
+     * achieve O(n) runtime.
+     *
+     * General algorithm:
+     *   - maintain a stack to keep track of index as iterating from left to right
+     *   - keep pushing the index into stack until height of new bar is greater than
+     *     the bar at the top of the stack
+     *   - when reach a new bar that is lower than previous bar
+     *     - calculate the rectangles of previous bars until reach the one that
+     *       is equal to or smaller than current bar
+     *     - maintain an anchor to calculate the width of rectangles as going backward
+     *   - as the last step after done iterating, ensure to process the remaining
+     *     bars in the stack.  The anchor point is the last index of the array
+     *
+     * @param heights
+     * @return
+     */
+    private static int maxRectangleSizeOptimized(int[] heights) {
+        int maxRectSize = 0;
+        // an element in the stack is an array of isze 2 - int[2] <index, height>
+        Stack<int[]> stack = new Stack<>();
+        for (int i = 0; i < heights.length; i++) {
+            int lastPopIndex = -1;
 
-            currHeight = histogram[i];
-            if (i == 0) {
-                int idx = 1;
-                // check for right side
-                while (idx < histogram.length && currHeight >= histogram[idx]) {
-                    idx++;
-                }
-
-                int area = (idx + 1) * currHeight;
-                maxArea = Math.max(maxArea, area);
-            } else {
-                // left side
-                int left = 0;
-                // right side
-                int idx = i-1;
-                while (idx >= 0 && currHeight <= histogram[idx]) {
-                    idx--;
-                    left++;
-                }
-
-
-                int right = 0;
-                idx = i+1;
-                while (idx < histogram.length && currHeight <= histogram[idx]) {
-                    idx++;
-                    right++;
-                }
-
-                int area = (left + right +1) * currHeight;
-                maxArea = Math.max(maxArea, area);
+            // keep popping until a bar that is smaller than the current one at i index
+            while (!stack.isEmpty() && heights[i] < stack.peek()[1]) {
+                int[] last = stack.pop();
+                maxRectSize = Math.max((i - last[0]) * last[1], maxRectSize);
+                lastPopIndex = last[0]; // index of last popped elm.
             }
 
+            // the lastPopIndex is -1 when we didn't go into the while loop
+            // the lastPopIndex is not -1, which means the index of the element
+            // that was taller than the current bar, so we use that index instead
+            // to cover the ground.
 
+            lastPopIndex = (lastPopIndex == -1) ? i : lastPopIndex;
+
+            stack.push(new int[] {lastPopIndex, heights[i]});
         }
-        return maxArea;
+
+        while (!stack.isEmpty()) {
+            int[] last = stack.pop();
+            maxRectSize = Math.max((heights.length - last[0]) * last[1], maxRectSize);
+        }
+        return maxRectSize;
     }
 }
