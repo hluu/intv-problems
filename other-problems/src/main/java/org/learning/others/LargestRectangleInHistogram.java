@@ -65,6 +65,7 @@ public class LargestRectangleInHistogram {
         //test(new int[] {2,1,2}, 3);
         //test(new int[] {2,1,2}, 3);
         test(new int[] {2,3,1,3,2}, 5);
+        test(new int[] {6, 2, 5, 4, 5, 1, 6}, 12);
 
        // test(new int[] {2,1,5,6,2,3}, 10);
       // test(new int[] {1,3,2,1,2}, 5);
@@ -88,9 +89,9 @@ public class LargestRectangleInHistogram {
                 expectedRectSize, actualRectSizeBF);
 
 
-        int actualRectSizeBF2 = s1(hist);
+       /* int actualRectSizeBF2 = s1(hist);
         System.out.printf("expected: %d, actualRectSizeBF2: %d\n",
-                expectedRectSize, actualRectSizeBF2);
+                expectedRectSize, actualRectSizeBF2); */
 
         int actualRectSizeOptimized = maxRectangleSizeOptimized(hist);
 
