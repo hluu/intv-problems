@@ -1,5 +1,6 @@
 package my.leetcode.medium;
 
+import org.common.TreeNode;
 import org.testng.Assert;
 
 import java.util.Arrays;
@@ -86,5 +87,12 @@ public class JumpGame {
         return currIdx >= (input.length - 1);
 
 
+    }
+
+    private static TreeNode<Integer> createTree1() {
+        TreeNode<Integer> root =TreeNode.createTreeNode(1);
+        root.right = TreeNode.createTreeNode(2);
+
+        return root;
     }
 }
