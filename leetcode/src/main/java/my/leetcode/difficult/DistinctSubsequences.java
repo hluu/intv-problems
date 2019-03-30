@@ -59,25 +59,28 @@ import java.util.*;
  *   - find second and subsequence letter starts after the prev. letter was found
  * - now moving letters from last to first to the right
  *
+ * Resources:
+ *  - http://traceformula.blogspot.com/2015/08/distinct-subsequences.html
  */
 public class DistinctSubsequences {
 
     public static void main(String[] args) {
         System.out.println(DistinctSubsequences.class.getName());
 
-        test("a", "b", 0);
-        test("rabbbit", "dog", 0);
-        test("rabbbit", "rabbbit", 1);
-        test("rabbbit", "rabbit", 3);
+       // test("a", "b", 0);
+       // test("rabbbit", "dog", 0);
+       // test("rabbbit", "rabbbit", 1);
+       // test("rabbbit", "rabbit", 3);
+        //test("babgbag", "bat", 0);
         test("babgbag", "bag", 5);
-        test("acdabefbc", "ab", 4);
+       // test("acdabefbc", "ab", 4);
         //test("adbdadeecadeadeccaeaabdabdbcdabddddabcaaadbabaaedeeddeaeebcdeabcaaaeeaeeabcddcebddebeebedaecccbdcbcedbdaeaedcdebeecdaaedaacadbdccabddaddacdddc",
           //       "dad", 8789);
 
     }
 
     private static void test(String input, String pattern, int expected) {
-        System.out.printf("\ninput: %s, pattern: %s, expected: %d\n",
+        System.out.printf("\n****** input: %s, pattern: %s, expected: %d ******\n",
                 input,pattern, expected);
 
         int actual = findDistinctSub(input, pattern);
@@ -86,8 +89,13 @@ public class DistinctSubsequences {
 
         int actualbottomUpDPRows = bottomUpDPUsingPatternAsRows(input, pattern);
 
-        System.out.printf("actual:  %d, actualtopDownDP: %d, actualbottomUpDP: %d\n",
-                actual,actualtopDownDP, actualbottomUpDPRows);
+        int actualDPPatternasCol = dpPatternAsCols(input, pattern);
+        int actualDPPatternasCol1D = dpPatternAsCols1D(input, pattern);
+
+        System.out.printf("actual:  %d, actualtopDownDP: %d, actualbottomUpDP: %d, " +
+                        "actualDPPatternasCol: %d, actualDPPatternasCol1D: %d\n",
+                actual,actualtopDownDP, actualbottomUpDPRows, actualDPPatternasCol,
+                actualDPPatternasCol1D);
 
         Assert.assertEquals(actual, expected);
     }
@@ -240,7 +248,7 @@ public class DistinctSubsequences {
     }
 
     public static int topDownDPHelper(String s, String t, int[][] dp, int sIdx, int tIdx){
-        if(tIdx >= t.length()) return 1;
+        if(tIdx >= t.length()) return 1; // why?
         if(sIdx >= s.length()) return 0;
         if(dp[sIdx][tIdx] != -1) return dp[sIdx][tIdx];
 
@@ -285,7 +293,7 @@ public class DistinctSubsequences {
             List<Integer>> charToPositionMap, int prevCharLoc) {
 
         char c = pattern.charAt(charIdx);
-        List<Integer> charLocList = charToPositionMap.get(c);
+        //List<Integer> charLocList = charToPositionMap.get(c);
 
         //System.out.printf("** char: %c, charIdx: %d, chaLocList: %s\n",
           //      c, charIdx, charLocList);
@@ -295,7 +303,7 @@ public class DistinctSubsequences {
         if (charIdx == pattern.length()-1) {
             for (Integer charLoc : charToPositionMap.get(c)) {
                 // there is an opportunity optimize here because
-                // we now subsequent values will be bigger after this point
+                // we know subsequent values will be bigger after this point
                 if (charLoc > prevCharLoc) {
                     result += 1;
                 }
@@ -332,6 +340,68 @@ public class DistinctSubsequences {
         }
 
         return charToPositionMap;
+    }
+
+    /**
+     * This implementation is based on the following formula
+     *
+     * dp [i][j] = dp[i-1][j] if S[i] != T[j] , or
+     * dp [i][j] = dp[i-1][j] + dp[i-1][j-1] if S[i] ==T[j]
+     *
+     * @param input
+     * @param pattern
+     * @return
+     */
+    private static int dpPatternAsCols(String input, String pattern) {
+        if(input == null || input.length()==0 ||
+                pattern == null || pattern.length() == 0) {
+            return 0;
+        }
+
+        int[][] dp = new int[input.length()][pattern.length()];
+
+        char firstCharOfPattern = pattern.charAt(0);
+        // initializing the first column, why?
+        for(int row=0; row<input.length(); row++){
+            char charAtRowOfInput = input.charAt(row);
+
+            int prevRowVale = row==0 ? 0: dp[row-1][0];
+            dp[row][0] = prevRowVale + (charAtRowOfInput == firstCharOfPattern?1:0);
+        }
+
+        // for each row
+        for(int row = 1; row<input.length(); row++){
+            char charAtRowOfInput = input.charAt(row);
+            // for each column
+            for(int col=1; col<pattern.length(); col++) {
+                char charAtColOfPattern = pattern.charAt(col);
+                dp[row][col] = dp[row-1][col] +
+                        (charAtColOfPattern==charAtRowOfInput? dp[row-1][col-1]:0);
+            }
+        }
+
+        System.out.println("=== dp pattern as cols ==");
+        ArrayUtils.printMatrix(dp);
+
+        return dp[input.length()-1][pattern.length()-1];
+    }
+
+    private static int dpPatternAsCols1D(String s, String t) {
+        if(s == null || t == null || t.length() == 0) return 0;
+        int[] dp = new int[t.length()];
+
+        for(int i = 0; i<s.length(); i++){
+            char c = s.charAt(i);
+            for(int j=dp.length-1; j>=0; j--){
+                if(c == t.charAt(j)){
+                    dp[j] = dp[j] + (j!=0?dp[j-1]: 1);
+                }
+            }
+        }
+
+        System.out.println("==== 1D ====");
+        System.out.println(Arrays.toString(dp));
+        return dp[t.length()-1];
     }
 
 

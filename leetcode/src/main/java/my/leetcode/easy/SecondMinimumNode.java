@@ -1,6 +1,7 @@
 package my.leetcode.easy;
 
 import org.common.TreeNode;
+import org.common.TreeUtility;
 
 import java.util.Comparator;
 import java.util.Deque;
@@ -52,18 +53,28 @@ public class SecondMinimumNode {
 
         test(createSmallTree(), 5);
         test(createMiniTree(), 8);
+        test(createSmallFour(), 2);
+        test(createSmallFive(), 3);
+        test(createLargeTree(), 2);
     }
 
     private static void test(TreeNode<Integer> root, int expected) {
+
+        System.out.println("******** testing ********");
+        TreeUtility.printLevelByLevel(root);
+
         int actual = findSecondMinimumDFS(root);
 
-        System.out.printf("actual: %d, expected: %d\n", actual,
+        System.out.printf("\nactual: %d, expected: %d\n", actual,
                  expected);
 
-        int actual2 = findSecondMinimumBFS(root);
+        int actualBFS2 = findSecondMinimumBFS(root);
 
-        System.out.printf("actual2: %d, expected: %d\n", actual2,
-                expected);
+        int actualOptimized3 = optimizedSolution1(root);
+
+        System.out.printf("actualBFS2: %d, actualOptimized3: %d, expected: %d\n",
+                actualBFS2,
+                actualOptimized3, expected);
     }
 
     /**
@@ -173,6 +184,42 @@ public class SecondMinimumNode {
         }
     }
 
+    private static int optimizedSolution1(TreeNode node) {
+
+        // handle these cases root is null and root has less than two children return null
+        if (node == null) {
+            return -1;
+        }
+
+        if (node.left == null || node.right == null) {
+            return -1;
+        }
+
+        int secondMin = Integer.MAX_VALUE;
+        secondMin = optimizedSolution1Helper(node, secondMin);
+        return (secondMin == Integer.MAX_VALUE) ? -1 : secondMin;;
+    }
+
+    private static int optimizedSolution1Helper(TreeNode<Integer> node, int secondMin) {
+        // this is an invariant of this problem, so when that is violated, return secondMin
+        if (node.left == null || node.right == null) {
+            return secondMin;
+        }
+
+        if (node.value != node.left.value) {
+            // going right
+            secondMin = Math.min(node.left.value, secondMin);
+            return optimizedSolution1Helper(node.right, secondMin);
+        } else {
+            // going left
+            int rightValue = (node.right.value == node.value) ? Integer.MAX_VALUE :
+                    node.right.value;
+            secondMin = Math.min(rightValue, secondMin);
+            return optimizedSolution1Helper(node.left, secondMin);
+
+        }
+    }
+
     private static TreeNode<Integer> createMiniTree() {
         TreeNode<Integer> root = new TreeNode<>(5);
         root.left = new TreeNode<>(8);
@@ -187,6 +234,74 @@ public class SecondMinimumNode {
         root.right = new TreeNode<>(5);
         root.right.left = new TreeNode<>(5);
         root.right.right = new TreeNode<>(7);
+
+        return root;
+    }
+
+    private static TreeNode<Integer> createSmallFour() {
+        TreeNode<Integer> root = new TreeNode<>(1);
+        root.left = new TreeNode<>(1);
+        root.right = new TreeNode<>(2);
+
+        root.left.left = new TreeNode<>(1);
+        root.left.right = new TreeNode<>(1);
+
+        root.right.left = new TreeNode<>(2);
+        root.right.right = new TreeNode<>(2);
+
+        return root;
+    }
+
+    private static TreeNode<Integer> createSmallFive() {
+        TreeNode<Integer> root = new TreeNode<>(2);
+        root.left = new TreeNode<>(2);
+        root.right = new TreeNode<>(4);
+
+        root.left.left = new TreeNode<>(3);
+        root.left.right = new TreeNode<>(2);
+
+        root.right.left = new TreeNode<>(5);
+        root.right.right = new TreeNode<>(4);
+
+        return root;
+    }
+
+    /**
+     * Fairly large tree
+     * [1, 1,3, 1,1,3,4, 3,1,1,1,3,8,4,8, 3,3,1,6,2,1]
+     */
+    private static TreeNode<Integer> createLargeTree() {
+        TreeNode<Integer> root = new TreeNode<>(1);
+
+        root.left = new TreeNode<>(1);
+        root.right = new TreeNode<>(3);
+
+        root.left.left = new TreeNode<>(1);
+        root.left.right = new TreeNode<>(1);
+
+        root.right.left = new TreeNode<>(3);
+        root.right.right = new TreeNode<>(4);
+
+        root.left.left.left = new TreeNode<>(3);
+        root.left.left.right = new TreeNode<>(1);
+
+        root.left.right.left = new TreeNode<>(1);
+        root.left.right.right = new TreeNode<>(1);
+
+        root.right.left.left = new TreeNode<>(3);
+        root.right.left.right = new TreeNode<>(8);
+
+        root.right.right.left = new TreeNode<>(4);
+        root.right.right.right = new TreeNode<>(8);
+
+        root.left.left.left.left = new TreeNode<>(3);
+        root.left.left.left.right = new TreeNode<>(3);
+
+        root.left.left.right.left = new TreeNode<>(1);
+        root.left.left.right.right = new TreeNode<>(6);
+
+        root.left.right.left.left = new TreeNode<>(2);
+        root.left.right.left.right = new TreeNode<>(1);
 
         return root;
     }

@@ -15,7 +15,7 @@ import java.util.Queue;
  *
  * Also all leaves will have distinct and unique values.
  *
- *        2
+ *         2
  *      /    \
  *     2      3
  *    / \    /  \
@@ -24,7 +24,7 @@ import java.util.Queue;
  * Answer is 3.
  *
  *
- *      2
+ *       2
  *     /  \
  *    4    2
  *   / \  / \
@@ -37,13 +37,18 @@ import java.util.Queue;
  *      * Traverse the entire tree and keep track of second minimum.
  *          Runtime => O(n) -> n for number of nodes
  *          Space => O(log(n)) -> stack for depth of the tree
- *      * Traverse the entire tree and populate the min-heap of size of 2 (k), pop out two times.
+ *      * Traverse the entire tree and populate the min-heap of size of 2 (k),
+ *        pop out two times.
  *          * No need to maintain all the nodes in the tree
- *          Runtime => O(n) for traversing the tree, populate the min heap O(klog(n)), pop out 2, 2logn
+ *            Runtime => O(n) for traversing the tree, populate the min heap
+ *            O(klog(n)), pop out 2, 2logn
  *          Space => O(log(n)) -> stack while traversing, O(n) for the heap
- *          * To get the kth smallest value from the tree, we can perform operations of Delete-Min and Get-Min k-1 times.
-*    * From previous approaches, it requires traversing the whole tree, IS THAT REALLY NECESSARY?
- *      * Can we come up with a condition and then go left or right at each level to cut the tree in half?
+ *          * To get the kth smallest value from the tree, we can perform operations
+ *            of Delete-Min and Get-Min k-1 times.
+*    * From previous approaches, it requires traversing the whole tree,
+ *      IS THAT REALLY NECESSARY?
+ *      * Can we come up with a condition and then go left or right at each
+ *        level to cut the tree in half?
  *
  */
 
@@ -56,6 +61,8 @@ public class TournamentTree {
         TreeNode<Integer> tree2 = createTree2();
         test(tree2, 3);
 
+        test(createTree3(), 5);
+        test(createTree4(), 2);
     }
 
     private static void test(TreeNode<Integer> tree, int expectedValue) {
@@ -67,14 +74,15 @@ public class TournamentTree {
         Assert.assertEquals(actualValueFromBruteForce, expectedValue);
 
         // brute force using BFS
-        int actualValueFromBruteForceBFS = bruteForceBFS(tree);
-        System.out.printf("expected: %d, actual from brute force BFS: %d\n", expectedValue, actualValueFromBruteForceBFS);
-        Assert.assertEquals(actualValueFromBruteForceBFS, expectedValue);
+        int actualValueFromBFBFS = bruteForceBFS(tree);
+        System.out.printf("expected: %d, actual from brute force BFS: %d\n",
+                expectedValue, actualValueFromBFBFS);
+        Assert.assertEquals(actualValueFromBFBFS, expectedValue);
 
         int actualValueFromOptimize1 = optimizedSolution1(tree);
 
-        System.out.printf("expected: %d, actual from solution1: %d\n", expectedValue, actualValueFromOptimize1);
-
+        System.out.printf("expected: %d, actual from optimized solution1: %d\n",
+                expectedValue, actualValueFromOptimize1);
 
         System.out.println();
     }
@@ -102,11 +110,11 @@ public class TournamentTree {
         }
 
         if (node.value != node.left.value) {
-            // going left
+            // going right
             secondMin = Math.min(node.left.value, secondMin);
             return optimizedSolution1Helper(node.right, secondMin);
         } else {
-            // going right
+            // going left
             secondMin = Math.min(node.right.value, secondMin);
             return optimizedSolution1Helper(node.left, secondMin);
         }
@@ -184,6 +192,33 @@ public class TournamentTree {
         }
 
         return result[1];
+    }
+
+    private static TreeNode<Integer> createTree4() {
+        TreeNode<Integer> root = new TreeNode<Integer>(1);
+
+        root.left = TreeNode.createTreeNode(1);
+        root.right = TreeNode.createTreeNode(2);
+
+        root.left.left = TreeNode.createTreeNode(1);
+        root.left.right = TreeNode.createTreeNode(1);
+
+        root.right.left = TreeNode.createTreeNode(2);
+        root.right.right = TreeNode.createTreeNode(2);
+
+        return root;
+    }
+
+
+    private static TreeNode<Integer> createTree3() {
+        TreeNode<Integer> root = new TreeNode<Integer>(2);
+
+        root.left = TreeNode.createTreeNode(2);
+        root.right = TreeNode.createTreeNode(5);
+        root.right.left = TreeNode.createTreeNode(5);
+        root.right.right = TreeNode.createTreeNode(7);
+
+        return root;
     }
 
     private static TreeNode<Integer> createTree2() {

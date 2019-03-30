@@ -1,10 +1,11 @@
-package my.epi.misc;
+package my.epi.array;
 
+
+import org.testng.Assert;
 
 import java.util.Arrays;
 
 /**
- * Created by hluu on 11/8/16.
  *
  * Problem:
  *  Give a set of stock prices in the order of time.  Determine the
@@ -20,6 +21,7 @@ import java.util.Arrays;
  *
  *      What would be a fast solution - like O(n)
  *          Is there a way that involves scanning the array multiple times?
+ *            - but not in nested loop
  *
  *          Another way of looking at this is treating the value of element as
  *          the maximum value, then find the small element among all the elements
@@ -35,24 +37,29 @@ public class BuyLowSellHigh {
         System.out.println(BuyLowSellHigh.class.getName());
 
         int arr[] = {30, 50, 60, 20, 40, 50, 45, 70, 40};
-        System.out.printf("input: %s\n", Arrays.toString(arr));
-
-        System.out.printf("max profit: %d", maxProfit(arr));
+        test(arr, 50);
     }
 
+    private static void test(int[] prices, int expected) {
+        System.out.printf("Input: %s\n",
+                Arrays.toString(prices));
+
+        int actual = maxProfit(prices);
+
+        System.out.printf("expected: %d, actual: %d\n",
+                expected, actual);
+
+        Assert.assertEquals(actual, expected);
+
+    }
     public static int maxProfit(int[] arr) {
         int[] minArr = new int[arr.length];
 
         // finding the min
         minArr[0] = arr[0];
-        // maintaining a running min
+
         for (int i = 1; i < arr.length; i++) {
-            // default update
-            minArr[i] = minArr[i-1];
-            // update if less than
-           if (arr[i] < minArr[i]) {
-               minArr[i] = arr[i];
-           }
+           minArr[i] = Math.min(minArr[i-1], arr[i]);
         }
 
         System.out.printf("min arr: %s\n", Arrays.toString(minArr));

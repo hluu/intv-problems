@@ -26,19 +26,6 @@ public class MaximumSubarray {
         Assert.assertEquals(actual, expected);
     }
 
-    private static int maxSubArrayLinear(int[] nums) {
-        int globalMax = nums[0];
-        int runningMax = globalMax;
-
-        for (int i = 1; i < nums.length; i++) {
-
-            runningMax =((runningMax > 0) ? runningMax : 0) + nums[i];
-
-            globalMax = Math.max(globalMax, runningMax);
-        }
-
-        return globalMax;
-    }
 
     /**
      * Using DP approach
@@ -77,5 +64,28 @@ public class MaximumSubarray {
         }
 
         return max;
+    }
+
+    /**
+     * This version builds on the maxSubArray with memoization version.
+     * The observation here is that we only need to know max-sum(i-1),
+     * so we can use one addition variable to store that and use it and update
+     * it as we go
+     *
+     * @param nums
+     * @return
+     */
+    private static int maxSubArrayLinear(int[] nums) {
+        int globalMax = nums[0];
+        int runningMax = globalMax;
+
+        for (int i = 1; i < nums.length; i++) {
+
+            runningMax =((runningMax > 0) ? runningMax : 0) + nums[i];
+
+            globalMax = Math.max(globalMax, runningMax);
+        }
+
+        return globalMax;
     }
 }

@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * https://leetcode.com/problems/path-sum-ii/description/
  *
- * Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+ * Given a binary tree and a sum, find all root-to-leaf paths where each path's
+ * sum equals the given sum.
  *
  * For example:
  *  Given the below binary tree and sum = 22,
@@ -80,8 +81,10 @@ public class PathSumPaths {
         remaining = remaining - node.value;
         path.add(node.value);
 
+        // are we at the leaf level? if so, check the remaining
         if (node.left == null && node.right == null && remaining == 0) {
             collector.add(new ArrayList<>(path));
+            return;
         }
 
         pathSumHelper(node.left, remaining, path, collector);

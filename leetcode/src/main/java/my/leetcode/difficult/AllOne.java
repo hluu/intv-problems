@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by hluu on 10/25/16.
  *
  * Problem:
  *  Implement a data structure supporting the following operations:

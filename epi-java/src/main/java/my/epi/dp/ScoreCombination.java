@@ -3,7 +3,6 @@ package my.epi.dp;
 import java.util.Arrays;
 
 /**
- * Created by hluu on 12/21/15.
  *
  * Problem statement:
  *  Give a final score of a game, compute how many difference combinations
