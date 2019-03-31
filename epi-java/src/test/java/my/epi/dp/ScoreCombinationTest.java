@@ -13,7 +13,7 @@ public class ScoreCombinationTest {
         int[] playScores = {3};
         int score = 2;
 
-        Assert.assertEquals(ScoreCombination.bruteForce(playScores, score), 0);
+        Assert.assertEquals(ScoreCombination.bruteForceHelper(playScores, score), 0);
 
         Assert.assertEquals(ScoreCombination.dpApproach(playScores, score), 0);
 
@@ -23,9 +23,9 @@ public class ScoreCombinationTest {
     public void oneCombination() {
         int[] playScores = {3};
 
-        Assert.assertEquals(ScoreCombination.bruteForce(playScores, 6), 1);
-        Assert.assertEquals(ScoreCombination.bruteForce(playScores, 9), 1);
-        Assert.assertEquals(ScoreCombination.bruteForce(playScores, 12), 1);
+        Assert.assertEquals(ScoreCombination.bruteForceHelper(playScores, 6), 1);
+        Assert.assertEquals(ScoreCombination.bruteForceHelper(playScores, 9), 1);
+        Assert.assertEquals(ScoreCombination.bruteForceHelper(playScores, 12), 1);
 
         Assert.assertEquals(ScoreCombination.dpApproach(playScores, 6), 1);
         Assert.assertEquals(ScoreCombination.dpApproach(playScores, 9), 1);
@@ -37,7 +37,7 @@ public class ScoreCombinationTest {
     public void twoCombinations() {
         int[] playScores = {2,3};
 
-        Assert.assertEquals(ScoreCombination.bruteForce(playScores, 8), 2);
+        Assert.assertEquals(ScoreCombination.bruteForceHelper(playScores, 8), 2);
         Assert.assertEquals(ScoreCombination.dpApproach(playScores, 8), 2);
 
     }
@@ -46,7 +46,7 @@ public class ScoreCombinationTest {
     public void threeCombinations() {
         int[] playScores = {2,3};
 
-        Assert.assertEquals(ScoreCombination.bruteForce(playScores, 12), 3);
+        Assert.assertEquals(ScoreCombination.bruteForceHelper(playScores, 12), 3);
 
         Assert.assertEquals(ScoreCombination.dpApproach(playScores, 12), 3);
 
@@ -55,7 +55,7 @@ public class ScoreCombinationTest {
     @Test
     public void fourCombinations() {
         int[] playScores = {2,3,7};
-        Assert.assertEquals(ScoreCombination.bruteForce(playScores, 12), 4);
+        Assert.assertEquals(ScoreCombination.bruteForceHelper(playScores, 12), 4);
         Assert.assertEquals(ScoreCombination.dpApproach(playScores, 12), 4);
     }
 }

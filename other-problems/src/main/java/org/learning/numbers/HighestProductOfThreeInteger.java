@@ -1,7 +1,6 @@
 package org.learning.numbers;
 
 /**
- * Created by hluu on 8/22/16.
  *
  * Problem statement:
  *  Give a list of integer with the minimum size of three, find the highest product

@@ -118,6 +118,17 @@ public class DistinctSubsequences {
      * else
      *   mem[r,c] =  mem[r, c-1]
      *
+     *     b    a    g
+     *   ===============
+     * b | 1 |  0 |  0 |
+     * a | 1 |  1 |  0 |
+     * b | 2 |  1 |  0 |
+     * g | 2 |  1 |  1 |
+     * b | 3 |  1 |  1 |
+     * a | 3 |  4 |  1 |
+     * g | 3 |  4 |  5 |
+     *   ===============
+     *
      * @param input
      * @param pattern
      * @return
@@ -253,8 +264,10 @@ public class DistinctSubsequences {
         if(dp[sIdx][tIdx] != -1) return dp[sIdx][tIdx];
 
         int sol = topDownDPHelper(s, t, dp, sIdx + 1, tIdx);
-        if(s.charAt(sIdx) == t.charAt(tIdx))
-            sol += topDownDPHelper(s, t, dp,sIdx + 1, tIdx + 1);
+        if(s.charAt(sIdx) == t.charAt(tIdx)) {
+            // when 2 characters are equal
+            sol += topDownDPHelper(s, t, dp, sIdx + 1, tIdx + 1);
+        }
 
         dp[sIdx][tIdx] = sol;
         return sol;

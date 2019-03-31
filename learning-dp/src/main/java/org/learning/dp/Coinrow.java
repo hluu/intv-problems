@@ -1,12 +1,15 @@
 package org.learning.dp;
 
 import org.common.Tuple;
+import org.testng.Assert;
+
+import java.util.Arrays;
 
 
 /**
  * Given a row of coins whose values are positive integers and not necessary distinct.
  * The goal is to pick up the maximum amount of money subject to the constraint that 
- * no two coins adjacent in the initial row can be picked up
+ * no two coins adjacent in the  row can be picked up
  * 
  * The main idea is to partition all the allowed coin selections into two group, those
  * that include in the last coin and those what w/o it.
@@ -19,21 +22,33 @@ import org.common.Tuple;
  * 
  * The recurrence relation is F(n) = max { C(n) + F(n-2), F(n-1) } for n > 1
  * F(0) = 0, F(1) = C(1)
- * 
- * @author hluu
+ *
  *
  */
 public class Coinrow {
 
 	public static void main(String[] args) {
-		//int[] coins = {1,2,3,4,5,6 };
-		int[] coins = {5,15,1,1,9,10 };
-		//int[] coins = {2,2,2,2,2,2 };
-		System.out.println("max is: " + coinRow(coins));
-		
-		System.out.println("max from coinRow2 is: " + coinRow2(coins));
-		
-		System.out.println("max from coinRowWithCoins is: " + coinRowWithCoins(coins));
+
+
+		test(new int[] {5,15,1,1,9,10 }, 26);
+		test(new int[] {2,2,2,2,2,2}, 6);
+		test(new int[] {1,2,3,4,5,6 }, 12);
+	}
+
+	private static void test(int[] coins, int expected) {
+		System.out.printf("\n *** input: %s\n", Arrays.toString(coins));
+
+		int actual1 = coinRow(coins);
+
+		int actual2 = coinRow2(coins);
+		Tuple actual3Tuple = coinRowWithCoins(coins);
+
+		System.out.printf("expected: %d, actual1: %d, actual2: %d, actual3: %d\n",
+				expected, actual1, actual2, actual3Tuple.first);
+
+		Assert.assertEquals(actual1, expected);
+		Assert.assertEquals(actual2, expected);
+		Assert.assertEquals(actual3Tuple.first, expected);
 	}
 	
 	public static int coinRow(int[] coins) {
@@ -41,7 +56,9 @@ public class Coinrow {
 		int max[] = new int[coins.length+1];
 		max[1] = coins[0];
 		
-		
+
+		// instead of the entire array, we can possibly just
+		// store 2 numbers max[i-1] and mac[i-2]
 		for (int i = 2; i <= coins.length; i++) {
 			max[i] = Math.max(coins[i-1] + max[i-2], max[i-1]);
 		}

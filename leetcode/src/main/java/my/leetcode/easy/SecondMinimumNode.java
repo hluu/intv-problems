@@ -197,7 +197,7 @@ public class SecondMinimumNode {
 
         int secondMin = Integer.MAX_VALUE;
         secondMin = optimizedSolution1Helper(node, secondMin);
-        return (secondMin == Integer.MAX_VALUE) ? -1 : secondMin;;
+        return (secondMin == Integer.MAX_VALUE) ? -1 : secondMin;
     }
 
     private static int optimizedSolution1Helper(TreeNode<Integer> node, int secondMin) {

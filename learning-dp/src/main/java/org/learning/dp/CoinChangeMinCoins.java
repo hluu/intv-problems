@@ -38,7 +38,8 @@ import java.util.List;
  * 	Space complexity is O(n) => n is the amount
  * 
  * 
- * @author hluu
+ * http://blog.gainlo.co/index.php/2015/10/22/
+ *  a-step-by-step-guide-to-dynamic-programming/?utm_campaign=quora&utm_medium=What+are+the+best+sources+for+practicing+Dynamic+Programming+problems?&utm_source=quora
  *
  */
 public class CoinChangeMinCoins {
@@ -50,10 +51,10 @@ public class CoinChangeMinCoins {
 				// TestObject.createTestObj(6249, new int[] {186,419,83,408}, 20),
               //  TestObject.createTestObj(7, new int[] {1,3,4}, 2),
               //  TestObject.createTestObj(22, new int[] {1,5,12,25}, 3),
-              //  TestObject.createTestObj(15, new int[] {1,3,9,10}, 3)
+                TestObject.createTestObj(15, new int[] {1,3,9,10}, 3)
               //TestObject.createTestObj(12, new int[] {1,6,10}, 2),
               //TestObject.createTestObj(17, new int[] {1,6,10}, 3),
-              TestObject.createTestObj(3, new int[] {2,6,10}, -1)
+              //TestObject.createTestObj(3, new int[] {2,6,10}, -1)
         };
 
         System.out.println("********* brute force *********");
@@ -62,13 +63,13 @@ public class CoinChangeMinCoins {
         }
 
 
-/*
+
         System.out.println("\n********* Top down DP *********");
         for (TestObject to : testObjects) {
             testTopDownDP(to.amount, to.coins, to.expectedNumCoins);
         }
 
-
+/*
         System.out.println("\n********* Bottom up DP *********");
         for (TestObject to : testObjects) {
             testBottomUpDP(to.amount, to.coins, to.expectedNumCoins);
@@ -200,12 +201,6 @@ public class CoinChangeMinCoins {
             }
         }
 
-        /*if (minCoin == Integer.MAX_VALUE || minCoin == -1) {
-            cache[amount] = -1;
-        } else {
-            cache[amount] = minCoin + 1;
-        }*/
-
         cache[amount] = minCoin + 1;
 
         return cache[amount];
@@ -230,7 +225,7 @@ public class CoinChangeMinCoins {
 			return -1;
 		}
 
-		int minCoin[] = new int[amount+1];
+		int minCoin[] = new int[amount+1]; //why amount+1?
 		int denominations[] = new int[minCoin.length];
 		
 		for (int amt = 1; amt <= amount; amt++) {

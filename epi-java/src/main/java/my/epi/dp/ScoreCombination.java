@@ -38,7 +38,7 @@ public class ScoreCombination {
         // 2,3,7
 
         System.out.println("playScoreTable: " + Arrays.toString(playScoreTable) + " score: " +
-        score + " # score combinations: " + bruteForce(playScoreTable, score));
+        score + " # score combinations: " + bruteForceHelper(playScoreTable, score));
 
         //System.out.printf("dp way: " + dpApproach(playScoreTable, score));
 
@@ -57,9 +57,9 @@ public class ScoreCombination {
      * @param score
      * @return
      */
-    public static int bruteForce(int[] playScoreTable, int score) {
+    public static int bruteForceHelper(int[] playScoreTable, int score) {
 
-        return bruteForce(playScoreTable, score, 0);
+        return bruteForceHelper(playScoreTable, score, 0);
     }
 
     /**
@@ -75,7 +75,7 @@ public class ScoreCombination {
      * @param playScoreIndex
      * @return number of combinations
      */
-    public static int bruteForce(int[] playScoreTable, int score, int playScoreIndex) {
+    public static int bruteForceHelper(int[] playScoreTable, int score, int playScoreIndex) {
         if (score == 0) {
             return 1;
         }
@@ -85,8 +85,12 @@ public class ScoreCombination {
         }
 
         int scoreComo = 0;
+
+        // for each scores starting at playScoreIndex (0, 1, 2, 3)
+        // sub-array [playScoreIndex ... playScoreTable.length]
         for (int i = playScoreIndex; i < playScoreTable.length; i++) {
-            scoreComo += bruteForce(playScoreTable, score - playScoreTable[i], i);
+            scoreComo += bruteForceHelper(playScoreTable,
+                    score - playScoreTable[i], i);
         }
         return scoreComo;
     }
@@ -97,7 +101,7 @@ public class ScoreCombination {
      * Let play scores be W = {w0,w1,w2..wn}, the total score is S.
      *
      * Let F(n) be the total # of combinations for given s of each play score
-     * and F(0) = 1 - one way for scoring 0 point
+     * and F(0) = 1 - one way for scoring 0 point, why?
      *
      * Let W = {2} and S = 12
      *   cache = [1,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -110,6 +114,8 @@ public class ScoreCombination {
      *
      * For each t < S, we cache the # of combinations of ways in which each play score can
      * be used to achieved t.
+     *
+     * This DP bottom-up style
      *
      * What is the optimal structure?
      *
