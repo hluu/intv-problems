@@ -36,6 +36,8 @@ public class AllPossibleCombinations {
         printCombinationInternal(inputs, new int[k], 0, 0, collector);
         return collector;
     }
+
+
     /**
      * The approach is to recursion with a buffer to store the k numbers.
      *

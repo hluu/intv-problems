@@ -1,4 +1,4 @@
-package my.leetcode.medium;
+package my.leetcode.difficult;
 
 import org.testng.Assert;
 
@@ -20,6 +20,11 @@ import java.util.Arrays;
  *
  * https://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/
  * tech-queries.blogspot.com/2011/08/find-optimal-number-of-jumps-to-reach.html
+ *
+ * Observation:
+ *  - this is a DP problem
+ *  - subproblem definition???
+ *  - overlapping subproblems???
  *
  */
 public class JumpingGameAdv {
@@ -125,7 +130,7 @@ public class JumpingGameAdv {
      *
      * @param input
      * @param currentIdx
-     * @param cache - index to number of jumps
+     * @param cache - index to number of jumps using currentIdx
      * @return
      */
     private static int jumpDPHelper(int[] input, int currentIdx,
@@ -247,6 +252,12 @@ public class JumpingGameAdv {
     }
 
 
+    /**
+     * This is very cryptic, not easy to understand
+     *
+     * @param input
+     * @return
+     */
     private static int jumpOptimizedBFS(int input[]) {
         if(input.length <2) {
             return 0;
@@ -259,7 +270,8 @@ public class JumpingGameAdv {
         while(currentMax-idx+1>0){		//nodes count of current level>0
             level++;
 
-            for(; idx <= currentMax; idx++){	//traverse current level , and update the max reach of next level
+            for(; idx <= currentMax; idx++) {
+                //traverse current level , and update the max reach of next level
 
                 nextMax=Math.max(nextMax,input[idx]+idx);
 

@@ -35,6 +35,21 @@ public class ArrayUtils {
 
 	}
 
+	/**
+	 * The length of each array might be the same
+	 * @param arrays
+	 */
+	public static void printMatrix2(int[][] arrays) {
+		if (arrays == null) {
+			System.out.println("arrays is null");
+			return;
+		}
+
+		for (int[] arr : arrays) {
+			System.out.println(Arrays.toString(arr));
+		}
+	}
+
 	public static void printMatrix(int[][] matrix) {
 		int rows = matrix.length;
 		int cols = matrix[0].length;
@@ -138,6 +153,31 @@ public class ArrayUtils {
 			result[r] = input[r].clone();
 		}
 		return result;
+	}
+
+	public static boolean equals(int[][] matrix1, int[][] matrix2) {
+		if (matrix1 == null && matrix2 == null) {
+			return true;
+		}
+
+		if (matrix1 == null || matrix2 == null) {
+			return false;
+		}
+
+		if (matrix1.length != matrix2.length ||
+		    matrix1[0].length != matrix2[0].length) {
+			return false;
+		}
+
+		for (int r = 0; r < matrix1.length; r++) {
+			for (int c = 0; c < matrix1[0].length; c++) {
+				if (matrix1[r][c] != matrix2[r][c]) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 }

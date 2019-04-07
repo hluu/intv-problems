@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by hluu on 1/2/17.
+ *
  */
 public class PermutationUsingPrefix {
     public static void main(String[] args) {

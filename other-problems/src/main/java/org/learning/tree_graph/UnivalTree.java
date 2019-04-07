@@ -66,6 +66,18 @@ public class UnivalTree {
         System.out.println("unival count is " + countUnivalTree(root));
     }
 
+    /**
+     * The algorithm is DFS
+     *  - The unival of a node is sum(left child + right child)
+     *  - add one of it if the following conditions are met
+     *    - node, left, right are equal
+     *    - null value of left and right are considered same as the other node
+     *    - leaf node is consider one
+     *
+     *
+     * @param root
+     * @return
+     */
     private static int countUnivalTree(TreeNode<Integer> root) {
         if (root == null) {
             return 0;
@@ -90,13 +102,8 @@ public class UnivalTree {
             total = total + 1;
         }
 
-        /*if (root.left == null && root.right == null) {
-            total = total + 1;
-        } else if (root.left == null || root.right == null) {
-            total = total + 1;
-        } else if ((root.left.value == root.right.value) && (root.value == root.left.value)) {
-            total = total + 1;
-        }*/
+        /*
+        * */
 
         return total;
     }
