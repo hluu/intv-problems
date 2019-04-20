@@ -1,6 +1,7 @@
 package org.learning.matrix;
 
 import org.common.ArrayUtils;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,12 +50,16 @@ public class RiverSizes {
         System.out.println(RiverSizes.class.getName());
 
         test(matrix1(), Arrays.asList(1,2,2,2,5));
+        test(matrix2(), Arrays.asList(1, 1, 2, 2, 5, 21));
+        test(matrix3(), Arrays.asList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1));
+
         test(new int[][]{}, Arrays.asList());
 
         test(new int[][]{{0,0,0}}, Arrays.asList());
         test(new int[][]{{1,1,1}}, Arrays.asList(3));
         test(new int[][]{{1,1,1}, {1,1}}, Arrays.asList(5));
         test(new int[][]{{1,1,1}, {1},{1,1}}, Arrays.asList(6));
+        test(new int[][]{{1,1,1,0,1,1,0,0,0,1,0}}, Arrays.asList(1,2,3));
     }
 
 
@@ -66,9 +71,34 @@ public class RiverSizes {
                 {1,0,1,0,1},
                 {1,0,1,1,0}
         };
+
+    }
+
+    private static int[][] matrix2() {
+        int[][] matrix = {
+                {1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0},
+                {1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0},
+                {0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1},
+                {1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0},
+                {1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1},
+        };
+        return matrix;
+    }
+
+    private static int[][] matrix3() {
+        int[][] matrix = {
+                {1, 0, 0, 0, 0, 0, 1},
+                {0, 1, 0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 1, 0, 0},
+                {0, 0, 0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0, 1, 0},
+                {1, 0, 0, 0, 0, 0, 1},
+        };
+        return matrix;
     }
     private static void test(int[][] matrix, List<Integer> expected) {
-        System.out.println("]===== testing ======");
+        System.out.println("\n===== testing ======");
 
         ArrayUtils.printMatrix(matrix);
 
@@ -78,8 +108,9 @@ public class RiverSizes {
         Collections.sort(actual);
 
         System.out.println("expected: " + expected);
-        System.out.println("actual: " + actual);
-        
+        System.out.println("  actual: " + actual);
+
+        Assert.assertEquals(actual, expected);
     }
 
     public static ArrayList<Integer> riverSizes(int[][] matrix) {
