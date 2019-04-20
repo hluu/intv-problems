@@ -1,12 +1,17 @@
 package org.common;
 
 /**
- * Created by hluu on 1/1/16.
+ *
  */
 public class LinkedListUtil {
 
     /**
      * Reverse a linked list
+     *
+     * p  c    n
+     *    a -> b -> c    ==>  a <- b <- c <
+     *
+     *
      * @param head
      * @param <T>
      * @return head of the reversed linked list
@@ -171,5 +176,23 @@ public class LinkedListUtil {
         }
 
         return result;
+    }
+
+    public static SLNode<Integer> fromArray(int[] input) {
+        // make sure not null and 0 length array
+        if (input == null || input.length == 0) {
+            return null;
+        }
+
+        SLNode<Integer> head = new SLNode<>(input[0]);
+        SLNode<Integer> tmp = head;
+
+        for (int i = 1; i < input.length; i++) {
+            tmp.next = new SLNode<>(input[i]);
+            // update tmp
+            tmp = tmp.next;
+        }
+
+        return head;
     }
 }

@@ -51,8 +51,17 @@ public class ArrayUtils {
 	}
 
 	public static void printMatrix(int[][] matrix) {
+		if (matrix.length == 0) {
+			return;
+		}
+
+
 		int rows = matrix.length;
-		int cols = matrix[0].length;
+		int cols = -1;
+
+		for (int i = 0; i < matrix.length; i++) {
+			cols = Math.max(cols, matrix[i].length);
+		}
 		
 		for (int j = 0; j < cols; j++) {
 			System.out.print("=====");
@@ -61,7 +70,7 @@ public class ArrayUtils {
 		
 		for (int i = 0; i < rows; i++) {
 			System.out.print("|");
-			for (int j = 0; j < cols; j++) {
+			for (int j = 0; j < matrix[i].length; j++) {
 				if (j > 0) {
 					System.out.print(" | ");
 				}
