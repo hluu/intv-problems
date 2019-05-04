@@ -23,7 +23,7 @@ import java.util.*;
  *              substring following that word
  *          * To handle the case with free and freedom, then we must keep iterating
  *          * There is a subproblem in this problem, because the suffix is
- *          * just a subproblem, so recursion is natural choice.
+ *          * just a subproblem of a shorter string, so recursion is natural choice.
  *          * The base case is when suffix is the exact word
  *
  *  Optimize:
@@ -49,19 +49,23 @@ public class WordBreak {
     public static void main(String[] args) {
         System.out.printf("%s\n", WordBreak.class.getName());
 
+
+        String dict0[] = {"bed", "bath", "bedbath", "and", "beyond"};
+        testBreakWord(dict0, "bedbathandbeyond");
+        //, return either ['bed', 'bath', 'and', 'beyond] or ['bedbath', 'and', 'beyond'].
+
         String dict1[] = {"I","am","a","free", "freedom"};
-        testBreakWord(dict1, "Iam");
-        testBreakWord(dict1, "freedomIam");
+   //     testBreakWord(dict1, "Iam");
+   //     testBreakWord(dict1, "freedomIam");
 
         testBreakWord(dict1, "amIdofree");
-        testBreakWord(dict1, "aaaaaaaaa");
+/*        testBreakWord(dict1, "aaaaaaaaa");
         testBreakWord(dict1, "IaIaIaIaIam");
         testBreakWord(dict1, "IaIaIamIaIa");
 
 
 
         String dict2[] = {"a","aa","aaa"};
-
 
         // event # of as
         testBreakWord(dict2, "aa");
@@ -71,11 +75,7 @@ public class WordBreak {
         testBreakWord(dict2, "aaaaaa");
         testBreakWord(dict2, "aaaaaaa");
 
-        // test with memoization
-        /*System.out.printf("Testing with memoization\n");
-        String input = "aaaaaaa";
-        System.out.printf("input: %s, output: %s\n", input,
-                breakWordWithMemoized(dict2, input));*/
+
 
         String dictionary[] = {"mobile","samsung","sam","sung","man","mango",
                 "icecream","and","go","i","love","ice","cream"};
@@ -89,8 +89,8 @@ public class WordBreak {
         testBreakWord(dictionary4, "thebiggercat");
 
         String dictionary5[] = {"cat","cats","and", "sand", "dog"};
-        testBreakWords(dictionary5, "catsanddog");
-
+        testBreakWord(dictionary5, "catsanddog");
+*/
     }
 
     private static void testBreakWord(String[] dict, String str) {
@@ -102,13 +102,18 @@ public class WordBreak {
 
     }
     private static void testBreakWord(Set<String> dict, String str) {
-        System.out.printf("=================\n");
-        System.out.printf("Dict: %s\n", dict);
-        String result = breakWordIntoSentence(dict, str);
+        System.out.printf("\n======= testBreakWord ======\n");
+        System.out.printf("Dict: %s, input: %s\n", dict, str);
 
-        System.out.printf("input: %s, output: %s\n", str, result);
+        String result1 = breakWordIntoSentence(dict, str);
+        System.out.printf("result1: %s\n", result1);
+
+        List<String> result2 = breakWords(dict, str);
+        System.out.println("result2: " + result2);
+
     }
 
+    /*
     private static void testBreakWords(String[] arrStr, String str) {
         System.out.println("========= testbreakWords =========");
 
@@ -119,7 +124,7 @@ public class WordBreak {
         List<String> result = breakWords(dict, str);
 
         System.out.println(result);
-     }
+     }*/
 
 
     /**
@@ -134,6 +139,7 @@ public class WordBreak {
             return str;
         }
 
+        String result = "";
         for (int i = 0; i < str.length(); i++) {
             // for substring, the second index is exclusive
             String prefix = str.substring(0, i);
@@ -144,13 +150,14 @@ public class WordBreak {
                 String suffixAsWords = breakWordIntoSentence(dict, str.substring(i));
 
                 if (suffixAsWords != null) {
-                    return prefix + " " + suffixAsWords;
+                    prefix = prefix + " " + suffixAsWords;
                 }
+
+                result = result + " " + prefix;
             }
         }
 
-        // if we got here, the can't find one of the words in dict
-        return null;
+        return result;
 
     }
 
@@ -164,7 +171,7 @@ public class WordBreak {
      */
     public static List<String> breakWords(Set<String> dict, String str) {
 
-        System.out.println("*** str: " + str);
+        //System.out.println("*** str: " + str);
         if (str == null || str.length() == 0) {
             return Collections.emptyList();
         }
@@ -183,12 +190,14 @@ public class WordBreak {
                 // from idx to the end
                 String suffix = str.substring(idx);
 
-                System.out.println("prefix: "  + prefix + " suffix: " + suffix);
+                //System.out.println("prefix: "  + prefix + " suffix: " + suffix);
 
                 List<String> tmpResult = breakWords(dict, str.substring(idx));
 
                 result.add(mkString(tmpResult));
             }
+
+            // move on to next character
         }
 
         return result;
@@ -207,8 +216,4 @@ public class WordBreak {
 
         return buf.toString();
     }
-
-
-
-
 }

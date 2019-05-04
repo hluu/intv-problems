@@ -1,7 +1,7 @@
 package org.learning.combinatory;
 
 /**
- * Created by hluu on 12/11/16.
+ *
  *
  * Problem:
  *  Each telephone number represents a set of characters

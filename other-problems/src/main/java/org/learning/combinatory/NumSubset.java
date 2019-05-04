@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by hluu on 6/29/17.
  *
  * Problem:
  *  Given a set of numbers, determine the number of subsets whose sum is
@@ -25,7 +24,7 @@ import java.util.List;
  * Approach:
  *  A subset can contain any # elements and not necessary contiguous.
  *
- *  An array {1,3,4,5} has 4 elements, there are 2^4 (15) possible combinations.  If
+ *  An array {1,3,4,5} has 4 elements, there are 2^4 (16) possible combinations.  If
  *  we run sum up the elements in each combination to see which ones would add up to
  *  given target sum.
  *
@@ -48,28 +47,30 @@ public class NumSubset {
 
         int[] a2 = {1,3,-2, 4,5, 2};
         int k2 = 5;
-        //test(a2,k2,6);
+        test(a2,k2,6);
 
         int[] a3= new int[]{1, 3, 5, 7, 2, -2};
         int k3 = 8;
-        //test(a3, k3, 6);
+        test(a3, k3, 6);
 
     }
 
-    private static void test(int[] array, int targetSum, int expectedNumSubsequences) {
+    private static void test(int[] array, int targetSum, int expected) {
         System.out.println("\n ******* Running tests **********" );
 
-        System.out.printf("a: %s, k: %d, expectedNumSubsequences: %d\n",
-                Arrays.toString(array), targetSum, expectedNumSubsequences);
+        System.out.printf("a: %s, k: %d, expected: %d\n",
+                Arrays.toString(array), targetSum, expected);
 
-        System.out.println("=====> Using running sum");
+        System.out.println("=====> Using running sum  <====");
 
-   //     int count1 = numSubsetsUsingSum(array, targetSum, 0, 0, 0);
-     //   System.out.printf("count: %d\n", count1);
+        int actual1 = numSubsetsUsingSum(array, targetSum, 0, 0, 0);
+        System.out.printf("expected: %d, actual1: %d\n", expected, actual1);
 
-        System.out.println("=====> Using sum subtraction");
-        int count2 = numSubsetsUsingSubtraction(array, targetSum, 0);
-        System.out.printf("actual count: %d\n", count2);
+        System.out.println("=====> Using sum subtraction <====");
+        int actual2 = numSubsetsUsingSubtraction(array, targetSum, 0);
+
+
+        System.out.printf("expected %d, actual2: %d\n", expected, actual2);
 
 /*
         System.out.println("=====> Using findSubSetUsingBackTrack");
@@ -97,6 +98,7 @@ public class NumSubset {
 
     /**
      * This version uses the running sum
+     *
      * @param array
      * @param target
      * @param index
@@ -129,7 +131,8 @@ public class NumSubset {
 
 
     /**
-     * This one uses subtraction.  Seems like
+     * This one uses subtraction.  Seems like this doesn't work well
+     * where there is a negative number
      *
      * @param array
      * @param remainingSum
@@ -143,9 +146,9 @@ public class NumSubset {
             return (remainingSum == 0) ? 1 : 0;
         }
 
-        StringUtility.printSpace(index);
-        System.out.printf("index: %d, remaining: %d, value: %d\n",
-                index, remainingSum,  array[index]);
+        //StringUtility.printSpace(index);
+        //System.out.printf("index: %d, remaining: %d, value: %d\n",
+          //      index, remainingSum,  array[index]);
 
 
        return (array[index] == remainingSum) ? 1 : 0 +
@@ -169,6 +172,7 @@ public class NumSubset {
 
     /**
      * Looks like this is a backtracking approach
+     *
      * @param arr
      * @param index
      * @param remaining
@@ -197,7 +201,7 @@ public class NumSubset {
         //          5
         for (int i = index; i < arr.length; i++) {
             listSoFar.add(arr[i]);
-            System.out.println("index: " + index + " listSoFar: " + listSoFar);
+           // System.out.println("index: " + index + " listSoFar: " + listSoFar);
             backTrackHelper(arr, i+1, remaining-arr[i],
                     collector, listSoFar);
             // remove last element, what was added earlier to

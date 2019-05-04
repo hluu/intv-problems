@@ -34,12 +34,13 @@ public class WordBreak2 {
     public static void main(String[] args) {
         System.out.printf("%s\n", WordBreak2.class.getName());
 
-        List<String> wordList = Arrays.asList("cat", "cats", "and", "sand", "dog");
-
-        test(wordList, "catsanddog");
-
         List<String> wordList2 = Arrays.asList("a", "abc", "b", "cd");
         test(wordList2, "abcd");
+
+
+        List<String> wordList = Arrays.asList("cat", "cats", "and", "sand", "dog");
+        test(wordList, "catsanddog");
+
 
         List<String> wordList3 = Arrays.asList("a");
         test(wordList3, "a");
@@ -58,9 +59,9 @@ public class WordBreak2 {
 
         Set<String> dictSet = new HashSet<>(dict);
         //List<String> actualResult = wordBreakHelper(word, dictSet);
-        List<String> actualResult = wordBreak(word, dict);
+        List<String> actualResult = wordBreak(word, dictSet);
 
-        System.out.printf("actualResult: %s\n", actualResult);
+        System.out.printf("  actualResult: %s\n", actualResult);
 
 
         List<String> actualResultDP = wordBreakHelperWithMemoiz(word, dictSet,
@@ -70,21 +71,22 @@ public class WordBreak2 {
     }
 
 
-    public static List<String> wordBreak(String s, List<String> wordDict) {
-        if (s == null  || s.isEmpty()  ||  wordDict == null | wordDict.isEmpty()) {
+    public static List<String> wordBreak(String s, Set<String> dictSet) {
+        if (s == null  || s.isEmpty()  ||  dictSet == null | dictSet.isEmpty()) {
             return Collections.emptyList();
         }
 
-        Set<String> dictSet = new HashSet<>(wordDict);
+        //Set<String> dictSet = new HashSet<>(wordDict);
         List<String>  result = wordBreakHelper(s, dictSet);
 
         List<String>  newResult = new ArrayList<>();
 
-        boolean forceCopy = wordDict.size() == 1;
+        boolean forceCopy = dictSet.size() == 1;
         for (String str : result) {
-            if (forceCopy || str.indexOf(' ') != -1) {
+            newResult.add(str);
+            /*if (forceCopy || str.indexOf(' ') != -1) {
                 newResult.add(str);
-            }
+            }*/
         }
 
         return newResult;
@@ -109,6 +111,7 @@ public class WordBreak2 {
      */
     public static List<String> wordBreakHelper(String wordRemaining, Set<String> dict) {
         List<String> sentences = new ArrayList<>();
+
         if (wordRemaining == null  || wordRemaining.isEmpty()) {
             return sentences;
         }
@@ -116,7 +119,9 @@ public class WordBreak2 {
 
         // start with 1 to make it easier with substring
         for (int i = 1; i <= wordRemaining.length(); i++) {
+
             String prefix = wordRemaining.substring(0, i);
+
             if (dict.contains(prefix)) {
                 String suffix = wordRemaining.substring(i);
                 List<String> tmpResult = wordBreakHelper(suffix, dict);

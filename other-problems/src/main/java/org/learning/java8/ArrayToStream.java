@@ -3,7 +3,7 @@ package org.learning.java8;
 import java.util.Arrays;
 
 /**
- * Created by hluu on 11/20/16.
+ *
  */
 public class ArrayToStream {
     public static void main(String[] args) {

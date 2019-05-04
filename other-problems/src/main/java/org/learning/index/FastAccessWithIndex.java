@@ -4,7 +4,7 @@ import java.util.TreeSet;
 import java.util.UUID;
 
 /**
- * Created by hluu on 1/16/16.
+ *
  *
  * Problem statement:
  *  Give a file with 2B lines, where each line is 500 bytes long and the key in UUID is 16 bytes

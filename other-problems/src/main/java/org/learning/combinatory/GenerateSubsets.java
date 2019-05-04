@@ -1,17 +1,16 @@
 package org.learning.combinatory;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Generate combinations
+ *
+ * Resources: https://byte-by-byte.wistia.com/medias/cwwyk06xhk?wvideo=cwwyk06xhk
  */
 public class GenerateSubsets {
     public static void main (String[] args) {
-        System.out.println("Hello Java");
-
-        //printNumbers(new int[] {1,2,3,4});
+        System.out.println(GenerateSubsets.class.getName());
 
         printNumbers2(new int[] {1,2,3,4}, 0, "");
 
@@ -19,7 +18,10 @@ public class GenerateSubsets {
     }
 
     /**
-     * This one will create duplicates
+     * This one will create duplicates.
+     *
+     * This is using the including and not including pattern.
+     *
      *
      * @param input
      * @param idx
@@ -31,6 +33,7 @@ public class GenerateSubsets {
         }
 
         System.out.println(prev);
+
 
         printNumbers2(input, idx+1, prev);
         printNumbers2(input, idx+1, prev + input[idx]);

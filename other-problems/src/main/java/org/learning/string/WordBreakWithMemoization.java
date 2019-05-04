@@ -6,6 +6,7 @@ import java.util.*;
  *
  */
 public class WordBreakWithMemoization {
+
     public static void main(String[] args) {
         System.out.printf("%s\n", WordBreakWithMemoization.class.getName());
 
@@ -42,8 +43,8 @@ public class WordBreakWithMemoization {
         }
 
         // check the state
-        System.out.printf("state: %s str: %s\n", state,
-                str);
+        System.out.printf("state: %s str: %s\n", state, str);
+
         if (state.containsKey(str)) {
             System.out.printf("breakWordWithMemoized: found %s for str: %s\n",
                     state.get(str), str);
