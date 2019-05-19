@@ -38,10 +38,10 @@ public class MergedNSortedArrays {
 
     }
     /**
-     * Give an array of arrays, mergey them and return a totally sorted list.
+     * Give an array of arrays, merge them and return a totally sorted list.
      *
      * We would extend the merging of two arrays to implement this, but it is
-     * a bit complicated becasause it will require n comparison and n indexes
+     * a bit complicated because it will require n comparison and n indexes
      * to keep track of.
      *
      * A simpler approach is to use a min-heap to perform the sorted list.
@@ -73,6 +73,7 @@ public class MergedNSortedArrays {
             int[] arr = inputs[arrIdx];
             // add only if it has more than 0 elements
             if (arr.length > 0) {
+                // adding the first element in each of the arrays
                 minHeap.offer(new MinHeapElm(arr[0], arrIdx, 0));
             }
         }
@@ -106,7 +107,6 @@ public class MergedNSortedArrays {
 
     private static class CustomComparitor implements Comparator<MinHeapElm> {
         public CustomComparitor() {
-
         }
 
         // ascending

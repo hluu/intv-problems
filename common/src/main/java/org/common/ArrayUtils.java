@@ -86,6 +86,42 @@ public class ArrayUtils {
 		
 	}
 
+	public static void printMatrix(boolean[][] matrix) {
+		if (matrix.length == 0) {
+			return;
+		}
+
+
+		int rows = matrix.length;
+		int cols = -1;
+
+		for (int i = 0; i < matrix.length; i++) {
+			cols = Math.max(cols, matrix[i].length);
+		}
+
+		for (int j = 0; j < cols; j++) {
+			System.out.print("=====");
+		}
+		System.out.println("");
+
+		for (int i = 0; i < rows; i++) {
+			System.out.print("|");
+			for (int j = 0; j < matrix[i].length; j++) {
+				if (j > 0) {
+					System.out.print(" | ");
+				}
+				System.out.print(" " + (matrix[i][j] ? "t" : "f"));
+			}
+			System.out.println(" |");
+		}
+
+		for (int j = 0; j < cols; j++) {
+			System.out.print("=====");
+		}
+		System.out.println("");
+
+	}
+
 	public static int[] randomArrayWithUnique(int size, int maxValue) {
 		int[] result = new int[size];
 		Set<Integer> set = new HashSet<>();
