@@ -116,7 +116,7 @@ public class TreeUtility {
 
         while(!currentLevelList.isEmpty()) {
             for (BNode<T> node : currentLevelList) {
-                System.out.printf("%d ", node.value);
+                System.out.printf("%s ", node.value.toString());
                 if (node.left != null) {
                     nextLevelList.add(node.left);
                 }

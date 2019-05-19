@@ -59,6 +59,8 @@ public class InversionNumber {
         test(new int[] {1,2,3,4}, 0);
         test(new int[] {1,2,3,4,5}, 0);
         test(new int[] {2,4,1,3,5}, 3);
+        test(new int[] {2, 1, 3, 1, 2}, 4);
+        test(new int[] {2, -1, 3, -1, 2}, 4);
 
         test(new int[] {5,4,3,2,1}, 10);
         test(new int[] {6,5,4,3,2,1}, 15);

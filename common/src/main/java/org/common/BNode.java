@@ -1,8 +1,7 @@
 package org.common;
 
 
-/**
- * Created by hluu on 12/11/15.
+/***
  *
  * To represent a node in binary tree
  */
