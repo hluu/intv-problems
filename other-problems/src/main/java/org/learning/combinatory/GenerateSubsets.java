@@ -58,13 +58,15 @@ public class GenerateSubsets {
 
     private static List<List<Integer>> generateCombs(int[] input, int idx) {
 
-        // base case
+        // base case so return the empty list of list
         if (idx == input.length) {
             List<List<Integer>> result = new ArrayList<>();
             result.add(new ArrayList<>());
             return result;
         }
 
+        // if not base case, for each returned list, either
+        // include or exclude the current element at idx
         List<List<Integer>> result = new ArrayList<>();
         for (List<Integer> tmpList : generateCombs(input, idx+1)) {
             // exclude

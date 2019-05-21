@@ -3,7 +3,7 @@ package org.common;
 
 
 /**
- * Created by hluu on 1/10/16.
+ *
  *
  * Node for double linked list
  */
