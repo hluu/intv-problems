@@ -1,4 +1,4 @@
-package org.learning.others;
+package my.leetcode.difficult;
 
 import org.testng.Assert;
 
@@ -44,9 +44,12 @@ import java.util.Stack;
  *
  *  * A new rectangle starts when we reach a new bar with a larger height
  *    and this rectangle ends when we see another bar with lower height
+ *
  *  * Maintain two stacks, one for the height and the other for the index of the bar
  *    this could be done using a single back with a tuple or object for (height, index)
+ *
  *  * Also maintain a running largest rectangle size
+ *
  *  * Iterate from left to right, when we see a taller bar, add to stack (height, index)
  *  * When we see a smaller height, compute the rectangle at that point using formula
  *    are = height * (end index - start index).  Swap with running largest rectangle size if
@@ -62,22 +65,28 @@ public class LargestRectangleInHistogram {
         System.out.println(LargestRectangleInHistogram.class.getName());
 
 
-        //test(new int[] {2,1,2}, 3);
-        //test(new int[] {2,1,2}, 3);
+        test(new int[] {2,1,2}, 3);
+        test(new int[] {2,1,2}, 3);
         test(new int[] {2,3,1,3,2}, 5);
         test(new int[] {6, 2, 5, 4, 5, 1, 6}, 12);
 
-       // test(new int[] {2,1,5,6,2,3}, 10);
-      // test(new int[] {1,3,2,1,2}, 5);
-        //test(new int[] {1,2,1,3,2,0,1}, 5);
+        test(new int[] {2,1,5,6,2,3}, 10);
+        test(new int[] {1,3,2,1,2}, 5);
+        test(new int[] {1,2,1,3,2,0,1}, 5);
 
 
-       // test(new int[] {2,1,5,6,2,3}, 10);
-        /*
+        test(new int[] {2,1,5,6,2,3}, 10);
+
         test(new int[] {1,10,1}, 10);
         test(new int[] {1,3,2,1,2}, 5);
 
-        test(new int[] {1,2,3,4,5,3,3,2}, 15);*/
+        test(new int[] {1,2,3,4,5,3,3,2}, 15);
+
+        test(new int[] {4,2,0,3,2,5},6);
+        test(new int[] {4,2,1,3,2,5},6);
+        test(new int[] {2,1,3,2,5},6);
+
+
     }
 
     private static void test(int[] hist, int expectedRectSize) {
@@ -95,12 +104,17 @@ public class LargestRectangleInHistogram {
 
         int actualRectSizeOptimized = maxRectangleSizeOptimized(hist);
 
-        System.out.printf("expected: %d, actualRectSizeOptimized: %d\n",
-                expectedRectSize, actualRectSizeOptimized);
+        int actualRectSizeWStack = maxRectangleSizeWStack(hist);
+
+        System.out.printf("expected: %d, actualRectSizeOptimized: %d, " +
+                        "actualRectSizeWStack: %d\n",
+                expectedRectSize, actualRectSizeOptimized,
+                actualRectSizeWStack);
 
 
         Assert.assertEquals(expectedRectSize, actualRectSizeBF);
         Assert.assertEquals(expectedRectSize, actualRectSizeOptimized);
+        Assert.assertEquals(expectedRectSize, actualRectSizeWStack);
     }
 
     /**
@@ -156,6 +170,7 @@ public class LargestRectangleInHistogram {
      *     - maintain an anchor to calculate the width of rectangles as going backward
      *   - as the last step after done iterating, ensure to process the remaining
      *     bars in the stack.  The anchor point is the last index of the array
+     *   - maintain a running maxRectSize
      *
      * @param heights
      * @return
@@ -170,7 +185,9 @@ public class LargestRectangleInHistogram {
             // keep popping until a bar that is smaller than the current one at i index
             while (!stack.isEmpty() && heights[i] < stack.peek()[1]) {
                 int[] last = stack.pop();
-                maxRectSize = Math.max((i - last[0]) * last[1], maxRectSize);
+                int width = (i - last[0]);
+                int height= last[1];
+                maxRectSize = Math.max(width * height, maxRectSize);
                 lastPopIndex = last[0]; // index of last popped elm.
             }
 
@@ -186,8 +203,67 @@ public class LargestRectangleInHistogram {
 
         while (!stack.isEmpty()) {
             int[] last = stack.pop();
-            maxRectSize = Math.max((heights.length - last[0]) * last[1], maxRectSize);
+            int width = heights.length - last[0];
+            int height= last[1];
+            maxRectSize = Math.max(width * height, maxRectSize);
         }
+        return maxRectSize;
+    }
+
+    /**
+     * O(n) algorithm - iterate from left to right
+     * - keep pushing col into stack if it is equal or greater than the last one
+     * - else that rectangle ends, so compute its width and height
+     *   - height is given
+     *   - compute width, which include left side and right side
+     *   - left side is (currentIdx - colIdx)
+     *   - right side is (colIdx - prevColIdx - 1)
+     *
+     * @param heights
+     * @return
+     */
+    private static int maxRectangleSizeWStack(int[] heights) {
+        int maxRectSize = 0;
+
+        // stack to maintain the index of each column
+        Stack<Integer> stack = new Stack<>();
+
+        // go all the way past last column in order to calculate all the columns
+        for (int i = 0; i <= heights.length; i++) {
+            int currHeight = (i != heights.length) ? heights[i] : -1;
+
+            while (!stack.isEmpty() && currHeight < heights[stack.peek()]) {
+                int colIdx = stack.pop();
+
+                int height = heights[colIdx];
+                // when stack is empty, this mean that we get the smallest
+                // so it width is actually the entire length of the array
+                //int width = stack.isEmpty() ? i : i - colIdx;
+
+                int width = 0;
+                if (stack.isEmpty()) {
+                    // since it is the smallest element in the list,
+                    // its width is the entire lenght of the array
+                    width = i;
+                } else {
+                    // width includes two sides
+                    // right side => (i - colIdx);
+                    // left side => (colIdx - (idx of elm of top of stack)
+                    width = i - colIdx;
+                    width += colIdx - stack.peek() - 1;
+
+                }
+
+                maxRectSize = Math.max(maxRectSize, height * width);
+
+            }
+
+            if (i < heights.length) {
+                stack.push(i);
+            }
+
+        }
+
         return maxRectSize;
     }
 }

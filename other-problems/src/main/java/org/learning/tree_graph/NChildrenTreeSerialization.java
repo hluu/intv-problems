@@ -36,6 +36,9 @@ public class NChildrenTreeSerialization {
 
     private static String serialize(NChildrenNode<Integer> root) {
 
+        if (root == null) {
+            return "";
+        }
         return serializeHelper(root, "");
     }
 
@@ -44,8 +47,10 @@ public class NChildrenTreeSerialization {
         soFar += root.value;
 
 
-        for (NChildrenNode child : root.getChildren()) {
-            soFar = serializeHelper(child, soFar + ",");
+        if (root.getChildren() != null) {
+            for (NChildrenNode child : root.getChildren()) {
+                soFar = serializeHelper(child, soFar + ",");
+            }
         }
 
         soFar += ",#";
@@ -67,7 +72,8 @@ public class NChildrenTreeSerialization {
      * @param holder
      * @return
      */
-    private static NChildrenNode<Integer> deserializeHelper(String input, int[] holder) {
+    private static NChildrenNode<Integer> deserializeHelper(String input,
+                                                            int[] holder) {
         int startIdx = holder[0];
 
         // if we are at the end, then stop
@@ -78,6 +84,8 @@ public class NChildrenTreeSerialization {
         // extract the value after ','
         int prefIdx = input.indexOf(",", startIdx);
         String prefix = input.substring(startIdx, prefIdx);
+
+        // update our index
         holder[0] = prefIdx + 1;
 
         // if we see "#", then no need to continue
@@ -89,7 +97,9 @@ public class NChildrenTreeSerialization {
         int value = Integer.parseInt(prefix);
         NChildrenNode<Integer> node = NChildrenNode.createNode(value);
 
+        // stop when there are no more children
         boolean shouldStop = false;
+
         while (!shouldStop) {
             // for each of the child
             NChildrenNode<Integer> childNode = deserializeHelper(input, holder);

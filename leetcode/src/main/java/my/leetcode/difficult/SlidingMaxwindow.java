@@ -5,6 +5,14 @@ import org.testng.Assert;
 import java.util.*;
 
 
+/**
+ * Give an array of unsorted numbers and k size window. As the window
+ * slides from left to right, determine the max element in each
+ * window.
+ *
+ *
+ *
+ */
 class SlidingMaxwindow {
 
     public static void main(String[] args) {
@@ -161,6 +169,9 @@ class SlidingMaxwindow {
      * Brute force and simple approach
      * 1) For each sliding window, find the max window each window
      * 2) Runtime O(n*k)
+     *
+     * The inefficiency comes from re-iterating through all the overlapping
+     * elements in the window.
      *
      * @param nums
      * @param k
