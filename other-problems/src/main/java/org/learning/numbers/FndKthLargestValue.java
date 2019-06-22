@@ -34,6 +34,7 @@ import java.util.PriorityQueue;
  *       if that position is equal to k, return the pivot value
  *       if that position is greater than k, then recursively work on the first subset, otherwise
  *         work on the right subset
+ *    c) what is the runtime here? O(logn)
  *
 
  */
@@ -138,6 +139,7 @@ public class FndKthLargestValue {
      *   5 6 7      ==>  This is the idea of using min heap (size is k)
      *
      *  Runtime is O(nlog(len(arr)+1 - k))
+     *
      * @param arr
      * @param k
      * @return

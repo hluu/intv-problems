@@ -4,7 +4,7 @@ import org.common.TreeNode;
 import org.common.TreeUtility;
 
 /**
- * Created by hluu on 2/20/16.
+ *
  *
  * Problem statement:
  *  Given a binary tree where each node contains a binary digit.  The MSB is at the root.
@@ -65,6 +65,12 @@ public class SumBinaryDigits {
 
     }
 
+    /**
+     * Another example of in-order traversal
+     * @param pathSum
+     * @param root
+     * @return
+     */
     public static int sumRootToLeaf(int pathSum, TreeNode<Integer> root) {
         if (root == null) {
             return 0;
@@ -79,6 +85,9 @@ public class SumBinaryDigits {
         }
 
         // sum of left side and right side
+        //     1
+        //   /  \
+        //  0     1
         return sumRootToLeaf(pathSum, root.left) +  sumRootToLeaf(pathSum, root.right);
 
     }

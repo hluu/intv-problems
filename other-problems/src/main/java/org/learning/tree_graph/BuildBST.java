@@ -1,4 +1,4 @@
-package my.cci.tree_graph;
+package org.learning.tree_graph;
 
 import org.common.BNode;
 import org.common.TreeUtility;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by hluu on 7/6/17.
+ *
  *
  * Problem:
  *  Given a sorted integer array, build an array with minimum height and most efficient

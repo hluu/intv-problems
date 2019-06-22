@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hluu on 2/21/16.
+ *
  *
  * Problem:
  *  Given a binary tree, perform the in-order traversal using space O(1)

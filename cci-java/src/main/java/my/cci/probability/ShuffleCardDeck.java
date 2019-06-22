@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Created by hluu on 11/29/16.
+ *
  *
  * Problem:
  *  Give a deck of 52 cards, how to shuffle it perfectly.

@@ -1,13 +1,17 @@
 package org.learning.tree_graph;
 
 import org.common.BNode;
+import org.common.LinkedListUtil;
+import org.testng.Assert;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 /**
- * Created by hluu on 10/9/17.
  *
- * Write a class to represent the in-order iterator of a binary tree.
+ *
+ * Write a class to represent the in-order iterator of a binary search tree.
  *
  * For given tree
  *
@@ -22,25 +26,34 @@ import java.util.Stack;
  * Approach:
  *  * Brute force way
  *    * Perform in-order traversal and store values in a list
- *
- *
  *  * No parent pointer, so use stack to store the path
  *  * Use stack to store the left hand side of the tree
- *  * As iterating, check to see if the just popped node has a right child
- *    * If so, navigate to the left mode child and store the path a long the way
+ *  * As iterating or popping from stack, check to see if the just
+ *    popped node has a right child
+ *    * If so, navigate to the left most child and store the path a long the way
+ *  * Runtime O(n), space O(depth of tree)
  */
 public class InOrderIterator {
     public static void main(String[] args) {
         System.out.println(InOrderIterator.class.getName());
 
-        BNode<Integer> root = createTree1();
+        test(createTree1());
 
+    }
+
+    private static void test(BNode<Integer> root) {
+        System.out.println("\n=====> testing <=====");
         InOrderBinaryTreeIteator iterator = new InOrderBinaryTreeIteator(root);
 
+        List<Integer> resultList = new LinkedList<>();
+
         while (iterator.hasNext()) {
-            System.out.printf("%d ", iterator.next());
+            resultList.add(iterator.next());
         }
 
+        System.out.println(resultList);
+
+        Assert.assertTrue(LinkedListUtil.isSorted(resultList));
     }
 
     private static class InOrderBinaryTreeIteator {

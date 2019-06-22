@@ -3,7 +3,6 @@ package org.learning.dp;
 import org.common.Tuple;
 
 /**
- * Created by hluu on 12/16/15.
  *
  * Problem statement:
  *  Longest common subsequence (LCS)

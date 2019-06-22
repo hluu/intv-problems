@@ -4,7 +4,7 @@ import org.common.TreeNode;
 import org.common.TreeUtility;
 
 /**
- * Created by hluu on 2/21/16.
+ *
  *
  * Problem:
  *  Give an node in a binary tree, compute the successor.
@@ -80,6 +80,7 @@ public class Successor {
     public static <T> void successTest(TreeNode<T> node) {
         System.out.printf("node = %s, successor = %s\n", node.value, successor(node).value);
     }
+
     public static <T> TreeNode<T> successor(TreeNode<T> node) {
         if (node == null) {
             return node;
@@ -103,7 +104,7 @@ public class Successor {
             }
             return tmp;
         } else {
-            // right node does exist, so traver up the parent
+            // right node does not exist, so travel up the parent
             // however if going up the right side of the tree, mean we
             // visit that root already, so we need to go up till left side of the parent
             TreeNode<T> parent = node.parent;

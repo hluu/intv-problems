@@ -18,10 +18,11 @@ public class NChildrenTreeSerialization {
 
         test(createTree2());
         test(createTree1());
+        //test(createTree3());
 
     }
 
-    private static void test(NChildrenNode<Integer> root) {
+    private static <T> void test(NChildrenNode<T> root) {
         System.out.println("==== test ====");
         String result1 = serialize(root);
 
@@ -34,7 +35,7 @@ public class NChildrenTreeSerialization {
 
     }
 
-    private static String serialize(NChildrenNode<Integer> root) {
+    private static <T> String serialize(NChildrenNode<T> root) {
 
         if (root == null) {
             return "";
@@ -42,7 +43,7 @@ public class NChildrenTreeSerialization {
         return serializeHelper(root, "");
     }
 
-    private static String serializeHelper(NChildrenNode<Integer> root,
+    private static <T> String serializeHelper(NChildrenNode<T> root,
                                           String soFar) {
         soFar += root.value;
 
@@ -141,5 +142,26 @@ public class NChildrenTreeSerialization {
         return root;
     }
 
+    private static NChildrenNode<Character> createTree3() {
+
+
+        NChildrenNode<Character> r = new NChildrenNode<Character>('r');
+        r.addChil(NChildrenNode.createNode('t'));
+
+        NChildrenNode<Character> a = new NChildrenNode<Character>('a');
+        a.addChil(r);
+        a.addChil(NChildrenNode.createNode('p'));
+
+        NChildrenNode<Character> o = new NChildrenNode<Character>('o');
+        o.addChil(NChildrenNode.createNode('d'));
+
+
+        NChildrenNode<Character> root = new NChildrenNode<Character>('c');
+        root.addChil(a);
+        root.addChil(o);
+
+
+        return root;
+    }
 
 }

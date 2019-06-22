@@ -1,6 +1,7 @@
 package my.leetcode.easy;
 
-import org.junit.Assert;
+
+import org.testng.Assert;
 
 /**
  * Given a non-empty string s, you may delete at most one character.
@@ -27,7 +28,6 @@ public class ValidPalindrome2 {
 
         test("aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga",
                 true);
-
 
     }
 

@@ -12,6 +12,8 @@ import java.util.Map;
  * Given a binary tree of integer values, count the number of paths that
  * sum up the given target value.
  *
+ * Note that a path can start or end at any node.
+ *
  * For example:
  *                    10
  *                  /   \
@@ -57,7 +59,16 @@ public class PathSumCount {
      * 1) Therefore the first part is to traverse node in pre-order fashion
      *    *) And for each node determine if there is a path with sum that matches the target
      *
-     * Runtime: O(2^n)
+     * Observation:
+     * - this pattern treats each node as a starting point
+     *   - for each node, call the helper
+     *   - for each node's children, recursively call it self
+     *   - pretty cool
+     *
+     *
+     * Runtime: O(nlogn) -
+     *   - treat each node as a starting point
+     *   - then traverse down to the height of the binary tree
      *
      * @return
      */
@@ -135,6 +146,7 @@ public class PathSumCount {
         int input[] = new int[] {8, 10,5,1,2,-1,7,1};
         testContiguousSum(input, 8, 4);
     }
+
     private static void testContiguousSum(int[] input, int target, int expected) {
         System.out.printf("==== %s, target: %d\n", Arrays.toString(input), target);
 
@@ -152,6 +164,7 @@ public class PathSumCount {
     /**
      * Given an array of integers, determine how many contiguous
      * set of integers that added up the given sum
+     *
      * @param input
      * @param target
      * @return
@@ -178,6 +191,7 @@ public class PathSumCount {
      *
      * First we need a map to maintain the running count and number of times
      * we've seen this running count
+     *
      *  map<sum, count>
      *
      * The idea is to iterate through each element,

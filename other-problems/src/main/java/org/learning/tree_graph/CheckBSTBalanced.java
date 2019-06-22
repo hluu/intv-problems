@@ -1,11 +1,11 @@
-package my.cci.tree_graph;
+package org.learning.tree_graph;
 
 
 import org.common.TreeNode;
 import org.common.TreeUtility;
 
 /**
- * Created by hluu on 7/6/17.
+ *
  *
  * A balanced tree is defined to be a tree such that the heights of two subtrees
  * of any node never differ more than one.

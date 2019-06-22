@@ -8,8 +8,8 @@ import java.util.Arrays;
  * inversion if A[i] > A[j] but i < j. That is, a smaller element
  * appears after a larger element.
  *
- * Given an array, count the number of inversions it has. Do this
- * faster than O(N^2) time.
+ * Given an array, count the number of inversions it has.
+ * Do this faster than O(N^2) time.
  *
  * You may assume each element in the array is distinct.
  *
@@ -100,16 +100,30 @@ public class InversionNumber {
         // the left side includes the mid
         int mid = (right + left) / 2;
 
+        // go left
         int invCount = countInversionsHelper(input, tmpArr, left, mid);
 
         // right side starts with mid+1
         invCount += countInversionsHelper(input, tmpArr,mid+1, right);
+
+        // merge step
         invCount += countInversionsMerge(input, tmpArr, left, mid+1, right);
 
         return invCount;
 
     }
 
+    /**
+     * We are expecting the left side to be less than the right side,
+     * when this expectation is not met, meaning there was a inversion.
+     *
+     * @param input
+     * @param tmpArr
+     * @param left
+     * @param mid
+     * @param right
+     * @return
+     */
     private static int countInversionsMerge(int[] input, int[] tmpArr,
                                             int left, int mid,
                                             int right) {
@@ -119,7 +133,7 @@ public class InversionNumber {
         int rightIdx = mid;
         int countIdx = left; // for the output tmpArr
 
-        // left goes form left to mid - 1
+        // left goes from left to mid - 1
         // right goes from mid to right
         while ((leftIdx <= mid-1) && (rightIdx <= right)) {
             if (input[leftIdx] <= input[rightIdx]) {

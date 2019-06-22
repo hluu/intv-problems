@@ -91,7 +91,8 @@ public class LongestIncreasingSubsequence {
      * len = 1   :      [4], [5], [6], [3]   => tails[0] = 3
      * len = 2   :      [4, 5], [5, 6]       => tails[1] = 5
      * len = 3   :      [4, 5, 6]            => tails[2] = 6
-     * We can easily prove that tails is a increasing array. Therefore it is possible to do a binary search in tails array to find the one needs update.
+     * We can easily prove that tails is a increasing array. Therefore it is possible to do a binary
+     * search in tails array to find the one needs update.
      *
      * Each time we only do one of the two:
      *

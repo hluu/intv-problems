@@ -35,7 +35,7 @@ public class FirstUniqueCharacter {
      * Brute force
      *  * Use a map to keep track of # of character in a string
      *  * One iteration to build the map
-     *  * Another iteration through input to find the first uniqu char
+     *  * Another iteration through input to find the first unique char
      *
      *  * This requires 2 iterations
      *
@@ -67,8 +67,9 @@ public class FirstUniqueCharacter {
 
     /**
      * How to solve this problem in a single pass?
-     *   * Do one pass and the state of the bookkeeping will tell us
-     *   * what is the first unique character
+     *   * Does one pass and the state of the bookkeeping will tell us
+     *   * what is the first unique character?
+     *     - implies the order of the letter within the word
      *   * This means we need to perform bookkeeping as we go
      *     * We still need a data structure to tell whether we have been a
      *       character before or not
@@ -85,10 +86,13 @@ public class FirstUniqueCharacter {
      *      **** USE THE LINKED LIST TO REMOVE RANDOM ELEMENT ***
      *    * Map of character to Node
      *
+     *  * This is a pattern - using a double linked with a map
+     *
      * @param input
      * @return
      */
     private static Character firstUniqueCharSinglePass(String input) {
+        // store the reference of the linked list node in the map
         Map<Character, Node> charMap = new HashMap<>();
         Node<Character> head = null;
         Node<Character> tail = null;
@@ -127,7 +131,8 @@ public class FirstUniqueCharacter {
                     charMap.put(charTmp, null);
                 }
             } else {
-                // a new character we haven't seen before
+                // a new character we haven't seen before,
+                // put it in the map and append to the queue
                 Node<Character> node = new Node<>(charTmp);
                 charMap.put(charTmp, node);
                 if (head == null) {
@@ -142,6 +147,8 @@ public class FirstUniqueCharacter {
             }
         }
 
+        // the queue contains the first unique letter because
+        // queue contains the order of letter insertion
         return (head != null) ? head.value : null;
 
     }

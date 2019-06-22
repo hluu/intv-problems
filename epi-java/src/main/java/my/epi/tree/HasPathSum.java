@@ -45,6 +45,14 @@ public class HasPathSum {
                 hasPathSum(root, 0, targetSum));
     }
 
+    /**
+     * In order traversal
+     *
+     * @param root
+     * @param sumSoFar
+     * @param sum
+     * @return
+     */
     public static boolean hasPathSum(TreeNode<Integer> root, int sumSoFar, int sum) {
         if (root == null) {
             return false;

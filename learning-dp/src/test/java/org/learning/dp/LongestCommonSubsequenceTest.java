@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Created by hluu on 12/20/15.
+ *
  */
 public class LongestCommonSubsequenceTest {
 

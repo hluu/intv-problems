@@ -184,15 +184,27 @@ public class MinRefuelingStops {
     /**
      * Top down DP solution using recursion.
      * - this will try all possible combination of stations
+     * - runtime would be O(n!) because at each station i, it will try i+1 to N stations
+     *
+     * Observation
+     * - it is a bit easier to use the distSoFar vs distRemaining
+     * - about the base case, condition about checking the last station should go after
+     *   checking the distFor > target
+     * - good practice to use local temp variable instead of modifying the input
+     *   arguments
+     * - two scenarios where -1 will be returned
+     *   - when no more stations to try
+     *   - when can't get to next station
+     *
      *
      * @return
      */
-    private static int minFuelStopBasicDPTD(int distSoFar, int target,
+    private static int minFuelStopBasicDPTD(int distSoFar, int targetDist,
                                             int startStation,
                                             int[][] stations) {
 
         // if reach target then return
-        if (distSoFar >= target) {
+        if (distSoFar >= targetDist) {
             return 0;
         }
 
@@ -205,17 +217,22 @@ public class MinRefuelingStops {
 
         for (int stationIdx = startStation; stationIdx < stations.length; stationIdx++) {
             int stationDist = stations[stationIdx][0];
+
             if (stationDist <= distSoFar) {
                 int stationFuel = stations[stationIdx][1];
                 int minRefuelsTmp = minFuelStopBasicDPTD(distSoFar + stationFuel,
-                        target, stationIdx+1, stations);
+                        targetDist, stationIdx+1, stations);
 
+                // since -1 can be returned, we need to guard and throw it a way
+                // before performing Math.min()
                 if (minRefuelsTmp != -1) {
                     minRefuels = Math.min(minRefuels, minRefuelsTmp+1);
                 }
             }
         }
 
+        // if we never got into the inner if statement of the for loop
+        // minRefuels will be Integer.MAX_VALUE, so handle it
         return (minRefuels == Integer.MAX_VALUE) ? -1 : minRefuels;
     }
 
@@ -234,6 +251,28 @@ public class MinRefuelingStops {
      *
      * O(nlogn) for heap offers.
      *
+     * One of the key insights:
+     *
+     * Start at 0, with start fuel = 35
+     * Stations = [(10, 25), (20, 12), (30,21), (40, 5), (50,3)]
+     *
+     * The question now is with 1 steps, what is the max distance we can reach?
+     *
+     * 35.......25.......12.......21.......5........3................... (fuel)
+     * |--------|--------|--------|--------|--------|------------------> (stations)
+     * 0.......10.......20.......30...|....40.......50.................. (distance)
+     * ...............................|.................................
+     * ...............................35................................ (max distance can reach after 0 step)
+     *
+     * When we reach 35, we pass by 3 stations [10, 20, 30]. It means we can possibly refuel at these stations.
+     *
+     * Refuel at 10: max distance = 10 + (35 - 10 + 25) = 35 + 25 = 60
+     * Refuel at 20: max distance = 20 + (35 - 20 + 12) = 35 + 12 = 47
+     * Refuel at 30: max distance = 30 + (35 - 30 + 12) = 35 + 21 = 56
+     *
+     * Notice that apparently the max distance does not depends on the station's position,
+     * but the station's fuel.
+     *
      * @param target
      * @param startFuel
      * @param stations
@@ -243,14 +282,14 @@ public class MinRefuelingStops {
     private static int minRefuelStops(int target, int startFuel, int[][] stations) {
         Queue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
-        int maxTravelDist = startFuel, refuel = 0, i = 0;
+        int maxTravelDist = startFuel, refuel = 0, stationIdx = 0;
 
         while (maxTravelDist < target) {
             //int stationDist = stations[i][0];
             // for all the stations within the maxTravelDist
-            for (; i < stations.length && stations[i][0] <= maxTravelDist; i++) {
+            for (; stationIdx < stations.length && stations[stationIdx][0] <= maxTravelDist; stationIdx++) {
                 // add the fuel amount to PQ
-                pq.offer(stations[i][1]);
+                pq.offer(stations[stationIdx][1]);
             }
 
             // if no station in the PQ, mean can't reach to any of them

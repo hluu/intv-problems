@@ -1,5 +1,7 @@
 package org.common;
 
+import java.util.List;
+
 /**
  *
  */
@@ -194,5 +196,22 @@ public class LinkedListUtil {
         }
 
         return head;
+    }
+
+    public static boolean isSorted(List<Integer> input) {
+        if (input == null || input.size() < 1) {
+            return true;
+        }
+
+        int prev = Integer.MIN_VALUE;
+
+        for (Integer value : input) {
+            if (prev > value.intValue()) {
+                return false;
+            }
+            prev = value.intValue();
+        }
+
+        return true;
     }
 }

@@ -121,7 +121,7 @@ public class PathWithSumCounting {
       return 0;
     }
 
-    // starting from the node
+    // starting from the node and running count is 0
     int numPath = pathWithSumHelper(node, target, 0);
 
     // its left side - NOTICE IT CALLS THE DRIVER
@@ -136,22 +136,6 @@ public class PathWithSumCounting {
     return numPath;
   }
 
-  private static int pathSumDriver2(TreeNode<Integer> node, int target) {
-    if (node == null) {
-      return 0;
-    }
-
-    // starting from the node
-    int numPath = pathSumHelper2(node, target);
-
-    // its left side
-    numPath += pathSumDriver2(node.left, target);
-
-    // its right side
-    numPath += pathSumDriver2(node.right, target);
-
-    return numPath;
-  }
 
   /**
    * This method starts at the given node and traverses down to all paths from this node
@@ -182,6 +166,31 @@ public class PathWithSumCounting {
     return numPath;
   }
 
+  private static int pathSumDriver2(TreeNode<Integer> node, int target) {
+    if (node == null) {
+      return 0;
+    }
+
+    // starting from the node and call helper method to traverse
+    int numPath = pathSumHelper2(node, target);
+
+    // its left side
+    numPath += pathSumDriver2(node.left, target);
+
+    // its right side
+    numPath += pathSumDriver2(node.right, target);
+
+    return numPath;
+  }
+
+  /**
+   * This one is counting down the sum.  When reaching a new node,
+   * it will ask if the count down value match the value of the new node.
+   *
+   * @param node
+   * @param sum
+   * @return
+   */
   private static int pathSumHelper2(TreeNode<Integer> node, int sum) {
     if (node == null) {
       return 0;
@@ -223,6 +232,8 @@ public class PathWithSumCounting {
 
   /**
    * Doing a DFS
+   *  - use a hash table to record the running sum with number of times
+   *
    * @param node
    * @param targetSum
    * @param runningSum
@@ -241,6 +252,7 @@ public class PathWithSumCounting {
     runningSum = runningSum + node.value;
 
     int prevRunningSum = runningSum - targetSum;
+
     // retrieve path count of prevRunningCount
     int pathCount = runningSumToSeenCount.getOrDefault(prevRunningSum, 0);
 
@@ -251,8 +263,10 @@ public class PathWithSumCounting {
 
     // going left
     pathCount += optimizedPathToSumHelper(node.left, targetSum, runningSum, runningSumToSeenCount);
+    // going right
     pathCount += optimizedPathToSumHelper(node.right, targetSum, runningSum, runningSumToSeenCount);
 
+    // back track
     recordRunningSum(runningSumToSeenCount,  runningSum,-1);
 
     return  pathCount;

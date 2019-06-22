@@ -86,7 +86,7 @@ public class HouseRGBColoring {
 
 
 	/**
-	 * DP Approach:
+	 * DP Bottom Up Approach:
 	 *  0) For each house, we need to evaluate two colors that are not used by adjacent neighbors.
 	 *
 	 *

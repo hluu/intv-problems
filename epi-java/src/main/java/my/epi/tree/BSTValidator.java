@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by hluu on 12/11/15.
+ *
  *
  * Problem statement:
  * Given a BST, verify indeed it follows the BST rules.
