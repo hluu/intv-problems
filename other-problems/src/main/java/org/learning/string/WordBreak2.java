@@ -45,8 +45,8 @@ public class WordBreak2 {
         List<String> wordList3 = Arrays.asList("a");
         test(wordList3, "a");
 
-        List<String> wordList4 = Arrays.asList("aaaa", "aa");
-        test(wordList4, "aaaaaaa");
+        List<String> wordList4 = Arrays.asList("aaa", "aa", "a");
+        test(wordList4, "aaaaaa");
 
         List<String> wordList5 = Arrays.asList("A", "AN", "AND", "DROID", "ANDROID","I", "LOVE", "SRC");
         test(wordList5, "ILOVEANDROIDSRC");
@@ -153,6 +153,7 @@ public class WordBreak2 {
     public static List<String> wordBreakHelperWithMemoiz(String word, Set<String> dict,
                                                          Map<String,List<String>> cache) {
         if (cache.containsKey(word)) {
+            System.out.println("**** found in cache: " + word);
             return cache.get(word);
         }
 

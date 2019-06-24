@@ -194,7 +194,9 @@ public class WordBreak {
 
                 List<String> tmpResult = breakWords(dict, str.substring(idx));
 
-                result.add(mkString(tmpResult));
+                if (!tmpResult.isEmpty()) {
+                    result.add(mkString(tmpResult));
+                }
             }
 
             // move on to next character

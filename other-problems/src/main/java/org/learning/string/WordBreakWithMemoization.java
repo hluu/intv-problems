@@ -10,23 +10,40 @@ public class WordBreakWithMemoization {
     public static void main(String[] args) {
         System.out.printf("%s\n", WordBreakWithMemoization.class.getName());
 
-        String dictWords[] = {"A", "AN", "AND", "DROID", "ANDROID","I", "LOVE", "SRC"};
-        String input2 = "ILOVEANDROIDSRC";
-        System.out.printf("input: %s, output: %s\n", input2,
-                testWordBreak(dictWords, input2));
+        String dictWords1[] = {"A", "AN", "AND", "DROID", "ANDROID","I", "LOVE", "SRC"};
+        String input1 = "ILOVEANDROIDSRC";
 
-        Map<String,String> testMap = new HashMap<>();
-        testMap.put(new String("abc"), new String("abc"));
+        testWordBreak(dictWords1, input1);
 
-        System.out.printf("contains: %b\n", testMap.containsKey(new String("abc")));
+
+        String dictWords2[] = {"this", "is", "sumit", "jain", "the","problem"};
+        String input2 = "thisissumitjain";
+
+        testWordBreak(dictWords2, input2);
+
+        String dictWords3[] = {"I", "am", "God"};
+        String input3 = "thisisadog";
+
+        testWordBreak(dictWords3, input3);
+
     }
 
+
+
     private static String testWordBreak(String[] dict, String str) {
+
+        System.out.println("\n======> testing <=========");
+        System.out.printf("input: %s\n", str);
+
         Set<String> dictSet = new HashSet<>();
         dictSet.addAll(Arrays.asList(dict));
 
 
-        return testWordBreak(dictSet, str);
+        String actual = testWordBreak(dictSet, str);
+
+        System.out.printf("actual: %s\n", actual);
+
+        return actual;
 
     }
 
