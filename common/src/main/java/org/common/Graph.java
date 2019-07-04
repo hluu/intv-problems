@@ -35,6 +35,19 @@ public class Graph {
         }
 
         adjacencyList[from].add(to);
+
+    }
+
+    public int size() {
+        return numVertices;
+    }
+
+    public List<Integer> getEdges(int node) {
+        if (node > numVertices) {
+            return null;
+        }
+
+        return adjacencyList[node];
     }
 
     public List<Integer>[] getAdjacencyList() {
