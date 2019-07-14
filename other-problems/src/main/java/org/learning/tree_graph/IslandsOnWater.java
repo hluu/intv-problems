@@ -13,6 +13,8 @@ import org.testng.Assert;
  *  The continuous block of 1s means they are adjacent via left, right, up and down,
  *  not diagonal.
  *
+ *  https://www.geeksforgeeks.org/find-the-number-of-distinct-islands-in-a-2d-matrix/
+ *
  *  For example:
  *   int[][] map = {{0, 0, 1, 1, 1, 0, 0},
  *                  {0, 1, 0, 0, 0, 1, 0},
@@ -31,7 +33,8 @@ import org.testng.Assert;
  *  * The DFS recursion will keep going cell value is 1, make sure to update it to -1
  *    before recurse
  *
- *
+ *  Time complexity: O(rows * cols)
+ * Space complexity: O(rows * cols)
  */
 public class IslandsOnWater {
 

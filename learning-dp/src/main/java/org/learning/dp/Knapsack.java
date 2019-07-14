@@ -103,6 +103,7 @@ public class Knapsack {
 
 
 		// only if weight of current item can fit in remaining capacity
+		// trying out all possible combinations
 		if (weights[itemIdx] <= remainingCapacity) {
 
 			// include the item
@@ -195,6 +196,7 @@ public class Knapsack {
 		for (int item = 1; item <= values.length; item++) {
 			int itemWeight = weights[item-1];
 			int itemValue = values[item-1];
+
 			// for each of the capacities up the bag capacity
 			for (int currCapacity = 1; currCapacity <= bagCapacity; currCapacity++) {
 				// only if the weight of the current item can fit

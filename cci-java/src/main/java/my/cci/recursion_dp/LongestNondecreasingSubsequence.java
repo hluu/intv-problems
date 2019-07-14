@@ -7,21 +7,25 @@ import java.util.Collections;
 
 
 /**
- * Given an array of integers (not sorted), find the length of the longest nondecreasing subsequences in
+ * Given an array of integers (not sorted), find the length of the longest
+ * increasing subsequences in
  * the array.
  *
  * For example:
  *
  *   {0, 8, 4, 12, 2, 10, 6, 14, 1, 9}
  *
- * There are 2 longest nondecreasing subsequences: {0,4,10,14}, {0,2,6,9}
+ * There are 2 longest increasing subsequences: {0,4,10,14}, {0,2,6,9}
  *
  * Approach:
- *  * Brute force - to enumerate all possible subsequences and test each one for being nondecreasing and
- *                  figure out longest ones.  This requires 2^n run time
+ *  * Brute force - to enumerate all possible subsequences and test each one
+ *                  for being increasing and figure out longest ones.
+ *                  This requires 2^n run time
+ *
  *  * DP way - let L[j] be the longest subsequence of element j, which is defined as
  *                L[j] = 1 + max(L[i] if (i < j and A[i] < A[j])
- *             meaning the length at elememt j is based on the max length of all the elements before j
+ *             meaning the length at elememt j is based on the max length of
+ *             all the elements before j
  *     * So we need a table to store the longest subsequence length at each element
  *     * This implies the run time is n^2 - n being the length of the array
  *
@@ -71,7 +75,9 @@ public class LongestNondecreasingSubsequence {
 
     /**
      * Use a temporary table to store the length of each element.
-     * The length of next element is based on the max length of each of the previous element
+     *
+     * The length of next element is based on the max length of each of the
+     * previous element
      * provided that (i < j and A[i] < A[j])
      *
      * Runtime is O(n^2) and space is O(n)
@@ -98,14 +104,7 @@ public class LongestNondecreasingSubsequence {
         }
 
         return lenTable[lenTable.length-1];
-        /*int max = -1;
-        for (int len : lenTable) {
-            if (len > max) {
-                max = len;
-            }
-        }
 
-        return max;*/
     }
 
 

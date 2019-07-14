@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 
 /**
- * Created by hluu on 5/27/17.
+ *
  *
  * Given a staircase has n steps and one can take either 1, 2, or 3 steps
  * at a time, determine the number of possible ways one can run up the stairs
@@ -74,7 +74,8 @@ public class TripleStep {
       return memo[n];
     }
 
-    memo[n] = fastCountWays(n-1, memo) + fastCountWays(n-2, memo) + fastCountWays(n-3, memo);
+    memo[n] = fastCountWays(n-1, memo) + fastCountWays(n-2, memo)
+                                          + fastCountWays(n-3, memo);
 
     return memo[n];
   }
