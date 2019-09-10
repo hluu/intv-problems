@@ -65,6 +65,8 @@ public class DetectCycleInDirectGraph {
      * @return
      */
     private static boolean isThereCycleInternal(Graph graph, int node, Set<Integer> path) {
+        // as we explore a new node, we don't expect to have seen yet
+        // been there means there is a cycle
         if (path.contains(node)) {
             return true;
         }

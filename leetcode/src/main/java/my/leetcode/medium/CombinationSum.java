@@ -36,6 +36,10 @@ import java.util.List;
  * Approach:
  *  - This is a classic backtracking problem with repeat
  *
+ * Runtime:
+ *  - O(2^n)
+ *
+ * - https://leetcode.com/problems/combination-sum-ii/
  */
 public class CombinationSum {
 

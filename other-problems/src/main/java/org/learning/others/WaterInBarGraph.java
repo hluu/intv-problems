@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Created by hluu on 8/5/17
+ *
  *
  * Problem:
  *  Given a bar graph represented by an array of positive numbers.  Find the maximum amount of
@@ -21,6 +21,7 @@ import java.util.Collections;
  *  |  |__|  |  |
  *  |  |  |  |  |
  *  ---------------------
+ *   5  1  3  4
  *  -1  5  5  5         <== highest left bar
  *   4  4  4  -1        <== highest right bar
  *
@@ -116,7 +117,9 @@ public class WaterInBarGraph {
     /**
      * This approach uses an insight that either side of the highest bar will be lower bars.
      * There will be two paths - one goes from left side and go to the highest bar, and the other
-     * goes from right side to the highest bar.  As traversing from each side, calculate the highest
+     * goes from right side to the highest bar.
+     *
+     * As traversing from each side, calculate the highest
      * bar as we go and only update it if a higher bar is found.  The amount of water is calculated
      * by substracting the value of highest bar to the height at each bar.
      *

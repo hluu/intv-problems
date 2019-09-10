@@ -9,17 +9,21 @@ import java.util.Arrays;
  * the array. Each element in the array represents your maximum jump length at that position.
  *
  * Your goal is to reach the last index in the minimum number of jumps.
- * For example:
- * Given array A = [2,3,1,1,4]
  *
- * The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1,
- * then 3 steps to the last index.)
+ * You can assume that you can always reach the last index.
+ *
+ * For example: [2,3,1,1,4]
+ *
+ * Expected: the minimum number of jumps to reach the last index is 2.
+ * (Jump 1 step from index 0 to 1,then 3 steps to the last index.)
  *
  * http://www.allenlipeng47.com/blog/index.php/2016/09/12/jump-game-ii/
  * https://leetcode.com/problems/jump-game-ii/description/
  *
  * https://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/
  * tech-queries.blogspot.com/2011/08/find-optimal-number-of-jumps-to-reach.html
+ *
+ * https://www.youtube.com/watch?v=vBdo7wtwlXs
  *
  * Observation:
  *  - this is a DP problem
@@ -32,8 +36,11 @@ public class JumpingGameAdv {
         System.out.println(JumpingGameAdv.class.getName());
 
 
+        test(new int[] {1,4,3,7,1,2,6,7,6,10} ,3);
+
         test(new int[] {1} ,0);
         test(new int[] {2,3,1,1,4} ,2);
+
 
         test(new int[] {2,0,2,4,6,0,0,3} ,3);
 
@@ -202,7 +209,7 @@ public class JumpingGameAdv {
      *
      * This is a from DFS.
      *
-     * Notic there is a lot of overlapping and repeated computation
+     * Note: there is a lot of overlapping and repeated computation
      *
      * @param input
      * @param currentIdx
@@ -234,18 +241,42 @@ public class JumpingGameAdv {
         return noJumps;
     }
 
+    /**
+     * O(n) solution.
+     *
+     * Example:  [2,3,1,1,4]
+     *            - -
+     *              - - -
+     *                  -
+     *                    -
+     *
+     *
+     *           [1,4,3,7,1,2,6,7,6,10]
+     *              -
+     *                - - - -
+     *                  - - -
+     *                    - - - - - -
+     *                      -
+     *                        - -
+     *                          - - - -
+     *                              - -
+     *                                -
+     *
+     * @param input
+     * @return
+     */
     public static int jumpOptimized(int[] input) {
         int jumpCount = 0;
         int prevJumpToLoc = 0;
-        int max = 0;
+        int maxJumpPoint = 0;
 
         for(int idx=0; idx< input.length-1; idx++) {
 
-            max = Math.max(max, idx+input[idx]);
+            maxJumpPoint = Math.max(maxJumpPoint, idx+input[idx]);
 
             if( idx == prevJumpToLoc ) {
                 jumpCount++;
-                prevJumpToLoc = max;
+                prevJumpToLoc = maxJumpPoint;
             }
         }
         return jumpCount;
@@ -283,5 +314,19 @@ public class JumpingGameAdv {
             currentMax=nextMax;
         }
         return 0;
+    }
+
+    /**
+     * This implementation gives O(n) runtime using the stair and ladder concepts.
+     *
+     * A ladder represents a jumping point - from one ladder to another
+     * A ladder has a set of stairs, when you are on a ladder, you traverse
+     *   through the stairs in that ladder and try to build the next ladder
+     *
+     * @param input
+     * @return
+     */
+    private static int jumpUsingStairAndLadder(int input[]) {
+        return -1;
     }
 }

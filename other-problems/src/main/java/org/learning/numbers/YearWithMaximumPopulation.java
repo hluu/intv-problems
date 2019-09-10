@@ -2,7 +2,7 @@ package org.learning.numbers;
 
 
 /**
- * Created by hluu on 11/19/16.
+ *
  *
  * Problem:
  *  Give a collection of people with born year and death year.

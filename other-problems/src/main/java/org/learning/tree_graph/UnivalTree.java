@@ -2,6 +2,7 @@ package org.learning.tree_graph;
 
 import org.common.TreeNode;
 import org.common.TreeUtility;
+import org.testng.Assert;
 
 /**
  *
@@ -49,21 +50,24 @@ public class UnivalTree {
         System.out.println(UnivalTree.class.getName());
 
         TreeNode<Integer> root1 = createTree1();
-        test(root1);
+        test(root1, 4);
 
         TreeNode<Integer> root2 = createTree2();
-        test(root2);
+        test(root2, 5);
 
         TreeNode<Integer> root3 = createTree3();
-        test(root3);
+        test(root3, 3);
 
     }
 
-    private static void test(TreeNode<Integer> root) {
+    private static void test(TreeNode<Integer> root, int expected) {
         System.out.println("*** test ***\n");
         TreeUtility.printLevelByLevel(root);
 
-        System.out.println("unival count is " + countUnivalTree(root));
+        int actual = countUnivalTree(root);
+        System.out.printf("expected: %d, actual: %d\n", expected, actual);
+
+        Assert.assertEquals(expected, actual);
     }
 
     /**
@@ -89,15 +93,21 @@ public class UnivalTree {
 
         int total = leftTreeCount + rightTreeCount;
 
+        // the logic below is to check the values between the node
+        // and it children (left and right)
         if (root.left == null && root.right == null) {
             // leaf node
             total = total + 1;
-        } else if (root.left == null && root.right!= null && root.right.value == root.value) {
-            // left node is null and right node value is same as parent
-            total = total + 1;
-        } else if (root.right == null && root.left != null && root.left.value == root.value) {
-            // right node is null and left value is same as parent
-            total = total + 1;
+        } else if (root.left == null && root.right!= null) {
+            if (root.right.value == root.value) {
+                // left node is null and right node value is same as parent
+                total = total + 1;
+            }
+        } else if (root.right == null && root.left != null) {
+            if (root.left.value == root.value) {
+                // right node is null and left value is same as parent
+                total = total + 1;
+            }
         } else if ((root.left.value == root.right.value) && (root.value == root.left.value)) {
             total = total + 1;
         }

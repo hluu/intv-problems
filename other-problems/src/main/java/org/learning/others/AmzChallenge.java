@@ -3,20 +3,14 @@ package org.learning.others;
 import java.util.*;
 
 /**
- * Created by hluu on 2/2/18.
+ *
  *
  * CONSIDER ALL EDGE CASES
  *
  */
 public class AmzChallenge {
     public static void main(String[] args) {
-        System.out.println("hello there!!");
 
-        Set<String> tmpOutput = new HashSet<String>();
-
-       // String str = "";
-
-        //System.out.println(subStringsKDist("abcd", 3));
 
         test("abcd", 3);
         test("awaglknagawunagwkwagl", 4);
@@ -41,6 +35,7 @@ public class AmzChallenge {
 
 
     private static void test(String str, int num) {
+        System.out.println("===> str: " + str + " num: " + num);
         List<String> output = subStringsKDist(str, num);
 
         Collections.sort(output);
@@ -74,8 +69,9 @@ public class AmzChallenge {
             int counter = 0;
             int index = i;
             while ((counter < num) && (i < strLen)) {
-                if (!charList.contains(inputStr.charAt(index))) {
-                    charList.add(inputStr.charAt(index));
+                char charAtIndex = inputStr.charAt(index);
+                if (!charList.contains(charAtIndex)) {
+                    charList.add(charAtIndex);
                     counter++;
                 } else {
                     break;

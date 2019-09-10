@@ -10,6 +10,7 @@ import java.util.*;
 public class PriorityQueueExample {
 
     public static void main(String[] args) {
+        // neat way of specify the comparator
         PriorityQueue<Integer> pq1 = new PriorityQueue<>((a, b) -> b - a);
         PriorityQueue<Integer> pq2 = new PriorityQueue<>(Collections.reverseOrder());
 

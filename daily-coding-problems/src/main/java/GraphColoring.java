@@ -11,6 +11,7 @@ import org.common.Graph;
  */
 public class GraphColoring {
     public static void main(String[] args) {
+
         System.out.println(GraphColoring.class.getName());
     }
 }

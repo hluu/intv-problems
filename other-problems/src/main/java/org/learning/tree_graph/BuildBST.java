@@ -81,6 +81,19 @@ public class BuildBST {
         TreeUtility.printLevelByLevel(root);
     }
 
+    /**
+     * This will recursively building the tree from top to bottom and then
+     * bubble upward.
+     *
+     * The left subtree is build first, and then the right subtree.
+     *
+     * Try to visualize it that way to make it easier to understand
+     *
+     * @param input
+     * @param leftIdx
+     * @param rightIdx
+     * @return
+     */
     private static BNode<Integer> buildBST(int[] input, int leftIdx, int rightIdx) {
         if (leftIdx > rightIdx) {
             return null;

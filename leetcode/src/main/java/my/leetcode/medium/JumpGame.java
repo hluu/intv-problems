@@ -19,12 +19,18 @@ import java.util.Arrays;
  *   A = [3,2,1,0,4], return false.
  *
  * Approach:
- *  * A value can be zero
- *  * Brute force, for each index, follow the value to see if we can reach the end
- *      * O(n^2)
- *  * The index + the element value at that index represents the point we can jump to
- *  * Maintain this max
- *  * If able to get to last index of beyond, return true
+ *  A value can be zero
+ *
+ *  Brute force, for each index, follow the value to see if we can reach the end
+ *  - Runtime - O(n^2)
+ *
+ *  Maintaining ladder:
+ *  - The index + the element value at that index represents the point we can jump to
+ *  - Maintain this max
+ *  - If able to get to last index of beyond, return true
+ *  - Runtime: O(n)
+ *
+ *  https://leetcode.com/problems/jump-game/
  */
 public class JumpGame {
     public static void main(String[] args) {
@@ -64,35 +70,28 @@ public class JumpGame {
             return true;
         }
 
-        if (input[0] == 0) {
-            return false;
-        }
+        int currLadderSize = 0;
 
-        int currIdx = 0;
-
-        currIdx += input[0];
-        for (int i = 1; i < input.length - 1 ; i++) {
-            if (currIdx < i) {
+        currLadderSize += input[0];
+        int lastIndex = input.length - 1;
+        for (int i = 1; i < lastIndex ; i++) {
+            if (currLadderSize < i) {
                 break;
             }
-            if (i + input[i] > currIdx) {
-                currIdx = i + input[i];
-                if (currIdx >= (input.length-1)) {
-                    return true;
-                }
+            int nextLadderSize = i + input[i];
+
+            if (nextLadderSize >= lastIndex) {
+                return true;
             }
+
+            currLadderSize = Math.max(currLadderSize, nextLadderSize);
+
         }
 
-        // make sure currIdx is at least at the last index or beyond
-        return currIdx >= (input.length - 1);
+        // make sure currNoJump is at least at the last index or beyond
+        return currLadderSize >= lastIndex;
 
 
     }
 
-    private static TreeNode<Integer> createTree1() {
-        TreeNode<Integer> root =TreeNode.createTreeNode(1);
-        root.right = TreeNode.createTreeNode(2);
-
-        return root;
-    }
 }

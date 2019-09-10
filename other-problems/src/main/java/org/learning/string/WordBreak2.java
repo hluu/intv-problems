@@ -61,12 +61,12 @@ public class WordBreak2 {
         //List<String> actualResult = wordBreakHelper(word, dictSet);
         List<String> actualResult = wordBreak(word, dictSet);
 
-        System.out.printf("  actualResult: %s\n", actualResult);
-
 
         List<String> actualResultDP = wordBreakHelperWithMemoiz(word, dictSet,
                 new HashMap<String, List<String>>());
 
+        System.out.println("=====> resumts <=======");
+        System.out.printf("  actualResult: %s\n", actualResult);
         System.out.printf("actualResultDP: %s\n", actualResultDP);
     }
 
@@ -81,12 +81,8 @@ public class WordBreak2 {
 
         List<String>  newResult = new ArrayList<>();
 
-        boolean forceCopy = dictSet.size() == 1;
         for (String str : result) {
             newResult.add(str);
-            /*if (forceCopy || str.indexOf(' ') != -1) {
-                newResult.add(str);
-            }*/
         }
 
         return newResult;
@@ -115,7 +111,6 @@ public class WordBreak2 {
         if (wordRemaining == null  || wordRemaining.isEmpty()) {
             return sentences;
         }
-
 
         // start with 1 to make it easier with substring
         for (int i = 1; i <= wordRemaining.length(); i++) {
