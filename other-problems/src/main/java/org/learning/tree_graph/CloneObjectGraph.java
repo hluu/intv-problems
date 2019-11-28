@@ -22,13 +22,25 @@ import java.util.*;
  *      Node e is being referenced by both b and c
  *
  * Approach:
- *   * Traverse the tree using DFS - left and then right
- *   * How to determine if a node is referenced by > 1 parent?
- *   * Need some way to track that or have that knowledge before traversing
- *   * Two options
- *      * Pre-processing - traverse the graph and update a counter.
- *          * Need the ability to update the tree
- *      * Use Hash map to look it up as traversing - O(n) space
+ *   - Traverse the graph using DFS - left and then right
+ *      * How to determine if a node is referenced by > 1 parent?
+ *      * Need some way to track that or have that knowledge before traversing
+ *      * Two options
+ *          * Pre-processing - traverse the graph and update a counter.
+ *              * Need the ability to update the tree
+ *          * Use Hash map to look it up as traversing - O(n) space
+ *
+ *   - Traverse the graph using BFS, which sligthly easier to understand
+ *      * Create a queue and add root to the queue
+ *      * while queue is not empty
+ *          * pop element from queue
+ *          * explore its neighbors
+ *              * if a neighbor haven't explored yet (by checking against the map)
+ *                - create a node and add to map
+ *                - add neighbor to queue to explore next level
+ *
+ * Resources:
+ * - https://www.programcreek.com/2012/12/leetcode-clone-graph-java/
  */
 public class CloneObjectGraph {
     public static void main(String[] args) {

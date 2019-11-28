@@ -32,6 +32,9 @@ public class TopologicalSort {
 
         test(createGraph1(), Arrays.asList(1,2,3,4));
         test(createGraph2(), Arrays.asList(4,5,2,3,1,0));
+        test(createGraph3(), Arrays.asList(0,1,2,3,4,5));
+
+        test(new HashMap<>(), Collections.emptyList());
     }
 
     private static void test(Map<Integer, List<Integer>> graph,
@@ -40,14 +43,17 @@ public class TopologicalSort {
         System.out.printf("\n graph: %s, expected: %s\n",
                 graph, expected);
 
-        List<Integer> actual = topologicalSort(1, graph);
+        List<Integer> actual1 = topologicalSort(graph);
 
-        System.out.printf("actual: %s\n", actual);
+        System.out.printf("actual1: %s\n", actual1);
+
+        List<Integer> actual2 = useDFS(graph);
+
+        System.out.printf("actual2: %s\n", actual2);
 
     }
 
-    private static List<Integer> topologicalSort(Integer root,
-                                                 Map<Integer, List<Integer>> graph) {
+    private static List<Integer> topologicalSort(Map<Integer, List<Integer>> graph) {
         List<Integer> result = new LinkedList<>();
 
         Map<Integer, List<Integer>> incomingEdgeMap = convertToIncomingEdgeMap(graph);
@@ -101,6 +107,7 @@ public class TopologicalSort {
      */
     private static Map<Integer, List<Integer>> convertToIncomingEdgeMap(
             Map<Integer, List<Integer>> graph) {
+
         Map<Integer, List<Integer>>  result = new HashMap<>();
 
         for (Map.Entry<Integer, List<Integer>> entry : graph.entrySet()) {
@@ -114,7 +121,7 @@ public class TopologicalSort {
             for (Integer edge : outGoingEdges) {
                 List<Integer> currentList = result.get(edge);
 
-                if (currentList == null) {
+                if (currentList == null) {  // will this ever happen?
                     currentList = new ArrayList<>();
                 }
                 currentList.add(node);
@@ -123,6 +130,66 @@ public class TopologicalSort {
             }
         }
         return result;
+
+    }
+
+    /**
+     * This approaches uses DFS and a list to keep track of the nodes in the order
+     * of visiting.
+     *
+     * We will also need a set tp keep track of which node was already visited.
+     *
+     * Runtime: O(V+E) -> explore every node and every edge
+     * Space: O(V) -> for keep tracking of visited nodes
+     *
+     */
+    private static List<Integer> useDFS(Map<Integer, List<Integer>> graph) {
+        Stack<Integer> stack = new Stack<>();
+
+        Set<Integer> visistedSet = new HashSet<>();
+
+        for (Map.Entry<Integer, List<Integer>> entry : graph.entrySet()) {
+            Integer node = entry.getKey();
+
+            if (!visistedSet.contains(node)) {
+                // has not visited
+                dfsHelper(graph, node, visistedSet, stack);
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        while (!stack.isEmpty()) {
+            result.add(stack.pop());
+        }
+
+        return result;
+    }
+
+
+    private static void dfsHelper(Map<Integer, List<Integer>> graph, Integer node,
+                                  Set<Integer> visistedSet, Stack<Integer> stack ) {
+
+        // explore if hasn't visited yet
+        if (!visistedSet.contains(node)) {
+            // mark it as visited
+            visistedSet.add(node);
+
+            // get the node's edges
+            List<Integer> edges = graph.get(node);
+
+            // explore all its edges
+            if (edges != null && !edges.isEmpty()) {
+                for (Integer edge : edges) {
+                    // explore
+                    dfsHelper(graph, edge, visistedSet, stack);
+                }
+            }
+            // done exploring or node has no edges
+            // then add to stack
+            // the order of adding nodes to stack is children first, then parent
+            // parent eat last pattern
+            stack.add(node);
+        }
 
     }
 
@@ -143,6 +210,35 @@ public class TopologicalSort {
         graph.put(4, Arrays.asList(0,1));
         graph.put(2, Arrays.asList(3));
         graph.put(3, Arrays.asList(1));
+
+        return graph;
+
+        // 5 4 2 3 1 0
+    }
+
+    /**
+     *  a=0, b=1, c=2, d=3, e=4, f=5
+     *
+     *             0
+     *         /       \
+     *       1    ->    5
+     *       | \      ^ ^
+     *       v \     /  |
+     *       2  \   /   4
+     *        \  \ /  /
+     *         v v   /
+     *            3
+     *
+     * @return
+     */
+    private static Map<Integer, List<Integer>> createGraph3() {
+        Map<Integer, List<Integer>> graph = new Hashtable<>();
+
+        graph.put(0, Arrays.asList(1,5));
+        graph.put(1, Arrays.asList(5,2,3));
+        graph.put(2, Arrays.asList(3));
+        graph.put(3, Arrays.asList(4,5));
+        graph.put(4, Arrays.asList(5));
 
         return graph;
 

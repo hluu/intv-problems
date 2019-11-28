@@ -3,7 +3,7 @@ package org.common;
 
 
 /**
- * Created by hluu on 1/17/16.
+ * Class to represent a binary tree node and optionally it could have a parent
  */
 public class TreeNode<T> extends Node<T> {
     public enum VisitState { NOT_VISITED, VISITING, VISITED };

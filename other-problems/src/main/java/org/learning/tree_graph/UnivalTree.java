@@ -98,7 +98,7 @@ public class UnivalTree {
         if (root.left == null && root.right == null) {
             // leaf node
             total = total + 1;
-        } else if (root.left == null && root.right!= null) {
+        } else if (root.left == null && root.right != null) {
             if (root.right.value == root.value) {
                 // left node is null and right node value is same as parent
                 total = total + 1;

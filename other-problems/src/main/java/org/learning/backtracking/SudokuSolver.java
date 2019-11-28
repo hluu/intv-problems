@@ -58,30 +58,34 @@ public class SudokuSolver {
         Tuple<Integer, Integer> spot = findUnassignedSpot(board);
 
         if (spot == null) {
+            // no empty spot on the board, so we are done
             return true;
         }
 
         int row = spot.first;
         int col = spot.second;
 
-        // for this spot found, consider each digit
+        // try all possible digit at the found empty spot
         for (int digit = 1; digit <= 9; digit++) {
             if (!isThereConflict(board, row, col, digit)) {
-                // make a choice
+                // make a choice if no conflict
                 System.out.printf("==> assigning spot: %s with digit: %d\n", spot, digit);
                 board[row][col] = digit;
 
-                // solve the remaining
+                // solve the remaining empty spots on the board
                 if (solveSudoku(board)) {
+                    // if able to do so, then we are done
                     return true;
                 }
 
-                // backtrack
+                // backtrack - oops not able to solve the sudoko with the digit
+                // at that empty spot, try another one is available
                 System.out.printf("<== backtrack spot: (%d,%d) - digit: %d\n", row,col,digit);
                 board[row][col] = UNASSIGED_SPOT;
             }
         }
 
+        // we've tried everything and didn't work out, so return false;
         return false;
     }
 

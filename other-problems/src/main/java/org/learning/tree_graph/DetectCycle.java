@@ -61,6 +61,8 @@ public class DetectCycle {
 
             }
         }
+
+        // make sure to backtrack when unwind up the graph
         visited[node] = false;
 
         return false;

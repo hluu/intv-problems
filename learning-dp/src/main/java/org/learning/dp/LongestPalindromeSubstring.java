@@ -181,14 +181,21 @@ public class LongestPalindromeSubstring {
             return null;
         }
 
-        if (str.length() == 1 || (str.length() == 2 && str.charAt(0) == str.charAt(1))) {
+        // odd case
+        if (str.length() == 1) {
+            return str;
+        }
+
+        if (str.length() == 2 && str.charAt(0) == str.charAt(1)) {
             return str;
         }
 
         int maxLen = 1;
         int start = 0;
         for (int i = 0; i < str.length(); i++) {
-            int left = i - 1; int right = i + 1;
+            int left = i - 1;
+            int right = i + 1;
+
             // odd case
             while (left >= 0 && right < str.length() &&
                     str.charAt(left) == str.charAt(right)) {

@@ -177,6 +177,12 @@ public class NChildrenTreeSerialization {
         return output.toString();
     }
 
+    /**
+     * Deserialization by level
+     *
+     * @param input
+     * @return
+     */
     private static NChildrenNode<Integer> deserializeByLevel(String input) {
         if (input == null || input.isEmpty()) {
             return null;

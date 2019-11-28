@@ -12,7 +12,7 @@ import java.util.List;
  *
  * Problem:
  *   Give a set of menu items, and amount, find all the possible combinations
- *   of menu items that can be bought for a given amount
+ *   of menu items that can be bought for the given amount
  *
  *   The same menu item can be bought multiple times
  *

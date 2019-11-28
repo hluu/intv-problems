@@ -1,6 +1,6 @@
 package org.learning.numbers;
 
-import com.google.common.base.Preconditions;
+
 import org.common.DLNode;
 import org.common.LinkedListUtil;
 
@@ -49,7 +49,7 @@ public class MaxStack<T extends Comparable<T>> {
     }
     // The standard three Stack methods - push adds an element to the stack
     public void push(T toPush) {
-        Preconditions.checkNotNull(toPush);
+        //Preconditions.checkNotNull(toPush);
 
         DLNode newNode = new DLNode<>(toPush);
         if (regularStackTail == null) {

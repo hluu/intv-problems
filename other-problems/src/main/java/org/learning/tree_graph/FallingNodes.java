@@ -182,7 +182,7 @@ public class FallingNodes {
     }
 
     /**
-     * Traverse throw the tree, collect the node and it level in the given map
+     * Traverse through the tree, collect the node and it level in the given map
      * @param root
      * @param map
      * @param <T>
