@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 /**
- * Created by hluu on 11/16/16.
+ * Some utilities to convert into base 62
  */
 public class ShortenURL {
     public static void main(String[] args) throws Exception {

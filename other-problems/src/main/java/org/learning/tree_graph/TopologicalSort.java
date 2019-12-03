@@ -137,7 +137,7 @@ public class TopologicalSort {
      * This approaches uses DFS and a list to keep track of the nodes in the order
      * of visiting.
      *
-     * We will also need a set tp keep track of which node was already visited.
+     * We will also need a set to keep track of which nodes were already visited.
      *
      * Runtime: O(V+E) -> explore every node and every edge
      * Space: O(V) -> for keep tracking of visited nodes
@@ -146,14 +146,14 @@ public class TopologicalSort {
     private static List<Integer> useDFS(Map<Integer, List<Integer>> graph) {
         Stack<Integer> stack = new Stack<>();
 
-        Set<Integer> visistedSet = new HashSet<>();
+        Set<Integer> visitedSet = new HashSet<>();
 
         for (Map.Entry<Integer, List<Integer>> entry : graph.entrySet()) {
             Integer node = entry.getKey();
 
-            if (!visistedSet.contains(node)) {
+            if (!visitedSet.contains(node)) {
                 // has not visited
-                dfsHelper(graph, node, visistedSet, stack);
+                dfsHelper(graph, node, visitedSet, stack);
             }
         }
 

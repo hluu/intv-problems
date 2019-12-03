@@ -18,7 +18,7 @@ import java.util.Arrays;
  *    * This invariant can be used to detect upfront whether it is possible or not
  *  * This fact is already stated, but worth to point out that the sums of all sub-arrays must be the same
  *    * We don't necessary know what the sum is, but we can calculate that and use it in validation logic
- *  * Runtime is n^k (number of elements in the array to the K)
+ *  * Runtime is k^n (number of elements in the array to the K)
  *  * This is a combination problem using backtrack algorithm
  *
  * Solutions:
@@ -32,6 +32,7 @@ import java.util.Arrays;
  *      * recursively call
  *      * if succeeded, then return else undo the previous attempt
  *
+ * https://leetcode.com/problems/partition-to-k-equal-sum-subsets
  */
 public class EqualPartitions {
 
@@ -47,7 +48,8 @@ public class EqualPartitions {
     //int[] array = {3, 5, 1, 3};  int k = 2;
     //int[] array = {1,3,6,9,10};  int k = 3;
 
-    int[] array = {3, 5, 1, 3};  int k = 3;
+    //int[] array = {3, 5, 1, 3};  int k = 3;
+    int[] array = {4,3,2,3,5,2,1};  int k = 4;
 
     isSumDivisibleByK(array, k);
 

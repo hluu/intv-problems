@@ -1,8 +1,5 @@
 package org.learning.backtracking;
 
-import org.common.ArrayUtils;
-import org.common.StringUtility;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -77,7 +74,7 @@ public class RestaurantMenuItem {
     private static List<List<MenuItem>> findItems(MenuItem[] menuItems, double amt) {
         List<List<MenuItem>> result = new ArrayList<List<MenuItem>>();
 
-        findItemsHelper2(menuItems, 0, 0.0, amt, result, new ArrayList<>());
+        findItemsHelper(menuItems, 0, 0.0, amt, result, new ArrayList<>());
         return result;
 
     }
@@ -103,9 +100,9 @@ public class RestaurantMenuItem {
      * @param list
      * @return
      */
-    private static void findItemsHelper2(MenuItem[] menuItems, int idx, double amtSoFar,
-                                           double amt, List<List<MenuItem>> collector,
-                                           List<MenuItem> list) {
+    private static void findItemsHelper(MenuItem[] menuItems, int idx, double amtSoFar,
+                                        double amt, List<List<MenuItem>> collector,
+                                        List<MenuItem> list) {
 
         //StringUtility.printSpace(list.size());
        // System.out.printf("idx: %d, amtSoFar: %f, collect: %s\n", idx, amtSoFar, list);
@@ -135,7 +132,7 @@ public class RestaurantMenuItem {
             if (menuItems[i].price + amtSoFar <= amt) {
                 list.add(menuItems[i]);
                 // select item
-                findItemsHelper2(menuItems, i, menuItems[i].price + amtSoFar,
+                findItemsHelper(menuItems, i, menuItems[i].price + amtSoFar,
                         amt, collector, list);
                 // back track
                 list.remove(list.size() - 1);

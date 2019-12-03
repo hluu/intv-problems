@@ -13,7 +13,7 @@ import java.util.List;
  *
  * Approaches:
  *  * There are two general approaches and they both use recursion
- *    * First one is to insert an open and close parans before and after each open paran.
+ *    * First one is to insert an open and close parentheses before and after each open paran.
  *      However, this generate duplicates
  *    * Second one is by recognizing the number of open and close parans is same as n
  *      * generate open parans as long as it doesn't run out

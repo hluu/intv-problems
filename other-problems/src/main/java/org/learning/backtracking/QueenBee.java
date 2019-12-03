@@ -29,15 +29,16 @@ public class QueenBee {
   public static void main(String[] args) {
     System.out.printf("%s\n", QueenBee.class.getName());
 
-    int boardSize = 8;
+    int boardSize = 4;
     int[][] board = new int[boardSize][boardSize];
 
     printBoard(board);
 
     //board[0][0] = QUEEN_VALUE;
 
-    solveQueenBee(board, 0);
+    boolean possible = solveQueenBee(board, 0);
 
+    System.out.printf("board size: %d, possible: %b\n", board.length, possible);
     printBoard(board);
 
     System.out.printf("isEntireBoardValid valid? %b\n", isEntireBoardValid(board));
