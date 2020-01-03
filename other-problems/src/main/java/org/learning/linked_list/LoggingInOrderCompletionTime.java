@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by hluu on 9/25/17.
+ *
  *
  * Imagine there a service that takes a lot of concurrent traffic and it uses
  * a logger that logs out one line for each request when it is completed in the below format.
