@@ -1,5 +1,8 @@
 package org.learning.string;
 
+import org.testng.Assert;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +16,7 @@ import java.util.Map;
  *   s = "bcabc" => a
  */
 public class FirstUniqueCharacter {
+
     public static void main(String[] args) {
         test("abbeb", 'a');
         test("abcbceb", 'a');
@@ -27,8 +31,16 @@ public class FirstUniqueCharacter {
         Character actualChar1 = firstUniqueCharBF(input);
         Character actualChar2 = firstUniqueCharSinglePass(input);
 
-        System.out.printf("expectedChar: %c, actual1: %c, actual2: %c\n",
-                expectedChar, actualChar1, actualChar2);
+        char actualChar3 = twoPassUsingArray(input);
+
+
+
+        System.out.printf("expectedChar: %c, actual1: %c, actual2: %c, actual3: %c\n",
+                expectedChar, actualChar1, actualChar2, actualChar3);
+
+        Assert.assertEquals(new Character(expectedChar), actualChar1);
+        Assert.assertEquals(new Character(expectedChar), actualChar1);
+        Assert.assertEquals(expectedChar, actualChar3);
     }
 
     /**
@@ -143,13 +155,55 @@ public class FirstUniqueCharacter {
                     node.prev = tail;
                     tail = node;
                 }
-
             }
         }
 
         // the queue contains the first unique letter because
         // queue contains the order of letter insertion
         return (head != null) ? head.value : null;
+
+    }
+
+    /**
+     * Using an array to keep track of both the order of the index
+     * and whether we've seen them before.
+     *
+     * Since we only care about the ones that are unique, we can use
+     * a -1 to keep track of those.
+     *
+     * For the ones we see only once, we can use the index to
+     * know the order
+     *
+     * @param input
+     * @return first unique character
+     */
+    private static char twoPassUsingArray(String input) {
+        //
+
+        int EMPTY_VALUE = -10;
+        int[] charCountArr = new int[26];
+        Arrays.fill(charCountArr, EMPTY_VALUE);
+
+        for (int i = 0; i < input.length(); i++) {
+            int idx = input.charAt(i) - 'a';
+
+            if (charCountArr[idx] == EMPTY_VALUE) {
+                // first time seeing this character
+                charCountArr[idx] = i;
+            } else {
+                // seen it before
+                charCountArr[idx] = -1;
+            }
+        }
+
+        int minIdx = Integer.MAX_VALUE;
+        for (int i = 0; i < input.length(); i++) {
+            if (charCountArr[i] >= 0 && charCountArr[i] < minIdx) {
+                minIdx = charCountArr[i];
+            }
+        }
+
+        return input.charAt(minIdx);
 
     }
 
