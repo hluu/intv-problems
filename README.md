@@ -6,16 +6,16 @@ books and other problems from other sources
 ## Common stuffs that one should know about
 
 ### Big-O Table
-| # Name  |  f(n)              | Examples   |
+| # Name  |  T(n)              | Examples   |
 | -----:     | :-----------------  | :------:|
-| Constant    | f(n) = 1          | max(n, 100)   |
-| Logarithm   | f(n) = log n      | Binary search  |
-| Linear      | f(n) = n          | Smallest item  |
-| Sublinear   | f(n) = nlog n     | Mergesort  |
-| Quadratic   | f(n) = n^2        | Selection sort  |
-| Cubic       | f(n) = n^3        | ????   |
-| Exponential | f(n) = c^n        | All subsets   |
-| Factorial   | f(n) = n!         | Permutation   |
+| Constant    | T(n) = O(1)          | max(n, 100)   |
+| Logarithm   | T(n) = O(logn)      | Binary search  |
+| Linear      | T(n) = O(n)          | Smallest item  |
+| Sublinear   | T(n) = O(nlogn)     | Mergesort  |
+| Quadratic   | T(n) = O(n^2)        | Selection sort  |
+| Cubic       | T(n) = O(n^3)        | ????   |
+| Exponential | T(n) = O(c^n)        | All subsets   |
+| Factorial   | T(n) = O(n!)         | Permutation   |
 
 #### Order of growth
 1 << log(n) << n << nlogn << n^2 << n3 << 2^n << n!
