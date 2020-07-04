@@ -11,7 +11,7 @@ books and other problems from other sources
 | Constant    | T(n) = O(1)          | max(n, 100)   |
 | Logarithm   | T(n) = O(logn)      | Binary search  |
 | Linear      | T(n) = O(n)          | Smallest item  |
-| Sublinear   | T(n) = O(nlogn)     | Mergesort  |
+| Superlinear   | T(n) = O(nlogn)     | Mergesort  |
 | Quadratic   | T(n) = O(n^2)        | Selection sort  |
 | Cubic       | T(n) = O(n^3)        | ????   |
 | Exponential | T(n) = O(c^n)        | All subsets   |
