@@ -20,7 +20,7 @@ import org.testng.Assert;
  * compare this fingerprint with the ones we create in t as we slide one character as a time.
  * The important aspect is to leverage an additive (rolling) hashing function so we can subtract
  * and add code as we slide the fingerprint of 's' from lest to right with one character
- * at a time.  The runtime for this is O(n) where n is the number of characters in t.
+ * at a time.  The runtime for this is O(m + n) where m is the length of s and n is length of t.
  *
  * Since there might be collision of the hash number "fingerprint", additional measure needs
  * to be taken by literally comparing the character there is a "fingerprint" match in t.
