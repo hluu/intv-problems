@@ -1,7 +1,6 @@
 package org.learning.string;
 
 
-import javax.xml.bind.SchemaOutputResolver;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
