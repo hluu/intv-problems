@@ -4,6 +4,12 @@ import org.testng.Assert;
 
 import java.util.Arrays;
 
+/**
+ * https://leetcode.com/problems/maximum-subarray/
+ *
+ * Given an integer array nums, find the contiguous
+ * subarray (containing at least one number) which has the largest sum and return its sum.
+ */
 public class MaximumSubarray {
 
     public static void main(String[] args) {
@@ -34,7 +40,7 @@ public class MaximumSubarray {
      *
      * maxSubArray(A, i) = A[i] + maxSubArray(A, i - 1) > 0 ? maxSubArray(A, i - 1) : 0;
      *
-     * In terms of coming up with a solution, first identy the subproblem.  In this case
+     * In terms of coming up with a solution, first identify the subproblem.  In this case
      * we are saying if we know the max sum up i-1, then we can come up with max sum at i.
      * A few things to consider:
      *
