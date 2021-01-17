@@ -3,9 +3,7 @@ package org.learning.twopointers;
 import org.testng.Assert;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * https://leetcode.com/problems/longest-substring-without-repeating-characters/
@@ -44,9 +42,13 @@ public class LongestSubStringWORepeatingCharacters {
         test("bba", 2);
         test("abcabcbb", 3);
         test("pwwkew", 3);
+
         test("abcdef", 6);
         test("abcdefabcdef", 6);
         test(" ", 1);
+
+        test("abcadef", 6);
+        test("bcdaadef", 4);
     }
 
     private static void test(String input, int expected) {
@@ -55,11 +57,15 @@ public class LongestSubStringWORepeatingCharacters {
         int actual = subStringWORepeatingChar(input);
 
         int actual2 = subStringWORepeatingCharUsingIntArray(input);
-        System.out.printf("expected: %d, actual: %d, actual2: %d\n",
-                expected, actual, actual2);
+
+        int actual3 = subStringWORepeatingCharWithBoolArray(input);
+        System.out.printf("expected: %d, actual: %d, actual2: %d,  actual3: %d\n",
+                expected, actual, actual2, actual3);
 
         Assert.assertEquals(actual, expected);
         Assert.assertEquals(actual2, expected);
+        Assert.assertEquals(actual3, expected);
+        System.out.println();
     }
 
     private static int subStringWORepeatingChar(String input) {
@@ -71,29 +77,39 @@ public class LongestSubStringWORepeatingCharacters {
         int runLen = 0;
         int windowStart = 0;
         Map<Character, Integer> seenSoFar = new HashMap<>();
+        String longestStr = null;
 
         for (int windowEnd = 0; windowEnd < input.length(); windowEnd++) {
             char currChar = input.charAt(windowEnd);
             Integer count = seenSoFar.put(currChar, seenSoFar.getOrDefault(currChar,0) + 1);
             if  (count == null) {
                 runLen++;
-                maxLength = Math.max(maxLength, runLen);
+                if (runLen >maxLength) {
+                    maxLength = runLen;
+                    longestStr = input.substring(windowStart, windowEnd+1);
+                }
             } else {
-                // moving the left side of the window to the right
-                while (input.charAt(windowStart) != currChar)  {
+                // moving the left side of the window to the right until
+                // it  reaches the duplicate character
+                char charAtWindowStart = input.charAt(windowStart);
+                while (charAtWindowStart != currChar)  {
                     // reduce the count and remove if needed
-                    if (seenSoFar.get(input.charAt(windowStart)) == 1) {
-                        seenSoFar.remove(input.charAt(windowStart));
+                    if (seenSoFar.get(charAtWindowStart) == 1) {
+                        seenSoFar.remove(charAtWindowStart);
                     } else {
-                        seenSoFar.put(currChar, seenSoFar.get(input.charAt(windowStart)) - 1);
+                        seenSoFar.put(currChar, seenSoFar.get(charAtWindowStart) - 1);
                     }
                     windowStart++;
+                    charAtWindowStart = input.charAt(windowStart);
                     runLen--;
                 }
+                // now we are at the duplicate character, decrement its count
                 seenSoFar.put(currChar, seenSoFar.get(currChar) - 1);
+                // move the  windowStart pass it
                 windowStart++;
             }
         }
+        System.out.println("longestStr: " +  longestStr);
         return maxLength;
     }
 
@@ -124,6 +140,38 @@ public class LongestSubStringWORepeatingCharacters {
                     runLen--;
                 }
                 charArray[charIdx]--;
+                windowStart++;
+            }
+        }
+        return maxLength;
+    }
+
+    private static int subStringWORepeatingCharWithBoolArray(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        int maxLength = 0;
+        int runLen = 0;
+        int windowStart = 0;
+        boolean[] charArray = new boolean[127-32];
+
+        for (int windowEnd = 0; windowEnd < input.length(); windowEnd++) {
+            char currChar = input.charAt(windowEnd);
+            int charIdx = currChar - ' ';
+
+            if  (!charArray[charIdx]) {
+                charArray[charIdx] = true;
+                runLen++;
+                maxLength = Math.max(maxLength, runLen);
+            } else {
+                // moving the left side of the window to the right
+                while (input.charAt(windowStart) != currChar)  {
+                    // reduce the count and remove if needed
+                    charArray[input.charAt(windowStart) - ' '] =  false;
+                    windowStart++;
+                    runLen--;
+                }
                 windowStart++;
             }
         }
