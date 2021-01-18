@@ -5,6 +5,11 @@ import org.common.TreeNode;
 import java.util.*;
 
 /**
+ * This implementation first converts the DAG into a map of <node, incoming edges>,
+ * - identify the first node w/ no incoming edges (meaning it has no dependencies)
+ * - remove it from the map, then remove it from the incoming edge list of other nodes
+ * - repeat the first step
+ *
  *       1
  *     /   \
  *    2    3
