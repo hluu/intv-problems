@@ -3,7 +3,9 @@ package org.learning.twopointers;
 import org.testng.Assert;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * https://leetcode.com/problems/longest-substring-without-repeating-characters/
@@ -49,6 +51,8 @@ public class LongestSubStringWORepeatingCharacters {
 
         test("abcadef", 6);
         test("bcdaadef", 4);
+
+        test("abcabkabc", 4);
     }
 
     private static void test(String input, int expected) {
@@ -59,12 +63,16 @@ public class LongestSubStringWORepeatingCharacters {
         int actual2 = subStringWORepeatingCharUsingIntArray(input);
 
         int actual3 = subStringWORepeatingCharWithBoolArray(input);
-        System.out.printf("expected: %d, actual: %d, actual2: %d,  actual3: %d\n",
-                expected, actual, actual2, actual3);
+
+        int actual4 = subStringWORepeatingCharTwoPointers(input);
+
+        System.out.printf("expected: %d, actual: %d, actual2: %d,  actual3: %d, actual4: %d\n",
+                expected, actual, actual2, actual3, actual4);
 
         Assert.assertEquals(actual, expected);
         Assert.assertEquals(actual2, expected);
         Assert.assertEquals(actual3, expected);
+        Assert.assertEquals(actual4, expected);
         System.out.println();
     }
 
@@ -176,5 +184,35 @@ public class LongestSubStringWORepeatingCharacters {
             }
         }
         return maxLength;
+    }
+
+    private static int subStringWORepeatingCharTwoPointers(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+
+        int maxLength = 0;
+        int frontPointer = 0;
+        int backPointer = 0;
+
+        // contains the unique characters we have seen so far
+        Set<Character> seenMap = new HashSet<>();
+
+        while (frontPointer < input.length()) {
+            char currChar = input.charAt(frontPointer);
+            if (!seenMap.contains(currChar)) {  // not seen it before
+                seenMap.add(currChar);
+                frontPointer++;
+                maxLength = Math.max(frontPointer - backPointer, maxLength);
+                //maxLength = Math.max(seenMap.size(), maxLength);
+            } else {
+                // remove the character at backPointer until the
+                // there is no duplicate of character at frontPointer
+                seenMap.remove(input.charAt(backPointer));
+                backPointer++;
+            }
+        }
+        return maxLength;
+
     }
 }

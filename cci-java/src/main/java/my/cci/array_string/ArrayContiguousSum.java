@@ -10,10 +10,10 @@ import java.util.Map;
  * Compute the number of contiguous set of numbers that are added up to
  * the given sum
  */
-public class ArrayContiguosSum {
+public class ArrayContiguousSum {
 
     public static void main(String[] args) {
-        System.out.println(ArrayContiguosSum.class.getName());
+        System.out.println(ArrayContiguousSum.class.getName());
 
         int input[] = new int[] {8, 10,5,1,2,-1,7,1};
        // testContiguousSum(input, 8, 4);
@@ -21,6 +21,7 @@ public class ArrayContiguosSum {
         int input2[] = new int[] {1, 4, 5, -2, 9, 6, 3, -9};
         testContiguousSum(input2, 9, 4);
 
+        testContiguousSum(new int[] {0,0}, 0, 3);
     }
 
 
