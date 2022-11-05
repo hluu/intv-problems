@@ -1,9 +1,9 @@
 dependencies {
-    compile project(':common')
+    implementation project(':common')
 
-    compile group:'org.testng', name:'testng', version:'6.9.9'
-    compile group:'com.google.collections', name:'google-collections', version:'1.0'
-    compile group:'com.google.guava', name:'guava', version:'22.0'
-    testCompile group:'org.testng', name:'testng', version:'6.9.9'
+    implementation group:'org.testng', name:'testng', version:'6.9.9'
+    implementation group:'com.google.collections', name:'google-collections', version:'1.0'
+    implementation group:'com.google.guava', name:'guava', version:'22.0'
+    testImplementation group:'org.testng', name:'testng', version:'6.9.9'
 
 }
